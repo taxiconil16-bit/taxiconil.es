@@ -799,9 +799,9 @@ let routeMapInstance = null,
   currentReturnRouteEndLocation = null;
 const MIN_LEAD_TIME_HOURS = 12,
   MIN_PRICE_DEFAULT = 45,
-  FLAG_FALL = 4.26,
-  RATE_WEEKDAY = 1.465,
-  RATE_WEEKEND_NIGHT = 1.687,
+  FLAG_FALL = 4.06,
+  RATE_WEEKDAY = 1.466,
+  RATE_WEEKEND_NIGHT = 1.688,
   NIGHT_RATE_START_HOUR = 21.8333,
   NIGHT_RATE_END_HOUR = 7;
 function selectBestRoute(routes) {
@@ -3517,7 +3517,7 @@ const CONIL_CENTER_POINT = { lat: 36.2746, lng: -6.089 },
         east: -6.102194,
         west: -6.136934,
       },
-      discount: 5,
+      discount: 6,
     },
     {
       name: "Puerto Pesquero de Conil",
