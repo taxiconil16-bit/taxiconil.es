@@ -7855,7 +7855,9 @@ function loadGoogleMapsIfNeeded() {
       originIsCadiz = matchesCadiz(tcNormalizeCityName(origin)),
       cadizWaypoints = [
         {
-          location: matchesCadiz(tcNormalizeCityName(destination))
+          location: tripType === "vuelta"
+            ? TC_CADIZ_WAYPOINT_FROM_CONIL
+            : matchesCadiz(tcNormalizeCityName(destination))
             ? TC_CADIZ_WAYPOINT_TO_CONIL
             : originIsCadiz
               ? TC_CADIZ_WAYPOINT_FROM_CONIL
