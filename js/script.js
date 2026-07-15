@@ -3517,7 +3517,7 @@ const CONIL_CENTER_POINT = { lat: 36.2746, lng: -6.089 },
         east: -6.102194,
         west: -6.136934,
       },
-      discount: 6,
+      discount: 4,
     },
     {
       name: "Puerto Pesquero de Conil",
@@ -10130,12 +10130,22 @@ function loadGoogleMapsIfNeeded() {
             const simplifiedAirport = simplifyAirportName(swappedOriginText);
             simplifiedAirport && (swappedOriginText = simplifiedAirport);
           }
-          ((autocompleteSelectedPlaces.origenVuelta = swappedOriginPlace),
+          // Asegurar que se copian las coordenadas para evitar rutas incorrectas
+          const swappedOriginPlaceWithCoords = {
+            ...swappedOriginPlace,
+            geometry: swappedOriginPlace.geometry || {
+              location: {
+                lat: () => swappedOriginPlace.lat || null,
+                lng: () => swappedOriginPlace.lng || null
+              }
+            }
+          };
+          ((autocompleteSelectedPlaces.origenVuelta = swappedOriginPlaceWithCoords),
             (autocompleteSuppressNextInputInvalidation.origenVuelta = !0),
             (autocompleteLastConfirmedText.origenVuelta = swappedOriginText),
             updateAddressSummary(
               document.getElementById("origen-vuelta-calc-summary"),
-              swappedOriginPlace,
+              swappedOriginPlaceWithCoords,
             ),
             setTimeout(() => {
               try {
@@ -10169,13 +10179,23 @@ function loadGoogleMapsIfNeeded() {
             );
             simplifiedAirport && (swappedDestinationText = simplifiedAirport);
           }
-          ((autocompleteSelectedPlaces.destinoVuelta = swappedDestinationPlace),
+          // Asegurar que se copian las coordenadas para evitar rutas incorrectas
+          const swappedDestinationPlaceWithCoords = {
+            ...swappedDestinationPlace,
+            geometry: swappedDestinationPlace.geometry || {
+              location: {
+                lat: () => swappedDestinationPlace.lat || null,
+                lng: () => swappedDestinationPlace.lng || null
+              }
+            }
+          };
+          ((autocompleteSelectedPlaces.destinoVuelta = swappedDestinationPlaceWithCoords),
             (autocompleteSuppressNextInputInvalidation.destinoVuelta = !0),
             (autocompleteLastConfirmedText.destinoVuelta =
               swappedDestinationText),
             updateAddressSummary(
               document.getElementById("destino-vuelta-calc-summary"),
-              swappedDestinationPlace,
+              swappedDestinationPlaceWithCoords,
             ),
             setTimeout(() => {
               try {
