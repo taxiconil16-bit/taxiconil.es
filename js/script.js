@@ -7844,7 +7844,7 @@ function loadGoogleMapsIfNeeded() {
       matchesCadiz = (city) => {
         if (!city) return !1;
         const normalizedCity = tcNormalizeCityName(city);
-        return ["cadiz", "cádiz"].some((c) => {
+        return ["cadiz", "cádiz", "plaza san juan de dios", "san juan de dios", "plaza sanjuan de dios", "sanjuan de dios"].some((c) => {
           const normalizedVariant = tcNormalizeCityName(c);
           return (
             city === normalizedVariant ||
