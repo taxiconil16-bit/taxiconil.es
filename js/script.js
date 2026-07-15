@@ -10138,13 +10138,18 @@ function loadGoogleMapsIfNeeded() {
           }
           // Asegurar que se copian las coordenadas para evitar rutas incorrectas
           let originLat = null, originLng = null;
+          console.log("DEBUG autorrellenado origen:", swappedOriginPlace);
           if (swappedOriginPlace.geometry && swappedOriginPlace.geometry.location) {
             const loc = swappedOriginPlace.geometry.location;
             originLat = typeof loc.lat === 'function' ? loc.lat() : loc.lat;
             originLng = typeof loc.lng === 'function' ? loc.lng() : loc.lng;
+            console.log("DEBUG coordenadas desde geometry.location:", originLat, originLng);
           } else if (swappedOriginPlace.lat && swappedOriginPlace.lng) {
             originLat = typeof swappedOriginPlace.lat === 'function' ? swappedOriginPlace.lat() : swappedOriginPlace.lat;
             originLng = typeof swappedOriginPlace.lng === 'function' ? swappedOriginPlace.lng() : swappedOriginPlace.lng;
+            console.log("DEBUG coordenadas desde propiedades directas:", originLat, originLng);
+          } else {
+            console.log("DEBUG: No se encontraron coordenadas");
           }
           
           const swappedOriginPlaceWithCoords = {
@@ -10199,13 +10204,18 @@ function loadGoogleMapsIfNeeded() {
           }
           // Asegurar que se copian las coordenadas para evitar rutas incorrectas
           let destLat = null, destLng = null;
+          console.log("DEBUG autorrellenado destino:", swappedDestinationPlace);
           if (swappedDestinationPlace.geometry && swappedDestinationPlace.geometry.location) {
             const loc = swappedDestinationPlace.geometry.location;
             destLat = typeof loc.lat === 'function' ? loc.lat() : loc.lat;
             destLng = typeof loc.lng === 'function' ? loc.lng() : loc.lng;
+            console.log("DEBUG coordenadas destino desde geometry.location:", destLat, destLng);
           } else if (swappedDestinationPlace.lat && swappedDestinationPlace.lng) {
             destLat = typeof swappedDestinationPlace.lat === 'function' ? swappedDestinationPlace.lat() : swappedDestinationPlace.lat;
             destLng = typeof swappedDestinationPlace.lng === 'function' ? swappedDestinationPlace.lng() : swappedDestinationPlace.lng;
+            console.log("DEBUG coordenadas destino desde propiedades directas:", destLat, destLng);
+          } else {
+            console.log("DEBUG destino: No se encontraron coordenadas");
           }
           
           const swappedDestinationPlaceWithCoords = {
