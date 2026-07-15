@@ -10137,6 +10137,12 @@ function loadGoogleMapsIfNeeded() {
           // Asegurar que se copian las coordenadas para evitar rutas incorrectas
           const swappedOriginPlaceWithCoords = {
             ...swappedOriginPlace,
+            lat: swappedOriginPlace.lat || (swappedOriginPlace.geometry?.location?.lat ? 
+              (typeof swappedOriginPlace.geometry.location.lat === 'function' ? 
+                swappedOriginPlace.geometry.location.lat() : swappedOriginPlace.geometry.location.lat) : null),
+            lng: swappedOriginPlace.lng || (swappedOriginPlace.geometry?.location?.lng ? 
+              (typeof swappedOriginPlace.geometry.location.lng === 'function' ? 
+                swappedOriginPlace.geometry.location.lng() : swappedOriginPlace.geometry.location.lng) : null),
             geometry: swappedOriginPlace.geometry || {
               location: {
                 lat: () => swappedOriginPlace.lat || null,
@@ -10186,6 +10192,12 @@ function loadGoogleMapsIfNeeded() {
           // Asegurar que se copian las coordenadas para evitar rutas incorrectas
           const swappedDestinationPlaceWithCoords = {
             ...swappedDestinationPlace,
+            lat: swappedDestinationPlace.lat || (swappedDestinationPlace.geometry?.location?.lat ? 
+              (typeof swappedDestinationPlace.geometry.location.lat === 'function' ? 
+                swappedDestinationPlace.geometry.location.lat() : swappedDestinationPlace.geometry.location.lat) : null),
+            lng: swappedDestinationPlace.lng || (swappedDestinationPlace.geometry?.location?.lng ? 
+              (typeof swappedDestinationPlace.geometry.location.lng === 'function' ? 
+                swappedDestinationPlace.geometry.location.lng() : swappedDestinationPlace.geometry.location.lng) : null),
             geometry: swappedDestinationPlace.geometry || {
               location: {
                 lat: () => swappedDestinationPlace.lat || null,
