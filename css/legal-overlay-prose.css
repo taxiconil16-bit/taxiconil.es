@@ -1,0 +1,365 @@
+/**
+ * Lectura cómoda de textos legales en el overlay (condiciones, privacidad, aviso legal, cookies).
+ * Se activa con .tc-legal-prose en #legal-overlay-inner y .tc-legal-prose-mode en #legal-overlay.
+ */
+
+/* Base: landings/blog sin styles.min — mismo overlay con .is-open (inline) o .visible (script.js) */
+#legal-overlay.legal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5001;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right))
+    max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+  background: rgba(0, 0, 0, 0.85);
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#legal-overlay.legal-overlay.is-open,
+#legal-overlay.legal-overlay.visible {
+  display: flex !important;
+}
+
+#legal-overlay.legal-overlay .legal-overlay-content {
+  position: relative;
+  max-width: min(900px, calc(100vw - 24px));
+  width: 100%;
+  max-height: min(90vh, 900px);
+  margin: auto;
+  box-sizing: border-box;
+  /* IMPORTANTE: permitir scroll interno para FAQ largos (18 preguntas) y textos legales extensos */
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#legal-overlay.tc-legal-prose-mode .legal-overlay-content {
+  width: min(42rem, 100%);
+  max-width: min(42rem, calc(100vw - 24px));
+  max-height: min(88vh, 900px);
+  padding: clamp(1rem, 3vw, 1.75rem) clamp(1.1rem, 3.5vw, 2rem) clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: 14px;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.18);
+  background: #fafbfc;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#legal-overlay.tc-legal-prose-mode .legal-overlay-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  margin: -0.25rem -0.35rem 0.5rem 0.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
+  font-size: 1.5rem;
+  line-height: 1;
+  color: #64748b;
+}
+
+#legal-overlay.tc-legal-prose-mode .legal-overlay-close:hover {
+  background: #fff;
+  color: #0f172a;
+}
+
+#legal-overlay-inner.tc-legal-prose {
+  color: #334155;
+  font-size: 0.9375rem;
+  line-height: 1.72;
+  letter-spacing: 0.01em;
+  font-variant-numeric: proportional-nums;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+#legal-overlay-inner.tc-legal-prose > h3:first-child,
+#legal-overlay-inner.tc-legal-prose h3:first-of-type {
+  margin: 0 0 1.25rem;
+  padding: 0 0 0.85rem;
+  font-size: clamp(1.2rem, 2.8vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.45);
+  line-height: 1.25;
+}
+
+#legal-overlay-inner.tc-legal-prose h4 {
+  margin: 1.65rem 0 0.55rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #1e293b;
+  line-height: 1.35;
+}
+
+#legal-overlay-inner.tc-legal-prose h4:first-of-type {
+  margin-top: 0.35rem;
+}
+
+#legal-overlay-inner.tc-legal-prose p {
+  margin: 0 0 1rem;
+  max-width: 65ch;
+}
+
+#legal-overlay-inner.tc-legal-prose p:last-child {
+  margin-bottom: 0;
+}
+
+#legal-overlay-inner.tc-legal-prose ul,
+#legal-overlay-inner.tc-legal-prose ol {
+  margin: 0 0 1.1rem;
+  padding-left: 1.35rem;
+  max-width: 65ch;
+}
+
+#legal-overlay-inner.tc-legal-prose li {
+  margin: 0.35rem 0;
+  padding-left: 0.2rem;
+}
+
+#legal-overlay-inner.tc-legal-prose li::marker {
+  color: #b8860b;
+}
+
+#legal-overlay-inner.tc-legal-prose strong {
+  font-weight: 700;
+  color: #1e293b;
+}
+
+#legal-overlay-inner.tc-legal-prose hr {
+  margin: 1.5rem 0;
+  border: 0;
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+}
+
+#legal-overlay-inner.tc-legal-prose a {
+  color: #0f4c81;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+#legal-overlay-inner.tc-legal-prose code {
+  font-size: 0.88em;
+  background: rgba(15, 23, 42, 0.06);
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+  word-break: break-word;
+}
+
+/* --- FAQs del footer (inyectadas sin #legal-faq padre): mismo criterio que /terms --- */
+#legal-overlay.tc-legal-faq-mode .legal-overlay-content {
+  width: min(40rem, calc(100vw - 24px));
+  max-width: min(40rem, calc(100vw - 24px));
+  max-height: min(88vh, 900px);
+  padding: clamp(0.85rem, 2.5vw, 1.35rem) clamp(1rem, 3vw, 1.65rem) clamp(1.25rem, 3vw, 1.75rem);
+  border-radius: 14px;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.2);
+  background: #f8fafc;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#legal-overlay.tc-legal-faq-mode .legal-overlay-close {
+  position: sticky;
+  top: 0;
+  float: right;
+  margin: -0.2rem -0.3rem 0.4rem 0.5rem;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  font-size: 1.45rem;
+  line-height: 1;
+  color: #64748b;
+}
+
+#legal-overlay.tc-legal-faq-mode .legal-overlay-close:hover {
+  background: #fff;
+  color: #0f172a;
+}
+
+#legal-overlay-inner.tc-legal-faq {
+  color: #334155;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+
+#legal-overlay-inner.tc-legal-faq > h3:first-of-type {
+  margin: 0 0 1rem;
+  padding: 0 0 0.75rem;
+  font-size: clamp(1.15rem, 2.6vw, 1.35rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+  border-bottom: 2px solid rgba(212, 175, 55, 0.45);
+}
+
+#legal-overlay-inner.tc-legal-faq details {
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: 12px;
+  padding: 0;
+  margin-bottom: 0.65rem;
+  background: #fff;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+  overflow: hidden;
+}
+
+#legal-overlay-inner.tc-legal-faq details:last-child {
+  margin-bottom: 0;
+}
+
+#legal-overlay-inner.tc-legal-faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.85rem 1rem 0.85rem 2.55rem;
+  font-weight: 700;
+  color: #1a2a45;
+  position: relative;
+  background: #fff;
+  --tc-faq-pad-y: 0.85rem;
+}
+
+#legal-overlay-inner summary {
+  list-style: none;
+}
+
+#legal-overlay-inner summary::marker {
+  content: '';
+  font-size: 0;
+}
+
+#legal-overlay-inner summary::-webkit-details-marker {
+  display: none !important;
+}
+
+#legal-overlay-inner.tc-legal-faq summary::marker {
+  content: '';
+  font-size: 0;
+}
+
+#legal-overlay-inner.tc-legal-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+#legal-overlay-inner.tc-legal-faq summary::before {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: calc(var(--tc-faq-pad-y) + 0.52em);
+  width: 0;
+  height: 0;
+  border-left: 6px solid #d4af37;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  transform-origin: 3px 5px;
+  transition: transform 0.18s ease;
+}
+
+#legal-overlay-inner.tc-legal-faq details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+#legal-overlay-inner.tc-legal-faq summary:hover {
+  background: #fafafa;
+}
+
+#legal-overlay-inner.tc-legal-faq .faq-answer {
+  padding: 0 1rem 0.85rem 2.55rem;
+  border-top: 1px solid rgba(15, 23, 42, 0.07);
+}
+
+#legal-overlay-inner.tc-legal-faq .faq-answer p {
+  margin: 0.4rem 0 0.65rem;
+  text-align: left;
+  color: #475569;
+  line-height: 1.65;
+  font-size: 0.94rem;
+}
+
+#legal-overlay-inner.tc-legal-faq .faq-answer p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  #legal-overlay-inner.tc-legal-faq summary {
+    padding: 0.8rem 0.85rem 0.8rem 2.35rem;
+    font-size: 0.9rem;
+  }
+
+  #legal-overlay-inner.tc-legal-faq summary::before {
+    left: 0.85rem;
+  }
+
+  #legal-overlay-inner.tc-legal-faq .faq-answer {
+    padding: 0 0.85rem 0.8rem 2.35rem;
+  }
+}
+
+/* --- Recogidas en aeropuertos (bloque corto con botones) --- */
+#legal-overlay.tc-legal-pickups-mode .legal-overlay-content {
+  width: min(28rem, calc(100vw - 24px));
+  max-height: min(80vh, 560px);
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.18);
+}
+
+#legal-overlay-inner.tc-legal-pickups h3 {
+  margin: 0 0 0.65rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  text-align: center;
+}
+
+#legal-overlay-inner.tc-legal-pickups > p {
+  margin: 0 0 1rem;
+  text-align: center;
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+#legal-overlay-inner.tc-legal-pickups .transfer-cta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin: 0;
+}
+
+#legal-overlay-inner.tc-legal-pickups .transfer-cta .btn {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 2px solid #1a2a45;
+  color: #1a2a45;
+  background: #fff;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+
+#legal-overlay-inner.tc-legal-pickups .transfer-cta .btn:hover {
+  background: #1a2a45;
+  color: #fff;
+  transform: translateY(-1px);
+}

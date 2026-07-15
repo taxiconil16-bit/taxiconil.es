@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Sitemap: https://taxiconil.es/sitemap.xml
+

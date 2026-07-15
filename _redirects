@@ -1,0 +1,291 @@
+/robots.txt /robots.txt 200
+/sitemap.xml /sitemap.xml 200
+
+# API functions
+/api/google-reviews /.netlify/functions/google-reviews 200
+
+/terms /terms.html 200
+/terms-en /terms-en.html 200
+/terms-de /terms-de.html 200
+/terms-fr /terms-fr.html 200
+
+/trayectos-frecuentes /trayectos-frecuentes.html 200
+/trayectos-frecuentes-en /trayectos-frecuentes-en.html 200
+/trayectos-frecuentes-de /trayectos-frecuentes-de.html 200
+/trayectos-frecuentes-fr /trayectos-frecuentes-fr.html 200
+
+# Language directory redirects removed to prevent redirect loops
+# /en/ /en 301!
+# /de/ /de 301!
+# /fr/ /fr 301!
+
+# /en/index.html /en 301!
+# /de/index.html /de 301!
+# /fr/index.html /fr 301!
+
+# Normalize legacy taxi language paths (safety net)
+/en/taxi-:splat /taxi-:splat-en 301!
+/de/taxi-:splat /taxi-:splat-de 301!
+/fr/taxi-:splat /taxi-:splat-fr 301!
+
+/articulos/aeropuerto-jerez-conil-en.html /en/articulos/aeropuerto-jerez-conil 301!
+/articulos/aeropuerto-jerez-conil-en /en/articulos/aeropuerto-jerez-conil 301!
+/articulos/aeropuerto-malaga-conil-en.html /en/articulos/aeropuerto-malaga-conil 301!
+/articulos/aeropuerto-malaga-conil-en /en/articulos/aeropuerto-malaga-conil 301!
+/articulos/aeropuerto-sevilla-conil-en.html /en/articulos/aeropuerto-sevilla-conil 301!
+/articulos/aeropuerto-sevilla-conil-en /en/articulos/aeropuerto-sevilla-conil 301!
+/articulos/mejores-calas-conil-en.html /en/articulos/mejores-calas-conil 301!
+/articulos/mejores-calas-conil-en /en/articulos/mejores-calas-conil 301!
+/articulos/miradores-conil-en.html /en/articulos/miradores-conil 301!
+/articulos/miradores-conil-en /en/articulos/miradores-conil 301!
+/articulos/que-ver-en-conil-en.html /en/articulos/que-ver-en-conil 301!
+/articulos/que-ver-en-conil-en /en/articulos/que-ver-en-conil 301!
+/articulos/ruta-atun-almadraba-en.html /en/articulos/ruta-atun-almadraba 301!
+/articulos/ruta-atun-almadraba-en /en/articulos/ruta-atun-almadraba 301!
+/articulos/ruta-pueblos-blancos-en.html /en/articulos/ruta-pueblos-blancos 301!
+/articulos/ruta-pueblos-blancos-en /en/articulos/ruta-pueblos-blancos 301!
+/articulos/santa-justa-conil-en.html /en/articulos/santa-justa-conil 301!
+/articulos/santa-justa-conil-en /en/articulos/santa-justa-conil 301!
+/articulos/setenil-ronda-excursion-en.html /en/articulos/setenil-ronda-excursion 301!
+/articulos/setenil-ronda-excursion-en /en/articulos/setenil-ronda-excursion 301!
+/articulos/sunshine-tour-montenmedio-en.html /en/articulos/sunshine-tour-montenmedio 301!
+/articulos/sunshine-tour-montenmedio-en /en/articulos/sunshine-tour-montenmedio 301!
+/articulos/taxi-vs-alquiler-conil-en.html /en/articulos/taxi-vs-alquiler-conil 301!
+/articulos/taxi-vs-alquiler-conil-en /en/articulos/taxi-vs-alquiler-conil 301!
+/articulos/ventajas-precio-cerrado-en.html /en/articulos/ventajas-precio-cerrado 301!
+/articulos/ventajas-precio-cerrado-en /en/articulos/ventajas-precio-cerrado 301!
+/articulos/viajar-con-ninos-seguridad-en.html /en/articulos/viajar-con-ninos-seguridad 301!
+/articulos/viajar-con-ninos-seguridad-en /en/articulos/viajar-con-ninos-seguridad 301!
+
+/articulos/aeropuerto-jerez-conil-de.html /de/articulos/aeropuerto-jerez-conil 301!
+/articulos/aeropuerto-jerez-conil-de /de/articulos/aeropuerto-jerez-conil 301!
+/articulos/aeropuerto-malaga-conil-de.html /de/articulos/aeropuerto-malaga-conil 301!
+/articulos/aeropuerto-malaga-conil-de /de/articulos/aeropuerto-malaga-conil 301!
+/articulos/aeropuerto-sevilla-conil-de.html /de/articulos/aeropuerto-sevilla-conil 301!
+/articulos/aeropuerto-sevilla-conil-de /de/articulos/aeropuerto-sevilla-conil 301!
+/articulos/mejores-calas-conil-de.html /de/articulos/mejores-calas-conil 301!
+/articulos/mejores-calas-conil-de /de/articulos/mejores-calas-conil 301!
+/articulos/miradores-conil-de.html /de/articulos/miradores-conil 301!
+/articulos/miradores-conil-de /de/articulos/miradores-conil 301!
+/articulos/que-ver-en-conil-de.html /de/articulos/que-ver-en-conil 301!
+/articulos/que-ver-en-conil-de /de/articulos/que-ver-en-conil 301!
+/articulos/ruta-atun-almadraba-de.html /de/articulos/ruta-atun-almadraba 301!
+/articulos/ruta-atun-almadraba-de /de/articulos/ruta-atun-almadraba 301!
+/articulos/ruta-pueblos-blancos-de.html /de/articulos/ruta-pueblos-blancos 301!
+/articulos/ruta-pueblos-blancos-de /de/articulos/ruta-pueblos-blancos 301!
+/articulos/santa-justa-conil-de.html /de/articulos/santa-justa-conil 301!
+/articulos/santa-justa-conil-de /de/articulos/santa-justa-conil 301!
+/articulos/setenil-ronda-excursion-de.html /de/articulos/setenil-ronda-excursion 301!
+/articulos/setenil-ronda-excursion-de /de/articulos/setenil-ronda-excursion 301!
+/articulos/sunshine-tour-montenmedio-de.html /de/articulos/sunshine-tour-montenmedio 301!
+/articulos/sunshine-tour-montenmedio-de /de/articulos/sunshine-tour-montenmedio 301!
+/articulos/taxi-vs-alquiler-conil-de.html /de/articulos/taxi-vs-alquiler-conil 301!
+/articulos/taxi-vs-alquiler-conil-de /de/articulos/taxi-vs-alquiler-conil 301!
+/articulos/ventajas-precio-cerrado-de.html /de/articulos/ventajas-precio-cerrado 301!
+/articulos/ventajas-precio-cerrado-de /de/articulos/ventajas-precio-cerrado 301!
+/articulos/viajar-con-ninos-seguridad-de.html /de/articulos/viajar-con-ninos-seguridad 301!
+/articulos/viajar-con-ninos-seguridad-de /de/articulos/viajar-con-ninos-seguridad 301!
+
+/articulos/aeropuerto-jerez-conil-fr.html /fr/articulos/aeropuerto-jerez-conil 301!
+/articulos/aeropuerto-jerez-conil-fr /fr/articulos/aeropuerto-jerez-conil 301!
+/articulos/aeropuerto-malaga-conil-fr.html /fr/articulos/aeropuerto-malaga-conil 301!
+/articulos/aeropuerto-malaga-conil-fr /fr/articulos/aeropuerto-malaga-conil 301!
+/articulos/aeropuerto-sevilla-conil-fr.html /fr/articulos/aeropuerto-sevilla-conil 301!
+/articulos/aeropuerto-sevilla-conil-fr /fr/articulos/aeropuerto-sevilla-conil 301!
+/articulos/mejores-calas-conil-fr.html /fr/articulos/mejores-calas-conil 301!
+/articulos/mejores-calas-conil-fr /fr/articulos/mejores-calas-conil 301!
+/articulos/miradores-conil-fr.html /fr/articulos/miradores-conil 301!
+/articulos/miradores-conil-fr /fr/articulos/miradores-conil 301!
+/articulos/que-ver-en-conil-fr.html /fr/articulos/que-ver-en-conil 301!
+/articulos/que-ver-en-conil-fr /fr/articulos/que-ver-en-conil 301!
+/articulos/ruta-atun-almadraba-fr.html /fr/articulos/ruta-atun-almadraba 301!
+/articulos/ruta-atun-almadraba-fr /fr/articulos/ruta-atun-almadraba 301!
+/articulos/ruta-pueblos-blancos-fr.html /fr/articulos/ruta-pueblos-blancos 301!
+/articulos/ruta-pueblos-blancos-fr /fr/articulos/ruta-pueblos-blancos 301!
+/articulos/santa-justa-conil-fr.html /fr/articulos/santa-justa-conil 301!
+/articulos/santa-justa-conil-fr /fr/articulos/santa-justa-conil 301!
+/articulos/setenil-ronda-excursion-fr.html /fr/articulos/setenil-ronda-excursion 301!
+/articulos/setenil-ronda-excursion-fr /fr/articulos/setenil-ronda-excursion 301!
+/articulos/sunshine-tour-montenmedio-fr.html /fr/articulos/sunshine-tour-montenmedio 301!
+/articulos/sunshine-tour-montenmedio-fr /fr/articulos/sunshine-tour-montenmedio 301!
+/articulos/taxi-vs-alquiler-conil-fr.html /fr/articulos/taxi-vs-alquiler-conil 301!
+/articulos/taxi-vs-alquiler-conil-fr /fr/articulos/taxi-vs-alquiler-conil 301!
+/articulos/ventajas-precio-cerrado-fr.html /fr/articulos/ventajas-precio-cerrado 301!
+/articulos/ventajas-precio-cerrado-fr /fr/articulos/ventajas-precio-cerrado 301!
+/articulos/viajar-con-ninos-seguridad-fr.html /fr/articulos/viajar-con-ninos-seguridad 301!
+/articulos/viajar-con-ninos-seguridad-fr /fr/articulos/viajar-con-ninos-seguridad 301!
+
+/en /en/index.html 200
+/de /de/index.html 200
+/fr /fr/index.html 200
+
+/taxi-aeropuerto-jerez-conil /taxi-aeropuerto-jerez-conil.html 200
+/taxi-aeropuerto-jerez-conil-en /taxi-aeropuerto-jerez-conil-en.html 200
+/taxi-aeropuerto-jerez-conil-de /taxi-aeropuerto-jerez-conil-de.html 200
+/taxi-aeropuerto-jerez-conil-fr /taxi-aeropuerto-jerez-conil-fr.html 200
+
+/taxi-aeropuerto-sevilla-conil /taxi-aeropuerto-sevilla-conil.html 200
+/taxi-aeropuerto-sevilla-conil-en /taxi-aeropuerto-sevilla-conil-en.html 200
+/taxi-aeropuerto-sevilla-conil-de /taxi-aeropuerto-sevilla-conil-de.html 200
+/taxi-aeropuerto-sevilla-conil-fr /taxi-aeropuerto-sevilla-conil-fr.html 200
+
+/taxi-aeropuerto-malaga-conil /taxi-aeropuerto-malaga-conil.html 200
+/taxi-aeropuerto-malaga-conil-en /taxi-aeropuerto-malaga-conil-en.html 200
+/taxi-aeropuerto-malaga-conil-de /taxi-aeropuerto-malaga-conil-de.html 200
+/taxi-aeropuerto-malaga-conil-fr /taxi-aeropuerto-malaga-conil-fr.html 200
+
+/taxi-aeropuerto-gibraltar-conil /taxi-aeropuerto-gibraltar-conil.html 200
+/taxi-aeropuerto-gibraltar-conil-en /taxi-aeropuerto-gibraltar-conil-en.html 200
+/taxi-aeropuerto-gibraltar-conil-de /taxi-aeropuerto-gibraltar-conil-de.html 200
+/taxi-aeropuerto-gibraltar-conil-fr /taxi-aeropuerto-gibraltar-conil-fr.html 200
+
+/taxi-bahia-sur-conil /taxi-bahia-sur-conil.html 200
+/taxi-bahia-sur-conil-en /taxi-bahia-sur-conil-en.html 200
+/taxi-bahia-sur-conil-de /taxi-bahia-sur-conil-de.html 200
+/taxi-bahia-sur-conil-fr /taxi-bahia-sur-conil-fr.html 200
+
+/blog /es/blog.html 200
+/blog-en /en/blog.html 200
+/blog-de /de/blog.html 200
+/blog-fr /fr/blog.html 200
+
+# --- BLOG ARTICLES ---
+
+# Sunshine Tour
+/articulos/sunshine-tour-montenmedio /articulos/sunshine-tour-montenmedio.html 200
+/en/articulos/sunshine-tour-montenmedio /en/articulos/sunshine-tour-montenmedio.html 200
+/de/articulos/sunshine-tour-montenmedio /de/articulos/sunshine-tour-montenmedio.html 200
+/fr/articulos/sunshine-tour-montenmedio /fr/articulos/sunshine-tour-montenmedio.html 200
+
+# Que ver en Conil
+/articulos/que-ver-en-conil /articulos/que-ver-en-conil.html 200
+/en/articulos/que-ver-en-conil /en/articulos/que-ver-en-conil.html 200
+/de/articulos/que-ver-en-conil /de/articulos/que-ver-en-conil.html 200
+/fr/articulos/que-ver-en-conil /fr/articulos/que-ver-en-conil.html 200
+
+# Mejores Calas
+/articulos/mejores-calas-conil /articulos/mejores-calas-conil.html 200
+/en/articulos/mejores-calas-conil /en/articulos/mejores-calas-conil.html 200
+/de/articulos/mejores-calas-conil /de/articulos/mejores-calas-conil.html 200
+/fr/articulos/mejores-calas-conil /fr/articulos/mejores-calas-conil.html 200
+
+# Ruta del Atún
+/articulos/ruta-atun-almadraba /articulos/ruta-atun-almadraba.html 200
+/en/articulos/ruta-atun-almadraba /en/articulos/ruta-atun-almadraba.html 200
+/de/articulos/ruta-atun-almadraba /de/articulos/ruta-atun-almadraba.html 200
+/fr/articulos/ruta-atun-almadraba /fr/articulos/ruta-atun-almadraba.html 200
+
+# Miradores
+/articulos/miradores-conil /articulos/miradores-conil.html 200
+/en/articulos/miradores-conil /en/articulos/miradores-conil.html 200
+/de/articulos/miradores-conil /de/articulos/miradores-conil.html 200
+/fr/articulos/miradores-conil /fr/articulos/miradores-conil.html 200
+
+# Ruta Pueblos Blancos
+/articulos/ruta-pueblos-blancos /articulos/ruta-pueblos-blancos.html 200
+/en/articulos/ruta-pueblos-blancos /en/articulos/ruta-pueblos-blancos.html 200
+/de/articulos/ruta-pueblos-blancos /de/articulos/ruta-pueblos-blancos.html 200
+/fr/articulos/ruta-pueblos-blancos /fr/articulos/ruta-pueblos-blancos.html 200
+
+# Santa Justa
+/articulos/santa-justa-conil /articulos/santa-justa-conil.html 200
+/en/articulos/santa-justa-conil /en/articulos/santa-justa-conil.html 200
+/de/articulos/santa-justa-conil /de/articulos/santa-justa-conil.html 200
+/fr/articulos/santa-justa-conil /fr/articulos/santa-justa-conil.html 200
+
+# Setenil y Ronda
+/articulos/setenil-ronda-excursion /articulos/setenil-ronda-excursion.html 200
+/en/articulos/setenil-ronda-excursion /en/articulos/setenil-ronda-excursion.html 200
+/de/articulos/setenil-ronda-excursion /de/articulos/setenil-ronda-excursion.html 200
+/fr/articulos/setenil-ronda-excursion /fr/articulos/setenil-ronda-excursion.html 200
+
+# Taxi vs Alquiler
+/articulos/taxi-vs-alquiler-conil /articulos/taxi-vs-alquiler-conil.html 200
+/en/articulos/taxi-vs-alquiler-conil /en/articulos/taxi-vs-alquiler-conil.html 200
+/de/articulos/taxi-vs-alquiler-conil /de/articulos/taxi-vs-alquiler-conil.html 200
+/fr/articulos/taxi-vs-alquiler-conil /fr/articulos/taxi-vs-alquiler-conil.html 200
+
+# Ventajas Precio Cerrado
+/articulos/ventajas-precio-cerrado /articulos/ventajas-precio-cerrado.html 200
+/en/articulos/ventajas-precio-cerrado /en/articulos/ventajas-precio-cerrado.html 200
+/de/articulos/ventajas-precio-cerrado /de/articulos/ventajas-precio-cerrado.html 200
+/fr/articulos/ventajas-precio-cerrado /fr/articulos/ventajas-precio-cerrado.html 200
+
+# Viajar con niños
+/articulos/viajar-con-ninos-seguridad /articulos/viajar-con-ninos-seguridad.html 200
+/en/articulos/viajar-con-ninos-seguridad /en/articulos/viajar-con-ninos-seguridad.html 200
+/de/articulos/viajar-con-ninos-seguridad /de/articulos/viajar-con-ninos-seguridad.html 200
+/fr/articulos/viajar-con-ninos-seguridad /fr/articulos/viajar-con-ninos-seguridad.html 200
+
+# Aeropuerto Jerez (Blog version)
+/articulos/aeropuerto-jerez-conil /articulos/aeropuerto-jerez-conil.html 200
+/en/articulos/aeropuerto-jerez-conil /en/articulos/aeropuerto-jerez-conil.html 200
+/de/articulos/aeropuerto-jerez-conil /de/articulos/aeropuerto-jerez-conil.html 200
+/fr/articulos/aeropuerto-jerez-conil /fr/articulos/aeropuerto-jerez-conil.html 200
+
+# Aeropuerto Malaga (Blog version)
+/articulos/aeropuerto-malaga-conil /articulos/aeropuerto-malaga-conil.html 200
+/en/articulos/aeropuerto-malaga-conil /en/articulos/aeropuerto-malaga-conil.html 200
+/de/articulos/aeropuerto-malaga-conil /de/articulos/aeropuerto-malaga-conil.html 200
+/fr/articulos/aeropuerto-malaga-conil /fr/articulos/aeropuerto-malaga-conil.html 200
+
+# Aeropuerto Sevilla (Blog version)
+/articulos/aeropuerto-sevilla-conil /articulos/aeropuerto-sevilla-conil.html 200
+/en/articulos/aeropuerto-sevilla-conil /en/articulos/aeropuerto-sevilla-conil.html 200
+/de/articulos/aeropuerto-sevilla-conil /de/articulos/aeropuerto-sevilla-conil.html 200
+/fr/articulos/aeropuerto-sevilla-conil /fr/articulos/aeropuerto-sevilla-conil.html 200
+# Remove trailing slashes (normalize URLs)
+/terms/ /terms 301!
+/terms-en/ /terms-en 301!
+/terms-de/ /terms-de 301!
+/terms-fr/ /terms-fr 301!
+/trayectos-frecuentes/ /trayectos-frecuentes 301!
+/taxi-aeropuerto-jerez-conil/ /taxi-aeropuerto-jerez-conil 301!
+/taxi-aeropuerto-jerez-conil-en/ /taxi-aeropuerto-jerez-conil-en 301!
+/taxi-aeropuerto-jerez-conil-de/ /taxi-aeropuerto-jerez-conil-de 301!
+/taxi-aeropuerto-jerez-conil-fr/ /taxi-aeropuerto-jerez-conil-fr 301!
+/taxi-aeropuerto-malaga-conil/ /taxi-aeropuerto-malaga-conil 301!
+/taxi-aeropuerto-malaga-conil-en/ /taxi-aeropuerto-malaga-conil-en 301!
+/taxi-aeropuerto-malaga-conil-de/ /taxi-aeropuerto-malaga-conil-de 301!
+/taxi-aeropuerto-malaga-conil-fr/ /taxi-aeropuerto-malaga-conil-fr 301!
+/taxi-aeropuerto-sevilla-conil/ /taxi-aeropuerto-sevilla-conil 301!
+/taxi-aeropuerto-sevilla-conil-en/ /taxi-aeropuerto-sevilla-conil-en 301!
+/taxi-aeropuerto-sevilla-conil-de/ /taxi-aeropuerto-sevilla-conil-de 301!
+/taxi-aeropuerto-sevilla-conil-fr/ /taxi-aeropuerto-sevilla-conil-fr 301!
+
+/index.html / 301!
+/index / 301!
+# /index-en /en 301!
+# /index-de /de 301!
+# /index-fr /fr 301!
+
+# /index-en.html /en 301!
+# /index-de.html /de 301!
+# /index-fr.html /fr 301!
+
+/terms.html /terms 301!
+/terms-en.html /terms-en 301!
+/terms-de.html /terms-de 301!
+/terms-fr.html /terms-fr 301!
+
+# Removed trayectos-frecuentes.html redirect to prevent loops
+
+/es/blog.html /blog 301!
+/en/blog.html /blog-en 301!
+/de/blog.html /blog-de 301!
+/fr/blog.html /blog-fr 301!
+
+/trayectos-frecuentes-en.html /trayectos-frecuentes-en 301!
+/trayectos-frecuentes-de.html /trayectos-frecuentes-de 301!
+/trayectos-frecuentes-fr.html /trayectos-frecuentes-fr 301!
+
+# Removed trailing slash redirects for articles to prevent redirect loops
+# Removed .html redirects for articles to prevent redirect loops
+# Removed taxi .html redirects to prevent redirect loops
+
+# Proxy images through the same origin (keeps URLs on your domain)
+/img/hero.webp /IMG/PORTADA-TAXI-CONIL.jpg 200
+
+# Safety: some audits/tools may request the hero image without the /IMG prefix
+/PORTADA-TAXI-CONIL-800.webp /IMG/PORTADA-TAXI-CONIL-800.webp 200
+

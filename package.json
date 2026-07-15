@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "start": "node server.js",
+    "start:local": "npm run minify && node server.js",
+    "minify": "terser js/script.js -o js/script.min.js --compress"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "franc": "^6.2.0",
+    "mkcert": "^3.2.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.3",
+    "terser": "^5.46.1"
+  }
+}

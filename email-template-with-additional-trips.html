@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light">
+  
+  <title>Reserva Taxi Conil - ADMIN</title>
+  <style>
+    :root { color-scheme: light only; supported-color-schemes: light; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #f2f4f6; color: #242424; margin: 0; padding: 0; line-height: 1.4; }
+    .email-wrapper { max-width: 600px; margin: 0 auto; background-color: #ffffff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    .email-header { background: linear-gradient(135deg, #1a2a45 0%, #2c3e50 100%); color: #ffffff; text-align: center; padding: 30px 20px; }
+    .email-header img { width: 100px; height: auto; margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2)); }
+    .email-header h1 { margin: 0; font-size: 24px; font-weight: 700; letter-spacing: 0.5px; text-transform: capitalize; color: #ffffff !important; }
+    .badge-status { background-color: #eebb22; color: #1a2a45; font-size: 11px; font-weight: 800; padding: 5px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .email-content { padding: 20px; }
+    .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid #eeeeee; }
+    .btn-full { grid-column: span 2; }
+    .btn { display: flex; justify-content: center; align-items: center; padding: 14px 0; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 15px; text-align: center; }
+    .btn-call { background-color: #1a2a45; color: #ffffff !important; box-shadow: 0 4px 6px rgba(26, 42, 69, 0.2); }
+    .btn-whatsapp { background-color: #25D366; color: #ffffff !important; border: 1px solid #1ebd5b; }
+    .btn-email { background-color: #6c757d; color: #ffffff !important; border: 1px solid #5a6268; }
+    .btn-share { background: linear-gradient(to bottom, #ffc800, #ffb300); background-color: #ffc800; color: #222222 !important; border: 1px solid #e6a800; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; box-shadow: 0 3px 6px rgba(0,0,0,0.1); }
+    .btn-calendar-full { display: block; width: 100%; box-sizing: border-box; background-color: #ffffff; color: #1a2a45 !important; font-size: 13px; font-weight: 800; text-transform: uppercase; text-align: center; padding: 12px 0; margin-top: 10px; border-radius: 6px; text-decoration: none; border: 2px solid #eebb22; }
+    h3 { color: #1a2a45; font-size: 14px; text-transform: uppercase; margin-top: 25px; margin-bottom: 10px; border-bottom: 2px solid #eebb22; padding-bottom: 4px; font-weight: 800; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .data-table td { padding: 8px 0; border-bottom: 1px solid #f0f0f0; }
+    .label { width: 35%; color: #777777; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+    .value { width: 65%; color: #111111; font-weight: 500; text-align: right; }
+    .highlight-date { color: #1a2a45 !important; font-weight: 800; font-size: 17px; }
+    .highlight-price { color: #eebb22 !important; font-weight: 800; font-size: 17px; }
+    .notes-box { background-color: #fff8e1; color: #5c4b18; padding: 12px; border-radius: 6px; font-size: 14px; margin-top: 10px; border-left: 4px solid #ffc107; font-style: italic; }
+    .total-box { background: #1a2a45; color: #ffffff !important; text-align: center; padding: 20px; border-radius: 10px; margin-top: 30px; box-shadow: 0 5px 15px rgba(26, 42, 69, 0.15); }
+    .total-price { font-size: 34px; font-weight: 800; color: #ffc107 !important; margin-top: 5px;}
+    .footer { background-color: #eeeeee; padding: 20px; text-align: center; color: #888888; font-size: 11px; border-top: 1px solid #e0e0e0; }
+    .icon { width: 18px; height: 18px; margin-right: 8px; vertical-align: middle; }
+
+    @media (prefers-color-scheme: dark) {
+        body, .email-wrapper { background-color: #ffffff !important; color: #242424 !important; }
+        h1, h2, h3, .value, .highlight-date { color: #1a2a45 !important; }
+        .email-header { background: linear-gradient(135deg, #1a2a45 0%, #2c3e50 100%) !important; color: #ffffff !important; }
+        .total-box { background-color: #1a2a45 !important; color: #ffffff !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="email-wrapper">
+    <div class="email-header">
+      <div class="badge-status">Nueva Reserva Web</div>
+      <img src="https://i.imgur.com/U2KLhsJ.png" alt="Taxi Conil Logo" />
+      <h1>{{1.Nombre}}</h1>
+    </div>
+
+    <div class="email-content">
+      <div class="action-grid">
+        <a href="tel:{{1.Telefono}}" class="btn btn-call btn-full">📞 Llamar al cliente</a>
+        <a href="https://wa.me/{{1.Telefono}}" class="btn btn-whatsapp"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/120px-WhatsApp.svg.png" class="icon" style="filter: brightness(0) invert(1);"> WhatsApp</a>
+        <a href="mailto:{{1.email}}" class="btn btn-email">✉️ Email</a>
+        
+        <a href="https://api.whatsapp.com/send?text=✅ *SERVICIO DE TAXI*%0A%0A👤 *Cliente:* _{{1.Nombre}}_%0A📞 *Teléfono:* {{1.Telefono}}%0A👥 *Pasajeros:* {{1.Pasajeros}}%0A🧳 *Equipaje:* {{1.Maletas_Cabina}}C/{{1.Maletas_Grandes}}G%0A{{if(1.SRI_Detalle; "%0A👶 *Sillas:* " + 1.SRI_Detalle; "")}}{{if(1.mascota; "%0A🐕 *Mascota:* " + 1.mascota; "")}}%0A%0A🚀 *IDA*%0A📅 _{{1.Fecha_Hora_Ida}}_%0A📍 {{1.Trayecto_Ida}}%0A💶 *{{1.Precio_Ida}}*%0A{{if(1.Trayecto_Vuelta; "%0A%0A🔄 *VUELTA*%0A📅 _" + 1.Fecha_Hora_Vuelta + "_%0A📍 " + 1.Trayecto_Vuelta + "%0A💶 *" + 1.Precio_Vuelta + "*"; "")}}{{if(1.additional_trips_whatsapp; "%0A%0A➕ *TRAYECTOS ADICIONALES*%0A" + 1.additional_trips_whatsapp; "")}}{{if(1.Comentarios; "%0A%0A📝 *Nota del cliente:*%0A_" + 1.Comentarios + "_"; "")}}%0A%0A💰 *TOTAL:* _{{if(1.Trayecto_Vuelta; 1.Precio_Total_Reserva; 1.Precio_Ida)}}_" class="btn btn-share btn-full">🚕 Pasar aviso a compañero</a>
+      </div>
+
+      <h3>👤 Cliente</h3>
+      <table class="data-table">
+        <tr><td class="label">Nombre</td><td class="value">{{1.Nombre}}</td></tr>
+        <tr><td class="label">Teléfono</td><td class="value">{{1.Telefono}}</td></tr>
+        <tr><td class="label">Email</td><td class="value">{{1.email}}</td></tr>
+        <tr><td class="label">Pasajeros</td><td class="value"><strong>{{1.Pasajeros}}</strong></td></tr>
+      </table>
+
+      <h3>🚀 Ida</h3>
+      <table class="data-table">
+        <tr><td class="label">Fecha/Hora</td><td class="value highlight-date">{{1.Fecha_Hora_Ida}}</td></tr>
+        <tr><td class="label">Origen/Destino</td><td class="value">{{1.Trayecto_Ida}}</td></tr>
+        <tr><td class="label">Distancia</td><td class="value">{{1.Distancia_Ida}}</td></tr>
+        <tr><td class="label">Duración</td><td class="value">{{1.Duracion_Ida}}</td></tr>
+        <tr><td class="label" style="color:#1a2a45; font-weight:800;">Precio Ida</td><td class="value highlight-price">{{1.Precio_Ida}}</td></tr>
+      </table>
+      <a href="{{1.Calendar_Link_Ida}}" class="btn-calendar-full">📅 Añadir Ida al Calendario</a>
+
+      {{if(1.Trayecto_Vuelta; "<h3>🔄 Vuelta</h3><table class='data-table'><tr><td class='label'>Fecha/Hora</td><td class='value highlight-date'>" + 1.Fecha_Hora_Vuelta + "</td></tr><tr><td class='label'>Origen/Destino</td><td class='value'>" + 1.Trayecto_Vuelta + "</td></tr><tr><td class='label'>Distancia</td><td class='value'>" + 1.Distancia_Vuelta + "</td></tr><tr><td class='label'>Duración</td><td class='value'>" + 1.Duracion_Vuelta + "</td></tr><tr><td class='label' style='color:#1a2a45; font-weight:800;'>Precio Vuelta</td><td class='value highlight-price'>" + 1.Precio_Vuelta + "</td></tr></table><a href='" + 1.Calendar_Link_Vuelta + "' class='btn-calendar-full'>📅 Añadir Vuelta al Calendario</a>"; )}}
+
+      {{if(1.additional_trips; "<h3>➕ Trayectos Adicionales</h3>" + 1.additional_trips; "")}}
+
+      <h3>🧳 Extras y Notas</h3>
+      <table class="data-table">
+        <tr><td class="label">Equipaje</td><td class="value">{{1.Maletas_Cabina}} Cabina / {{1.Maletas_Grandes}} Grandes</td></tr>
+        {{if(1.mascota; "<tr><td class='label'>Mascota</td><td class='value'>" + 1.mascota + "</td></tr>"; )}}
+        {{if(1.SRI_Detalle; "<tr><td class='label'>Sillas (SRI)</td><td class='value'>" + 1.SRI_Detalle + "</td></tr>"; )}}
+        {{if(1.Edad_Peso_Bebe; "<tr><td class='label'>Info Bebé</td><td class='value'>" + 1.Edad_Peso_Bebe + "</td></tr>"; )}}
+      </table>
+
+      {{if(1.Comentarios; "<div class='notes-box'><strong>⚠️ Nota del cliente:</strong><br>" + 1.Comentarios + "</div>"; )}}
+
+      <div class="total-box">
+        <div class="total-title">Total a Cobrar</div>
+        <div class="total-price">{{if(1.Trayecto_Vuelta; 1.Precio_Total_Reserva; 1.Precio_Ida)}}</div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p><strong>REGISTRO DE SEGURIDAD</strong></p>
+      <p>📅 Fecha Reserva (AC): {{1.current_date}}</p>
+    </div>
+  </div>
+</body>
+</html>

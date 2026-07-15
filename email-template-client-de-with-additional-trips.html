@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light">
+  <title>Buchungsbestätigung | Taxi Conil</title>
+  <style>
+    body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #f4f6f8; color: #333333; margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    .email-wrapper { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+    .email-header { background-color: #1a2a45; color: #ffffff; text-align: center; padding: 30px 20px; }
+    .email-header img { width: 100px; height: auto; margin-bottom: 15px; display: block; margin-left: auto; margin-right: auto; border: 0; }
+    .email-header h1 { margin: 0; font-size: 24px; font-weight: 600; text-transform: uppercase; line-height: 1.2; color: #ffffff !important; }
+    .email-content { padding: 25px; line-height: 1.6; }
+    h2, h3 { color: #1a2a45; font-size: 18px; border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; margin-top: 30px; margin-bottom: 15px; font-weight: 700; }
+    .info-box { background-color: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #D4AF37; font-size: 15px; }
+    .info-row { margin-bottom: 8px; display: block; }
+    .label { font-weight: 700; color: #1a2a45; }
+    .calendar-wrapper { text-align: center; margin-top: 12px; padding-top: 10px; border-top: 1px solid #e6e6e6; }
+    .btn-calendar-slim { display: inline-block; background-color: #D4AF37; color: #1a2a45 !important; text-decoration: none; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; padding: 6px 18px; border-radius: 20px; transition: opacity 0.3s; }
+    .total-box { background-color: #fffbf0; border: 1px solid #f0e6c5; padding: 20px; border-radius: 12px; margin-top: 30px; text-align: center; }
+    .total-price { display: block; font-size: 28px; color: #1a2a45; font-weight: 800; margin: 10px 0; }
+    .disclaimer { font-size: 12px; color: #666; margin-top: 15px; line-height: 1.4; font-style: italic; }
+    .contact-section { text-align: center; margin-top: 30px; }
+    .btn { display: block; width: 100%; max-width: 300px; margin: 10px auto; padding: 14px 0; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 16px; text-align: center; transition: opacity 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .btn-call { background-color: #ffffff; color: #1a2a45 !important; border: 1px solid #1a2a45; }
+    .btn-whatsapp { background-color: #ffffff; color: #25D366 !important; border: 1px solid #25D366; }
+    .btn-gmail { background-color: #ffffff; color: #ea4335 !important; border: 1px solid #ea4335; }
+    .icon-img { width: 24px; height: 24px; margin-right: 8px; border: 0; vertical-align: middle; display: inline-block; }
+    .btn-text { vertical-align: middle; display: inline-block; }
+    .footer { background-color: #111b2b; padding: 30px 20px; text-align: center; }
+    .footer p { color: #ffffff; font-size: 12px; margin-bottom: 10px; margin-top: 15px; }
+    .web-link { color: #D4AF37 !important; font-size: 15px; font-weight: bold; text-decoration: none; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid #D4AF37; padding-bottom: 2px; }
+    @media only screen and (max-width: 600px) { .email-wrapper { width: 100% !important; margin: 0 !important; } .info-box { padding: 12px; } h1 { font-size: 22px !important; } .btn { width: 90% !important; } }
+  </style>
+</head>
+<body>
+
+  <div style="display:none; max-height:0; overflow:hidden; font-size:1px; color:#f4f6f8;">
+    Bestätigung Ihrer Taxi Conil Buchung. Abholungsdetails, Strecke und Gesamtbetrag.
+  </div>
+
+  <div class="email-wrapper">
+
+    <div class="email-header">
+      <img src="https://i.imgur.com/U2KLhsJ.png" alt="Taxi Conil Logo" width="100" />
+      <h1>Buchungsbestätigung</h1>
+    </div>
+
+    <div class="email-content">
+      <p>Guten Tag, <strong>{{1.Nombre}}</strong>:</p>
+      
+      <p>Wir bedanken uns für Ihre Buchungsanfrage. Nachfolgend finden Sie eine Zusammenfassung Ihrer Fahrt:</p>
+
+      <h3>Kundeninformationen</h3>
+      <div class="info-box">
+        <div class="info-row"><span class="label">Name:</span> {{1.Nombre}}</div>
+        <div class="info-row"><span class="label">Telefon:</span> {{1.Telefono}}</div>
+        <div class="info-row"><span class="label">E-Mail:</span> {{1.email}}</div>
+        <div class="info-row"><span class="label">Fahrgäste:</span> {{1.Pasajeros}}</div>
+      </div>
+
+      <h3>Hinfahrt</h3>
+      <div class="info-box">
+        <div class="info-row"><span class="label">Strecke:</span> {{1.Trayecto_Ida}}</div>
+        <div class="info-row"><span class="label">Datum & Uhrzeit:</span> {{1.Fecha_Hora_Ida}}</div>
+        <div class="info-row"><span class="label">Entfernung:</span> {{1.Distancia_Ida}}</div>
+        <div class="info-row"><span class="label">Dauer:</span> {{1.Duracion_Ida}}</div>
+        <div class="info-row" style="margin-top:5px; border-top:1px dashed #ccc; padding-top:5px;">
+          <span class="label">Preis Hinfahrt:</span> {{1.Precio_Ida}}
+        </div>
+        <div class="calendar-wrapper">
+            <a href="{{1.Calendar_Link_Ida}}" class="btn-calendar-slim">📅 Zu meinem Kalender hinzufügen</a>
+        </div>
+      </div>
+
+      {{if(1.Trayecto_Vuelta; "<h3>Rückfahrt</h3><div class='info-box'><div class='info-row'><span class='label'>Strecke:</span> " + 1.Trayecto_Vuelta + "</div><div class='info-row'><span class='label'>Datum & Uhrzeit:</span> " + 1.Fecha_Hora_Vuelta + "</div><div class='info-row'><span class='label'>Entfernung:</span> " + 1.Distancia_Vuelta + "</div><div class='info-row'><span class='label'>Dauer:</span> " + 1.Duracion_Vuelta + "</div><div class='info-row' style='margin-top:5px; border-top:1px dashed #ccc; padding-top:5px;'><span class='label'>Preis Rückfahrt:</span> " + 1.Precio_Vuelta + "</div><div class='calendar-wrapper'><a href='" + 1.Calendar_Link_Vuelta + "' class='btn-calendar-slim'>📅 Zu meinem Kalender hinzufügen</a></div></div>"; )}}
+
+      {{if(1.additional_trips; "<h3>Zusätzliche Fahrten</h3>" + 1.additional_trips; "")}}
+
+      <h3>Zusätzliche Details</h3>
+      <div class="info-box">
+        <div class="info-row"><span class="label">Gepäck:</span> Handgepäck: {{1.Maletas_Cabina}}, Groß: {{1.Maletas_Grandes}}</div>
+        
+        {{if(1.mascota; "<div class='info-row'><span class='label'>Haustier:</span> " + 1.mascota + "</div>"; )}}
+        
+        {{if(1.SRI_Detalle; "<div class='info-row'><span class='label'>Kindersitze:</span> " + 1.SRI_Detalle + "</div>"; )}}
+        
+        {{if(1.Edad_Peso_Bebe; "<div class='info-row'><span class='label'>Alter/Gewicht des Babys:</span> " + 1.Edad_Peso_Bebe + "</div>"; )}}
+
+        {{if(1.Comentarios; "<div class='info-row' style='margin-top:10px; border-top:1px solid #eee; padding-top:10px;'><span class='label'>Anmerkungen:</span><br>" + 1.Comentarios + "</div>"; )}}
+      </div>
+
+      <div class="total-box">
+        <p style="margin:0; font-size:14px; text-transform:uppercase;">Gesamtbetrag:</p>
+        
+        <span class="total-price">
+          {{if(1.Trayecto_Vuelta; 1.Precio_Total_Reserva; 1.Precio_Ida)}}
+        </span>
+
+        <p class="disclaimer">
+          Taxi Conil behält sich das Recht vor, den Fahrpreis bei Abweichungen von der tatsächlichen Strecke anzupassen. Diese Änderung wird vor Beginn der Fahrt mitgeteilt.
+        </p>
+      </div>
+
+      <div style="border-top:1px solid #eee; margin:30px 0;"></div>
+
+      <div class="contact-section">
+        <p style="margin-bottom: 20px;">
+          Um Änderungen an Ihrer Buchung vorzunehmen oder Fragen zu klären, wählen Sie bitte Ihre bevorzugte Option:
+        </p>
+        
+        <a href="https://api.whatsapp.com/send?phone=34670705774" class="btn btn-whatsapp" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/3670/3670051.png" alt="WhatsApp" class="icon-img" width="24" height="24">
+          <span class="btn-text">WhatsApp senden</span>
+        </a>
+
+        <a href="tel:670705774" class="btn btn-call">
+          <span style="font-size: 18px; margin-right: 8px; vertical-align: middle;">📞</span> 
+          <span class="btn-text">Jetzt anrufen</span>
+        </a>
+
+        <a href="mailto:taxiconil16@gmail.com" class="btn btn-gmail">
+          <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" class="icon-img" width="24" height="24">
+          <span class="btn-text">E-Mail senden</span>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <p>— Ihr Team von <strong>Taxi Conil</strong></p>
+      <a href="https://taxiconil.es/" target="_blank" class="web-link">www.taxiconil.es</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
