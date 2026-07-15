@@ -7875,13 +7875,17 @@ function loadGoogleMapsIfNeeded() {
           (forcePolicy = !0),
           (policyName = "Colorado corridor only"))
         : forceColorado && forceCadizWaypoint
-          ? ((waypoints = originIsCadiz
+          ? ((waypoints = tripType === "vuelta"
+              ? [...cadizWaypoints, ...corridorWaypoints]
+              : originIsCadiz
               ? [...cadizWaypoints, ...corridorWaypoints]
               : [...corridorWaypoints, ...cadizWaypoints]),
             (forcePolicy = !0),
-            (policyName = originIsCadiz
-              ? "Cadiz → Colorado waypoints"
-              : "Colorado → Cadiz waypoints"))
+            (policyName = tripType === "vuelta"
+              ? "Vuelta: Cadiz → Colorado waypoints"
+              : originIsCadiz
+              ? "Ida: Cadiz → Colorado waypoints"
+              : "Ida: Colorado → Cadiz waypoints"))
           : forceColorado
             ? ((waypoints = corridorWaypoints),
               (forcePolicy = !0),
