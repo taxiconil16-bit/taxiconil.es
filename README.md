@@ -31,3 +31,7 @@ Las siguientes variables de entorno son necesarias para el funcionamiento de las
 - `GOOGLE_CLIENT_ID`
 - `GOOGLE_CLIENT_SECRET`
 - `GOOGLE_REFRESH_TOKEN`
+
+## Estado del proyecto
+- Configurado con variables de entorno en Netlify
+- Conectado a GitHub para despliegues automáticos
