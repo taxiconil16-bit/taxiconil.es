@@ -10137,18 +10137,24 @@ function loadGoogleMapsIfNeeded() {
             simplifiedAirport && (swappedOriginText = simplifiedAirport);
           }
           // Asegurar que se copian las coordenadas para evitar rutas incorrectas
+          let originLat = null, originLng = null;
+          if (swappedOriginPlace.geometry && swappedOriginPlace.geometry.location) {
+            const loc = swappedOriginPlace.geometry.location;
+            originLat = typeof loc.lat === 'function' ? loc.lat() : loc.lat;
+            originLng = typeof loc.lng === 'function' ? loc.lng() : loc.lng;
+          } else if (swappedOriginPlace.lat && swappedOriginPlace.lng) {
+            originLat = typeof swappedOriginPlace.lat === 'function' ? swappedOriginPlace.lat() : swappedOriginPlace.lat;
+            originLng = typeof swappedOriginPlace.lng === 'function' ? swappedOriginPlace.lng() : swappedOriginPlace.lng;
+          }
+          
           const swappedOriginPlaceWithCoords = {
             ...swappedOriginPlace,
-            lat: swappedOriginPlace.lat || (swappedOriginPlace.geometry?.location?.lat ? 
-              (typeof swappedOriginPlace.geometry.location.lat === 'function' ? 
-                swappedOriginPlace.geometry.location.lat() : swappedOriginPlace.geometry.location.lat) : null),
-            lng: swappedOriginPlace.lng || (swappedOriginPlace.geometry?.location?.lng ? 
-              (typeof swappedOriginPlace.geometry.location.lng === 'function' ? 
-                swappedOriginPlace.geometry.location.lng() : swappedOriginPlace.geometry.location.lng) : null),
+            lat: originLat,
+            lng: originLng,
             geometry: swappedOriginPlace.geometry || {
               location: {
-                lat: () => swappedOriginPlace.lat || null,
-                lng: () => swappedOriginPlace.lng || null
+                lat: () => originLat,
+                lng: () => originLng
               }
             }
           };
@@ -10192,18 +10198,24 @@ function loadGoogleMapsIfNeeded() {
             simplifiedAirport && (swappedDestinationText = simplifiedAirport);
           }
           // Asegurar que se copian las coordenadas para evitar rutas incorrectas
+          let destLat = null, destLng = null;
+          if (swappedDestinationPlace.geometry && swappedDestinationPlace.geometry.location) {
+            const loc = swappedDestinationPlace.geometry.location;
+            destLat = typeof loc.lat === 'function' ? loc.lat() : loc.lat;
+            destLng = typeof loc.lng === 'function' ? loc.lng() : loc.lng;
+          } else if (swappedDestinationPlace.lat && swappedDestinationPlace.lng) {
+            destLat = typeof swappedDestinationPlace.lat === 'function' ? swappedDestinationPlace.lat() : swappedDestinationPlace.lat;
+            destLng = typeof swappedDestinationPlace.lng === 'function' ? swappedDestinationPlace.lng() : swappedDestinationPlace.lng;
+          }
+          
           const swappedDestinationPlaceWithCoords = {
             ...swappedDestinationPlace,
-            lat: swappedDestinationPlace.lat || (swappedDestinationPlace.geometry?.location?.lat ? 
-              (typeof swappedDestinationPlace.geometry.location.lat === 'function' ? 
-                swappedDestinationPlace.geometry.location.lat() : swappedDestinationPlace.geometry.location.lat) : null),
-            lng: swappedDestinationPlace.lng || (swappedDestinationPlace.geometry?.location?.lng ? 
-              (typeof swappedDestinationPlace.geometry.location.lng === 'function' ? 
-                swappedDestinationPlace.geometry.location.lng() : swappedDestinationPlace.geometry.location.lng) : null),
+            lat: destLat,
+            lng: destLng,
             geometry: swappedDestinationPlace.geometry || {
               location: {
-                lat: () => swappedDestinationPlace.lat || null,
-                lng: () => swappedDestinationPlace.lng || null
+                lat: () => destLat,
+                lng: () => destLng
               }
             }
           };
