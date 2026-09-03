@@ -25,21 +25,8 @@
   Cache-Control: public, max-age=0, s-maxage=3600, must-revalidate
   Content-Type: text/html; charset=utf-8
 
-
-/index-en.html
-  Content-Language: en-GB
-  Content-Type: text/html; charset=utf-8
-
 /en
   Content-Language: en-GB
-  Content-Type: text/html; charset=utf-8
-
-/index-de.html
-  Content-Language: de-DE
-  Content-Type: text/html; charset=utf-8
-
-/index-fr.html
-  Content-Language: fr-FR
   Content-Type: text/html; charset=utf-8
 
 /de
@@ -49,20 +36,6 @@
 /fr
   Content-Language: fr-FR
   Content-Type: text/html; charset=utf-8
-
-/taxi-aeropuerto-jerez-conil.html
-  Content-Language: es-ES
-  Content-Type: text/html; charset=utf-8
-
-/taxi-aeropuerto-jerez-conil-en.html
-  Content-Language: en-GB
-  Content-Type: text/html; charset=utf-8
-
-/taxi-aeropuerto-jerez-conil-de.html
-  Content-Language: de-DE
-
-/taxi-aeropuerto-jerez-conil-fr.html
-  Content-Language: fr-FR
 
 /taxi-aeropuerto-jerez-conil
   Content-Language: es-ES
@@ -74,18 +47,6 @@
   Content-Language: de-DE
 
 /taxi-aeropuerto-jerez-conil-fr
-  Content-Language: fr-FR
-
-/taxi-aeropuerto-malaga-conil.html
-  Content-Language: es-ES
-
-/taxi-aeropuerto-malaga-conil-en.html
-  Content-Language: en-GB
-
-/taxi-aeropuerto-malaga-conil-de.html
-  Content-Language: de-DE
-
-/taxi-aeropuerto-malaga-conil-fr.html
   Content-Language: fr-FR
 
 /taxi-aeropuerto-malaga-conil
@@ -100,18 +61,6 @@
 /taxi-aeropuerto-malaga-conil-fr
   Content-Language: fr-FR
 
-/taxi-aeropuerto-sevilla-conil.html
-  Content-Language: es-ES
-
-/taxi-aeropuerto-sevilla-conil-en.html
-  Content-Language: en-GB
-
-/taxi-aeropuerto-sevilla-conil-de.html
-  Content-Language: de-DE
-
-/taxi-aeropuerto-sevilla-conil-fr.html
-  Content-Language: fr-FR
-
 /taxi-aeropuerto-sevilla-conil
   Content-Language: es-ES
 
@@ -124,31 +73,40 @@
 /taxi-aeropuerto-sevilla-conil-fr
   Content-Language: fr-FR
 
-/terms.html
-  X-Robots-Tag: noindex, follow
+/taxi-estacion-tren-cadiz-conil
+  Content-Language: es-ES
+
+/taxi-estacion-tren-cadiz-conil-en
+  Content-Language: en-GB
+
+/taxi-estacion-tren-cadiz-conil-de
+  Content-Language: de-DE
+
+/taxi-estacion-tren-cadiz-conil-fr
+  Content-Language: fr-FR
+
+/taxi-bahia-sur-conil
+  Content-Language: es-ES
+
+/taxi-bahia-sur-conil-en
+  Content-Language: en-GB
+
+/taxi-bahia-sur-conil-de
+  Content-Language: de-DE
+
+/taxi-bahia-sur-conil-fr
+  Content-Language: fr-FR
 
 /terms
   X-Robots-Tag: noindex, follow
-
-/terms-en.html
-  X-Robots-Tag: noindex, follow
-  Content-Language: en-GB
 
 /terms-en
   X-Robots-Tag: noindex, follow
   Content-Language: en-GB
 
-/terms-de.html
-  X-Robots-Tag: noindex, follow
-  Content-Language: de-DE
-
 /terms-de
   X-Robots-Tag: noindex, follow
   Content-Language: de-DE
-
-/terms-fr.html
-  X-Robots-Tag: noindex, follow
-  Content-Language: fr-FR
 
 /terms-fr
   X-Robots-Tag: noindex, follow
