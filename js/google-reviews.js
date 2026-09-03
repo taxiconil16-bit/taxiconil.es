@@ -5,7 +5,7 @@ const translations = {
     google: 'Google',
     seeAll: 'Ver todas en Google',
     reviews: 'reseñas',
-    writeReview: 'Escribir reseña en Google',
+    writeReview: '',
     readReviews: 'Leer más reseñas',
     anonymous: 'Anónimo',
     error: 'No se pudieron cargar las reseñas.',
@@ -16,7 +16,7 @@ const translations = {
     google: 'Google',
     seeAll: 'See all on Google',
     reviews: 'reviews',
-    writeReview: 'Write review on Google',
+    writeReview: '',
     readReviews: 'Read more reviews',
     anonymous: 'Anonymous',
     error: 'Could not load reviews.',
@@ -27,7 +27,7 @@ const translations = {
     google: 'Google',
     seeAll: 'Alle auf Google ansehen',
     reviews: 'Bewertungen',
-    writeReview: 'Bewertung auf Google schreiben',
+    writeReview: '',
     readReviews: 'Mehr Bewertungen lesen',
     anonymous: 'Anonym',
     error: 'Bewertungen konnten nicht geladen werden.',
@@ -38,7 +38,7 @@ const translations = {
     google: 'Google',
     seeAll: 'Voir toutes sur Google',
     reviews: 'avis',
-    writeReview: 'Écrire un avis sur Google',
+    writeReview: '',
     readReviews: 'Lire plus d\'avis',
     anonymous: 'Anonyme',
     error: 'Impossible de charger les avis.',
@@ -119,6 +119,8 @@ class GoogleReviewsWidget {
     const t = this.translations;
     this.reviews = reviews;
 
+    const isMobile = window.innerWidth <= 768;
+
     // Crear HTML
     let html = `
       <div class="google-reviews-widget">
@@ -150,11 +152,13 @@ class GoogleReviewsWidget {
           ` : ''}
         </div>
         <div class="google-reviews-carousel">
-          <button class="carousel-arrow carousel-arrow-left" aria-label="Anterior">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="15 18 9 12 15 6"/>
-            </svg>
-          </button>
+          ${!isMobile ? `
+            <button class="carousel-arrow carousel-arrow-left" aria-label="Anterior">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+          ` : ''}
           <div class="google-reviews-track">
     `;
 
@@ -162,9 +166,9 @@ class GoogleReviewsWidget {
     const reviewsToShow = this.reviews.slice(0, this.options.maxReviews);
     
     reviewsToShow.forEach((review, index) => {
-      const isActive = index === 0 ? 'active' : '';
-      const isNext = index === 1 ? 'next' : '';
-      const isPrev = index === reviewsToShow.length - 1 ? 'prev' : '';
+      const isActive = !isMobile && index === 0 ? 'active' : '';
+      const isNext = !isMobile && index === 1 ? 'next' : '';
+      const isPrev = !isMobile && index === reviewsToShow.length - 1 ? 'prev' : '';
       const profilePhotoUrl = review.reviewer?.profilePhotoUrl;
       const displayName = review.reviewer?.displayName || t.anonymous;
       const initial = displayName.charAt(0).toUpperCase();
@@ -192,28 +196,41 @@ class GoogleReviewsWidget {
 
     html += `
           </div>
-          <button class="carousel-arrow carousel-arrow-right" aria-label="Siguiente">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <polyline points="9 18 15 12 9 6"/>
-            </svg>
-          </button>
+          ${!isMobile ? `
+            <button class="carousel-arrow carousel-arrow-right" aria-label="Siguiente">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </button>
+          ` : ''}
         </div>
-        <div class="carousel-dots">
+        ${!isMobile ? `
+          <div class="carousel-dots">
+        ` : ''}
     `;
 
-    // Renderizar dots
-    reviewsToShow.forEach((_, index) => {
-      const isActive = index === 0 ? 'active' : '';
-      html += `<button class="carousel-dot ${isActive}" data-index="${index}" aria-label="Reseña ${index + 1}"></button>`;
-    });
+    // Renderizar dots solo en desktop
+    if (!isMobile) {
+      reviewsToShow.forEach((_, index) => {
+        const isActive = index === 0 ? 'active' : '';
+        html += `<button class="carousel-dot ${isActive}" data-index="${index}" aria-label="Reseña ${index + 1}"></button>`;
+      });
+
+      html += `
+          </div>
+        `;
+    }
 
     html += `
-        </div>
       </div>
     `;
 
     this.container.innerHTML = html;
-    this.attachEventListeners();
+    
+    // Solo attach event listeners en desktop
+    if (!isMobile) {
+      this.attachEventListeners();
+    }
   }
 
   attachEventListeners() {

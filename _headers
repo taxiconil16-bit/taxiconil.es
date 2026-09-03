@@ -40,77 +40,20 @@
 /taxi-aeropuerto-jerez-conil
   Content-Language: es-ES
 
-/taxi-aeropuerto-jerez-conil-en
-  Content-Language: en-GB
-
-/taxi-aeropuerto-jerez-conil-de
-  Content-Language: de-DE
-
-/taxi-aeropuerto-jerez-conil-fr
-  Content-Language: fr-FR
-
 /taxi-aeropuerto-malaga-conil
   Content-Language: es-ES
-
-/taxi-aeropuerto-malaga-conil-en
-  Content-Language: en-GB
-
-/taxi-aeropuerto-malaga-conil-de
-  Content-Language: de-DE
-
-/taxi-aeropuerto-malaga-conil-fr
-  Content-Language: fr-FR
 
 /taxi-aeropuerto-sevilla-conil
   Content-Language: es-ES
 
-/taxi-aeropuerto-sevilla-conil-en
-  Content-Language: en-GB
-
-/taxi-aeropuerto-sevilla-conil-de
-  Content-Language: de-DE
-
-/taxi-aeropuerto-sevilla-conil-fr
-  Content-Language: fr-FR
-
 /taxi-estacion-tren-cadiz-conil
   Content-Language: es-ES
-
-/taxi-estacion-tren-cadiz-conil-en
-  Content-Language: en-GB
-
-/taxi-estacion-tren-cadiz-conil-de
-  Content-Language: de-DE
-
-/taxi-estacion-tren-cadiz-conil-fr
-  Content-Language: fr-FR
 
 /taxi-bahia-sur-conil
   Content-Language: es-ES
 
-/taxi-bahia-sur-conil-en
-  Content-Language: en-GB
-
-/taxi-bahia-sur-conil-de
-  Content-Language: de-DE
-
-/taxi-bahia-sur-conil-fr
-  Content-Language: fr-FR
-
 /terms
   X-Robots-Tag: noindex, follow
-
-/terms-en
-  X-Robots-Tag: noindex, follow
-  Content-Language: en-GB
-
-/terms-de
-  X-Robots-Tag: noindex, follow
-  Content-Language: de-DE
-
-/terms-fr
-  X-Robots-Tag: noindex, follow
-  Content-Language: fr-FR
 
 /sw.js
   Cache-Control: no-cache, no-store, must-revalidate
