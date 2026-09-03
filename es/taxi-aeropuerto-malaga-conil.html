@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es-ES">
 <head>
         
@@ -72,7 +72,8 @@
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin/></noscript>
 
     <link rel="stylesheet" href="/css/legal-overlay-prose.css?v=20260513c"/>
-    <!-- <link rel="stylesheet" href="/css/landing-airport.min.css"> -->
+    <link rel="stylesheet" href="/css/google-reviews.css">
+    <link rel="stylesheet" href="/css/landing-airport.min.css">
     <style>
         :root {
             --primary: #0f172a;
@@ -1342,20 +1343,35 @@
           "url": "https://taxiconil.es/taxi-aeropuerto-malaga-conil",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "Conil de la Frontera",
-            "addressLocality": "Cádiz",
+            "streetAddress": "C/ Trebujena 8, 1B",
+            "addressLocality": "Conil de la Frontera",
+            "addressRegion": "Cádiz",
             "postalCode": "11140",
             "addressCountry": "ES"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "36.2775",
+            "longitude": "-6.0883"
+          },
+          "openingHours": "Mo/Tu/We/Th/Fr/Sa/Su 00:00-23:59",
+          "priceRange": "€€",
+          "paymentAccepted": ["Cash", "Credit Card", "Bank Transfer"],
+          "languagesSpoken": ["Spanish", "English", "German", "French"],
+          "hasCredential": {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "Professional License",
+            "name": "Taxi License"
           }
         },
         {
           "@type": "TaxiService",
           "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil#service",
-          "name": "Taxi Aeropuerto de Málaga a Conil",
+          "name": "Taxi Aeropuerto de Málaga a Conil - Experiencia Premium",
           "provider": { "@id": "https://taxiconil.es/#localbusiness" },
           "serviceType": "Airport Transfer",
           "url": "https://taxiconil.es/taxi-aeropuerto-malaga-conil",
-          "description": "Servicio de taxi y traslado privado desde el Aeropuerto de Málaga (AGP) a Conil de la Frontera.",
+          "description": "Servicio premium de taxi y traslado privado desde el Aeropuerto de Málaga (AGP) a Conil de la Frontera. Experiencia de viaje superior con conductor profesional, vehículo de lujo y atención personalizada 24h.",
           "areaServed": [
             {
               "@type": "City",
@@ -1364,16 +1380,27 @@
             {
               "@type": "City",
               "name": "Málaga"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Cádiz"
             }
           ],
           "hasOfferCatalog": {
             "@type": "OfferCatalog",
-            "name": "Traslados Aeropuerto Málaga",
+            "name": "Traslados Premium Aeropuerto Málaga",
             "itemListElement": [
               {
                 "@type": "Offer",
-                "price": "300.00",
-                "priceCurrency": "EUR",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Taxi Málaga a Conil - Experiencia Diurna",
+                  "description": "Traslado premium con vehículo de lujo, conductor profesional, agua embotellada, WiFi y equipaje manejado.",
+                  "price": "300.00",
+                  "priceCurrency": "EUR",
+                  "availability": "https://schema.org/InStock"
+                },
+                "seller": { "@id": "https://taxiconil.es/#localbusiness" },
                 "hasMerchantReturnPolicy": {
                   "@type": "MerchantReturnPolicy",
                   "applicableCountry": "ES",
@@ -1406,15 +1433,19 @@
                     }
                   }
                 },
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Taxi Málaga a Conil (Tarifa Diurna)"
-                }
+                "validFrom": "2024-01-01"
               },
               {
                 "@type": "Offer",
-                "price": "350.00",
-                "priceCurrency": "EUR",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Taxi Málaga a Conil - Experiencia Nocturna/Festivos",
+                  "description": "Traslado premium con servicio nocturno, vehículo de lujo, conductor profesional, amenities exclusivas y equipaje manejado.",
+                  "price": "350.00",
+                  "priceCurrency": "EUR",
+                  "availability": "https://schema.org/InStock"
+                },
+                "seller": { "@id": "https://taxiconil.es/#localbusiness" },
                 "hasMerchantReturnPolicy": {
                   "@type": "MerchantReturnPolicy",
                   "applicableCountry": "ES",
@@ -1447,22 +1478,35 @@
                     }
                   }
                 },
-                "itemOffered": {
-                  "@type": "Service",
-                  "name": "Taxi Málaga a Conil (Tarifa Nocturna/Festivos)"
-                }
+                "validFrom": "2024-01-01"
               }
             ]
+          },
+          "providerMobility": "dynamic",
+          "serviceOutput": {
+            "@type": "Service",
+            "name": "Transporte Privado Aeropuerto",
+            "description": "Traslado puerta a puerta desde Aeropuerto de Málaga hasta Conil de la Frontera"
           }
         },
         {
           "@type": "WebPage",
           "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil#webpage",
           "url": "https://taxiconil.es/taxi-aeropuerto-malaga-conil",
-          "name": "Taxi Aeropuerto de Málaga a Conil | Experiencia Premium & Precio Cerrado 24h",
-          "description": "Experiencia premium de traslado desde el aeropuerto de Málaga (AGP) a Conil. Vehículo de lujo, conductor profesional y servicio personalizado 24h con precio cerrado.",
-          "inLanguage": "es-ES",
+          "name": "Taxi Aeropuerto de Málaga a Conil | Experiencia Premium - Precio cerrado y reserva 24h",
+          "description": "Descubre la experiencia premium en traslados desde el Aeropuerto de Málaga a Conil. Vehículos de lujo, conductores profesionales y servicio personalizado 24h.",
           "isPartOf": { "@id": "https://taxiconil.es/#website" },
+          "primaryImageOfPage": {
+            "@type": "ImageObject",
+            "url": "https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1600.webp",
+            "width": 1600,
+            "height": 900
+          },
+          "datePublished": "2024-01-01",
+          "dateModified": "2024-03-24",
+          "inLanguage": "es-ES",
+          "about": { "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil#service" },
+          "mainEntity": { "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil#service" },
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -1479,12 +1523,7 @@
                 "item": "https://taxiconil.es/taxi-aeropuerto-malaga-conil"
               }
             ]
-          },
-          "mainEntity": [
-            { "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil#service" },
-            { "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil#faq" },
-            { "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil#howto" }
-          ]
+          }
         },
         {
           "@type": "Product",
@@ -1877,14 +1916,14 @@
 
                 <div class="luxe-grid reveal">
                     <div class="luxe-card reveal stagger-1">
-                        <i class="fas fa-user-shield"></i>
-                                                <h3>Protocolo meet & greet</h3>
-                        <p>Nos pondremos en contacto con usted previamente para acordar un punto de encuentro exacto. Olvide esperas e incertidumbres en el aeropuerto.</p>
+                        <i class="fas fa-plane-arrival"></i>
+                                                <h3>Seguimiento de vuelo en tiempo real</h3>
+                        <p>Monitorizamos su vuelo desde Málaga (AGP) automáticamente. Si hay retrasos o adelantos, ajustamos la hora de recogida sin costes adicionales.</p>
                     </div>
                     <div class="luxe-card reveal stagger-2">
-                        <i class="fas fa-plane-arrival"></i>
-                                                <h3>Control de vuelo</h3>
-                        <p>Monitorizamos su vuelo en tiempo real. Ante cualquier retraso, su chófer le esperará sin cargos adicionales ni esperas innecesarias.</p>
+                        <i class="fas fa-suitcase-rolling"></i>
+                                                <h3>Equipaje sin limitaciones</h3>
+                        <p>Nuestro Volkswagen Arteon dispone de un maletero de 563 litros, lo que permite transportar todo su equipaje sin restricciones: maletas grandes, carritos de bebé y equipaje de golf.</p>
                     </div>
                     <div class="luxe-card reveal stagger-3">
                         <i class="fas fa-baby-carriage"></i>
@@ -1892,9 +1931,9 @@
                         <p>Disponemos de Sistemas de Retención Infantil (SRI) homologados para todas las edades, disponibles bajo petición previa.</p>
                     </div>
                     <div class="luxe-card reveal stagger-4">
-                        <i class="fas fa-award"></i>
-                                                <h3>Excelencia ejecutiva</h3>
-                        <p>Especialistas en traslados exclusivos desde el Aeropuerto de Málaga (AGP) hasta su destino final en Conil de la Frontera.</p>
+                        <i class="fas fa-couch"></i>
+                                                <h3>Confort para viajes largos</h3>
+                        <p>En 2h 15min de viaje, el confort es clave. Nuestro Volkswagen Arteon ofrece asientos ergonómicos, climatización perfecta y espacio amplio para descansar.</p>
                     </div>
                 </div>
             </div>
@@ -2106,48 +2145,20 @@
             </div>
         </section>
 
-        <!-- 7. Testimonios Reales -->
-        <section class="section-padding" style="background: var(--bg-alt); border-radius: clamp(40px, 8vw, 80px);">
+        <!-- 7. Google Reviews Dinámicos -->
+        <section class="google-reviews-section" id="google-reviews" style="scroll-padding-top: 150px;">
             <div class="container">
                 <div style="text-align: center; margin-bottom: 80px;">
-                    <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 900; letter-spacing: -2px;">Lo que dicen nuestros pasajeros</h2>
-                    <div style="color: var(--accent); font-size: 1.5rem; margin-top: 1rem;">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
+                    <span style="color: var(--accent); text-transform: uppercase; letter-spacing: 4px; font-weight: 800; font-size: 0.9rem;">Opiniones</span>
+                    <h2 id="reviews-heading" style="font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 900; margin-top: 1rem; letter-spacing: -2px;">Lo que dicen nuestros clientes</h2>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
-                    <div style="background: white; padding: 50px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); position: relative;">
-                        <i class="fas fa-quote-left" style="position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #f1f5f9;"></i>
-                        <p style="font-style: italic; font-size: 1.15rem; margin-bottom: 2.5rem; position: relative; z-index: 10;">"La mejor opción para ir al aeropuerto. Coche de alta gama, limpio y un trato exquisito. Reserva sencilla y confirmación inmediata."</p>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white;">L</div>
-                            <div><strong style="display: block; font-size: 1.1rem;">Laura S.</strong><span style="font-size: 0.85rem; color: var(--text-muted);">Viaje a Conil</span></div>
-                        </div>
-                    </div>
-                    <div style="background: white; padding: 50px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); position: relative;">
-                        <i class="fas fa-quote-left" style="position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #f1f5f9;"></i>
-                        <p style="font-style: italic; font-size: 1.15rem; margin-bottom: 2.5rem; position: relative; z-index: 10;">"Servicio estupendo, siempre puntual y trato muy agradable. El coche es una maravilla para traslados largos."</p>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white;">M</div>
-                            <div><strong style="display: block; font-size: 1.1rem;">Moraga Lucia</strong><span style="font-size: 0.85rem; color: var(--text-muted);">Evento Privado</span></div>
-                        </div>
-                    </div>
-                    <div style="background: white; padding: 50px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); position: relative;">
-                        <i class="fas fa-quote-left" style="position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #f1f5f9;"></i>
-                        <p style="font-style: italic; font-size: 1.15rem; margin-bottom: 2.5rem; position: relative; z-index: 10;">"Precio cerrado y sin sorpresas. El conductor me esperaba puntualmente a la salida de la recogida de equipajes. Muy profesional."</p>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white;">B</div>
-                            <div><strong style="display: block; font-size: 1.1rem;">Begoña Esteban</strong><span style="font-size: 0.85rem; color: var(--text-muted);">Cliente Particular</span></div>
-                        </div>
-                    </div>
-                    <div style="background: white; padding: 50px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); position: relative;">
-                        <i class="fas fa-quote-left" style="position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #f1f5f9;"></i>
-                        <p style="font-style: italic; font-size: 1.15rem; margin-bottom: 2.5rem; position: relative; z-index: 10;">"Impecable. Reservamos el traslado para una boda y el servicio fue de película. El coche Arteon es espectacular y el chófer muy atento."</p>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white;">J</div>
-                            <div><strong style="display: block; font-size: 1.1rem;">Javier Gómez</strong><span style="font-size: 0.85rem; color: var(--text-muted);">Evento Privado</span></div>
-                        </div>
-                    </div>
+                <div id="google-reviews-container" class="google-reviews-widget-container"
+                     data-show-rating="true"
+                     data-show-date="true"
+                     data-show-google-link="true"
+                     data-google-url="https://maps.app.goo.gl/5kocLkscg2NXErMk9"
+                     data-write-review-url="https://g.page/r/CXNQqV28stT1EBM/review"
+                     data-language="es">
                 </div>
             </div>
         </section>
@@ -2161,8 +2172,8 @@
                 </div>
                 <div class="faq-container">
                     <div class="faq-item">
-                        <div class="faq-head">¿Dónde me espera exactamente el conductor? <i class="fas fa-chevron-down"></i></div>
-                        <div class="faq-body">Nos pondremos en contacto con usted previamente para acordar un punto de encuentro exacto y facilitar su localización una vez aterrice. No es necesario buscar paradas externas.</div>
+                        <div class="faq-head">¿Con cuánta antelación debo salir de Conil para un vuelo en Málaga? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-body">Para vuelos internacionales recomendamos salir con 4 horas y media de antelación; para vuelos nacionales, con 3 horas y media. Considerando que el trayecto dura aproximadamente 2 horas y 15 minutos por las autovías AP-7 y A7, este margen garantiza tiempo suficiente para el check-in y los controles de seguridad.</div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-head">¿El servicio es puerta a puerta? <i class="fas fa-chevron-down"></i></div>
@@ -2173,6 +2184,10 @@
                         <div class="faq-body">No se preocupe. Usamos el número de vuelo para monitorizar el estado real del mismo. Si hay un retraso, ajustamos la hora de recogida automáticamente y le esperamos sin costes adicionales.</div>
                     </div>
                     <div class="faq-item">
+                        <div class="faq-head">¿Compensa un taxi privado para 2-4 pasajeros en un viaje largo como Málaga? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-body">Sí. Para 2-4 pasajeros con equipaje, el coste por persona es similar al tren + taxi desde la estación, pero con ventajas: recogida puerta a puerta, sin transbordos, horario flexible y confort en vehículo privado.</div>
+                    </div>
+                    <div class="faq-item">
                         <div class="faq-head">¿Puedo solicitar una factura oficial? <i class="fas fa-chevron-down"></i></div>
                         <div class="faq-body">Sí, emitimos facturas oficiales para empresas y autónomos. Puede solicitarla directamente al conductor o enviarnos los datos por correo electrónico.</div>
                     </div>
@@ -2181,8 +2196,8 @@
                         <div class="faq-body">Nuestros precios son por <strong>trayecto completo en vehículo privado</strong> (hasta 4 pasajeros). El servicio es exclusivo para usted y sus acompañantes.</div>
                     </div>
                     <div class="faq-item">
-                        <div class="faq-head">¿Hay cargos ocultos por equipaje o peajes? <i class="fas fa-chevron-down"></i></div>
-                        <div class="faq-body">No. El precio es final. Incluye equipaje razonable y los peajes habituales del recorrido.</div>
+                        <div class="faq-head">¿Hay cargos adicionales por equipaje? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-body">No. El precio es final e incluye todo su equipaje. Nuestro vehículo dispone de un maletero de 563 litros con capacidad para transportar maletas grandes y equipaje adicional sin coste extra.</div>
                     </div>
                     <div class="faq-item">
                         <div class="faq-head">¿Cómo se garantiza el "Precio Cerrado"? <i class="fas fa-chevron-down"></i></div>
@@ -2266,19 +2281,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="google-reviews-section" id="google-reviews" style="scroll-padding-top: 150px;">
-        <div class="container">
-            <h2 id="reviews-heading" style="text-align: center;">Lo que dicen nuestros clientes</h2>
-            <div id="google-reviews-container" class="google-reviews-widget-container"
-                 data-show-rating="true"
-                 data-show-date="true"
-                 data-show-google-link="true"
-                 data-max-reviews="10"
-                 data-language="es">
             </div>
         </div>
     </section>
@@ -2537,12 +2539,8 @@
         }
     </script>
 
+<script src="/js/google-reviews.js" defer></script>
+
 </body>
 
 </html>
-
-
-
-
-
-

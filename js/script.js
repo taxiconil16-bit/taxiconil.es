@@ -800,8 +800,8 @@ let routeMapInstance = null,
 const MIN_LEAD_TIME_HOURS = 12,
   MIN_PRICE_DEFAULT = 45,
   FLAG_FALL = 5,
-  RATE_WEEKDAY = 1.466,
-  RATE_WEEKEND_NIGHT = 1.688,
+  RATE_WEEKDAY = 1.465,
+  RATE_WEEKEND_NIGHT = 1.687,
   NIGHT_RATE_START_HOUR = 21.8333,
   NIGHT_RATE_END_HOUR = 7;
 function selectBestRoute(routes) {

@@ -7,8 +7,9 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
     <meta http-equiv="Pragma" content="no-cache"/>
     <meta http-equiv="Expires" content="0"/>
+    <link rel="canonical" href="https://taxiconil.es/fr/" />
     <title>Taxi Conil 24h – Expérience Premium & Tarif fixe instantané | Réservation en ligne</title>
-    <meta name="description" content="Découvrez l'expérience premium de Taxi Conil 24h. Service de taxi de luxe avec véhicule premium, attention personnalisée et tarifs fixes vers toutes les destinations depuis Conil de la Frontera."/>
+    <meta name="description" content="Découvrez l'expérience premium de Taxi Conil 24h. Service de taxi avec attention personnalisée et tarifs fixes vers toutes les destinations depuis Conil de la Frontera."/>
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
     <meta name="google-site-verification" content="bV7JCptpzTstAh75ri-DWfxP-E8AK3tu4P7cMBnMSU8" />
@@ -36,7 +37,6 @@
     <meta name="geo.placename" content="Conil de la Frontera"/>
     <meta name="geo.position" content="36.2773;-6.0883"/>
     <meta name="ICBM" content="36.2773, -6.0883"/>
-    <link rel="canonical" href="https://taxiconil.es/fr" />
     <script>
       (function () {
         try {
@@ -135,7 +135,7 @@
 
     <meta property="og:type" content="website"/>
     <meta property="og:title" content="Taxi Conil 24h | Prix fixe instantané sur notre site | Réservation en ligne"/>
-    <meta property="og:description" content="Service taxi premium à Conil avec prix fixes garantis. Véhicules de luxe, ponctualité absolue et attention personnalisée 24h/24."/>
+    <meta property="og:description" content="Service taxi premium à Conil avec prix fixes garantis. Ponctualité absolue et attention personnalisée 24h/24."/>
     <meta property="og:url" content="https://taxiconil.es/fr"/>
     <meta property="og:image" content="https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1200.jpg"/>
     <meta property="og:image:secure_url" content="https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1200.jpg"/>
@@ -147,7 +147,7 @@
     <meta property="og:site_name" content="Taxi Conil"/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:title" content="Taxi Conil 24h | Prix fixe instantané sur notre site | Réservation en ligne"/>
-    <meta name="twitter:description" content="Service taxi premium à Conil avec prix fixes garantis. Véhicules de luxe, ponctualité absolue et attention personnalisée 24h/24."/>
+    <meta name="twitter:description" content="Service taxi premium à Conil avec prix fixes garantis. Ponctualité absolue et attention personnalisée 24h/24."/>
     <meta name="twitter:image" content="https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1200.jpg"/>
     <meta name="twitter:image:alt" content="Taxi Conil 24h - Service Premium"/>
 <script type="application/ld+json">
@@ -213,8 +213,15 @@
   "@type": "TaxiService",
   "@id": "https://taxiconil.es/#taxi-service",
   "url": "https://taxiconil.es/fr",
-  "name": "Taxi Conil",
-  "description": "Taxi à Conil de la Frontera avec tarif fixe. Transferts locaux et longue distance avec réservation en ligne 24h/24, 7j/7.",
+  "mainEntityOfPage": {
+    "@id": "https://taxiconil.es/fr#webpage"
+  },
+  "termsOfService": [
+    "https://taxiconil.es/terms",
+    "https://taxiconil.es/terms-en",
+    "https://taxiconil.es/terms-de",
+    "https://taxiconil.es/terms-fr"
+  ],
   "sameAs": [
     "https://maps.app.goo.gl/rrgKdf3Jzdfd3vCm9",
     "https://wa.me/34670705774",
@@ -222,6 +229,37 @@
     "https://www.facebook.com/share/1DXM7gmDne/",
     "https://www.instagram.com/taxi_conil_670705774?utm_source=qr&igsh=MWJud2E3b280dWFxaw=="
   ],
+  "name": "Taxi Conil",
+  "alternateName": [
+    "Taxi Conil aéroport Jerez",
+    "Taxi Conil aéroport Séville",
+    "Taxi Conil aéroport Málaga",
+    "Taxi Conil transferts longue distance"
+  ],
+  "description": "Taxi à Conil de la Frontera avec tarif fixe. Transferts locaux et longue distance avec réservation en ligne 24h/24, 7j/7.",
+  "serviceType": "Service de taxi et transferts privés depuis Conil de la Frontera vers les aéroports, gares et destinations longue distance.",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "https://taxiconil.es/IMG/LOGO-TAXI-CONIL.jpg",
+    "contentUrl": "https://taxiconil.es/IMG/LOGO-TAXI-CONIL.jpg",
+    "width": 300,
+    "height": 300,
+    "encodingFormat": "image/jpeg"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1200.jpg",
+    "contentUrl": "https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1200.jpg",
+    "width": 1600,
+    "height": 900,
+    "encodingFormat": "image/jpeg"
+  },
+  "provider": {
+    "@id": "https://taxiconil.es/#local-business"
+  },
+  "brand": {
+    "@id": "https://taxiconil.es/#brand"
+  },
   "serviceArea": {
     "@type": "GeoCircle",
     "geoMidpoint": {
@@ -235,22 +273,6 @@
     {
       "@type": "City",
       "name": "Conil de la Frontera"
-    },
-    {
-      "@type": "Place",
-      "name": "Roche, Conil de la Frontera"
-    },
-    {
-      "@type": "Place",
-      "name": "El Colorado, Conil de la Frontera"
-    },
-    {
-      "@type": "Place",
-      "name": "Barrio Nuevo, Conil de la Frontera"
-    },
-    {
-      "@type": "Place",
-      "name": "El Palmar, Vejer de la Frontera"
     },
     {
       "@type": "AdministrativeArea",
@@ -269,39 +291,30 @@
     {
       "@type": "ServiceChannel",
       "serviceUrl": "https://taxiconil.es/fr#calculadora",
-      "availableLanguage": ["fr", "es", "en", "de"]
+      "availableLanguage": ["es", "en", "de", "fr"]
     },
     {
       "@type": "ServiceChannel",
       "serviceUrl": "https://wa.me/34670705774",
-      "availableLanguage": ["fr", "es", "en", "de"]
+      "availableLanguage": ["es", "en", "de", "fr"]
     },
     {
       "@type": "ServiceChannel",
       "serviceUrl": "tel:+34670705774",
-      "availableLanguage": ["fr", "es", "en", "de"]
+      "availableLanguage": ["es", "en", "de", "fr"]
     },
     {
       "@type": "ServiceChannel",
       "serviceUrl": "mailto:taxiconil16@gmail.com",
-      "availableLanguage": ["fr", "es", "en", "de"]
+      "availableLanguage": ["es", "en", "de", "fr"]
     }
   ],
-  "provider": {
-    "@id": "https://taxiconil.es/#local-business"
-  },
-  "brand": {
-    "@id": "https://taxiconil.es/#brand"
-  },
-  "mainEntityOfPage": {
-    "@id": "https://taxiconil.es/fr#webpage"
-  },
   "potentialAction": {
     "@type": "ReserveAction",
     "target": "https://taxiconil.es/fr#calculadora",
     "result": {
       "@type": "Reservation",
-      "name": "Réservation de taxi à Conil"
+      "name": "Réservation de taxi à Conil de la Frontera"
     }
   }
 }
@@ -387,6 +400,8 @@
     "transfert aéroport Séville",
     "transfert aéroport Málaga"
   ],
+  "openingHours": "Mo-Su 00:00-23:59",
+  "priceRange": "€€",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Services et transferts",
@@ -920,8 +935,16 @@
       "@type": "ContactPoint",
       "telephone": "+34670705774",
       "email": "taxiconil16@gmail.com",
+      "contactType": "customer service",
+      "areaServed": "ES-CA",
+      "availableLanguage": ["es", "en", "de", "fr"]
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "+34670705774",
+      "email": "taxiconil16@gmail.com",
       "contactType": "reservations",
-      "availableLanguage": ["fr", "es", "en", "de"],
+      "availableLanguage": ["es", "en", "de", "fr"],
       "areaServed": "ES",
       "url": "https://wa.me/34670705774",
       "hoursAvailable": [
@@ -1015,27 +1038,27 @@
   "@type": "WebPage",
   "@id": "https://taxiconil.es/fr#webpage",
   "url": "https://taxiconil.es/fr",
-  "name": "Taxi Conil 24h – Tarif fixe instantané sur notre site | Réservation en ligne",
+  "name": "Taxi Conil 24h",
   "description": "Taxi à Conil de la Frontera avec tarif fixe. Transferts locaux et longue distance avec réservation en ligne 24h/24, 7j/7.",
-  "datePublished": "2026-01-20",
-  "dateModified": "2026-01-29",
+  "inLanguage": "fr-FR",
   "isPartOf": {
     "@id": "https://taxiconil.es/fr#website"
   },
-  "breadcrumb": {
-    "@id": "https://taxiconil.es/fr#breadcrumb"
+  "about": {
+    "@id": "https://taxiconil.es/#taxi-service"
   },
   "primaryImageOfPage": {
     "@type": "ImageObject",
     "url": "https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1200.jpg",
-    "contentUrl": "https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1200.jpg"
+    "contentUrl": "https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1200.jpg",
+    "width": 1600,
+    "height": 900,
+    "encodingFormat": "image/jpeg"
   },
-  "inLanguage": "fr-FR",
-  "about": {
-    "@id": "https://taxiconil.es/#taxi-service"
-  },
-  "mainEntity": {
-    "@id": "https://taxiconil.es/#taxi-service"
+  "datePublished": "2024-01-01",
+  "dateModified": "2026-01-29",
+  "publisher": {
+    "@id": "https://taxiconil.es/#local-business"
   }
 }
 </script>
