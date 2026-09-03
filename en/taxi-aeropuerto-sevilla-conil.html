@@ -5,7 +5,10 @@
     
 <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <meta name="referrer" content="strict-origin-when-cross-origin"/>`n    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>`n    <meta http-equiv="Pragma" content="no-cache"/>`n    <meta http-equiv="Expires" content="0"/>
+    <meta name="referrer" content="strict-origin-when-cross-origin"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
     <title>Taxi Seville Airport to Conil | Premium Experience & Fixed Price 24/7</title>
     <meta name="description" content="Premium transfer experience from Seville Airport (SVQ) to Conil. Luxury vehicle, professional driver, and personalized 24/7 service with fixed pricing."/>
     
@@ -1401,8 +1404,30 @@
               },
               "shippingDetails": {
                 "@type": "OfferShippingDetails",
-                "shippingRate": "0.00",
-                "doesNotShip": true
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "0",
+                  "currency": "EUR"
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "ES"
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 0,
+                    "maxValue": 0,
+                    "unitCode": "DAY"
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 0,
+                    "maxValue": 0,
+                    "unitCode": "DAY"
+                  }
+                }
               },
               "validFrom": "2024-01-01",
               "priceValidUntil": "2024-12-31"
@@ -1422,8 +1447,30 @@
               },
               "shippingDetails": {
                 "@type": "OfferShippingDetails",
-                "shippingRate": "0.00",
-                "doesNotShip": true
+                "shippingRate": {
+                  "@type": "MonetaryAmount",
+                  "value": "0",
+                  "currency": "EUR"
+                },
+                "shippingDestination": {
+                  "@type": "DefinedRegion",
+                  "addressCountry": "ES"
+                },
+                "deliveryTime": {
+                  "@type": "ShippingDeliveryTime",
+                  "handlingTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 0,
+                    "maxValue": 0,
+                    "unitCode": "DAY"
+                  },
+                  "transitTime": {
+                    "@type": "QuantitativeValue",
+                    "minValue": 0,
+                    "maxValue": 0,
+                    "unitCode": "DAY"
+                  }
+                }
               },
               "validFrom": "2024-01-01",
               "priceValidUntil": "2024-12-31"
@@ -1647,6 +1694,7 @@
     position: absolute !important;
   }
 </style>
+<link rel="stylesheet" href="/css/google-reviews.css">
 </head>
 
 <body class="landing-airport">
@@ -1713,14 +1761,14 @@
 
                 <div class="luxe-grid reveal">
                     <div class="luxe-card reveal stagger-1">
-                        <i class="fas fa-user-shield"></i>
-                        <h3>Protocol meet & greet</h3>
-                        <p>We will contact you in advance to agree on an exact meeting point. Forget about waiting and uncertainty at the airport.</p>
+                        <i class="fas fa-road"></i>
+                        <h3>Direct trip on AP-4 motorway</h3>
+                        <p>160 km in approximately 1 h 40 min via the AP-4 motorway. No transfers or intermediate stops: one comfortable journey from the airport to Conil.</p>
                     </div>
                     <div class="luxe-card reveal stagger-2">
                         <i class="fas fa-plane-arrival"></i>
-                        <h3>Flight monitoring</h3>
-                        <p>We monitor your flight in real time. In case of any delay, your driver will wait for you without additional charges or unnecessary waiting.</p>
+                        <h3>Flight tracking</h3>
+                        <p>We monitor your flight from Seville (SVQ) automatically. If there are delays, we adjust the pickup time without additional charges.</p>
                     </div>
                     <div class="luxe-card reveal stagger-3">
                         <i class="fas fa-baby-carriage"></i>
@@ -1728,9 +1776,9 @@
                         <p>We have approved Child Restraint Systems (CRS) for all ages, available upon prior request.</p>
                     </div>
                     <div class="luxe-card reveal stagger-4">
-                        <i class="fas fa-award"></i>
-                        <h3>Executive excellence</h3>
-                        <p>Specialists in exclusive transfers from Seville Airport (SVQ) to your final destination in Conil de la Frontera.</p>
+                        <i class="fas fa-suitcase-rolling"></i>
+                        <h3>Families and luggage</h3>
+                        <p>Door-to-door pickup with a 563-litre trunk. Ideal for families with children and national or international flights with full luggage.</p>
                     </div>
                 </div>
             </div>
@@ -1997,6 +2045,11 @@
                     <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 900; margin-top: 1rem; letter-spacing: -2px;">Frequently Asked Questions</h2>
                 </div>
                 <div class="faq-container">
+                                        <div class="faq-item">
+                        <div class="faq-head">How much time should I allow to leave Conil for a flight from Seville? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-body">For international flights we recommend leaving 3 and a half hours in advance; for domestic flights, 2 and a half hours. The journey takes approximately 1 h 40 min via the AP-4, plus margin for Seville traffic and security checks.</div>
+                    </div>
+
                     <div class="faq-item">
                         <div class="faq-head">Where exactly does the driver wait for me? <i class="fas fa-chevron-down"></i></div>
                         <div class="faq-body">We will contact you in advance to agree on an exact meeting point and facilitate your location once you land. No need to look for external stops.</div>
@@ -2131,6 +2184,7 @@
                     <a href="/trayectos-frecuentes-en" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Popular routes</a>
                     <a href="/blog-en" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Blog</a>
                     <a href="/taxi-bahia-sur-conil-en" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Bahía Sur train station transfer</a>
+                    <a href="/taxi-estacion-tren-cadiz-conil-en" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Cádiz train station transfer</a>
                     <a href="/taxi-aeropuerto-gibraltar-conil-en" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Gibraltar Airport transfer (GIB)</a>
                     <a href="/taxi-aeropuerto-jerez-conil-en" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Jerez Airport transfer (XRY)</a>
                     <a href="/taxi-aeropuerto-sevilla-conil-en" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Seville Airport transfer (SVQ)</a>
@@ -2252,6 +2306,7 @@
 
     <script src="/js/script.fix_20260414_1026.min.js" defer></script>
 
+<script src="/js/google-reviews.js" defer></script>
 </body>
 </html>
 
