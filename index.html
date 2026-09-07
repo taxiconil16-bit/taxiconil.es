@@ -2036,20 +2036,6 @@
 
 <script src="/js/script.min.js?v=fix_20260715_1143" defer></script>
 <link rel="prefetch" href="/js/landing.min.js?v=20260313-1741" as="script"/>
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      try {
-        const host = (location && location.hostname) ? String(location.hostname).toLowerCase() : '';
-        if (host === 'localhost' || host === '127.0.0.1') return;
-        navigator.serviceWorker.register('/sw.min.js?v=20260513_loopback', {updateViaCache: 'none'})
-          .catch(registrationError => {
-            console.log('SW registration failed: ', registrationError);
-          });
-      } catch (_) {}
-    });
-  }
-</script>
 
 <script src="/js/google-reviews.js" defer></script>
 

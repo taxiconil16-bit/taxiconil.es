@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-GB">
 <head>
   <meta charset="utf-8"/>
@@ -394,7 +394,7 @@
     .page-hero p { font-size: 1.15rem; max-width: 850px; margin: 0 auto; opacity: 1; line-height: 1.7; font-weight: 400; color: #ffffff; text-shadow: 0 1px 5px rgba(0,0,0,0.3); }
 
     @media (max-width: 768px) {
-      .page-hero { min-height: 450px; height: 55vh; max-height: 550px; padding: 5.25rem 16px 8.5rem; }
+      .page-hero { min-height: 450px; height: 55vh; max-height: 550px; padding: 8rem 16px 8.5rem; }
       .page-hero p { font-size: 1.05rem; }
       .hero-logo { width: 90px; }
     }
@@ -759,9 +759,10 @@
     .blog-banner p { font-size: 1.15rem; opacity: 0.9; max-width: 700px; margin: 0 auto 2.5rem; color: #fff; }
     .blog-banner .btn-premium { background: var(--accent); color: var(--primary); }
     @media (max-width: 768px) {
-      .blog-banner { padding: 2.5rem 1.5rem; margin: 4rem 0; }
-      .blog-banner h2 { font-size: 1.75rem; }
-      .blog-banner p { font-size: 1rem; }
+      .blog-banner { padding: clamp(20px, 5vw, 40px) !important; margin: 4rem 0; border-radius: 24px !important; }
+      .blog-banner h2 { font-size: clamp(1.4rem, 5vw, 2rem) !important; }
+      .blog-banner p { font-size: 1rem !important; margin-bottom: 20px !important; }
+      .blog-banner .btn-premium { padding: 0.9rem 1.8rem !important; font-size: 1rem !important; }
     }
     .commitment-grid {
       display: grid;

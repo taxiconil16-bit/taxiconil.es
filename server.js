@@ -151,7 +151,7 @@ function applyHeaderRules(urlPath, res) {
   }
 }
 
-function applyRedirectRules(urlPath) {
+function applyRedirectRules(urlPath, isLocalDev) {
   for (const rule of REDIRECT_RULES) {
     const match = rule.fromRegex.exec(urlPath);
     if (!match) continue;
@@ -162,6 +162,12 @@ function applyRedirectRules(urlPath) {
       target = target.replaceAll(':splat', splatValue);
       target = target.replaceAll('*', splatValue);
     }
+    
+    // In local development, serve files directly instead of redirecting
+    if (isLocalDev && rule.statusCode === 301) {
+      return { statusCode: 200, location: target, isRewrite: true };
+    }
+    
     return { statusCode: rule.statusCode, location: target };
   }
   return null;
@@ -276,9 +282,10 @@ const server = http.createServer((req, res) => {
   }
 
   // Apply Netlify-style redirects/rewrites
-  const redirect = applyRedirectRules(decodedPathname);
+  const isLocalDev = tcHostHeaderIsLocalDev(hostHeaderEarly);
+  const redirect = applyRedirectRules(decodedPathname, isLocalDev);
   if (redirect) {
-    if (redirect.statusCode === 200) {
+    if (redirect.statusCode === 200 || redirect.isRewrite) {
       // rewrite (internal)
       if (parsedUrl) parsedUrl.pathname = redirect.location;
       decodedPathname = redirect.location;
