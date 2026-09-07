@@ -1,6 +1,46 @@
 /robots.txt /robots.txt 200
 /sitemap.xml /sitemap.xml 200
 
+# Taxi pages with language suffixes - redirect to clean URLs in language folders
+/taxi-aeropuerto-jerez-conil-en /en/taxi-aeropuerto-jerez-conil 301!
+/taxi-aeropuerto-jerez-conil-de /de/taxi-aeropuerto-jerez-conil 301!
+/taxi-aeropuerto-jerez-conil-fr /fr/taxi-aeropuerto-jerez-conil 301!
+/taxi-aeropuerto-sevilla-conil-en /en/taxi-aeropuerto-sevilla-conil 301!
+/taxi-aeropuerto-sevilla-conil-de /de/taxi-aeropuerto-sevilla-conil 301!
+/taxi-aeropuerto-sevilla-conil-fr /fr/taxi-aeropuerto-sevilla-conil 301!
+/taxi-aeropuerto-malaga-conil-en /en/taxi-aeropuerto-malaga-conil 301!
+/taxi-aeropuerto-malaga-conil-de /de/taxi-aeropuerto-malaga-conil 301!
+/taxi-aeropuerto-malaga-conil-fr /fr/taxi-aeropuerto-malaga-conil 301!
+/taxi-aeropuerto-gibraltar-conil-en /en/taxi-aeropuerto-gibraltar-conil 301!
+/taxi-aeropuerto-gibraltar-conil-de /de/taxi-aeropuerto-gibraltar-conil 301!
+/taxi-aeropuerto-gibraltar-conil-fr /fr/taxi-aeropuerto-gibraltar-conil 301!
+/taxi-estacion-tren-cadiz-conil-en /en/taxi-estacion-tren-cadiz-conil 301!
+/taxi-estacion-tren-cadiz-conil-de /de/taxi-estacion-tren-cadiz-conil 301!
+/taxi-estacion-tren-cadiz-conil-fr /fr/taxi-estacion-tren-cadiz-conil 301!
+/taxi-bahia-sur-conil-en /en/taxi-bahia-sur-conil 301!
+/taxi-bahia-sur-conil-de /de/taxi-bahia-sur-conil 301!
+/taxi-bahia-sur-conil-fr /fr/taxi-bahia-sur-conil 301!
+
+# Taxi pages with language suffixes AND .html extension
+/taxi-aeropuerto-jerez-conil-en.html /en/taxi-aeropuerto-jerez-conil 301!
+/taxi-aeropuerto-jerez-conil-de.html /de/taxi-aeropuerto-jerez-conil 301!
+/taxi-aeropuerto-jerez-conil-fr.html /fr/taxi-aeropuerto-jerez-conil 301!
+/taxi-aeropuerto-sevilla-conil-en.html /en/taxi-aeropuerto-sevilla-conil 301!
+/taxi-aeropuerto-sevilla-conil-de.html /de/taxi-aeropuerto-sevilla-conil 301!
+/taxi-aeropuerto-sevilla-conil-fr.html /fr/taxi-aeropuerto-sevilla-conil 301!
+/taxi-aeropuerto-malaga-conil-en.html /en/taxi-aeropuerto-malaga-conil 301!
+/taxi-aeropuerto-malaga-conil-de.html /de/taxi-aeropuerto-malaga-conil 301!
+/taxi-aeropuerto-malaga-conil-fr.html /fr/taxi-aeropuerto-malaga-conil 301!
+/taxi-aeropuerto-gibraltar-conil-en.html /en/taxi-aeropuerto-gibraltar-conil 301!
+/taxi-aeropuerto-gibraltar-conil-de.html /de/taxi-aeropuerto-gibraltar-conil 301!
+/taxi-aeropuerto-gibraltar-conil-fr.html /fr/taxi-aeropuerto-gibraltar-conil 301!
+/taxi-estacion-tren-cadiz-conil-en.html /en/taxi-estacion-tren-cadiz-conil 301!
+/taxi-estacion-tren-cadiz-conil-de.html /de/taxi-estacion-tren-cadiz-conil 301!
+/taxi-estacion-tren-cadiz-conil-fr.html /fr/taxi-estacion-tren-cadiz-conil 301!
+/taxi-bahia-sur-conil-en.html /en/taxi-bahia-sur-conil 301!
+/taxi-bahia-sur-conil-de.html /de/taxi-bahia-sur-conil 301!
+/taxi-bahia-sur-conil-fr.html /fr/taxi-bahia-sur-conil 301!
+
 # API functions
 /api/google-reviews /.netlify/functions/google-reviews 200
 
@@ -119,36 +159,6 @@
 /de /de/index.html 200
 /fr /fr/index.html 200
 
-/taxi-aeropuerto-jerez-conil /es/taxi-aeropuerto-jerez-conil.html 301
-/taxi-aeropuerto-jerez-conil-en /en/taxi-aeropuerto-jerez-conil.html 301
-/taxi-aeropuerto-jerez-conil-de /de/taxi-aeropuerto-jerez-conil.html 301
-/taxi-aeropuerto-jerez-conil-fr /fr/taxi-aeropuerto-jerez-conil.html 301
-
-/taxi-aeropuerto-sevilla-conil /es/taxi-aeropuerto-sevilla-conil.html 301
-/taxi-aeropuerto-sevilla-conil-en /en/taxi-aeropuerto-sevilla-conil.html 301
-/taxi-aeropuerto-sevilla-conil-de /de/taxi-aeropuerto-sevilla-conil.html 301
-/taxi-aeropuerto-sevilla-conil-fr /fr/taxi-aeropuerto-sevilla-conil.html 301
-
-/taxi-aeropuerto-malaga-conil /es/taxi-aeropuerto-malaga-conil.html 301
-/taxi-aeropuerto-malaga-conil-en /en/taxi-aeropuerto-malaga-conil.html 301
-/taxi-aeropuerto-malaga-conil-de /de/taxi-aeropuerto-malaga-conil.html 301
-/taxi-aeropuerto-malaga-conil-fr /fr/taxi-aeropuerto-malaga-conil.html 301
-
-/taxi-aeropuerto-gibraltar-conil /es/taxi-aeropuerto-gibraltar-conil.html 301
-/taxi-aeropuerto-gibraltar-conil-en /en/taxi-aeropuerto-gibraltar-conil.html 301
-/taxi-aeropuerto-gibraltar-conil-de /de/taxi-aeropuerto-gibraltar-conil.html 301
-/taxi-aeropuerto-gibraltar-conil-fr /fr/taxi-aeropuerto-gibraltar-conil.html 301
-
-/taxi-estacion-tren-cadiz-conil /es/taxi-estacion-tren-cadiz-conil.html 301
-/taxi-estacion-tren-cadiz-conil-en /en/taxi-estacion-tren-cadiz-conil.html 301
-/taxi-estacion-tren-cadiz-conil-de /de/taxi-estacion-tren-cadiz-conil.html 301
-/taxi-estacion-tren-cadiz-conil-fr /fr/taxi-estacion-tren-cadiz-conil.html 301
-
-/taxi-bahia-sur-conil /es/taxi-bahia-sur-conil.html 301
-/taxi-bahia-sur-conil-en /en/taxi-bahia-sur-conil.html 301
-/taxi-bahia-sur-conil-de /de/taxi-bahia-sur-conil.html 301
-/taxi-bahia-sur-conil-fr /fr/taxi-bahia-sur-conil.html 301
-
 /blog /es/blog.html 200
 /blog-en /en/blog.html 200
 /blog-de /de/blog.html 200
@@ -247,21 +257,25 @@
 /trayectos-frecuentes/ /trayectos-frecuentes 301!
 # Removed trailing slash redirects for airport pages to prevent redirect loops
 
-# Removed index.html redirects to prevent SEO issues
-# /index.html / 301!
-# /index / 301!
-# /index-en /en 301!
-# /index-de /de 301!
-# /index-fr /fr 301!
-# /index-en.html /en 301!
-# /index-de.html /de 301!
-# /index-fr.html /fr 301!
+# Index redirects - IMPORTANT: prevent duplicate content
+/index.html / 301!
+/index / 301!
+/index-en /en 301!
+/index-de /de 301!
+/index-fr /fr 301!
+/index-en.html /en 301!
+/index-de.html /de 301!
+/index-fr.html /fr 301!
 
 # Block URLs with query parameters from indexing
 /?origen=* / 410
+/?q=* / 410
 /de/?origen=* /de 410
+/de/?q=* /de 410
 /en/?origen=* /en 410
+/en/?q=* /en 410
 /fr/?origen=* /fr 410
+/fr/?q=* /fr 410
 
 /terms.html /terms 301!
 /terms-en.html /terms-en 301!

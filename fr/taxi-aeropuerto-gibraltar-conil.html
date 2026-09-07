@@ -1420,7 +1420,7 @@
           "@id": "https://taxiconil.es/fr#website",
           "url": "https://taxiconil.es/fr",
           "name": "Taxi Conil",
-          "publisher": { "@id": "https://taxiconil.es/#localbusiness" },
+          "publisher": { "@id": "https://taxiconil.es/fr#local-business" },
           "potentialAction": {
             "@type": "SearchAction",
             "target": "https://taxiconil.es/fr/?q={search_term_string}",
@@ -1429,7 +1429,7 @@
         },
         {
           "@type": "LocalBusiness",
-          "@id": "https://taxiconil.es/#localbusiness",
+          "@id": "https://taxiconil.es/fr#local-business",
           "name": "Taxi Conil 24h",
           "image": "https://taxiconil.es/IMG/LOGO-TAXI-CONIL-300.jpg",
           "telephone": "+34670705774",
@@ -1461,7 +1461,7 @@
           "@type": "TaxiService",
           "@id": "https://taxiconil.es/taxi-aeropuerto-gibraltar-conil-fr#service",
           "name": "Taxi Aéroport Gibraltar vers Conil - Expérience Premium",
-          "provider": { "@id": "https://taxiconil.es/#localbusiness" },
+          "provider": { "@id": "https://taxiconil.es/fr#local-business" },
           "serviceType": "Airport Transfer",
           "url": "https://taxiconil.es/taxi-aeropuerto-gibraltar-conil-fr",
           "description": "Expérience de transfert premium de l'Aéroport de Gibraltar (GIB) à Conil de la Frontera. Véhicule de luxe, chauffeur professionnel et service personnalisé 24h/24 avec commodités améliorées.",
@@ -1493,7 +1493,7 @@
                   "priceCurrency": "EUR",
                   "availability": "https://schema.org/InStock"
                 },
-                "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+                "seller": { "@id": "https://taxiconil.es/fr#local-business" },
                 "hasMerchantReturnPolicy": {
                   "@type": "MerchantReturnPolicy",
                   "applicableCountry": "ES",
@@ -1501,8 +1501,30 @@
                 },
                 "shippingDetails": {
                   "@type": "OfferShippingDetails",
-                  "shippingRate": "0.00",
-                  "doesNotShip": true
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
                 },
                 "validFrom": "2024-01-01"
               },
@@ -1516,7 +1538,7 @@
                   "priceCurrency": "EUR",
                   "availability": "https://schema.org/InStock"
                 },
-                "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+                "seller": { "@id": "https://taxiconil.es/fr#local-business" },
                 "hasMerchantReturnPolicy": {
                   "@type": "MerchantReturnPolicy",
                   "applicableCountry": "ES",
@@ -1524,8 +1546,30 @@
                 },
                 "shippingDetails": {
                   "@type": "OfferShippingDetails",
-                  "shippingRate": "0.00",
-                  "doesNotShip": true
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
                 },
                 "validFrom": "2024-01-01"
               }

@@ -1327,7 +1327,7 @@
       "@graph": [
         {
           "@type": "LocalBusiness",
-          "@id": "https://taxiconil.es/#localbusiness",
+          "@id": "https://taxiconil.es/fr#local-business",
           "name": "Taxi Conil 24h",
           "image": "https://taxiconil.es/IMG/LOGO-TAXI-CONIL-300.jpg",
           "telephone": "+34670705774",
@@ -1343,7 +1343,7 @@
           "@type": "TaxiService",
           "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil-fr#service",
           "name": "Taxi Malaga vers Conil",
-          "provider": { "@id": "https://taxiconil.es/#localbusiness" },
+          "provider": { "@id": "https://taxiconil.es/fr#local-business" },
           "serviceType": "Airport Transfer",
           "url": "https://taxiconil.es/taxi-aeropuerto-malaga-conil-fr",
           "description": "Transfert privé en taxi depuis l'aéroport de Malaga (AGP) vers Conil de la Frontera avec tarif fixe et service premium.",
@@ -1359,7 +1359,7 @@
           "name": "Taxi aéroport de Malaga – Conil | Expérience Premium & Tarif fixe 24/7",
           "description": "Transfert privé premium depuis l'aéroport de Malaga (AGP) vers Conil. Véhicule de luxe, chauffeur professionnel et service personnalisé 24/7 avec tarif fixe.",
           "inLanguage": "fr-FR",
-          "isPartOf": { "@id": "https://taxiconil.es/#website" },
+          "isPartOf": { "@id": "https://taxiconil.es/fr#website" },
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -1436,7 +1436,7 @@
                 "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
               },
               "availability": "https://schema.org/InStock",
-              "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+              "seller": { "@id": "https://taxiconil.es/fr#local-business" },
               "validFrom": "2024-01-01",
               "priceValidUntil": "2024-12-31"
             },
@@ -1479,7 +1479,7 @@
                 "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
               },
               "availability": "https://schema.org/InStock",
-              "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+              "seller": { "@id": "https://taxiconil.es/fr#local-business" },
               "validFrom": "2024-01-01",
               "priceValidUntil": "2024-12-31"
             }
@@ -1512,7 +1512,7 @@
           "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil-fr#airport-service",
           "name": "Service Expérience Aéroport de Malaga",
           "description": "Expérience complète de transfert depuis l'aéroport de Malaga incluant : accueil en terminal, gestion des bagages, véhicule premium, chauffeur multilingue, commodités à bord et suivi de vol en temps réel.",
-          "provider": { "@id": "https://taxiconil.es/#localbusiness" },
+          "provider": { "@id": "https://taxiconil.es/fr#local-business" },
           "serviceType": "Airport Transfer Experience",
           "areaServed": {
             "@type": "Place",
@@ -1530,7 +1530,34 @@
                   "description": "Service exécutif avec véhicule de luxe, presse, boissons premium et WiFi haut débit"
                 },
                 "price": "130.00",
-                "priceCurrency": "EUR"
+                "priceCurrency": "EUR",
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
+                }
               },
               {
                 "@type": "Offer",
@@ -1540,7 +1567,34 @@
                   "description": "Service exclusif avec véhicule haut de gamme, champagne, snacks gourmets et assistant personnel"
                 },
                 "price": "150.00",
-                "priceCurrency": "EUR"
+                "priceCurrency": "EUR",
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
+                }
               }
             ]
           }

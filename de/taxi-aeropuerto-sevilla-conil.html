@@ -1323,14 +1323,14 @@
       "@graph": [
         {
           "@type": "WebSite",
-          "@id": "https://taxiconil.es/#website",
+          "@id": "https://taxiconil.es/de#website",
           "url": "https://taxiconil.es/",
           "name": "Taxi Conil",
-          "publisher": { "@id": "https://taxiconil.es/#localbusiness" }
+          "publisher": { "@id": "https://taxiconil.es/de#local-business" }
         },
         {
           "@type": "LocalBusiness",
-          "@id": "https://taxiconil.es/#localbusiness",
+          "@id": "https://taxiconil.es/de#local-business",
           "name": "Taxi Conil 24h",
           "image": "https://taxiconil.es/IMG/LOGO-TAXI-CONIL-300.jpg",
           "telephone": "+34670705774",
@@ -1346,7 +1346,7 @@
           "@type": "TaxiService",
           "@id": "https://taxiconil.es/taxi-aeropuerto-sevilla-conil-de#service",
           "name": "Taxi Sevilla nach Conil",
-          "provider": { "@id": "https://taxiconil.es/#localbusiness" },
+          "provider": { "@id": "https://taxiconil.es/de#local-business" },
           "serviceType": "Airport Transfer",
           "url": "https://taxiconil.es/taxi-aeropuerto-sevilla-conil-de",
           "description": "Privater Transfer vom Flughafen Sevilla (SVQ) nach Conil de la Frontera mit Festpreis und Premium-Service.",
@@ -1362,7 +1362,7 @@
           "name": "Taxi Flughafen Sevilla nach Conil | Festpreis Sofort",
           "description": "Transferservice vom Flughafen Sevilla nach Conil de la Frontera. Online-Buchung mit Festpreisen, professionellen Fahrern und Premium-Fahrzeugen.",
           "inLanguage": "de-DE",
-          "isPartOf": { "@id": "https://taxiconil.es/#website" },
+          "isPartOf": { "@id": "https://taxiconil.es/de#website" },
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -1439,7 +1439,7 @@
                 "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
               },
               "availability": "https://schema.org/InStock",
-              "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+              "seller": { "@id": "https://taxiconil.es/de#local-business" },
               "validFrom": "2024-01-01",
               "priceValidUntil": "2024-12-31"
             },
@@ -1482,7 +1482,7 @@
                 "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
               },
               "availability": "https://schema.org/InStock",
-              "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+              "seller": { "@id": "https://taxiconil.es/de#local-business" },
               "validFrom": "2024-01-01",
               "priceValidUntil": "2024-12-31"
             }
@@ -1515,7 +1515,7 @@
           "@id": "https://taxiconil.es/taxi-aeropuerto-sevilla-conil-de#airport-service",
           "name": "Service Erlebnis Flughafen Sevilla",
           "description": "Komplettes Transfererlebnis vom Flughafen Sevilla inklusive: Empfang am Terminal, Gepäckassistenz, Premium-Fahrzeug, mehrsprachiger Fahrer, Annehmlichkeiten an Bord und Echtzeit-Monitoring.",
-          "provider": { "@id": "https://taxiconil.es/#localbusiness" },
+          "provider": { "@id": "https://taxiconil.es/de#local-business" },
           "serviceType": "Airport Transfer Experience",
           "areaServed": {
             "@type": "Place",
@@ -1535,6 +1535,33 @@
                 "price": "130.00",
                 "priceCurrency": "EUR"
               },
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
+                },
               {
                 "@type": "Offer",
                 "itemOffered": {
@@ -1544,7 +1571,34 @@
                 },
                 "price": "150.00",
                 "priceCurrency": "EUR"
-              }
+              },
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
+                }
             ]
           }
         },

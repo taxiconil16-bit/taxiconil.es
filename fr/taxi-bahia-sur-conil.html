@@ -1408,7 +1408,7 @@
           "@id": "https://taxiconil.es/fr#website",
           "url": "https://taxiconil.es/fr",
           "name": "Taxi Conil",
-          "publisher": { "@id": "https://taxiconil.es/#localbusiness" },
+          "publisher": { "@id": "https://taxiconil.es/fr#local-business" },
           "potentialAction": {
             "@type": "SearchAction",
             "target": "https://taxiconil.es/fr/?q={search_term_string}",
@@ -1417,7 +1417,7 @@
         },
         {
           "@type": "LocalBusiness",
-          "@id": "https://taxiconil.es/#localbusiness",
+          "@id": "https://taxiconil.es/fr#local-business",
           "name": "Taxi Conil 24h",
           "image": "https://taxiconil.es/IMG/LOGO-TAXI-CONIL-300.jpg",
           "telephone": "+34670705774",
@@ -1449,7 +1449,7 @@
           "@type": "TaxiService",
           "@id": "https://taxiconil.es/taxi-bahia-sur-conil-fr#service",
           "name": "Taxi Conil vers gare Bahía Sur - Expérience Premium",
-          "provider": { "@id": "https://taxiconil.es/#localbusiness" },
+          "provider": { "@id": "https://taxiconil.es/fr#local-business" },
           "serviceType": "Train Station Transfer",
           "url": "https://taxiconil.es/taxi-bahia-sur-conil-fr",
           "description": "Expérience de transfert premium de Conil de la Frontera vers la gare Bahía Sur. Véhicule de luxe, chauffeur professionnel et service personnalisé 24h/24 avec commodités améliorées.",
@@ -1481,11 +1481,38 @@
                   "priceCurrency": "EUR",
                   "availability": "https://schema.org/InStock"
                 },
-                "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+                "seller": { "@id": "https://taxiconil.es/fr#local-business" },
                 "hasMerchantReturnPolicy": {
                   "@type": "MerchantReturnPolicy",
                   "applicableCountry": "ES",
                   "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+                },
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
                 },
                 "validFrom": "2024-01-01"
               },
@@ -1499,11 +1526,38 @@
                   "priceCurrency": "EUR",
                   "availability": "https://schema.org/InStock"
                 },
-                "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+                "seller": { "@id": "https://taxiconil.es/fr#local-business" },
                 "hasMerchantReturnPolicy": {
                   "@type": "MerchantReturnPolicy",
                   "applicableCountry": "ES",
                   "returnPolicyCategory": "https://schema.org/MerchantReturnNotPermitted"
+                },
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
                 },
                 "validFrom": "2024-01-01"
               }

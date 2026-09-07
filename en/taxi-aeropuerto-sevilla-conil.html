@@ -1315,14 +1315,14 @@
       "@graph": [
         {
           "@type": "WebSite",
-          "@id": "https://taxiconil.es/#website",
+          "@id": "https://taxiconil.es/en#website",
           "url": "https://taxiconil.es/",
           "name": "Taxi Conil",
-          "publisher": { "@id": "https://taxiconil.es/#localbusiness" }
+          "publisher": { "@id": "https://taxiconil.es/en#local-business" }
         },
         {
           "@type": "LocalBusiness",
-          "@id": "https://taxiconil.es/#localbusiness",
+          "@id": "https://taxiconil.es/en#local-business",
           "name": "Taxi Conil 24h",
           "image": "https://taxiconil.es/IMG/LOGO-TAXI-CONIL-300.jpg",
           "telephone": "+34670705774",
@@ -1338,7 +1338,7 @@
           "@type": "TaxiService",
           "@id": "https://taxiconil.es/taxi-aeropuerto-sevilla-conil-en#service",
           "name": "Taxi Seville to Conil",
-          "provider": { "@id": "https://taxiconil.es/#localbusiness" },
+          "provider": { "@id": "https://taxiconil.es/en#local-business" },
           "serviceType": "Airport Transfer",
           "url": "https://taxiconil.es/taxi-aeropuerto-sevilla-conil-en",
           "description": "Private taxi and transfer service from Seville Airport (SVQ) to Conil de la Frontera with fixed price and premium service.",
@@ -1354,7 +1354,7 @@
           "name": "Taxi Seville to Conil | Premium Experience & Fixed Price 24/7",
           "description": "Private transfer from Seville Airport (SVQ) to Conil. Fixed price, premium vehicle and personalised 24/7 service.",
           "inLanguage": "en-GB",
-          "isPartOf": { "@id": "https://taxiconil.es/#website" },
+          "isPartOf": { "@id": "https://taxiconil.es/en#website" },
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -1396,7 +1396,7 @@
               "price": "233.00",
               "priceCurrency": "EUR",
               "availability": "https://schema.org/InStock",
-              "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+              "seller": { "@id": "https://taxiconil.es/en#local-business" },
               "hasMerchantReturnPolicy": {
                 "@type": "MerchantReturnPolicy",
                 "applicableCountry": "ES",
@@ -1439,7 +1439,7 @@
               "price": "258.00",
               "priceCurrency": "EUR",
               "availability": "https://schema.org/InStock",
-              "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+              "seller": { "@id": "https://taxiconil.es/en#local-business" },
               "hasMerchantReturnPolicy": {
                 "@type": "MerchantReturnPolicy",
                 "applicableCountry": "ES",
@@ -1504,7 +1504,7 @@
           "@id": "https://taxiconil.es/taxi-aeropuerto-sevilla-conil-en#airport-service",
           "name": "Seville Airport Experience Service",
           "description": "Complete transfer experience from Seville Airport including: terminal meet & greet, luggage management, premium vehicle, multilingual driver, onboard amenities and real-time monitoring.",
-          "provider": { "@id": "https://taxiconil.es/#localbusiness" },
+          "provider": { "@id": "https://taxiconil.es/en#local-business" },
           "serviceType": "Airport Transfer Experience",
           "areaServed": {
             "@type": "Place",
@@ -1522,7 +1522,34 @@
                   "description": "Executive service with luxury vehicle, newspapers, premium drinks and high-speed WiFi"
                 },
                 "price": "130.00",
-                "priceCurrency": "EUR"
+                "priceCurrency": "EUR",
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
+                }
               },
               {
                 "@type": "Offer",
@@ -1532,7 +1559,34 @@
                   "description": "Exclusive service with high-end vehicle, champagne, gourmet snacks and personal assistant"
                 },
                 "price": "150.00",
-                "priceCurrency": "EUR"
+                "priceCurrency": "EUR",
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
+                }
               }
             ]
           }

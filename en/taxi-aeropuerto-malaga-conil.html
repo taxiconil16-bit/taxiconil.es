@@ -54,7 +54,7 @@
     
     <!-- Performance Optimization -->
     <link rel="preload" as="image" href="https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1600.webp" fetchpriority="high">
-    <link rel="canonical" href="https://taxiconil.es/en/taxi-aeropuerto-malaga-conil.html" />
+    <link rel="canonical" href="https://taxiconil.es/taxi-aeropuerto-malaga-conil-en" />
     <link rel="alternate" hreflang="es-ES" href="https://taxiconil.es/taxi-aeropuerto-malaga-conil" />
     <link rel="alternate" hreflang="en-GB" href="https://taxiconil.es/taxi-aeropuerto-malaga-conil-en" />
     <link rel="alternate" hreflang="de-DE" href="https://taxiconil.es/taxi-aeropuerto-malaga-conil-de" />
@@ -1345,7 +1345,7 @@
       "@graph": [
         {
           "@type": "LocalBusiness",
-          "@id": "https://taxiconil.es/#localbusiness",
+          "@id": "https://taxiconil.es/en#local-business",
           "name": "Taxi Conil 24h",
           "image": "https://taxiconil.es/IMG/LOGO-TAXI-CONIL-300.jpg",
           "telephone": "+34670705774",
@@ -1361,7 +1361,7 @@
           "@type": "TaxiService",
           "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil-en#service",
           "name": "Taxi Malaga Airport to Conil",
-          "provider": { "@id": "https://taxiconil.es/#localbusiness" },
+          "provider": { "@id": "https://taxiconil.es/en#local-business" },
           "serviceType": "Airport Transfer",
           "url": "https://taxiconil.es/taxi-aeropuerto-malaga-conil-en",
           "description": "Private taxi and transfer service from Malaga Airport (AGP) to Conil de la Frontera with fixed price and premium service.",
@@ -1377,7 +1377,7 @@
           "name": "Taxi Malaga Airport to Conil | Premium Experience & Fixed Price 24/7",
           "description": "Premium private transfer from Malaga Airport (AGP) to Conil. Luxury vehicle, professional driver and personalised 24/7 service with fixed price.",
           "inLanguage": "en-GB",
-          "isPartOf": { "@id": "https://taxiconil.es/#website" },
+          "isPartOf": { "@id": "https://taxiconil.es/en#website" },
           "breadcrumb": {
             "@type": "BreadcrumbList",
             "itemListElement": [
@@ -1419,7 +1419,7 @@
               "price": "306.00",
               "priceCurrency": "EUR",
               "availability": "https://schema.org/InStock",
-              "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+              "seller": { "@id": "https://taxiconil.es/en#local-business" },
               "hasMerchantReturnPolicy": {
                 "@type": "MerchantReturnPolicy",
                 "applicableCountry": "ES",
@@ -1440,7 +1440,7 @@
               "price": "350.00",
               "priceCurrency": "EUR",
               "availability": "https://schema.org/InStock",
-              "seller": { "@id": "https://taxiconil.es/#localbusiness" },
+              "seller": { "@id": "https://taxiconil.es/en#local-business" },
               "hasMerchantReturnPolicy": {
                 "@type": "MerchantReturnPolicy",
                 "applicableCountry": "ES",
@@ -1483,7 +1483,7 @@
           "@id": "https://taxiconil.es/taxi-aeropuerto-malaga-conil-en#airport-service",
           "name": "Malaga Airport Experience Service",
           "description": "Complete transfer experience from Malaga Airport including: terminal meet & greet, luggage management, premium vehicle, multilingual driver, onboard amenities and real-time flight monitoring.",
-          "provider": { "@id": "https://taxiconil.es/#localbusiness" },
+          "provider": { "@id": "https://taxiconil.es/en#local-business" },
           "serviceType": "Airport Transfer Experience",
           "areaServed": {
             "@type": "Place",
@@ -1503,6 +1503,33 @@
                 "price": "130.00",
                 "priceCurrency": "EUR"
               },
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
+                },
               {
                 "@type": "Offer",
                 "itemOffered": {
@@ -1512,7 +1539,34 @@
                 },
                 "price": "150.00",
                 "priceCurrency": "EUR"
-              }
+              },
+                "shippingDetails": {
+                  "@type": "OfferShippingDetails",
+                  "shippingRate": {
+                    "@type": "MonetaryAmount",
+                    "value": "0",
+                    "currency": "EUR"
+                  },
+                  "shippingDestination": {
+                    "@type": "DefinedRegion",
+                    "addressCountry": "ES"
+                  },
+                  "deliveryTime": {
+                    "@type": "ShippingDeliveryTime",
+                    "handlingTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    },
+                    "transitTime": {
+                      "@type": "QuantitativeValue",
+                      "minValue": 0,
+                      "maxValue": 0,
+                      "unitCode": "DAY"
+                    }
+                  }
+                }
             ]
           }
         },
