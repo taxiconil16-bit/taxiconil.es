@@ -2039,54 +2039,25 @@
                                 <span>Child <br>Seats</span>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- 7. Real Testimonials -->
-        <section class="section-padding" style="background: var(--bg-alt); border-radius: clamp(40px, 8vw, 80px);">
+        <!-- 7. Google Reviews Dinámicos -->
+        <section class="google-reviews-section" id="google-reviews" style="scroll-padding-top: 150px;">
             <div class="container">
                 <div style="text-align: center; margin-bottom: 80px;">
-                    <h2 style="font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 900; letter-spacing: -2px;">What our passengers say</h2>
-                    <div style="color: var(--accent); font-size: 1.5rem; margin-top: 1rem;">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                    </div>
+                    <span style="color: var(--accent); text-transform: uppercase; letter-spacing: 4px; font-weight: 800; font-size: 0.9rem;">Reviews</span>
+                    <h2 id="reviews-heading" style="font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 900; margin-top: 1rem; letter-spacing: -2px;">What our customers say</h2>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px;">
-                    <div style="background: white; padding: 50px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); position: relative;">
-                        <i class="fas fa-quote-left" style="position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #f1f5f9;"></i>
-                        <p style="font-style: italic; font-size: 1.15rem; margin-bottom: 2.5rem; position: relative; z-index: 10;">"The best option for getting to the airport. A high-end car, impeccably clean, and excellent service. Easy booking and immediate confirmation."</p>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white;">L</div>
-                            <div><strong style="display: block; font-size: 1.1rem;">Laura S.</strong><span style="font-size: 0.85rem; color: var(--text-muted);">Trip to Conil</span></div>
-                        </div>
-                    </div>
-                    <div style="background: white; padding: 50px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); position: relative;">
-                        <i class="fas fa-quote-left" style="position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #f1f5f9;"></i>
-                        <p style="font-style: italic; font-size: 1.15rem; margin-bottom: 2.5rem; position: relative; z-index: 10;">"Great service, always punctual and very friendly. The car is perfect for long-distance transfers."</p>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white;">M</div>
-                            <div><strong style="display: block; font-size: 1.1rem;">Moraga Lucia</strong><span style="font-size: 0.85rem; color: var(--text-muted);">Private Event</span></div>
-                        </div>
-                    </div>
-                    <div style="background: white; padding: 50px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); position: relative;">
-                        <i class="fas fa-quote-left" style="position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #f1f5f9;"></i>
-                        <p style="font-style: italic; font-size: 1.15rem; margin-bottom: 2.5rem; position: relative; z-index: 10;">"Fixed price and no surprises. The driver was waiting for me right at baggage claim—very professional."</p>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white;">B</div>
-                            <div><strong style="display: block; font-size: 1.1rem;">Begoña Esteban</strong><span style="font-size: 0.85rem; color: var(--text-muted);">Private Client</span></div>
-                        </div>
-                    </div>
-                    <!-- Fourth VIP Review -->
-                    <div style="background: white; padding: 50px; border-radius: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.03); position: relative;">
-                        <i class="fas fa-quote-left" style="position: absolute; top: 40px; right: 40px; font-size: 3rem; color: #f1f5f9;"></i>
-                        <p style="font-style: italic; font-size: 1.15rem; margin-bottom: 2.5rem; position: relative; z-index: 10;">"Impeccable. We booked the transfer for a wedding and the service felt like a movie. The Arteon is spectacular and the driver was very attentive."</p>
-                        <div style="display: flex; align-items: center; gap: 15px;">
-                            <div style="width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; color: white;">J</div>
-                            <div><strong style="display: block; font-size: 1.1rem;">Javier Gómez</strong><span style="font-size: 0.85rem; color: var(--text-muted);">Private Event</span></div>
-                        </div>
-                    </div>
+                <div id="google-reviews-container" class="google-reviews-widget-container"
+                     data-show-rating="true"
+                     data-show-date="true"
+                     data-show-google-link="true"
+                     data-show-write-review-link="false"
+                     data-google-url="https://maps.app.goo.gl/5kocLkscg2NXErMk9"
+                     data-write-review-url="https://g.page/r/CXNQqV28stT1EBM/review"
+                     data-language="en">
                 </div>
             </div>
         </section>
