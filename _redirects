@@ -1,6 +1,14 @@
 /robots.txt /robots.txt 200
 /sitemap.xml /sitemap.xml 200
 
+# Taxi pages in Spanish (no suffix) - redirect to es/ folder
+/taxi-aeropuerto-jerez-conil /es/taxi-aeropuerto-jerez-conil.html 301!
+/taxi-aeropuerto-sevilla-conil /es/taxi-aeropuerto-sevilla-conil.html 301!
+/taxi-aeropuerto-malaga-conil /es/taxi-aeropuerto-malaga-conil.html 301!
+/taxi-aeropuerto-gibraltar-conil /es/taxi-aeropuerto-gibraltar-conil.html 301!
+/taxi-estacion-tren-cadiz-conil /es/taxi-estacion-tren-cadiz-conil.html 301!
+/taxi-bahia-sur-conil /es/taxi-bahia-sur-conil.html 301!
+
 # Taxi pages with language suffixes - redirect to actual .html files in language folders
 /taxi-aeropuerto-jerez-conil-en /en/taxi-aeropuerto-jerez-conil.html 301!
 /taxi-aeropuerto-jerez-conil-de /de/taxi-aeropuerto-jerez-conil.html 301!
