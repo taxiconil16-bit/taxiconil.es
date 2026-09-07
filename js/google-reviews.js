@@ -5,7 +5,7 @@ const translations = {
     google: 'Google',
     seeAll: 'Ver todas en Google',
     reviews: 'reseñas',
-    writeReview: '',
+    writeReview: 'Escribir un reseña',
     readReviews: 'Leer más reseñas',
     anonymous: 'Anónimo',
     error: 'No se pudieron cargar las reseñas.',
@@ -16,7 +16,7 @@ const translations = {
     google: 'Google',
     seeAll: 'See all on Google',
     reviews: 'reviews',
-    writeReview: '',
+    writeReview: 'Write a review',
     readReviews: 'Read more reviews',
     anonymous: 'Anonymous',
     error: 'Could not load reviews.',
@@ -27,7 +27,7 @@ const translations = {
     google: 'Google',
     seeAll: 'Alle auf Google ansehen',
     reviews: 'Bewertungen',
-    writeReview: '',
+    writeReview: 'Bewertung schreiben',
     readReviews: 'Mehr Bewertungen lesen',
     anonymous: 'Anonym',
     error: 'Bewertungen konnten nicht geladen werden.',
@@ -38,7 +38,7 @@ const translations = {
     google: 'Google',
     seeAll: 'Voir toutes sur Google',
     reviews: 'avis',
-    writeReview: '',
+    writeReview: 'Écrire un avis',
     readReviews: 'Lire plus d\'avis',
     anonymous: 'Anonyme',
     error: 'Impossible de charger les avis.',
@@ -59,6 +59,7 @@ class GoogleReviewsWidget {
       showRating: options.showRating !== false,
       showDate: options.showDate !== false,
       showGoogleLink: options.showGoogleLink !== false,
+      showWriteReviewLink: options.showWriteReviewLink !== false,
       googleBusinessUrl: options.googleBusinessUrl || 'https://maps.app.goo.gl/5kocLkscg2NXErMk9',
       writeReviewUrl: options.writeReviewUrl || options.googleBusinessUrl || 'https://maps.app.goo.gl/5kocLkscg2NXErMk9',
       language: options.language || this.detectLanguage(),
@@ -142,11 +143,20 @@ class GoogleReviewsWidget {
           </div>
           ${this.options.showGoogleLink ? `
             <a href="${this.options.googleBusinessUrl}" target="_blank" rel="noopener" class="google-reviews-link">
-              ${t.readReviews || t.writeReview}
+              ${t.readReviews}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                 <polyline points="15 3 21 3 21 9"/>
                 <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+            </a>
+          ` : ''}
+          ${this.options.showWriteReviewLink ? `
+            <a href="${this.options.writeReviewUrl}" target="_blank" rel="noopener" class="google-reviews-link write-review-link">
+              ${t.writeReview}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
               </svg>
             </a>
           ` : ''}
@@ -389,6 +399,7 @@ function initGoogleReviews() {
       showRating: container.dataset.showRating !== 'false',
       showDate: container.dataset.showDate !== 'false',
       showGoogleLink: container.dataset.showGoogleLink !== 'false',
+      showWriteReviewLink: container.dataset.showWriteReviewLink !== 'false',
       googleBusinessUrl: container.dataset.googleUrl || 'https://maps.app.goo.gl/5kocLkscg2NXErMk9',
       writeReviewUrl: container.dataset.writeReviewUrl || container.dataset.googleUrl || 'https://maps.app.goo.gl/5kocLkscg2NXErMk9',
       language: container.dataset.language || 'es',
