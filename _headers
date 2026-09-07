@@ -1,3 +1,6 @@
+/sw.min.js
+  Cache-Control: max-age=0,no-cache,no-store,must-revalidate
+
 /*
   Referrer-Policy: strict-origin-when-cross-origin
   X-DNS-Prefetch-Control: on

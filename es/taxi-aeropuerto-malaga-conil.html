@@ -2535,7 +2535,7 @@
 
         // SW
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => navigator.serviceWorker.register('/sw.min.js').catch(() => {}));
+            window.addEventListener('load', () => navigator.serviceWorker.register('/sw.min.js', {updateViaCache: 'none'}).catch(() => {}));
         }
     </script>
 
