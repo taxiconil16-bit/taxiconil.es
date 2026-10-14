@@ -875,6 +875,153 @@ function applyFlightTrainBanner(kind) {
       kind === "airport" ? "fas fa-plane-arrival" : "fas fa-train";
   banner.style.display = "block";
 }
+
+function getTripDisplayName(key) {
+  const lang = CURRENT_LANG || "es";
+  const names = {
+    'origenCalc': {
+      es: 'Trayecto de ida',
+      en: 'Outbound trip',
+      de: 'Hinfahrt',
+      fr: 'Trajet aller'
+    },
+    'origenVuelta': {
+      es: 'Trayecto de vuelta',
+      en: 'Return trip',
+      de: 'Rückfahrt',
+      fr: 'Trajet retour'
+    },
+    'additionalTripOrigen': {
+      es: 'Trayecto adicional',
+      en: 'Additional trip',
+      de: 'Zusätzliche Fahrt',
+      fr: 'Trajet supplémentaire'
+    }
+  };
+  return (names[key] && names[key][lang]) || names[key]?.es || key;
+}
+
+function showMultipleFlightTrainModal() {
+  if (!window.flightTrainTrips || window.flightTrainTrips.length <= 1) return;
+  
+  const lang = CURRENT_LANG || "es";
+  const modal = document.getElementById("multiple-flight-train-modal");
+  if (!modal) {
+    // Crear modal dinámicamente si no existe
+    const modalHTML = `
+      <div id="multiple-flight-train-modal" class="confirmation-modal" style="display: none;">
+        <div class="modal-content" style="max-width: 600px; max-height: 80vh; overflow-y: auto;">
+          <h2 id="multiple-flight-train-title"></h2>
+          <p id="multiple-flight-train-message"></p>
+          <div id="multiple-flight-trip-list"></div>
+          <button id="multiple-flight-train-submit" class="btn btn-primary"></button>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+  }
+  
+  const titleEl = document.getElementById("multiple-flight-train-title");
+  const messageEl = document.getElementById("multiple-flight-train-message");
+  const listEl = document.getElementById("multiple-flight-trip-list");
+  const submitBtn = document.getElementById("multiple-flight-train-submit");
+  
+  const copy = {
+    es: {
+      title: "Información de vuelos/trenes",
+      message: "Hemos detectado que varios de sus trayectos tienen origen en aeropuertos o estaciones de tren. Por favor, indique el número de vuelo/tren y hora de llegada para cada uno:",
+      submit: "Continuar"
+    },
+    en: {
+      title: "Flight/Train Information",
+      message: "We have detected that several of your trips originate from airports or train stations. Please provide the flight/train number and arrival time for each:",
+      submit: "Continue"
+    },
+    de: {
+      title: "Flug-/Zuginformationen",
+      message: "Wir haben festgestellt, dass mehrere Ihrer Fahrten an Flughäfen oder Bahnhöfen beginnen. Bitte geben Sie die Flug-/Zugnummer und Ankunftszeit für jede Fahrt an:",
+      submit: "Weiter"
+    },
+    fr: {
+      title: "Informations de vol/train",
+      message: "Nous avons détecté que plusieurs de vos trajets commencent à des aéroports ou gares. Veuillez indiquer le numéro de vol/train et l'heure d'arrivée pour chaque trajet:",
+      submit: "Continuer"
+    }
+  };
+  
+  const pack = copy[lang] || copy.es;
+  titleEl.textContent = pack.title;
+  messageEl.textContent = pack.message;
+  submitBtn.textContent = pack.submit;
+  
+  // Generar lista de trayectos
+  listEl.innerHTML = window.flightTrainTrips.map((trip, index) => {
+    const icon = trip.type === 'airport' ? '✈️' : '🚆';
+    const label = trip.type === 'airport' ? 
+      (lang === 'es' ? 'Número de vuelo:' : lang === 'en' ? 'Flight number:' : lang === 'de' ? 'Flugnummer:' : 'Numéro de vol:') :
+      (lang === 'es' ? 'Número de tren:' : lang === 'en' ? 'Train number:' : lang === 'de' ? 'Zugnummer:' : 'Numéro de train:');
+    const timeLabel = lang === 'es' ? 'Hora de llegada:' : lang === 'en' ? 'Arrival time:' : lang === 'de' ? 'Ankunftszeit:' : 'Heure d\'arrivée:';
+    
+    return `
+      <div class="flight-train-trip-item" style="margin-bottom: 1.5rem; padding: 1rem; border: 1px solid #e0e0e0; border-radius: 8px;">
+        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">${icon} ${trip.tripName}</h3>
+        <p style="margin-bottom: 1rem; color: #666; font-size: 0.9rem;">${trip.origin}</p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <div>
+            <label style="display: block; margin-bottom: 0.3rem; font-weight: 500;">${label}</label>
+            <input type="text" id="flight-train-number-${index}" placeholder="${trip.type === 'airport' ? 'Ej.: IB3941' : 'Ej.: AVE 02131'}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+          </div>
+          <div>
+            <label style="display: block; margin-bottom: 0.3rem; font-weight: 500;">${timeLabel}</label>
+            <input type="time" id="flight-train-time-${index}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  
+  // Mostrar modal
+  modal.style.display = "flex";
+  
+  // Configurar botón submit
+  submitBtn.onclick = function() {
+    // Validar todos los campos
+    let allValid = true;
+    window.flightTrainTrips.forEach((trip, index) => {
+      const numberInput = document.getElementById(`flight-train-number-${index}`);
+      const timeInput = document.getElementById(`flight-train-time-${index}`);
+      if (!numberInput.value || !timeInput.value) {
+        allValid = false;
+        numberInput.style.borderColor = '#dc3545';
+        timeInput.style.borderColor = '#dc3545';
+      } else {
+        numberInput.style.borderColor = '#ccc';
+        timeInput.style.borderColor = '#ccc';
+      }
+    });
+    
+    if (!allValid) {
+      alert(lang === 'es' ? 'Por favor, complete todos los campos.' : lang === 'en' ? 'Please fill in all fields.' : lang === 'de' ? 'Bitte füllen Sie alle Felder aus.' : 'Veuillez remplir tous les champs.');
+      return;
+    }
+    
+    // Guardar los datos
+    window.flightTrainTrips.forEach((trip, index) => {
+      const numberInput = document.getElementById(`flight-train-number-${index}`);
+      const timeInput = document.getElementById(`flight-train-time-${index}`);
+      trip.flightNumber = numberInput.value;
+      trip.arrivalTime = timeInput.value;
+    });
+    
+    // Cerrar modal
+    modal.style.display = "none";
+    
+    // Continuar con el flujo normal
+    populateConfirmationModal();
+    openDialog(bookingConfirmationOverlay);
+  };
+}
+
 function tcHideCurrentLangInSelectors(root) {
   try {
     if ("undefined" == typeof document) return;
@@ -2779,6 +2926,38 @@ function setupLegacyAutocompleteField(inputEl, options, summaryEl, key) {
             inputEl && inputEl.value ? inputEl.value : "",
           ).trim()),
           updateAddressSummary(summaryEl, validPlace));
+        
+        // Detectar si es estación/aeropuerto para origen de trayectos
+        if (validPlace && inputEl && inputEl.value) {
+          const origenText = String(inputEl.value).toLowerCase();
+          const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|tren|ave|renfe|adif|train station|railway station|bahnhof|gare/.test(origenText);
+          const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal/.test(origenText);
+          
+          if (isStation || isAirport) {
+            // Guardar información del trayecto para el modal múltiple
+            if (!window.flightTrainTrips) window.flightTrainTrips = [];
+            
+            const tripInfo = {
+              key: key,
+              type: isStation ? 'station' : 'airport',
+              origin: inputEl.value,
+              tripName: getTripDisplayName(key)
+            };
+            
+            // Eliminar si ya existe este key
+            window.flightTrainTrips = window.flightTrainTrips.filter(t => t.key !== key);
+            window.flightTrainTrips.push(tripInfo);
+            
+            // Si hay múltiples trayectos, mostrar modal con lista
+            if (window.flightTrainTrips.length > 1) {
+              showMultipleFlightTrainModal();
+            } else {
+              // Si es solo uno, usar el banner actual
+              applyFlightTrainBanner(isStation ? "station" : "airport");
+            }
+          }
+        }
+        
         try {
           autocompleteSessionTokens[key] =
             new google.maps.places.AutocompleteSessionToken();
