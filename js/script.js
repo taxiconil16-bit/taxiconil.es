@@ -2779,18 +2779,6 @@ function setupLegacyAutocompleteField(inputEl, options, summaryEl, key) {
             inputEl && inputEl.value ? inputEl.value : "",
           ).trim()),
           updateAddressSummary(summaryEl, validPlace));
-        
-        // Detectar si es estación/aeropuerto para el origen del trayecto de vuelta
-        if (key === "origenVuelta" && validPlace && inputEl && inputEl.value) {
-          const origenText = String(inputEl.value).toLowerCase();
-          const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|tren|ave|renfe|adif|train station|railway station|bahnhof|gare/.test(origenText);
-          const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal/.test(origenText);
-          
-          if (isStation || isAirport) {
-            applyFlightTrainBanner(isStation ? "station" : "airport");
-          }
-        }
-        
         try {
           autocompleteSessionTokens[key] =
             new google.maps.places.AutocompleteSessionToken();
