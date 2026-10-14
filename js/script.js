@@ -2927,6 +2927,18 @@ function setupLegacyAutocompleteField(inputEl, options, summaryEl, key) {
           ).trim()),
           updateAddressSummary(summaryEl, validPlace));
         
+        // Detectar si es estación/aeropuerto para el origen del trayecto de vuelta
+        if (key === "origenVuelta" && validPlace && inputEl && inputEl.value) {
+          const origenText = String(inputEl.value).toLowerCase();
+          const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|tren|ave|renfe|adif|train station|railway station|bahnhof|gare/.test(origenText);
+          const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal/.test(origenText);
+          
+          if (isStation || isAirport) {
+            applyFlightTrainBanner(isStation ? "station" : "airport");
+          }
+        }
+        
+        
         // Detectar si es estación/aeropuerto para origen de trayectos
         if (validPlace && inputEl && inputEl.value) {
           const origenText = String(inputEl.value).toLowerCase();
@@ -7130,6 +7142,11 @@ function loadGoogleMapsIfNeeded() {
     }
   }),
     (window.removeAdditionalTrip = function (tripId) {
+      // Limpiar el trayecto adicional de la lista de vuelos/trenes
+      if (window.flightTrainTrips) {
+        window.flightTrainTrips = window.flightTrainTrips.filter(t => !t.key.startsWith('additionalTripOrigen_'));
+      }
+      
       const tripDiv = document.getElementById(tripId);
       if (
         tripDiv &&
@@ -10314,6 +10331,11 @@ function loadGoogleMapsIfNeeded() {
       });
   }
   function cancelReturnTrip() {
+    // Limpiar el trayecto de vuelta de la lista de vuelos/trenes
+    if (window.flightTrainTrips) {
+      window.flightTrainTrips = window.flightTrainTrips.filter(t => t.key !== 'origenVuelta');
+    }
+    
     (returnTripNo && (returnTripNo.checked = !0),
       returnTripYes && (returnTripYes.checked = !1),
       origenVueltaInput && (origenVueltaInput.required = !1),
@@ -11459,6 +11481,36 @@ function loadGoogleMapsIfNeeded() {
           : additionalTripCalcResultDiv &&
             (additionalTripCalcResultDiv.innerHTML =
               '<p style="color: #dc3545;">Por favor, complete todos los campos.</p>');
+        
+        // Detectar si el origen es estación/aeropuerto para trayectos adicionales
+        if (origin) {
+          const origenText = origin.toLowerCase();
+          const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|tren|ave|renfe|adif|train station|railway station|bahnhof|gare/.test(origenText);
+          const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal/.test(origenText);
+          
+          if (isStation || isAirport) {
+            if (!window.flightTrainTrips) window.flightTrainTrips = [];
+            
+            // Usar índice único basado en el número de trayectos adicionales
+            const tripIndex = (window.additionalTrips || []).length;
+            const tripKey = `additionalTripOrigen_${tripIndex}`;
+            
+            const tripInfo = {
+              key: tripKey,
+              type: isStation ? 'station' : 'airport',
+              origin: origin,
+              tripName: getTripDisplayName('additionalTripOrigen') + (tripIndex > 0 ? ` ${tripIndex + 1}` : '')
+            };
+            
+            window.flightTrainTrips.push(tripInfo);
+            
+            if (window.flightTrainTrips.length > 1) {
+              showMultipleFlightTrainModal();
+            } else {
+              applyFlightTrainBanner(isStation ? "station" : "airport");
+            }
+          }
+        }
       }),
     attachInvalidateReturnOnChange(origenVueltaInput),
     attachInvalidateReturnOnChange(destinoVueltaInput),
@@ -11588,6 +11640,33 @@ function loadGoogleMapsIfNeeded() {
                 alerts.googleMapsNotLoaded &&
                 alert(alerts.googleMapsNotLoaded);
             } catch (_) {}
+          }
+          
+          // Detectar si el origen es estación/aeropuerto para el trayecto de vuelta
+          if (originValue) {
+            const origenText = originValue.toLowerCase();
+            const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|tren|ave|renfe|adif|train station|railway station|bahnhof|gare/.test(origenText);
+            const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal/.test(origenText);
+            
+            if (isStation || isAirport) {
+              if (!window.flightTrainTrips) window.flightTrainTrips = [];
+              
+              const tripInfo = {
+                key: 'origenVuelta',
+                type: isStation ? 'station' : 'airport',
+                origin: originValue,
+                tripName: getTripDisplayName('origenVuelta')
+              };
+              
+              window.flightTrainTrips = window.flightTrainTrips.filter(t => t.key !== 'origenVuelta');
+              window.flightTrainTrips.push(tripInfo);
+              
+              if (window.flightTrainTrips.length > 1) {
+                showMultipleFlightTrainModal();
+              } else {
+                applyFlightTrainBanner(isStation ? "station" : "airport");
+              }
+            }
           }
         }
       }),
