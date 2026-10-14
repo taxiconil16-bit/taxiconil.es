@@ -368,13 +368,15 @@ class GoogleReviewsWidget {
 
   formatDate(dateString) {
     const date = new Date(dateString);
-    const locale = this.options.language === 'es' ? 'es-ES' : 
+    const locale = this.options.language === 'es' ? 'es-ES' :
                    this.options.language === 'en' ? 'en-GB' :
                    this.options.language === 'de' ? 'de-DE' : 'fr-FR';
-    return date.toLocaleDateString(locale, { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    const isMobile = window.innerWidth <= 768;
+
+    return date.toLocaleDateString(locale, {
+      year: 'numeric',
+      month: isMobile ? 'short' : 'long',
+      day: 'numeric'
     });
   }
 

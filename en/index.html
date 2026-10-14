@@ -770,11 +770,11 @@
   "priceRange": "€€",
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": 5,
+    "ratingValue": 4.4,
     "bestRating": 5,
     "worstRating": 1,
-    "ratingCount": 4,
-    "reviewCount": 4
+    "ratingCount": 155,
+    "reviewCount": 155
   },
   "review": [
     {
@@ -1560,15 +1560,14 @@
 </div>
 <div class="form-group">
 <label for="comentarios">Notes:</label>
-<textarea id="comentarios" name="Comentarios" placeholder="Do you require anything in particular?"></textarea>
+<textarea id="comentarios" name="Comentarios" placeholder="Do you require anything in particular? E.g.: stop en route, extra luggage, etc."></textarea>
 </div>
 <div class="form-group small-note">
-<p>If the pick-up point is an airport or railway station, please include your flight or train number in this section.</p>
 </div>
 </fieldset>
 <div class="form-group" id="return-trip-wrapper">
 <div class="form-group">
-<p id="return-trip-question-en">Do you need to include the return trip or another trip?</p>
+<p id="return-trip-question-en" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color); margin-bottom: 0.8rem;">Do you need to include the return trip or another trip?</p>
 <div class="inline-radios" aria-labelledby="return-trip-question-en">
 <label><input checked="" id="return-trip-no" name="return-trip" type="radio" value="no"/> No</label>
 <label><input id="return-trip-yes" name="return-trip" type="radio" value="yes"/> Yes</label>
@@ -1651,10 +1650,6 @@
   <div id="additional-trips-list"></div>
 </div>
 <div class="checkbox-group terms-group" style="margin-top: 2rem;">
-<div class="info-box aviso-roche">
-<i class="fas fa-info-circle"></i>
-<strong>Important notice:</strong> If your pick-up takes place in the developments of Roche, El Colorado or Barrio Nuevo and your destination lies in the direction of Cadiz, the price may be subject to a slight adjustment. In every case, this will be communicated to you in advance, before the service is confirmed. Should you have any questions, you are welcome to contact us at any time.
-</div>
 <div class="terms-checkbox">
 <input id="accept-terms" name="accept-terms" required="" type="checkbox" aria-describedby="accept-terms-error" oninvalid="this.setCustomValidity('You must accept the legal terms in order to continue.')" oninput="this.setCustomValidity('')"/>
 <label for="accept-terms">I have read and accept the <a href="/terms-en#legal-condiciones" class="legal-link" data-target="legal-condiciones">general terms and conditions</a>, the <a href="/terms-en#legal-privacidad" class="legal-link" data-target="legal-privacidad">privacy notice</a>, the <a href="/terms-en#legal-aviso" class="legal-link" data-target="legal-aviso">legal notice</a> and the <a href="/terms-en#legal-cookies" class="legal-link" data-target="legal-cookies">cookie policy</a>.<span class="required-star">*</span></label>
@@ -1959,6 +1954,9 @@
 
 <script src="/js/google-reviews.js?v=20260903_1500" defer></script>
 
+<script src="/js/update-schema-dynamic.js" defer></script>
+
+</body>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const reviewsLink = document.querySelector('a[href="#google-reviews"]');

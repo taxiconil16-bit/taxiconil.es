@@ -1010,6 +1010,286 @@ input[type=tel]:focus,input[type=tel]:focus-visible {
     margin: auto;
 }
 
+.flight-train-banner {
+    background: linear-gradient(135deg, #1a2a45 0%, #2a3a55 100%);
+    margin: 1.5rem;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 2px solid #d4af37;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+    transition: all 0.3s ease;
+    display: none; /* Oculto por defecto */
+}
+
+/* Estado fullscreen del banner cuando está activo */
+.flight-train-banner.fullscreen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 10000;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease;
+    background: rgba(26, 42, 69, 0.95);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Fondo difuminado detrás del banner */
+.flight-train-banner.fullscreen::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 42, 69, 0.85) 0%, rgba(42, 58, 85, 0.85) 50%, rgba(26, 42, 69, 0.85) 100%),
+                url('/IMG/barrio-de-los-pescadores.jpg') center/cover no-repeat;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: -1;
+}
+
+.flight-train-banner.fullscreen::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 70%, rgba(212, 175, 55, 0.06) 0%, transparent 50%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.flight-train-banner.fullscreen .flight-train-banner-content {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flight-train-banner.fullscreen .flight-train-banner-inputs {
+    max-width: 400px;
+    margin: 0 auto 2rem auto;
+}
+
+.flight-train-banner.fullscreen .flight-train-banner-link {
+    text-align: center;
+}
+
+/* Efecto blur en el contenido cuando el banner está en fullscreen */
+.confirmation-modal.has-flight-train-banner .confirmation-grid {
+    filter: blur(8px);
+    pointer-events: none;
+    transition: filter 0.3s ease;
+}
+
+.confirmation-modal.has-flight-train-banner .confirmation-header {
+    filter: blur(8px);
+    pointer-events: none;
+    transition: filter 0.3s ease;
+}
+
+.confirmation-modal.has-flight-train-banner .confirmation-buttons {
+    filter: blur(8px);
+    pointer-events: none;
+    transition: filter 0.3s ease;
+}
+
+/* Botón siguiente en el banner */
+.flight-train-next-btn {
+    background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%);
+    color: #1a2a45;
+    border: none;
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.flight-train-next-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.flight-train-next-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
+}
+
+.flight-train-next-btn:hover::before {
+    left: 100%;
+}
+
+.flight-train-next-btn:active {
+    transform: translateY(-1px);
+}
+
+/* Botón "No es necesario" en el banner */
+.flight-train-skip-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 1rem 2.5rem;
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(10px);
+}
+
+.flight-train-skip-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: #d4af37;
+    color: #d4af37;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+}
+
+.flight-train-skip-btn:active {
+    transform: translateY(0);
+}
+
+.flight-train-banner-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.flight-train-banner-icon {
+    background: #d4af37;
+    border-radius: 12px;
+    padding: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.flight-train-banner-icon svg {
+    color: #1a2a45;
+    width: 24px;
+    height: 24px;
+}
+
+.flight-train-banner-text h3 {
+    color: #d4af37;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.flight-train-banner-text p {
+    color: #ffffff;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.flight-train-banner-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.flight-train-banner-inputs .form-group {
+    margin: 0;
+}
+
+.flight-train-banner-inputs label {
+    color: #d4af37;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    display: block;
+}
+
+.flight-train-banner-inputs input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 8px;
+    padding: 0.6rem 0.8rem;
+    color: #ffffff;
+    font-size: 0.9rem;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.flight-train-banner-inputs input:focus {
+    outline: none;
+    border-color: #d4af37;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.flight-train-banner-inputs input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.flight-train-banner-link {
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.flight-train-banner-link a {
+    color: #d4af37;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.flight-train-banner-link a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .flight-train-banner-inputs {
+        grid-template-columns: 1fr;
+    }
+}
+
 .confirmation-header {
     flex-shrink: 0;
     background: #1a2a45;
@@ -2593,24 +2873,6 @@ input[type=tel]:focus,input[type=tel]:focus-visible {
     font-size: 1.2rem
 }
 
-.info-box.aviso-roche {
-    background-color: transparent;
-    border-color: transparent;
-    color: #555;
-    width: 100%;
-    box-sizing: border-box;
-    margin: .25rem 0 .5rem;
-    padding: .15rem 0;
-    font-size: .75rem;
-    font-style: italic;
-    text-shadow: none;
-    text-align: justify!important;
-    font-weight: 400
-}
-
-.info-box.aviso-roche strong {
-    font-weight: 400
-}
 
 #booking-form .checkbox-group.terms-group {
     flex-direction: column;
@@ -5548,27 +5810,6 @@ footer {
 
 .fa-spinner.fa-spin {
     animation-duration: 1.6s!important
-}
-
-.aviso-roche {
-    background: 0 0!important;
-    border: none!important;
-    color: #666!important;
-    font-size: .9rem!important;
-    text-align: left!important;
-    margin-top: .8rem!important;
-    margin-left: 0!important;
-    margin-right: 0!important;
-    line-height: 1.5!important;
-    padding: 0!important;
-    max-width: 100%!important;
-    display: block!important
-}
-
-.aviso-roche i {
-    color: #999!important;
-    margin-right: .4rem!important;
-    font-size: .9rem!important
 }
 
 .input-wrapper {

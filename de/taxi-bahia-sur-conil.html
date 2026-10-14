@@ -201,8 +201,7 @@
 
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html { scroll-behavior: smooth; background-color: #0f172a; }
+        html { scroll-behavior: smooth; background-color: var(--bg-body); overflow-x: hidden; }
 
         body {
 
@@ -792,6 +791,8 @@
 
             background: transparent;
 
+            overflow-x: hidden;
+
         }
 
         .nav-luxe.scrolled {
@@ -906,7 +907,7 @@
 
         /* UI Base */
 
-        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; width: 100%; }
 
         .section-padding { padding: clamp(60px, 10vw, 120px) 0; }
 
@@ -1106,21 +1107,6 @@
 
         .stagger-3 { transition-delay: 0.3s; }
 
-        .stagger-4 { transition-delay: 0.4s; }
-
-
-
-        @media (max-width: 768px) {
-
-            html { font-size: 15px; }
-
-            body { font-size: 0.98rem; }
-
-            .hero-viewport { height: auto; min-height: 100vh; padding: 120px 0 60px; }
-
-            .hero-viewport h1 { font-size: clamp(2.2rem, 7.2vw, 2.9rem); letter-spacing: -2px; line-height: 1.2 !important; }
-
-            .section-header h2 { line-height: 1.2 !important; margin-top: 1.5rem !important; }
 
             .stat-bar { 
 
@@ -1162,9 +1148,9 @@
 
 
 
-            .nav-content { 
+            .nav-content {
 
-                padding: 0.7rem 0; 
+                padding: 0.7rem 0;
 
                 display: flex !important;
 
@@ -1180,29 +1166,21 @@
 
                 min-height: 68px;
 
-                padding-left: 76px;
-
             }
 
             .logo-box {
 
-                position: absolute;
+                position: static;
 
-                left: 0;
-
-                top: 50%;
-
-                transform: translateY(-50%);
-
-                z-index: 10;
+                flex-shrink: 0;
 
             }
 
-            .logo-box img { 
+            .logo-box img {
 
-                height: 52px; /* Tamaño mayor que sobresale */
+                height: 48px;
 
-                width: auto; 
+                width: auto;
 
                 background: white;
 
@@ -2407,7 +2385,7 @@
 
 
         @media (max-width: 768px) {
-
+            .container { padding: 0 1rem; }
             .section-padding { padding: 80px 0; }
 
             body.landing-train-station .hero-tag {
@@ -2471,7 +2449,11 @@
 
 
         @media (max-width: 640px) {
-
+            .hero-title-bottom span[style*="vertical-align"] {
+                font-size: 0.7em !important;
+                margin: 0 0.2em !important;
+                vertical-align: baseline !important;
+            }
             body.landing-train-station .hero-viewport h1 {
 
                 font-size: clamp(2.1rem, 7.2vw, 3.1rem) !important;
@@ -3508,7 +3490,7 @@
 
             <span class="hero-tag">VIP Bahnhof-Service</span>
 
-            <h1><span class="hero-title-top">Taxi</span> <span class="text-gold hero-title-bottom">Conil &harr; Bahnhof Bahía Sur</span></h1>
+            <h1><span class="hero-title-top">Taxi</span> <span class="text-gold hero-title-bottom">Conil <span style="display: inline-block; vertical-align: middle; margin: 0 0.25em; font-size: 0.8em; position: relative; top: -0.2em;">⇄</span> Bahnhof Bahía Sur</span></h1>
 
             <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 300; max-width: 800px; margin: 0 auto 3rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Premium-Privattransfer mit Pünktlichkeit, Diskretion und einem Fahrzeug der Spitzenklasse – ideal für Reisen an der Costa de la Luz.</p>
 

@@ -743,11 +743,11 @@
   "priceRange": "€€",
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": 5,
+    "ratingValue": 4.4,
     "bestRating": 5,
     "worstRating": 1,
-    "ratingCount": 4,
-    "reviewCount": 4
+    "ratingCount": 155,
+    "reviewCount": 155
   },
   "review": [
     {
@@ -1499,15 +1499,14 @@
 </div>
 <div class="form-group">
 <label for="comentarios">Anmerkungen:</label>
-<textarea id="comentarios" name="Comentarios" placeholder="Benötigen Sie etwas Besonderes?"></textarea>
+<textarea id="comentarios" name="Comentarios" placeholder="Benötigen Sie etwas Besonderes? Z.B.: Stopp auf der Strecke, zusätzliches Gepäck, usw."></textarea>
 </div>
 <div class="form-group small-note">
-<p>Wenn der Abholort ein Flughafen oder Bahnhof ist, geben Sie bitte hier die Flug- oder Zugnummer an.</p>
 </div>
 </fieldset>
 <div class="form-group" id="return-trip-wrapper">
 <div class="form-group">
-<p id="return-trip-question">Müssen Sie die Rückfahrt oder eine andere Fahrt einbeziehen?</p>
+<p id="return-trip-question" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color); margin-bottom: 0.8rem;">Müssen Sie die Rückfahrt oder eine andere Fahrt einbeziehen?</p>
 <div class="inline-radios" aria-labelledby="return-trip-question">
 <label><input checked="" id="return-trip-no" name="return-trip" type="radio" value="no"/> Nein</label>
 <label><input id="return-trip-yes" name="return-trip" type="radio" value="yes"/> Ja</label>
@@ -1590,10 +1589,6 @@
   <div id="additional-trips-list"></div>
 </div>
 <div class="checkbox-group terms-group" style="margin-top: 2rem;">
-<div class="info-box aviso-roche">
-<i class="fas fa-info-circle"></i>
-<strong>Wichtiger Hinweis:</strong> Wenn Ihre Abholung in Roche, El Colorado oder Barrio Nuevo erfolgt und Ihr Ziel in Richtung Cádiz liegt, kann es zu einer leichten Preisanpassung kommen. In jedem Fall informieren wir Sie vor der Bestätigung des Services. Bei Fragen kontaktieren Sie uns gerne.
-</div>
 <div class="terms-checkbox">
 <input id="accept-terms" name="accept-terms" required="" type="checkbox" aria-describedby="accept-terms-error" oninvalid="this.setCustomValidity('Sie müssen die rechtlichen Bedingungen akzeptieren, um fortzufahren.')" oninput="this.setCustomValidity('')"/>
 <label for="accept-terms">Ich habe die <a href="/terms-de#legal-condiciones" class="legal-link" data-target="legal-condiciones">Allgemeinen Geschäftsbedingungen</a>, den <a href="/terms-de#legal-privacidad" class="legal-link" data-target="legal-privacidad">Datenschutzhinweis</a>, das <a href="/terms-de#legal-aviso" class="legal-link" data-target="legal-aviso">Impressum</a> und die <a href="/terms-de#legal-cookies" class="legal-link" data-target="legal-cookies">Cookie-Richtlinie</a> gelesen und akzeptiere diese.<span class="required-star">*</span></label>
@@ -1926,7 +1921,8 @@
 
 <script src="/js/script.min.js?v=20260903_1500" defer></script>
 
-<script src="/js/google-reviews.js?v=20260903_1500" defer></script>
+<script src="/js/google-reviews.js" defer></script>
+<script src="/js/update-schema-dynamic.js" defer></script>
 
 </body>
 </html>

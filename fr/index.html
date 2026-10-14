@@ -852,11 +852,11 @@
   "priceRange": "€€",
   "aggregateRating": {
     "@type": "AggregateRating",
-    "ratingValue": 5,
+    "ratingValue": 4.4,
     "bestRating": 5,
     "worstRating": 1,
-    "ratingCount": 4,
-    "reviewCount": 4
+    "ratingCount": 155,
+    "reviewCount": 155
   },
   "review": [
     {
@@ -1614,15 +1614,14 @@
 </div>
 <div class="form-group">
 <label for="comentarios">Notes :</label>
-<textarea id="comentarios" name="Comentarios" placeholder="Avez-vous une demande particulière ?"></textarea>
+<textarea id="comentarios" name="Comentarios" placeholder="Avez-vous une demande particulière ? Ex: arrêt en route, bagages supplémentaires, etc."></textarea>
 </div>
 <div class="form-group small-note">
-<p>Si la prise en charge a lieu à l'aéroport ou à la gare, merci d'indiquer votre numéro de vol ou de train dans cette section.</p>
 </div>
 </fieldset>
 <div class="form-group" id="return-trip-wrapper">
 <div class="form-group">
-<p id="return-trip-question">Avez-vous besoin d'inclure le trajet de retour ou un autre trajet ?</p>
+<p id="return-trip-question" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color); margin-bottom: 0.8rem;">Avez-vous besoin d'inclure le trajet de retour ou un autre trajet ?</p>
 <div class="inline-radios" aria-labelledby="return-trip-question">
 <label><input checked="" id="return-trip-no" name="return-trip" type="radio" value="no"/> Non</label>
 <label><input id="return-trip-yes" name="return-trip" type="radio" value="yes"/> Oui</label>
@@ -1705,10 +1704,6 @@
   <div id="additional-trips-list"></div>
 </div>
 <div class="checkbox-group terms-group" style="margin-top: 2rem;">
-<div class="info-box aviso-roche">
-<i class="fas fa-info-circle"></i>
-<strong>Information importante :</strong> Si la prise en charge a lieu dans les lotissements de Roche, El Colorado ou Barrio Nuevo et que votre destination se trouve en direction de Cadix, le prix peut faire l'objet d'un léger ajustement. Dans tous les cas, cela vous sera communiqué à l'avance, avant la confirmation du service. Si vous avez des questions, n'hésitez pas à nous contacter.
-</div>
 <div class="terms-checkbox">
 <input id="accept-terms" name="accept-terms" required="" type="checkbox" aria-describedby="accept-terms-error" oninvalid="this.setCustomValidity('Vous devez accepter les conditions légales pour continuer.')" oninput="this.setCustomValidity('')"/>
 <label for="accept-terms">J'ai lu et j'accepte les <a href="/terms-fr#legal-condiciones" class="legal-link" data-target="legal-condiciones">conditions générales</a>, la <a href="/terms-fr#legal-privacidad" class="legal-link" data-target="legal-privacidad">politique de confidentialité</a>, les <a href="/terms-fr#legal-aviso" class="legal-link" data-target="legal-aviso">mentions légales</a> et la <a href="/terms-fr#legal-cookies" class="legal-link" data-target="legal-cookies">politique de cookies</a>.<span class="required-star">*</span></label>
@@ -2015,7 +2010,8 @@
 
 <script src="/js/script.min.js?v=20260903_1500" defer></script>
 
-<script src="/js/google-reviews.js?v=20260903_1500" defer></script>
+<script src="/js/google-reviews.js" defer></script>
+<script src="/js/update-schema-dynamic.js" defer></script>
 
 </body>
 </html>

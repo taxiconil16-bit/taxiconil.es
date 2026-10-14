@@ -250,13 +250,13 @@
           "openingHours": "Mo-Su 00:00-23:59",
           "priceRange": "€€",
           "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": 5,
-            "bestRating": 5,
-            "worstRating": 1,
-            "ratingCount": 4,
-            "reviewCount": 4
-          },
+    "@type": "AggregateRating",
+    "ratingValue": 4.4,
+    "bestRating": 5,
+    "worstRating": 1,
+    "ratingCount": 155,
+    "reviewCount": 155
+  },
           "review": [
             {
               "@type": "Review",
@@ -1565,15 +1565,14 @@
 </div>
 <div class="form-group">
 <label for="comentarios">Anotaciones:</label>
-<textarea id="comentarios" name="Comentarios" placeholder="¿Necesita algo especial?"></textarea>
+<textarea id="comentarios" name="Comentarios" placeholder="¿Necesita algo especial? Ej: parada en ruta, equipaje adicional, etc."></textarea>
 </div>
 <div class="form-group small-note">
-<p>Si el lugar de recogida es un aeropuerto o una estación de tren, le rogamos que indique en este apartado el número de vuelo o de tren.</p>
 </div>
 </fieldset>
 <div class="form-group" id="return-trip-wrapper">
 <div class="form-group">
-<p id="return-trip-question-es">¿Necesita incluir el trayecto de vuelta u otro trayecto?</p>
+<p id="return-trip-question-es" style="font-size: 1.1rem; font-weight: 600; color: var(--primary-color); margin-bottom: 0.8rem;">¿Necesita incluir el trayecto de vuelta u otro trayecto?</p>
 <div class="inline-radios" aria-labelledby="return-trip-question-es">
 <label><input checked="" id="return-trip-no" name="return-trip" type="radio" value="no"/> No</label>
 <label><input id="return-trip-yes" name="return-trip" type="radio" value="yes"/> Sí</label>
@@ -1656,10 +1655,6 @@
   <div id="additional-trips-list"></div>
 </div>
 <div class="checkbox-group terms-group" style="margin-top: 2rem;">
-<div class="info-box aviso-roche">
-<i class="fas fa-info-circle"></i>
-<strong>Aviso importante:</strong> Si su recogida se realiza en la Urbanización de Roche, El Colorado o Barrio Nuevo y su destino se encuentra en dirección a Cádiz, el precio podría sufrir un ligero ajuste. En cualquier caso, este será comunicado previamente a la confirmación del servicio. En caso de duda, no dude en contactarnos.
-</div>
 <div class="terms-checkbox">
 <input id="accept-terms" name="accept-terms" required="" type="checkbox" aria-describedby="accept-terms-error" oninvalid="this.setCustomValidity('Debe aceptar las condiciones legales para continuar.')" oninput="this.setCustomValidity('')"/>
 <label for="accept-terms">He leído y acepto las <a href="/terms#legal-condiciones" class="legal-link" data-target="legal-condiciones" aria-label="Condiciones generales de servicio">condiciones generales</a>, el <a href="/terms#legal-privacidad" class="legal-link" data-target="legal-privacidad" aria-label="Aviso de privacidad y protección de datos">aviso de privacidad</a>, el <a href="/terms#legal-aviso" class="legal-link" data-target="legal-aviso" aria-label="Aviso legal de la web">aviso legal</a> y la <a href="/terms#legal-cookies" class="legal-link" data-target="legal-cookies" aria-label="Política de cookies">política de cookies</a>.<span class="required-star">*</span></label>
@@ -2039,7 +2034,7 @@
 <link rel="prefetch" href="/js/landing.min.js?v=20260313-1741" as="script"/>
 
 <script src="/js/google-reviews.js" defer></script>
+<script src="/js/update-schema-dynamic.js" defer></script>
 
 </body>
 </html>
-
