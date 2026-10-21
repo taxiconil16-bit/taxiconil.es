@@ -667,7 +667,7 @@ function detectPickupOriginType(raw) {
   // Detectar estación de tren primero (más específico)
   if (
     // Español
-    /estaci[oó]n de tren|estaci[oó]n ferroviaria|tren|ave|renfe|adif/.test(s) ||
+    /estaci[oó]n de tren|estaci[oó]n ferroviaria|\btren\b|\bave\b|renfe|adif/.test(s) ||
     // Inglés
     /train station|railway station|train depot|railway/.test(s) ||
     // Alemán
@@ -679,10 +679,10 @@ function detectPickupOriginType(raw) {
     // Combinaciones específicas
     /santa justa|bahia sur/.test(s) ||
     (/\bestaci[oó]n\b/.test(s) &&
-      /tren|ave|renfe|cadiz|sevilla|jerez|algeciras|san fernando|santa justa|ferroviaria|adif/.test(
+      /\btren\b|\bave\b|renfe|cadiz|sevilla|jerez|algeciras|san fernando|santa justa|ferroviaria|adif/.test(
         s,
       )) ||
-    /tren|ave|renfe|zug|train/.test(s) && /cadiz|sevilla|jerez|algeciras|san fernando/.test(s) ||
+    /\btren\b|\bave\b|renfe|zug|train/.test(s) && /cadiz|sevilla|jerez|algeciras|san fernando/.test(s) ||
     /bahnhof/.test(s) && /cadiz|sevilla|jerez/.test(s) ||
     /adif/.test(s) && /cadiz|sevilla|jerez/.test(s) ||
     /\badif\b/.test(s)
@@ -740,142 +740,6 @@ function resolveBookingPickupKind() {
   console.log('Final kind:', kind);
   return kind;
 }
-function applyFlightTrainBanner(kind) {
-  console.log('=== applyFlightTrainBanner START ===');
-  console.log('kind:', kind);
-  console.log('CURRENT_LANG:', CURRENT_LANG);
-  const banner = document.getElementById("flight-train-banner");
-  console.log('banner element:', banner);
-  if (!banner) return;
-  if (!kind) {
-    banner.style.display = "none";
-    return;
-  }
-  const lang = CURRENT_LANG || "es";
-  const titleEl = document.getElementById("flight-train-banner-title");
-  const messageEl = document.getElementById("flight-train-banner-message");
-  const numberLabelEl = document.getElementById("flight-train-number-label");
-  const timeLabelEl = document.getElementById("flight-train-time-label");
-  const linkEl = document.getElementById("flight-train-info-link");
-  const faEl = document.getElementById("flight-train-banner-fa");
-  const numberInput = document.getElementById("flight-train-number");
-  console.log('titleEl:', titleEl);
-  console.log('messageEl:', messageEl);
-  const copy = {
-    airport: {
-      es: {
-        title: "Su llegada, nuestra prioridad",
-        message:
-          "Su confort es lo más importante. Si nos indica su número de vuelo y hora de llegada, le recibiremos con la puntualidad que merece.",
-        numberLabel: "Número de vuelo:",
-        timeLabel: "Hora de llegada:",
-        linkText: "¿Alguna duda sobre su recogida en el aeropuerto?",
-        linkUrl: "/articulos/procedimiento-recogida-aeropuerto",
-        placeholder: "Ej.: IB3941",
-      },
-      en: {
-        title: "Your arrival, our priority",
-        message:
-          "Your comfort is most important. If you provide your flight number and arrival time, we will receive you with the punctuality you deserve.",
-        numberLabel: "Flight number:",
-        timeLabel: "Arrival time:",
-        linkText: "Any questions about your airport pick-up?",
-        linkUrl: "/en/articulos/how-we-pick-up-at-the-airport",
-        placeholder: "E.g. IB3941",
-      },
-      de: {
-        title: "Ihre Ankunft, unsere Priorität",
-        message:
-          "Ihr Komfort ist am wichtigsten. Wenn Sie uns Ihre Flugnummer und Ankunftszeit mitteilen, empfangen wir Sie mit der Pünktlichkeit, die Sie verdienen.",
-        numberLabel: "Flugnummer:",
-        timeLabel: "Ankunftszeit:",
-        linkText: "Fragen zur Abholung am Flughafen?",
-        linkUrl: "/de/articulos/wir-holen-sie-am-flughafen-ab",
-        placeholder: "z. B. IB3941",
-      },
-      fr: {
-        title: "Votre arrivée, notre priorité",
-        message:
-          "Votre confort est le plus important. Si vous nous indiquez votre numéro de vol et votre heure d'arrivée, nous vous accueillerons avec la ponctualité que vous méritez.",
-        numberLabel: "Numéro de vol :",
-        timeLabel: "Heure d'arrivée :",
-        linkText: "Une question sur votre prise en charge à l'aéroport ?",
-        linkUrl: "/fr/articulos/comment-nous-vous-recuperons-a-l-aeroport",
-        placeholder: "Ex. : IB3941",
-      },
-    },
-    station: {
-      es: {
-        title: "Su llegada, nuestra prioridad",
-        message:
-          "Su confort es lo más importante. Si nos indica su número de tren y hora de llegada, le recibiremos con la puntualidad que merece.",
-        numberLabel: "Número de tren:",
-        timeLabel: "Hora de llegada:",
-        linkText: "¿Alguna duda sobre su recogida en la estación de tren?",
-        linkUrl: "/articulos/procedimiento-recogida-estacion-tren",
-        placeholder: "Ej.: AVE 02131",
-      },
-      en: {
-        title: "Your arrival, our priority",
-        message:
-          "Your comfort is most important. If you provide your train number and arrival time, we will receive you with the punctuality you deserve.",
-        numberLabel: "Train number:",
-        timeLabel: "Arrival time:",
-        linkText: "Any questions about your station pick-up?",
-        linkUrl: "/en/articulos/how-we-pick-up-at-the-train-station",
-        placeholder: "E.g. AVE 02131",
-      },
-      de: {
-        title: "Ihre Ankunft, unsere Priorität",
-        message:
-          "Ihr Komfort ist am wichtigsten. Wenn Sie uns Ihre Zugnummer und Ankunftszeit mitteilen, empfangen wir Sie mit der Pünktlichkeit, die Sie verdienen.",
-        numberLabel: "Zugnummer:",
-        timeLabel: "Ankunftszeit:",
-        linkText: "Fragen zur Abholung am Bahnhof?",
-        linkUrl: "/de/articulos/wir-holen-sie-am-bahnhof-ab",
-        placeholder: "z. B. AVE 02131",
-      },
-      fr: {
-        title: "Votre arrivée, notre priorité",
-        message:
-          "Votre confort est le plus important. Si vous nous indiquez votre numéro de train et votre heure d'arrivée, nous vous accueillerons avec la ponctualité que vous méritez.",
-        numberLabel: "Numéro de train :",
-        timeLabel: "Heure d'arrivée :",
-        linkText: "Une question sur votre prise en charge en gare ?",
-        linkUrl: "/fr/articulos/comment-nous-vous-recuperons-a-la-gare",
-        placeholder: "Ex. : AVE 02131",
-      },
-    },
-  };
-  const pack = (copy[kind] && copy[kind][lang]) || copy[kind].es;
-  console.log('Pack:', pack);
-  banner.classList.toggle("is-airport", kind === "airport");
-  banner.classList.toggle("is-station", kind === "station");
-  banner.dataset.pickupKind = kind;
-  if (titleEl) {
-    console.log('Setting title to:', pack.title);
-    titleEl.textContent = pack.title;
-  }
-  if (messageEl) {
-    console.log('Setting message to:', pack.message);
-    messageEl.textContent = pack.message;
-  }
-  if (numberLabelEl) numberLabelEl.textContent = pack.numberLabel;
-  if (timeLabelEl) timeLabelEl.textContent = pack.timeLabel;
-  if (numberInput) numberInput.placeholder = pack.placeholder;
-  if (linkEl) {
-    const langPrefix = lang === 'es' ? '' : `/${lang}`;
-    const baseUrl = pack.linkUrl.startsWith('/') ? pack.linkUrl : `/${pack.linkUrl}`;
-    linkEl.href = `${langPrefix}${baseUrl}`;
-    linkEl.textContent = pack.linkText;
-    console.log('Setting link to:', linkEl.href, linkEl.textContent);
-  }
-  if (faEl)
-    faEl.className =
-      kind === "airport" ? "fas fa-plane-arrival" : "fas fa-train";
-  banner.style.display = "block";
-}
-
 function getTripDisplayName(key) {
   const lang = CURRENT_LANG || "es";
   const names = {
@@ -898,127 +762,207 @@ function getTripDisplayName(key) {
       fr: 'Trajet supplémentaire'
     }
   };
+  
+  // Si el key empieza con additionalTripOrigen_, extraer el número del tripId
+  if (key.startsWith('additionalTripOrigen_')) {
+    const tripId = key.replace('additionalTripOrigen_', '');
+    const tripIndex = window.additionalTrips?.findIndex(t => t.id === tripId);
+    if (tripIndex !== -1) {
+      const tripNum = tripIndex + 1;
+      const baseName = names['additionalTripOrigen']?.[lang] || names['additionalTripOrigen']?.es || 'Trayecto adicional';
+      return `${baseName} ${tripNum}`;
+    }
+    return names['additionalTripOrigen']?.[lang] || names['additionalTripOrigen']?.es || key;
+  }
+  
   return (names[key] && names[key][lang]) || names[key]?.es || key;
 }
 
 function showMultipleFlightTrainModal() {
-  if (!window.flightTrainTrips || window.flightTrainTrips.length <= 1) return;
+  if (!window.flightTrainTrips || window.flightTrainTrips.length === 0) return;
   
   const lang = CURRENT_LANG || "es";
-  const modal = document.getElementById("multiple-flight-train-modal");
-  if (!modal) {
-    // Crear modal dinámicamente si no existe
-    const modalHTML = `
-      <div id="multiple-flight-train-modal" class="confirmation-modal" style="display: none;">
-        <div class="modal-content" style="max-width: 600px; max-height: 80vh; overflow-y: auto;">
-          <h2 id="multiple-flight-train-title"></h2>
-          <p id="multiple-flight-train-message"></p>
-          <div id="multiple-flight-trip-list"></div>
-          <button id="multiple-flight-train-submit" class="btn btn-primary"></button>
-        </div>
-      </div>
-    `;
-    document.body.insertAdjacentHTML('beforeend', modalHTML);
-  }
+  const modalId = "multiple-flight-train-modal";
   
-  const titleEl = document.getElementById("multiple-flight-train-title");
-  const messageEl = document.getElementById("multiple-flight-train-message");
-  const listEl = document.getElementById("multiple-flight-trip-list");
-  const submitBtn = document.getElementById("multiple-flight-train-submit");
+  // Eliminar modal si ya existe
+  const existingModal = document.getElementById(modalId);
+  if (existingModal) existingModal.remove();
   
   const copy = {
     es: {
       title: "Información de vuelos/trenes",
       message: "Hemos detectado que varios de sus trayectos tienen origen en aeropuertos o estaciones de tren. Por favor, indique el número de vuelo/tren y hora de llegada para cada uno:",
-      submit: "Continuar"
+      submit: "Continuar",
+      skip: "No es necesario",
+      required: "Por favor, complete todos los campos."
     },
     en: {
       title: "Flight/Train Information",
       message: "We have detected that several of your trips originate from airports or train stations. Please provide the flight/train number and arrival time for each:",
-      submit: "Continue"
+      submit: "Continue",
+      skip: "Not needed",
+      required: "Please fill in all fields."
     },
     de: {
       title: "Flug-/Zuginformationen",
       message: "Wir haben festgestellt, dass mehrere Ihrer Fahrten an Flughäfen oder Bahnhöfen beginnen. Bitte geben Sie die Flug-/Zugnummer und Ankunftszeit für jede Fahrt an:",
-      submit: "Weiter"
+      submit: "Weiter",
+      skip: "Nicht erforderlich",
+      required: "Bitte füllen Sie alle Felder aus."
     },
     fr: {
       title: "Informations de vol/train",
       message: "Nous avons détecté que plusieurs de vos trajets commencent à des aéroports ou gares. Veuillez indiquer le numéro de vol/train et l'heure d'arrivée pour chaque trajet:",
-      submit: "Continuer"
+      submit: "Continuer",
+      skip: "Pas nécessaire",
+      required: "Veuillez remplir tous les champs."
     }
   };
   
   const pack = copy[lang] || copy.es;
-  titleEl.textContent = pack.title;
-  messageEl.textContent = pack.message;
-  submitBtn.textContent = pack.submit;
   
   // Generar lista de trayectos
-  listEl.innerHTML = window.flightTrainTrips.map((trip, index) => {
-    const icon = trip.type === 'airport' ? '✈️' : '🚆';
+  const tripsList = window.flightTrainTrips.map((trip, index) => {
+    const icon = trip.type === 'airport' ? '✈' : '🚃';
     const label = trip.type === 'airport' ? 
-      (lang === 'es' ? 'Número de vuelo:' : lang === 'en' ? 'Flight number:' : lang === 'de' ? 'Flugnummer:' : 'Numéro de vol:') :
-      (lang === 'es' ? 'Número de tren:' : lang === 'en' ? 'Train number:' : lang === 'de' ? 'Zugnummer:' : 'Numéro de train:');
-    const timeLabel = lang === 'es' ? 'Hora de llegada:' : lang === 'en' ? 'Arrival time:' : lang === 'de' ? 'Ankunftszeit:' : 'Heure d\'arrivée:';
+      (lang === 'es' ? 'Número de vuelo' : lang === 'en' ? 'Flight number' : lang === 'de' ? 'Flugnummer' : 'Numéro de vol') :
+      (lang === 'es' ? 'Número de tren' : lang === 'en' ? 'Train number' : lang === 'de' ? 'Zugnummer' : 'Numéro de train');
+    const timeLabel = lang === 'es' ? 'Hora de llegada' : lang === 'en' ? 'Arrival time' : lang === 'de' ? 'Ankunftszeit' : 'Heure d\'arrivée';
+    const placeholder = trip.type === 'airport' ? 'Ej.: IB3941' : 'Ej.: AVE 02131';
+    // Usar el key como identificador único para los IDs
+    const safeKey = trip.key.replace(/[^a-zA-Z0-9_-]/g, '_');
     
     return `
-      <div class="flight-train-trip-item" style="margin-bottom: 1.5rem; padding: 1rem; border: 1px solid #e0e0e0; border-radius: 8px;">
-        <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">${icon} ${trip.tripName}</h3>
-        <p style="margin-bottom: 1rem; color: #666; font-size: 0.9rem;">${trip.origin}</p>
+      <div class="flight-train-trip-item" style="margin-bottom: 1.5rem; padding: 1.5rem; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px; backdrop-filter: blur(10px);">
+        <div style="display: flex; align-items: center; margin-bottom: 1rem;">
+          <div style="background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); border-radius: 50%; width: 50px; height: 50px; margin-right: 0.75rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); flex-shrink: 0;">
+            <span style="font-size: clamp(1.2rem, 4vw, 1.5rem); color: #1a2a45; line-height: 1;">${icon}</span>
+          </div>
+          <div style="flex: 1; min-width: 0;">
+            <h3 style="margin: 0; font-size: clamp(1rem, 3vw, 1.2rem); color: #d4af37; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${trip.tripName}</h3>
+            <p style="margin: 0.25rem 0 0; color: rgba(255, 255, 255, 0.7); font-size: clamp(0.85rem, 2.5vw, 0.95rem); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${trip.origin}</p>
+          </div>
+        </div>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
           <div>
-            <label style="display: block; margin-bottom: 0.3rem; font-weight: 500;">${label}</label>
-            <input type="text" id="flight-train-number-${index}" placeholder="${trip.type === 'airport' ? 'Ej.: IB3941' : 'Ej.: AVE 02131'}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+            <label style="display: block; margin-bottom: 0.5rem; color: #d4af37; font-weight: 600; font-size: clamp(0.75rem, 2vw, 0.9rem); text-transform: uppercase; letter-spacing: 0.5px;">${label}</label>
+            <input type="text" id="flight-train-number-${safeKey}" placeholder="${placeholder}" style="width: 100%; padding: 0.75rem; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 8px; color: white; font-size: clamp(0.9rem, 2.5vw, 1rem); transition: border-color 0.3s;">
           </div>
           <div>
-            <label style="display: block; margin-bottom: 0.3rem; font-weight: 500;">${timeLabel}</label>
-            <input type="time" id="flight-train-time-${index}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px;">
+            <label style="display: block; margin-bottom: 0.5rem; color: #d4af37; font-weight: 600; font-size: clamp(0.75rem, 2vw, 0.9rem); text-transform: uppercase; letter-spacing: 0.5px;">${timeLabel}</label>
+            <input type="time" id="flight-train-time-${safeKey}" style="width: 100%; padding: 0.75rem; background: rgba(255, 255, 255, 0.1); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 8px; color: white; font-size: clamp(0.9rem, 2.5vw, 1rem); transition: border-color 0.3s;">
           </div>
         </div>
       </div>
     `;
   }).join('');
   
-  // Mostrar modal
-  modal.style.display = "flex";
+  const modalHTML = `
+    <div id="${modalId}" class="flight-train-modal" style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/IMG/barrio-de-los-pescadores.jpg'); background-size: cover; background-position: center; z-index: 10000; align-items: center; justify-content: center; overflow-y: auto;">
+      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26, 42, 69, 0.85);"></div>
+      <div class="modal-content" style="position: relative; max-width: 600px; width: 90%; background: linear-gradient(135deg, rgba(26, 42, 69, 0.85), rgba(45, 55, 72, 0.85)); padding: 2rem; border-radius: 20px; text-align: center; color: white; box-shadow: 0 20px 60px rgba(0,0,0,0.5); backdrop-filter: blur(10px); margin: 1rem; max-height: 90vh; overflow-y: auto;">
+        <h2 style="color: #d4af37; font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 0.75rem; text-shadow: 0 2px 20px rgba(0,0,0,0.3);">${pack.title}</h2>
+        <p style="color: rgba(255,255,255,0.8); font-size: clamp(0.9rem, 2.5vw, 1rem); line-height: 1.6; margin-bottom: 1.5rem;">${pack.message}</p>
+        <div style="max-height: 50vh; overflow-y: auto; margin-bottom: 1.5rem; padding-right: 0.5rem;">
+          ${tripsList}
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+          <button id="flight-train-submit" style="background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); color: #1a2a45; border: none; padding: 1rem; border-radius: 12px; font-size: clamp(0.9rem, 2.5vw, 1rem); font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">${pack.submit}</button>
+          <button id="flight-train-skip" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 2px solid rgba(255, 255, 255, 0.3); padding: 1rem; border-radius: 12px; font-size: clamp(0.9rem, 2.5vw, 1rem); font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">${pack.skip}</button>
+        </div>
+      </div>
+    </div>
+  `;
   
-  // Configurar botón submit
+  document.body.insertAdjacentHTML('beforeend', modalHTML);
+  const modal = document.getElementById(modalId);
+  const submitBtn = document.getElementById("flight-train-submit");
+  const skipBtn = document.getElementById("flight-train-skip");
+  const bookingConfirmationOverlay = document.getElementById("booking-confirmation-overlay");
+  
   submitBtn.onclick = function() {
     // Validar todos los campos
     let allValid = true;
-    window.flightTrainTrips.forEach((trip, index) => {
-      const numberInput = document.getElementById(`flight-train-number-${index}`);
-      const timeInput = document.getElementById(`flight-train-time-${index}`);
+    window.flightTrainTrips.forEach((trip) => {
+      const safeKey = trip.key.replace(/[^a-zA-Z0-9_-]/g, '_');
+      const numberInput = document.getElementById(`flight-train-number-${safeKey}`);
+      const timeInput = document.getElementById(`flight-train-time-${safeKey}`);
       if (!numberInput.value || !timeInput.value) {
         allValid = false;
         numberInput.style.borderColor = '#dc3545';
         timeInput.style.borderColor = '#dc3545';
       } else {
-        numberInput.style.borderColor = '#ccc';
-        timeInput.style.borderColor = '#ccc';
+        numberInput.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+        timeInput.style.borderColor = 'rgba(212, 175, 55, 0.3)';
       }
     });
     
     if (!allValid) {
-      alert(lang === 'es' ? 'Por favor, complete todos los campos.' : lang === 'en' ? 'Please fill in all fields.' : lang === 'de' ? 'Bitte füllen Sie alle Felder aus.' : 'Veuillez remplir tous les champs.');
+      alert(pack.required);
       return;
     }
     
-    // Guardar los datos
-    window.flightTrainTrips.forEach((trip, index) => {
-      const numberInput = document.getElementById(`flight-train-number-${index}`);
-      const timeInput = document.getElementById(`flight-train-time-${index}`);
+    // Guardar los datos en la variable global
+    window.flightTrainTrips.forEach((trip) => {
+      const safeKey = trip.key.replace(/[^a-zA-Z0-9_-]/g, '_');
+      const numberInput = document.getElementById(`flight-train-number-${safeKey}`);
+      const timeInput = document.getElementById(`flight-train-time-${safeKey}`);
       trip.flightNumber = numberInput.value;
       trip.arrivalTime = timeInput.value;
+      console.log(`Guardando datos para trip ${trip.key}:`, { flightNumber: trip.flightNumber, arrivalTime: trip.arrivalTime });
     });
     
-    // Cerrar modal
-    modal.style.display = "none";
+    console.log('window.flightTrainTrips después de guardar:', window.flightTrainTrips);
     
-    // Continuar con el flujo normal
-    populateConfirmationModal();
-    openDialog(bookingConfirmationOverlay);
+    // Cerrar modal
+    modal.remove();
+    
+    // Guardar datos en el dataset del modal de confirmación ANTES de abrir
+    const confirmationModal = document.querySelector("#booking-confirmation-overlay .confirmation-modal");
+    if (confirmationModal) {
+      confirmationModal.dataset.flightTrainTrips = JSON.stringify(window.flightTrainTrips);
+    }
+    
+    // Abrir el diálogo primero
+    if (bookingConfirmationOverlay) {
+      openDialog(bookingConfirmationOverlay);
+    }
+    
+    // Luego llenar el modal después de que esté visible
+    setTimeout(() => {
+      if (typeof window.populateConfirmationModal === 'function') {
+        window.populateConfirmationModal();
+      }
+    }, 50);
+  };
+  
+  skipBtn.onclick = function() {
+    // Limpiar los datos de vuelo/tren ya que no son necesarios
+    window.flightTrainTrips = [];
+    
+    // Limpiar el dataset del modal de confirmación
+    const confirmationModal = document.querySelector("#booking-confirmation-overlay .confirmation-modal");
+    if (confirmationModal) {
+      delete confirmationModal.dataset.flightTrainTrips;
+      delete confirmationModal.dataset.flightNumber;
+      delete confirmationModal.dataset.flightTime;
+      delete confirmationModal.dataset.pickupKind;
+    }
+    
+    // Cerrar modal sin guardar datos
+    modal.remove();
+    
+    // Abrir el diálogo primero
+    if (bookingConfirmationOverlay) {
+      openDialog(bookingConfirmationOverlay);
+    }
+    
+    // Luego llenar el modal después de que esté visible
+    setTimeout(() => {
+      if (typeof window.populateConfirmationModal === 'function') {
+        window.populateConfirmationModal();
+      }
+    }, 50);
   };
 }
 
@@ -1172,11 +1116,21 @@ let routeMapInstance = null,
   currentReturnRouteEndLocation = null;
 const MIN_LEAD_TIME_HOURS = 12,
   MIN_PRICE_DEFAULT = 45,
+  MIN_PRICE_SEASONAL = 35,
   FLAG_FALL = 5,
   RATE_WEEKDAY = 1.465,
   RATE_WEEKEND_NIGHT = 1.687,
   NIGHT_RATE_START_HOUR = 21.8333,
   NIGHT_RATE_END_HOUR = 7;
+
+function getMinPriceForDate(date = new Date()) {
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  if ((month === 10 && day >= 15) || (month === 11 || month === 12) || (month >= 1 && month <= 5) || (month === 6 && day === 1)) {
+    return MIN_PRICE_SEASONAL;
+  }
+  return MIN_PRICE_DEFAULT;
+}
 function selectBestRoute(routes) {
   if (!routes || !routes.length) return null;
   if (1 === routes.length) return routes[0];
@@ -2653,7 +2607,7 @@ function simplifyAirportName(name) {
 function updateAddressSummary(summaryEl, place) {
   if (!summaryEl) return;
   if (
-    !!(!place || !place.place_id || (!place.formatted_address && !place.name))
+    !!(!place || (!place.place_id && !place.geometry) || (!place.formatted_address && !place.name))
   )
     return void clearAddressSummary(summaryEl);
   const html = buildAddressSummaryText(place);
@@ -2766,6 +2720,8 @@ function setupPlaceAutocompleteElementField(inputEl, summaryEl, key) {
       placeAutocomplete.addEventListener(
         "gmp-select",
         async ({ placePrediction: placePrediction }) => {
+          console.log("gmp-select fired for key:", key);
+          console.log("placePrediction:", placePrediction);
           try {
             if (
               !placePrediction ||
@@ -2789,6 +2745,9 @@ function setupPlaceAutocompleteElementField(inputEl, summaryEl, key) {
                   "location",
                 ],
               }));
+            console.log("gmp-select place:", place);
+            console.log("place.id:", place && place.id);
+            console.log("place.location:", place && place.location);
             const adaptedPlace = {
                 place_id: place && place.id ? place.id : null,
                 name:
@@ -2804,9 +2763,11 @@ function setupPlaceAutocompleteElementField(inputEl, summaryEl, key) {
                 geometry:
                   place && place.location ? { location: place.location } : null,
               },
-              validPlace = !!adaptedPlace.place_id ? adaptedPlace : null;
+              validPlace = (adaptedPlace.place_id || adaptedPlace.geometry) ? adaptedPlace : null;
             ((autocompleteSelectedPlaces[key] = validPlace),
-              (autocompleteLastConfirmedText[key] = ""),
+              (autocompleteLastConfirmedText[key] = String(
+                adaptedPlace.formatted_address || adaptedPlace.name || "",
+              ).trim()),
               updateAddressSummary(summaryEl, validPlace));
             try {
               if (
@@ -2832,13 +2793,13 @@ function setupPlaceAutocompleteElementField(inputEl, summaryEl, key) {
                 validPlace.formatted_address || validPlace.name || "";
               inputEl &&
                 ((autocompleteSuppressNextInputInvalidation[key] = !0),
-                (inputEl.value = displayText),
                 (autocompleteLastConfirmedText[key] = String(
                   displayText || "",
                 ).trim()),
+                (inputEl.value = displayText),
                 setTimeout(() => {
                   autocompleteSuppressNextInputInvalidation[key] = !1;
-                }, 0));
+                }, 300));
             } else
               (inputEl && (inputEl.value = ""),
                 (autocompleteLastConfirmedText[key] = ""),
@@ -2918,8 +2879,8 @@ function setupLegacyAutocompleteField(inputEl, options, summaryEl, key) {
   ((autocompleteInstances[key] = instance),
     instance.addListener("place_changed", () => {
       try {
-        const place = instance.getPlace(),
-          validPlace = place && place.place_id ? place : null;
+        const place = instance.getPlace();
+        const validPlace = place && (place.place_id || place.geometry) ? place : null;
         ((autocompleteSelectedPlaces[key] = validPlace),
           (autocompleteSuppressNextInputInvalidation[key] = !0),
           (autocompleteLastConfirmedText[key] = String(
@@ -2927,23 +2888,11 @@ function setupLegacyAutocompleteField(inputEl, options, summaryEl, key) {
           ).trim()),
           updateAddressSummary(summaryEl, validPlace));
         
-        // Detectar si es estación/aeropuerto para el origen del trayecto de vuelta
-        if (key === "origenVuelta" && validPlace && inputEl && inputEl.value) {
+        // Detectar si es estación/aeropuerto para origen de trayectos (SOLO para campos de origen)
+        if (validPlace && inputEl && inputEl.value && (key.includes("origen") || key === "additionalTripOrigen")) {
           const origenText = String(inputEl.value).toLowerCase();
-          const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|tren|ave|renfe|adif|train station|railway station|bahnhof|gare/.test(origenText);
-          const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal/.test(origenText);
-          
-          if (isStation || isAirport) {
-            applyFlightTrainBanner(isStation ? "station" : "airport");
-          }
-        }
-        
-        
-        // Detectar si es estación/aeropuerto para origen de trayectos
-        if (validPlace && inputEl && inputEl.value) {
-          const origenText = String(inputEl.value).toLowerCase();
-          const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|tren|ave|renfe|adif|train station|railway station|bahnhof|gare/.test(origenText);
-          const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal/.test(origenText);
+          const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|\bave\b|renfe|adif|train station|railway station|bahnhof|gare|cádiz adif|cadiz adif|estaci[oó]n de c[aá]diz|c[aá]diz.*adif|adif.*c[aá]diz/.test(origenText);
+          const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal|jerez airport/.test(origenText);
           
           if (isStation || isAirport) {
             // Guardar información del trayecto para el modal múltiple
@@ -2959,14 +2908,6 @@ function setupLegacyAutocompleteField(inputEl, options, summaryEl, key) {
             // Eliminar si ya existe este key
             window.flightTrainTrips = window.flightTrainTrips.filter(t => t.key !== key);
             window.flightTrainTrips.push(tripInfo);
-            
-            // Si hay múltiples trayectos, mostrar modal con lista
-            if (window.flightTrainTrips.length > 1) {
-              showMultipleFlightTrainModal();
-            } else {
-              // Si es solo uno, usar el banner actual
-              applyFlightTrainBanner(isStation ? "station" : "airport");
-            }
           }
         }
         
@@ -2979,7 +2920,7 @@ function setupLegacyAutocompleteField(inputEl, options, summaryEl, key) {
         }
         setTimeout(() => {
           autocompleteSuppressNextInputInvalidation[key] = !1;
-        }, 0);
+        }, 500);
       } catch (_) {
         ((autocompleteSelectedPlaces[key] = null),
           (autocompleteLastConfirmedText[key] = ""),
@@ -3003,6 +2944,11 @@ function setupLegacyAutocompleteField(inputEl, options, summaryEl, key) {
         ((autocompleteSelectedPlaces[key] = null),
         (autocompleteLastConfirmedText[key] = ""),
         clearAddressSummary(summaryEl));
+      
+      // Limpiar el key temporal de flightTrainTrips cuando el usuario modifica el input
+      if (key === 'additionalTripOrigen' && window.flightTrainTrips) {
+        window.flightTrainTrips = window.flightTrainTrips.filter(t => t.key !== 'additionalTripOrigen');
+      }
     }));
 }
 "undefined" != typeof window &&
@@ -3734,6 +3680,13 @@ let currentBookingDetails = {
     returnDestination: "",
     returnRawPrice: 0,
     returnPickupDateTime: null,
+    // Guardar rutas para los mapas de confirmación
+    oneWayRoutePath: null,
+    oneWayRouteStartLocation: null,
+    oneWayRouteEndLocation: null,
+    returnRoutePath: null,
+    returnRouteStartLocation: null,
+    returnRouteEndLocation: null,
   },
   googleMapsInitRetryCount = 0,
   googleMapsNotLoadedAlertShown = !1,
@@ -4642,7 +4595,7 @@ function loadGoogleMapsIfNeeded() {
 }
 (document.addEventListener("DOMContentLoaded", () => {
   const alerts = getMessagesSection("alerts") || {},
-    calcMsgs = getMessagesSection("calc"),
+    calcMsgs = window.calcMsgs = getMessagesSection("calc"),
     validationMsgs = getMessagesSection("validation");
   try {
     const urlParams = new URLSearchParams(window.location.search),
@@ -4810,10 +4763,11 @@ function loadGoogleMapsIfNeeded() {
         let surcharge = 0;
         return (distanceKm > 400 && (surcharge = 5), surcharge);
       },
-      computeApproxPriceForRate = (distanceKm, ratePerKm) => {
+      computeApproxPriceForRate = (distanceKm, ratePerKm, tripDate = new Date()) => {
         const raw =
           distanceKm * ratePerKm + FLAG_FALL + computeSurcharge(distanceKm);
-        return raw < 45 ? 45 : raw;
+        const minPrice = getMinPriceForDate(tripDate);
+        return raw < minPrice ? minPrice : raw;
       },
       safeFormatPrice = (amount) => {
         try {
@@ -5423,7 +5377,7 @@ function loadGoogleMapsIfNeeded() {
         });
     }
   } catch (_) {}
-  const confirmMsgs = getMessagesSection("confirmation") || {},
+  const confirmMsgs = window.confirmMsgs = getMessagesSection("confirmation") || {},
     bookingMsgs = getMessagesSection("booking") || {
       sending: "Enviando…",
       confirmButton: "Confirmar solicitud de reserva",
@@ -6335,7 +6289,9 @@ function loadGoogleMapsIfNeeded() {
               (additionalRoutePolyline.setMap(null),
               (additionalRoutePolyline = null)),
             (additionalRouteMarkers = []),
-            (currentAdditionalTripData = null));
+            (currentAdditionalTripData = null),
+            // Limpiar el key temporal de flightTrainTrips al cancelar
+            window.flightTrainTrips && (window.flightTrainTrips = window.flightTrainTrips.filter(t => t.key !== 'additionalTripOrigen')));
         }),
       confirmBtn &&
         confirmBtn.addEventListener("click", () => {
@@ -6359,6 +6315,18 @@ function loadGoogleMapsIfNeeded() {
             additionalTripCounter++;
             const tripId = `additional-trip-${additionalTripCounter}`;
             const tripNumber = additionalTripCounter;
+            
+            // Actualizar el key en flightTrainTrips para usar el tripId único
+            if (window.flightTrainTrips) {
+              const tripIndex = window.flightTrainTrips.findIndex(t => t.key === 'additionalTripOrigen');
+              if (tripIndex !== -1) {
+                window.flightTrainTrips[tripIndex].key = `additionalTripOrigen_${tripId}`;
+                window.flightTrainTrips[tripIndex].tripId = tripId;
+              }
+              // Eliminar cualquier entrada duplicada con el key temporal DESPUÉS de actualizar
+              window.flightTrainTrips = window.flightTrainTrips.filter(t => t.key !== 'additionalTripOrigen');
+            }
+            
             window.additionalTrips.push({ id: tripId, ...currentAdditionalTripData });
             const tripDiv = document.createElement("div");
             ((tripDiv.id = tripId),
@@ -7144,7 +7112,7 @@ function loadGoogleMapsIfNeeded() {
     (window.removeAdditionalTrip = function (tripId) {
       // Limpiar el trayecto adicional de la lista de vuelos/trenes
       if (window.flightTrainTrips) {
-        window.flightTrainTrips = window.flightTrainTrips.filter(t => !t.key.startsWith('additionalTripOrigen_'));
+        window.flightTrainTrips = window.flightTrainTrips.filter(t => t.tripId !== tripId && t.key !== 'additionalTripOrigen');
       }
       
       const tripDiv = document.getElementById(tripId);
@@ -7289,6 +7257,8 @@ function loadGoogleMapsIfNeeded() {
     function buildDirectionsLocation(rawValue, selectedPlace) {
       return selectedPlace && selectedPlace.place_id
         ? { placeId: selectedPlace.place_id }
+        : selectedPlace && selectedPlace.geometry && selectedPlace.geometry.location
+        ? { latLng: selectedPlace.geometry.location }
         : rawValue;
     }
     let originParam = origin,
@@ -7958,7 +7928,8 @@ function loadGoogleMapsIfNeeded() {
             const rawPrice = calculatedPrice;
             let finalPrice = rawPrice,
               isMinPrice = !1;
-            rawPrice < 45 && ((finalPrice = 45), (isMinPrice = !0));
+            const minPrice = getMinPriceForDate(pickupDateTime);
+            rawPrice < minPrice && ((finalPrice = minPrice), (isMinPrice = !0));
             try {
               "undefined" != typeof window &&
                 window.TC_DEBUG_KM &&
@@ -7973,7 +7944,7 @@ function loadGoogleMapsIfNeeded() {
                   rawPrice: rawPrice,
                   finalPrice: finalPrice,
                   isMinPrice: isMinPrice,
-                  minPrice: 45,
+                  minPrice: minPrice,
                 });
             } catch (_) {}
             if ("ida" === tripType) {
@@ -7984,7 +7955,7 @@ function loadGoogleMapsIfNeeded() {
                   const originPlace = autocompleteSelectedPlaces.origenCalc,
                     destinationPlace = autocompleteSelectedPlaces.destinoCalc,
                     buildDisplayFromPlace = (place, fallback) => {
-                      if (!place || !place.place_id) return fallback;
+                      if (!place || (!place.place_id && !place.geometry)) return fallback;
                       const name = (place.name || "").trim(),
                         formatted = (place.formatted_address || "").trim(),
                         normalizeForCompare = (s) =>
@@ -8082,6 +8053,12 @@ function loadGoogleMapsIfNeeded() {
                   route.legs[0].end_location
                     ? route.legs[0].end_location
                     : null),
+                // Guardar en currentBookingDetails para persistencia
+                currentBookingDetails && (
+                  (currentBookingDetails.oneWayRoutePath = currentRouteOverviewPath),
+                  (currentBookingDetails.oneWayRouteStartLocation = currentRouteStartLocation),
+                  (currentBookingDetails.oneWayRouteEndLocation = currentRouteEndLocation)
+                ),
                 (!currentRouteStartLocation || !currentRouteEndLocation) &&
                   currentRouteOverviewPath &&
                   currentRouteOverviewPath.length)
@@ -8172,6 +8149,12 @@ function loadGoogleMapsIfNeeded() {
                 route.legs[0].end_location
                   ? route.legs[0].end_location
                   : null),
+              // Guardar en currentBookingDetails para persistencia
+              currentBookingDetails && (
+                (currentBookingDetails.returnRoutePath = currentReturnRouteOverviewPath),
+                (currentBookingDetails.returnRouteStartLocation = currentReturnRouteStartLocation),
+                (currentBookingDetails.returnRouteEndLocation = currentReturnRouteEndLocation)
+              ),
               (!currentReturnRouteStartLocation ||
                 !currentReturnRouteEndLocation) &&
                 currentReturnRouteOverviewPath &&
@@ -8400,12 +8383,12 @@ function loadGoogleMapsIfNeeded() {
           originHasSelection = !!(
             autocompleteSelectedPlaces &&
             autocompleteSelectedPlaces.origenCalc &&
-            autocompleteSelectedPlaces.origenCalc.place_id
+            (autocompleteSelectedPlaces.origenCalc.place_id || autocompleteSelectedPlaces.origenCalc.geometry)
           ),
           destinationHasSelection = !!(
             autocompleteSelectedPlaces &&
             autocompleteSelectedPlaces.destinoCalc &&
-            autocompleteSelectedPlaces.destinoCalc.place_id
+            (autocompleteSelectedPlaces.destinoCalc.place_id || autocompleteSelectedPlaces.destinoCalc.geometry)
           ),
           hasSelectedOriginPlace = originHasSelection,
           hasSelectedDestinationPlace = destinationHasSelection;
@@ -9434,7 +9417,7 @@ function loadGoogleMapsIfNeeded() {
               };
               ((calcResultDiv.__minPriceClickHandler = minPriceClickHandler),
                 calcResultDiv.addEventListener("click", minPriceClickHandler));
-            })(45, function () {
+            })(getMinPriceForDate(currentCalculation.pickupDateTime), function () {
               (showBookingForm(), markOneWayIncluded());
             })
           : (function () {
@@ -10283,10 +10266,11 @@ function loadGoogleMapsIfNeeded() {
               (successEl.style.display = "inline-block"));
           }
         };
-        currentBookingDetails.returnRawPrice < 45
+        const returnMinPrice = getMinPriceForDate(pickupDateTime);
+        currentBookingDetails.returnRawPrice < returnMinPrice
           ? (function (onAccept) {
               if (!returnCalcResultDiv) return;
-              const formattedMinPrice = formatPrice(45);
+              const formattedMinPrice = formatPrice(returnMinPrice);
               returnCalcResultDiv.innerHTML = `\n      <div class="min-price-notice min-price-notice--return">\n        <p>${calcMsgs.minPriceIntro}</p>\n        <p>${calcMsgs.minPriceLine(formattedMinPrice)}</p>\n        <p class="min-price-note" style="font-size: 0.9rem; color: #ccc; font-style: italic; text-align: center; border: none;">${calcMsgs.minPriceNote}</p>\n        <div class="min-price-buttons">\n          <button type="button" id="return-min-accept-btn" class="btn btn-primary">${calcMsgs.confirmReturnButton}</button>\n          <button type="button" id="return-min-cancel-btn" class="btn btn-light">${calcMsgs.returnCancelButton}</button>\n        </div>\n      </div>\n    `;
               try {
                 returnCalcResultDiv.__returnMinPriceNoticeActive = !0;
@@ -10296,11 +10280,11 @@ function loadGoogleMapsIfNeeded() {
                   (e.target &&
                     "return-min-accept-btn" === e.target.id &&
                     (currentBookingDetails &&
-                      ((currentBookingDetails.returnPrice = 45),
+                      ((currentBookingDetails.returnPrice = returnMinPrice),
                       (currentBookingDetails.returnTrip = !0)),
                     updateTotalPriceAmount(),
                     displayReturnCalculationResult(
-                      45,
+                      returnMinPrice,
                       currentBookingDetails &&
                         "number" ==
                           typeof currentBookingDetails.returnDistanceKm
@@ -10519,13 +10503,16 @@ function loadGoogleMapsIfNeeded() {
           isMinPriceApplied: !1,
           lastRequestKey: "",
         }),
-        (currentRouteOverviewPath = null),
-        (currentRouteStartLocation = null),
-        (currentRouteEndLocation = null),
-        (currentRouteBounds = null),
-        (routeMapInstance = null),
-        (routeMapPolyline = null),
-        (routeMapMarkers = []),
+        // No resetear currentRouteOverviewPath si estamos en modo de vuelta (para preservar el mapa de ida)
+        returnTripYes || (
+          (currentRouteOverviewPath = null),
+          (currentRouteStartLocation = null),
+          (currentRouteEndLocation = null),
+          (currentRouteBounds = null),
+          (routeMapInstance = null),
+          (routeMapPolyline = null),
+          (routeMapMarkers = [])
+        ),
         setMinDate(),
         fechaCalcInput && (fechaCalcInput.value = ""));
     } catch (_) {}
@@ -10544,6 +10531,13 @@ function loadGoogleMapsIfNeeded() {
       returnDestination: "",
       returnRawPrice: 0,
       returnPickupDateTime: null,
+      // Resetear rutas guardadas
+      oneWayRoutePath: null,
+      oneWayRouteStartLocation: null,
+      oneWayRouteEndLocation: null,
+      returnRoutePath: null,
+      returnRouteStartLocation: null,
+      returnRouteEndLocation: null,
     }),
       hideElement(returnDetailsDiv),
       hideElement(childSeatQuestionsDiv),
@@ -10588,7 +10582,7 @@ function loadGoogleMapsIfNeeded() {
           void 0 !== autocompleteSelectedPlaces
             ? autocompleteSelectedPlaces.destinoCalc
             : null;
-        if (swappedOriginPlace && swappedOriginPlace.place_id) {
+        if (swappedOriginPlace && (swappedOriginPlace.place_id || swappedOriginPlace.geometry)) {
           if (
             ((swappedOriginText = (
               swappedOriginPlace.name ||
@@ -10640,6 +10634,26 @@ function loadGoogleMapsIfNeeded() {
                 autocompleteSuppressNextInputInvalidation.origenVuelta = !1;
               } catch (_) {}
             }, 0));
+          
+          // Detectar si es estación/aeropuerto para el origen de vuelta autorrellenado
+          const origenText = swappedOriginText.toLowerCase();
+          const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|\bave\b|renfe|adif|train station|railway station|bahnhof|gare|cádiz adif|cadiz adif|estaci[oó]n de c[aá]diz|c[aá]diz.*adif|adif.*c[aá]diz/.test(origenText);
+          const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal|jerez airport/.test(origenText);
+          
+          if (isStation || isAirport) {
+            if (!window.flightTrainTrips) window.flightTrainTrips = [];
+            
+            const tripInfo = {
+              key: 'origenVuelta',
+              type: isStation ? 'station' : 'airport',
+              origin: swappedOriginText,
+              tripName: getTripDisplayName('origenVuelta')
+            };
+            
+            // Eliminar si ya existe este key
+            window.flightTrainTrips = window.flightTrainTrips.filter(t => t.key !== 'origenVuelta');
+            window.flightTrainTrips.push(tripInfo);
+          }
         }
       } catch (_) {}
       ((origenVueltaInput.value = swappedOriginText),
@@ -10652,7 +10666,7 @@ function loadGoogleMapsIfNeeded() {
           void 0 !== autocompleteSelectedPlaces
             ? autocompleteSelectedPlaces.origenCalc
             : null;
-        if (swappedDestinationPlace && swappedDestinationPlace.place_id) {
+        if (swappedDestinationPlace && (swappedDestinationPlace.place_id || swappedDestinationPlace.geometry)) {
           if (
             ((swappedDestinationText = (
               swappedDestinationPlace.name ||
@@ -10895,6 +10909,12 @@ function loadGoogleMapsIfNeeded() {
     let fullPath =
       (isReturn ? currentReturnRouteOverviewPath : currentRouteOverviewPath) ||
       [];
+    // Si las variables globales están vacías, intentar usar las guardadas en currentBookingDetails
+    if (!fullPath.length && currentBookingDetails) {
+      fullPath = isReturn 
+        ? (currentBookingDetails.returnRoutePath || [])
+        : (currentBookingDetails.oneWayRoutePath || []);
+    }
     fullPath = fullPath
       .map((p) => {
         if (!p) return null;
@@ -10909,7 +10929,14 @@ function loadGoogleMapsIfNeeded() {
       endLocation = isReturn
         ? currentReturnRouteEndLocation
         : currentRouteEndLocation;
-    if (!fullPath.length || !startLocation || !endLocation) return;
+    // Si las ubicaciones están vacías, intentar usar las guardadas en currentBookingDetails
+    const finalStartLocation = (!startLocation && currentBookingDetails)
+      ? (isReturn ? currentBookingDetails.returnRouteStartLocation : currentBookingDetails.oneWayRouteStartLocation)
+      : startLocation;
+    const finalEndLocation = (!endLocation && currentBookingDetails)
+      ? (isReturn ? currentBookingDetails.returnRouteEndLocation : currentBookingDetails.oneWayRouteEndLocation)
+      : endLocation;
+    if (!fullPath.length || !finalStartLocation || !finalEndLocation) return;
     const distanceKm = isReturn
         ? currentBookingDetails?.returnDistanceKm || 0
         : currentCalculation?.distanceKm || 0,
@@ -10938,7 +10965,7 @@ function loadGoogleMapsIfNeeded() {
       let mapInstance = null;
       try {
         mapInstance = new google.maps.Map(mapElement, {
-          center: startLocation,
+          center: finalStartLocation,
           zoom: 11,
           disableDefaultUI: !0,
           clickableIcons: !1,
@@ -11372,6 +11399,8 @@ function loadGoogleMapsIfNeeded() {
           additionalTripDestinoInput && (additionalTripDestinoInput.value = ""),
           additionalTripFechaInput && (additionalTripFechaInput.value = ""),
           additionalTripHoraInput && (additionalTripHoraInput.value = ""),
+          // Limpiar el key temporal de flightTrainTrips al añadir un nuevo trayecto
+          window.flightTrainTrips && (window.flightTrainTrips = window.flightTrainTrips.filter(t => t.key !== 'additionalTripOrigen')),
           additionalTripOrigenInput &&
             !autocompleteInstances.additionalTripOrigen)
         ) {
@@ -11482,35 +11511,7 @@ function loadGoogleMapsIfNeeded() {
             (additionalTripCalcResultDiv.innerHTML =
               '<p style="color: #dc3545;">Por favor, complete todos los campos.</p>');
         
-        // Detectar si el origen es estación/aeropuerto para trayectos adicionales
-        if (origin) {
-          const origenText = origin.toLowerCase();
-          const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|tren|ave|renfe|adif|train station|railway station|bahnhof|gare/.test(origenText);
-          const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal/.test(origenText);
-          
-          if (isStation || isAirport) {
-            if (!window.flightTrainTrips) window.flightTrainTrips = [];
-            
-            // Usar índice único basado en el número de trayectos adicionales
-            const tripIndex = (window.additionalTrips || []).length;
-            const tripKey = `additionalTripOrigen_${tripIndex}`;
-            
-            const tripInfo = {
-              key: tripKey,
-              type: isStation ? 'station' : 'airport',
-              origin: origin,
-              tripName: getTripDisplayName('additionalTripOrigen') + (tripIndex > 0 ? ` ${tripIndex + 1}` : '')
-            };
-            
-            window.flightTrainTrips.push(tripInfo);
-            
-            if (window.flightTrainTrips.length > 1) {
-              showMultipleFlightTrainModal();
-            } else {
-              applyFlightTrainBanner(isStation ? "station" : "airport");
-            }
-          }
-        }
+        // La detección de aeropuerto/estación se hace en el autocomplete, no aquí
       }),
     attachInvalidateReturnOnChange(origenVueltaInput),
     attachInvalidateReturnOnChange(destinoVueltaInput),
@@ -11642,32 +11643,7 @@ function loadGoogleMapsIfNeeded() {
             } catch (_) {}
           }
           
-          // Detectar si el origen es estación/aeropuerto para el trayecto de vuelta
-          if (originValue) {
-            const origenText = originValue.toLowerCase();
-            const isStation = /estaci[oó]n de tren|estaci[oó]n ferroviaria|tren|ave|renfe|adif|train station|railway station|bahnhof|gare/.test(origenText);
-            const isAirport = /aeropuerto|airport|flughafen|xry|agp|svq|gib|lej|mal/.test(origenText);
-            
-            if (isStation || isAirport) {
-              if (!window.flightTrainTrips) window.flightTrainTrips = [];
-              
-              const tripInfo = {
-                key: 'origenVuelta',
-                type: isStation ? 'station' : 'airport',
-                origin: originValue,
-                tripName: getTripDisplayName('origenVuelta')
-              };
-              
-              window.flightTrainTrips = window.flightTrainTrips.filter(t => t.key !== 'origenVuelta');
-              window.flightTrainTrips.push(tripInfo);
-              
-              if (window.flightTrainTrips.length > 1) {
-                showMultipleFlightTrainModal();
-              } else {
-                applyFlightTrainBanner(isStation ? "station" : "airport");
-              }
-            }
-          }
+          // NO detectar origen del trayecto de vuelta - solo se pregunta por el origen del trayecto de ida
         }
       }),
     returnCalcResultDiv &&
@@ -11699,6 +11675,451 @@ function loadGoogleMapsIfNeeded() {
             ? showElement(babySeatAgeQuestionDiv)
             : hideElementSmooth(babySeatAgeQuestionDiv);
         })),
+    
+    // Función para llenar el modal de confirmación (definida fuera del event listener para que esté disponible globalmente)
+    window.populateConfirmationModal = function() {
+      try {
+        console.log('populateConfirmationModal llamado');
+        console.log('window.flightTrainTrips al inicio de populateConfirmationModal:', window.flightTrainTrips);
+        console.log('=== populateConfirmationModal START ===');
+        console.log('currentCalculation:', currentCalculation);
+        console.log('currentBookingDetails:', currentBookingDetails);
+        
+        // Obtener variables del DOM en lugar de usar closures
+        const fechaBookInput = document.getElementById("fecha-book");
+        const horaBookInput = document.getElementById("hora-book");
+        const returnTripYes = document.getElementById("return-trip-yes");
+        
+        const getElValue = (id) =>
+            document.getElementById(id)?.value || "",
+          getRadioValue = (name) =>
+            document.querySelector(`input[name="${name}"]:checked`)
+              ?.value || "",
+          confirmNombreEl = document.getElementById("confirm-nombre");
+        
+        console.log('confirmNombreEl:', confirmNombreEl);
+        if (!confirmNombreEl) {
+          console.error('ERROR: confirmNombreEl no encontrado. El modal de confirmación no existe o no tiene el contenido esperado.');
+          return;
+        }
+        confirmNombreEl &&
+          (confirmNombreEl.textContent = getElValue("nombre"));
+
+        const confirmTelefonoEl =
+          document.getElementById("confirm-telefono");
+        confirmTelefonoEl &&
+          (confirmTelefonoEl.textContent = getElValue("telefono"));
+        const confirmEmailEl = document.getElementById("confirm-email");
+        confirmEmailEl &&
+          (confirmEmailEl.textContent = getElValue("email"));
+        const confirmPasajerosEl =
+          document.getElementById("confirm-pasajeros");
+        confirmPasajerosEl &&
+          (confirmPasajerosEl.textContent = getElValue("pasajeros"));
+        const origenIdaEl = document.getElementById("confirm-origen-ida"),
+          destinoIdaEl = document.getElementById("confirm-destino-ida");
+        if (currentCalculation) {
+          const originLabel = buildShortAddressLabel(
+              currentCalculation.origin || "",
+            ),
+            destinationLabel = buildShortAddressLabel(
+              currentCalculation.destination || "",
+            );
+          (origenIdaEl && (origenIdaEl.textContent = originLabel || ""),
+            destinoIdaEl &&
+              (destinoIdaEl.textContent = destinationLabel || ""));
+        }
+        const idaRouteChipEl = document.getElementById(
+            "confirm-ida-route-chip",
+          ),
+          idaRouteMapEl = document.getElementById(
+            "confirm-ida-route-map",
+          ),
+          idaRouteToggleBtn = document.getElementById(
+            "confirm-ida-route-toggle",
+          ),
+          idaRouteContainerEl = document.getElementById(
+            "confirm-ida-route-container",
+          ),
+          hasIdaGeometry =
+            Array.isArray(currentRouteOverviewPath) &&
+            currentRouteOverviewPath.length > 0 &&
+            currentRouteStartLocation &&
+            currentRouteEndLocation;
+        idaRouteChipEl &&
+          currentCalculation &&
+          "number" == typeof currentCalculation.distanceKm &&
+          currentCalculation.durationText &&
+          (idaRouteChipEl.textContent = `${currentCalculation.distanceKm.toFixed(1)} km · ${currentCalculation.durationText}`);
+        idaRouteMapEl &&
+          currentCalculation &&
+          "number" == typeof currentCalculation.distanceKm &&
+          currentCalculation.durationText &&
+          idaRouteMapEl.setAttribute(
+            "aria-label",
+            `${currentCalculation.distanceKm.toFixed(1)} km, ${currentCalculation.durationText}`,
+          );
+        idaRouteToggleBtn &&
+        window.calcMsgs &&
+        window.calcMsgs.viewRouteButton &&
+        hasIdaGeometry &&
+        idaRouteContainerEl &&
+        idaRouteMapEl
+          ? ((idaRouteToggleBtn.innerHTML = `${window.calcMsgs.viewRouteButton} <span class="route-toggle-icon">&#9662;</span>`),
+            (idaRouteToggleBtn.style.display = ""),
+            idaRouteContainerEl.classList.remove("visible"),
+            idaRouteContainerEl.setAttribute("aria-hidden", "true"),
+            createConfirmationRouteToggle({
+              toggleButton: idaRouteToggleBtn,
+              container: idaRouteContainerEl,
+              mapElement: idaRouteMapEl,
+              chipElement: idaRouteChipEl,
+              isReturn: !1,
+            }))
+          : idaRouteToggleBtn &&
+            idaRouteContainerEl &&
+            (idaRouteContainerEl.classList.remove("visible"),
+            idaRouteContainerEl.setAttribute("aria-hidden", "true"));
+        const datetimeIdaEl = document.getElementById(
+          "confirm-datetime-ida",
+        );
+        datetimeIdaEl &&
+          (datetimeIdaEl.textContent = `${fechaBookInput?.value || window.confirmMsgs.notAvailable}${window.confirmMsgs.atTimeConnector}${horaBookInput?.value || window.confirmMsgs.notAvailable}`);
+        const precioIdaSpan =
+          document.getElementById("confirm-precio-ida");
+        precioIdaSpan &&
+          (precioIdaSpan.textContent = formatPrice(
+            currentCalculation.totalPriceOneWay || 0,
+          ));
+        const returnDateEl = document.getElementById("return-date"),
+          returnTimeEl = document.getElementById("return-time");
+        let formattedReturnDate = window.confirmMsgs.notAvailable;
+        if (returnDateEl && returnDateEl.value) {
+          const parts = returnDateEl.value.split("-");
+          if (3 === parts.length) {
+            const [yyyy, mm, dd] = parts;
+            formattedReturnDate = `${dd}/${mm}/${yyyy}`;
+          } else formattedReturnDate = returnDateEl.value;
+        }
+        const formattedReturnTime =
+            returnTimeEl && returnTimeEl.value
+              ? returnTimeEl.value
+              : window.confirmMsgs.notAvailable,
+          vueltaSection = document.getElementById(
+            "confirm-vuelta-section",
+          );
+        if (
+          returnTripYes?.checked &&
+          currentBookingDetails?.returnPrice > 0
+        ) {
+          const origenVueltaEl = document.getElementById(
+              "confirm-origen-vuelta",
+            ),
+            destinoVueltaEl = document.getElementById(
+              "confirm-destino-vuelta",
+            ),
+            origenVueltaManual = getElValue("origen-vuelta-calc"),
+            destinoVueltaManual = getElValue("destino-vuelta-calc"),
+            origenVuelta =
+              currentBookingDetails.returnOrigin ||
+              origenVueltaManual ||
+              "",
+            destinoVuelta =
+              currentBookingDetails.returnDestination ||
+              destinoVueltaManual ||
+              "",
+            originReturnPlace =
+              void 0 !== autocompleteSelectedPlaces &&
+              autocompleteSelectedPlaces.origenVuelta
+                ? autocompleteSelectedPlaces.origenVuelta
+                : null,
+            destinationReturnPlace =
+              void 0 !== autocompleteSelectedPlaces &&
+              autocompleteSelectedPlaces.destinoVuelta
+                ? autocompleteSelectedPlaces.destinoVuelta
+                : null,
+            originReturnLabel = buildMapLabelFromPlaceOrAddress(
+              originReturnPlace,
+              origenVuelta,
+            ),
+            destinationReturnLabel = buildMapLabelFromPlaceOrAddress(
+              destinationReturnPlace,
+              destinoVuelta,
+            );
+          (origenVueltaEl &&
+            (origenVueltaEl.textContent =
+              originReturnLabel ||
+              buildShortAddressLabel(origenVuelta) ||
+              ""),
+            destinoVueltaEl &&
+              (destinoVueltaEl.textContent =
+                destinationReturnLabel ||
+                buildShortAddressLabel(destinoVuelta) ||
+                ""));
+          const datetimeVueltaEl = document.getElementById(
+            "confirm-datetime-vuelta",
+          );
+          datetimeVueltaEl &&
+            (datetimeVueltaEl.textContent = `${formattedReturnDate}${window.confirmMsgs.atTimeConnector}${formattedReturnTime}`);
+          const precioVueltaSpan = document.getElementById(
+            "confirm-precio-vuelta",
+          );
+          precioVueltaSpan &&
+            (precioVueltaSpan.textContent = formatPrice(
+              currentBookingDetails.returnPrice || 0,
+            ));
+          const vueltaRouteChipEl = document.getElementById(
+              "confirm-vuelta-route-chip",
+            ),
+            vueltaRouteMapEl = document.getElementById(
+              "confirm-vuelta-route-map",
+            ),
+            vueltaRouteToggleBtn = document.getElementById(
+              "confirm-vuelta-route-toggle",
+            ),
+            vueltaRouteContainerEl = document.getElementById(
+              "confirm-vuelta-route-container",
+            ),
+            hasVueltaGeometry =
+              Array.isArray(currentReturnRouteOverviewPath) &&
+              currentReturnRouteOverviewPath.length > 0 &&
+              currentReturnRouteStartLocation &&
+              currentReturnRouteEndLocation;
+          if (
+            (vueltaRouteChipEl &&
+              "number" == typeof currentBookingDetails.returnDistanceKm &&
+              currentBookingDetails.returnDurationText &&
+              (vueltaRouteChipEl.textContent = `${currentBookingDetails.returnDistanceKm.toFixed(1)} km · ${currentBookingDetails.returnDurationText}`),
+            vueltaRouteMapEl &&
+              "number" == typeof currentBookingDetails.returnDistanceKm &&
+              currentBookingDetails.returnDurationText &&
+              vueltaRouteMapEl.setAttribute(
+                "aria-label",
+                `${currentBookingDetails.returnDistanceKm.toFixed(1)} km, ${currentBookingDetails.returnDurationText}`,
+              ),
+            vueltaRouteToggleBtn &&
+              window.calcMsgs &&
+              vueltaSection &&
+              hasVueltaGeometry &&
+              vueltaRouteContainerEl &&
+              vueltaRouteMapEl)
+          ) {
+            const label =
+              window.calcMsgs.viewReturnRouteButton || window.calcMsgs.viewRouteButton;
+            (label &&
+              (vueltaRouteToggleBtn.innerHTML = `${label} <span class="route-toggle-icon">&#9662;</span>`),
+              (vueltaRouteToggleBtn.style.display = ""),
+              vueltaRouteContainerEl.classList.remove("visible"),
+              vueltaRouteContainerEl.setAttribute("aria-hidden", "true"),
+              createConfirmationRouteToggle({
+                toggleButton: vueltaRouteToggleBtn,
+                container: vueltaRouteContainerEl,
+                mapElement: vueltaRouteMapEl,
+                chipElement: vueltaRouteChipEl,
+                isReturn: !0,
+              }));
+          } else
+            vueltaRouteToggleBtn &&
+              vueltaRouteContainerEl &&
+              (vueltaRouteContainerEl.classList.remove("visible"),
+              vueltaRouteContainerEl.setAttribute("aria-hidden", "true"));
+          vueltaSection && (vueltaSection.style.display = "block");
+        }
+        const additionalTripsSection = document.getElementById(
+          "confirm-additional-trips-section",
+        );
+        additionalTripsSection &&
+          ((additionalTripsSection.innerHTML = ""),
+          Array.isArray(window.additionalTrips) && window.additionalTrips.length > 0
+            ? ((additionalTripsSection.style.display = "block"),
+              window.additionalTrips.forEach((trip, index) => {
+                const tripNumber = index + 1,
+                  tripSection = document.createElement("div");
+                ((tripSection.className = "additional-trip-confirmation"),
+                  (tripSection.style.marginTop = "1.5rem"),
+                  (tripSection.style.paddingTop = "1.5rem"),
+                  (tripSection.style.borderTop = "1px solid #dee2e6"));
+                const originLabel = buildShortAddressLabel(
+                    trip.origin || "",
+                  ),
+                  destinationLabel = buildShortAddressLabel(
+                    trip.destination || "",
+                  );
+                let formattedAdditionalDate =
+                  trip.date || window.confirmMsgs.notAvailable;
+                if (trip.date && trip.date.includes("-")) {
+                  const parts = trip.date.split("-");
+                  if (3 === parts.length) {
+                    const [yyyy, mm, dd] = parts;
+                    formattedAdditionalDate = `${dd}/${mm}/${yyyy}`;
+                  }
+                }
+                const formattedAdditionalTime =
+                    trip.time || window.confirmMsgs.notAvailable,
+                  tripId = trip.id || `additional-trip-${index}`,
+                  routeChipId = `confirm-additional-${tripId}-route-chip`,
+                  routeMapId = `confirm-additional-${tripId}-route-map`,
+                  routeToggleBtnId = `confirm-additional-${tripId}-route-toggle`,
+                  routeContainerId = `confirm-additional-${tripId}-route-container`;
+                ((tripSection.innerHTML = `
+      <h3 class="confirmation-section-title">Trayecto adicional ${tripNumber}</h3>
+      <div class="confirmation-field-row"><strong>Origen:</strong> <span id="confirm-additional-${tripId}-origen">${originLabel}</span></div>
+      <div class="confirmation-field-row"><strong>Destino:</strong> <span id="confirm-additional-${tripId}-destino">${destinationLabel}</span></div>
+      <div class="confirmation-field-row"><strong>Fecha y hora:</strong> <span id="confirm-additional-${tripId}-datetime">${formattedAdditionalDate}${window.confirmMsgs.atTimeConnector}${formattedAdditionalTime}</span></div>
+      <div class="confirmation-field-row"><strong>Precio:</strong> <span id="confirm-additional-${tripId}-precio">${formatPrice(trip.price || 0)}</span></div>
+
+      <div class="confirmation-route-wrapper">
+        <div
+          id="${routeContainerId}"
+          class="route-map-container confirmation-route-map-container visible">
+          <div class="route-map-info">
+            <div class="route-map-chip">
+              <span class="route-map-chip-main" id="${routeChipId}"></span>
+            </div>
+          </div>
+          <div
+            id="${routeMapId}"
+            class="route-map"
+            role="img"
+            aria-label="Mapa del trayecto adicional ${tripNumber}"></div>
+        </div>
+      </div>
+    `),
+                  additionalTripsSection.appendChild(tripSection));
+                const routeChipEl = document.getElementById(routeChipId),
+                  routeMapEl = document.getElementById(routeMapId),
+                  routeToggleBtnEl =
+                    document.getElementById(routeToggleBtnId),
+                  routeContainerEl =
+                    document.getElementById(routeContainerId);
+                (routeChipEl &&
+                  "number" == typeof trip.distance &&
+                  trip.duration &&
+                  (routeChipEl.textContent = `${trip.distance.toFixed(1)} km · ${trip.duration}`),
+                  routeMapEl &&
+                    "number" == typeof trip.distance &&
+                    trip.duration &&
+                    routeMapEl.setAttribute(
+                      "aria-label",
+                      `${trip.distance.toFixed(1)} km, ${trip.duration}`,
+                    ));
+                const hasGeometry =
+                  Array.isArray(trip.overview_path) &&
+                  trip.overview_path.length > 0 &&
+                  trip.start_location &&
+                  trip.end_location;
+                routeToggleBtnEl &&
+                window.calcMsgs &&
+                hasGeometry &&
+                routeContainerEl &&
+                routeMapEl
+                  ? ((routeToggleBtnEl.innerHTML = `${window.calcMsgs.viewRouteButton || "Ver ruta"} <span class="route-toggle-icon">&#9662;</span>`),
+                    (routeToggleBtnEl.style.display = ""),
+                    routeContainerEl.classList.remove("visible"),
+                    routeContainerEl.setAttribute("aria-hidden", "true"),
+                    createConfirmationRouteToggle({
+                      toggleButton: routeToggleBtnEl,
+                      container: routeContainerEl,
+                      mapElement: routeMapEl,
+                      chipElement: routeChipEl,
+                      isReturn: !1,
+                      isAdditional: !0,
+                      additionalTripIndex: index,
+                    }))
+                  : routeToggleBtnEl &&
+                    routeContainerEl &&
+                    ((routeToggleBtnEl.style.display = "none"),
+                    routeContainerEl.classList.remove("visible"),
+                    routeContainerEl.setAttribute("aria-hidden", "true"));
+              }))
+            : (additionalTripsSection.style.display = "none"));
+        const equipajeEl = document.getElementById("confirm-equipaje");
+        equipajeEl &&
+          (equipajeEl.textContent = `${window.confirmMsgs.luggageCabinLabel}: ${getElValue("maletas-cabina")}, ${window.confirmMsgs.luggageLargeLabel}: ${getElValue("maletas-grandes")}`);
+        const mascotaEl = document.getElementById("confirm-mascota");
+        mascotaEl &&
+          (mascotaEl.textContent =
+            "yes" === getRadioValue("mascota")
+              ? window.confirmMsgs.yes
+              : window.confirmMsgs.no);
+        let sriTxt = window.confirmMsgs.no;
+        needsSRIYes?.checked &&
+          ((sriTxt = window.confirmMsgs.sriYes(
+            getElValue("baby-seats"),
+            getElValue("child-seats"),
+          )),
+          parseInt(getElValue("baby-seats"), 10) > 0 &&
+            (sriTxt += `${window.confirmMsgs.sriAgeWeightPrefix}${getElValue("baby-age") || window.confirmMsgs.notAvailable}`));
+        const confirmSriEl = document.getElementById("confirm-sri");
+        confirmSriEl && (confirmSriEl.textContent = sriTxt);
+        const comentariosEl = document.getElementById(
+          "confirm-comentarios",
+        );
+        let comentariosText = getElValue("comentarios") || window.confirmMsgs.none;
+        
+        // Agregar información de vuelo/tren si existe
+        const confirmationModal = document.querySelector("#booking-confirmation-overlay .confirmation-modal");
+        const flightTrainNumber = confirmationModal?.dataset.flightNumber || getElValue("flight-train-number");
+        const flightTrainTime = confirmationModal?.dataset.flightTime || getElValue("flight-train-time");
+        const pickupKind = confirmationModal?.dataset.pickupKind || "";
+        
+        // Agregar información de múltiples trayectos de vuelo/tren desde la variable global o dataset
+        let flightTrainTrips = [];
+        if (window.flightTrainTrips && window.flightTrainTrips.length > 0) {
+          flightTrainTrips = window.flightTrainTrips;
+          console.log('flightTrainTrips desde variable global:', flightTrainTrips);
+        } else if (confirmationModal?.dataset.flightTrainTrips) {
+          try {
+            flightTrainTrips = JSON.parse(confirmationModal.dataset.flightTrainTrips);
+            console.log('flightTrainTrips desde dataset:', flightTrainTrips);
+          } catch (e) {
+            flightTrainTrips = [];
+          }
+        }
+        
+        console.log('flightTrainTrips final:', flightTrainTrips);
+        
+        if (flightTrainTrips.length > 0) {
+          flightTrainTrips.forEach(trip => {
+            console.log('Procesando trip:', trip);
+            if (trip.flightNumber || trip.arrivalTime) {
+              const parts = [];
+              // Usar label dinámico según el tipo de trayecto
+              const lang = CURRENT_LANG || "es";
+              const numberLabel = trip.type === 'airport' ? 
+                (lang === 'es' ? 'Número de vuelo' : lang === 'en' ? 'Flight number' : lang === 'de' ? 'Flugnummer' : 'Numéro de vol') :
+                (lang === 'es' ? 'Número de tren' : lang === 'en' ? 'Train number' : lang === 'de' ? 'Zugnummer' : 'Numéro de train');
+              if (trip.flightNumber) parts.push(`${numberLabel}: ${trip.flightNumber}`);
+              if (trip.arrivalTime) parts.push(`${window.confirmMsgs.arrivalTimeLabel}: ${trip.arrivalTime}`);
+              if (parts.length) {
+                const line = parts.join(" | ");
+                comentariosText = comentariosText === window.confirmMsgs.none ? line : `${comentariosText}\n\n${line}`;
+              }
+            }
+          });
+        }
+        
+        if (flightTrainNumber || flightTrainTime) {
+          const parts = [];
+          if (flightTrainNumber) parts.push(`${window.confirmMsgs.flightNumberLabel}: ${flightTrainNumber}`);
+          if (flightTrainTime) parts.push(`${window.confirmMsgs.arrivalTimeLabel}: ${flightTrainTime}`);
+          if (parts.length) {
+            const line = parts.join(" | ");
+            comentariosText = comentariosText === window.confirmMsgs.none ? line : `${comentariosText}\n\n${line}`;
+          }
+        }
+        
+        comentariosEl && (comentariosEl.textContent = comentariosText);
+        const confirmTotalEl = document.getElementById("confirm-total");
+        confirmTotalEl &&
+          (confirmTotalEl.textContent = formatPrice(
+            currentBookingDetails.finalTotalPrice,
+          ));
+      } catch (e) {
+        console.error("populateConfirmationModal failed:", e);
+      }
+    },
+    
     showConfirmationOverlayBtn &&
       showConfirmationOverlayBtn.addEventListener("click", () => {
         try {
@@ -11888,641 +12309,387 @@ function loadGoogleMapsIfNeeded() {
             );
           }
           
-          // Lógica para el banner de vuelo/tren - pantalla intermedia ANTES del modal
+          // Lógica para el modal de vuelo/tren - pantalla intermedia ANTES del modal
           try {
-            const origenBook = document.getElementById("origen-book");
-            const origenText = origenBook ? origenBook.value.toLowerCase() : "";
-
-            // Detectar estación de tren primero (más específico)
-            const isStation = origenText.includes("estación") || origenText.includes("estacion") ||
-                              origenText.includes("station") || origenText.includes("railway") ||
-                              origenText.includes("gare") || origenText.includes("bahnhof") ||
-                              origenText.includes("tren") || origenText.includes("train") ||
-                              origenText.includes("ave") || origenText.includes("renfe") ||
-                              origenText.includes("zug") || origenText.includes("bahn") ||
-                              origenText.includes("stazione") || origenText.includes("adif") ||
-                              origenText.includes("santa justa") || origenText.includes("bahia sur");
-            const isAirport = origenText.includes("aeropuerto") || origenText.includes("airport") ||
-                              origenText.includes("flughafen") || origenText.includes("aéroport") ||
-                              origenText.includes("aeroport") ||
-                              origenText.includes("xry") || origenText.includes("agp") ||
-                              origenText.includes("svq") || origenText.includes("gib") ||
-                              origenText.includes("lej") || origenText.includes("mal");
-
-            if (isStation || isAirport) {
-              // Mostrar banner intermedia en lugar del modal de confirmación
-              const banner = document.getElementById("flight-train-banner");
-              const modal = document.querySelector(".confirmation-modal");
-              const nextBtn = document.getElementById("flight-train-next-btn");
-              const skipBtn = document.getElementById("flight-train-skip-btn");
-              
-              if (banner) {
-                // Configurar el banner como pantalla intermedia
-                banner.style.display = "block";
-                banner.classList.add("fullscreen");
-
-                // Configurar el tipo de recogida en el dataset
-                banner.dataset.pickupKind = isStation ? "station" : "airport";
-
-                // Aplicar el contenido correcto según el tipo
-                applyFlightTrainBanner(isStation ? "station" : "airport");
-
-                // Configurar el botón siguiente
-                if (nextBtn) {
-                  nextBtn.onclick = function() {
-                    const flightNumber = document.getElementById("flight-train-number").value;
-                    const flightTime = document.getElementById("flight-train-time").value;
-                    
-                    if (!flightNumber || !flightTime) {
-                      const validationMsgs = getMessagesSection("validation") || {};
-                      alert(validationMsgs.errorFlightTrainRequired || "Por favor, rellene el número de vuelo/tren y la hora de llegada.");
-                      return;
-                    }
-                    
-                    // Quitar modo fullscreen y abrir el modal de confirmación
-                    banner.classList.remove("fullscreen");
-                    banner.style.display = "none";
-                    populateConfirmationModal();
-                    openDialog(bookingConfirmationOverlay);
-                    
-                    // Inicializar mapas después de abrir el modal
-                    setTimeout(() => {
-                      try {
-                        initConfirmationMap(!1);
-                      } catch (_) {}
-                      try {
-                        initConfirmationMap(!0);
-                      } catch (_) {}
-                      Array.isArray(window.additionalTrips) &&
-                        window.additionalTrips.length > 0 &&
-                        window.additionalTrips.forEach((_, index) => {
-                          try {
-                            !(function (additionalTripIndex) {
-                              if (
-                                !Array.isArray(window.additionalTrips) ||
-                                !window.additionalTrips[additionalTripIndex]
-                              )
-                                return;
-                              const trip = window.additionalTrips[additionalTripIndex],
-                                tripId =
-                                  trip.id || `additional-trip-${additionalTripIndex}`,
-                                mapElement = document.getElementById(
-                                  `confirm-additional-${tripId}-route-map`,
-                                ),
-                                container = document.getElementById(
-                                  `confirm-additional-${tripId}-route-container`,
-                                ),
-                                chipElement = document.getElementById(
-                                  `confirm-additional-${tripId}-route-chip`,
-                                );
-                              if (!mapElement || !container) return;
-                              const stateKey = `confirmMapStateAdditional_${additionalTripIndex}`,
-                                animationKey = `confirmMapAnimAdditional_${additionalTripIndex}`;
-                              try {
-                                if (
-                                  container.dataset &&
-                                  "ready" === container.dataset[stateKey]
-                                )
-                                  return;
-                              } catch (_) {}
-                              let fullPath = trip.overview_path || [];
-                              fullPath = fullPath
-                                .map((p) => {
-                                  if (!p) return null;
-                                  const lat = p.lat || p[0];
-                                  const lng = p.lng || p[1];
-                                  return lat && lng ? { lat, lng } : null;
-                                })
-                                .filter(Boolean);
-                              if (fullPath.length < 2) return;
-                              const bounds = new google.maps.LatLngBounds();
-                              fullPath.forEach((point) => bounds.extend(point));
-                              const map = new google.maps.Map(mapElement, {
-                                center: bounds.getCenter(),
-                                zoom: 12,
-                                mapTypeId: "roadmap",
-                                disableDefaultUI: !0,
-                                styles: [
-                                  { featureType: "poi", stylers: [{ visibility: "off" }] },
-                                ],
-                              });
-                              const polyline = new google.maps.Polyline({
-                                path: fullPath,
-                                geodesic: !0,
-                                strokeColor: "#d4af37",
-                                strokeOpacity: 1,
-                                strokeWeight: 4,
-                              });
-                              polyline.setMap(map);
-                              map.fitBounds(bounds);
-                              container.dataset[stateKey] = "ready";
-                              container.dataset[animationKey] = "played";
-                            })(index);
-                          } catch (_) {}
-                        });
-                    }, 100);
-                  };
-                }
-                
-                // Configurar el botón "No es necesario"
-                if (skipBtn) {
-                  skipBtn.onclick = function() {
-                    // Quitar modo fullscreen y abrir el modal directamente
-                    banner.classList.remove("fullscreen");
-                    banner.style.display = "none";
-                    populateConfirmationModal();
-                    openDialog(bookingConfirmationOverlay);
-                    
-                    // Inicializar mapas después de abrir el modal
-                    setTimeout(() => {
-                      try {
-                        initConfirmationMap(!1);
-                      } catch (_) {}
-                      try {
-                        initConfirmationMap(!0);
-                      } catch (_) {}
-                      Array.isArray(window.additionalTrips) &&
-                        window.additionalTrips.length > 0 &&
-                        window.additionalTrips.forEach((_, index) => {
-                          try {
-                            !(function (additionalTripIndex) {
-                              if (
-                                !Array.isArray(window.additionalTrips) ||
-                                !window.additionalTrips[additionalTripIndex]
-                              )
-                                return;
-                              const trip = window.additionalTrips[additionalTripIndex],
-                                tripId =
-                                  trip.id || `additional-trip-${additionalTripIndex}`,
-                                mapElement = document.getElementById(
-                                  `confirm-additional-${tripId}-route-map`,
-                                ),
-                                container = document.getElementById(
-                                  `confirm-additional-${tripId}-route-container`,
-                                ),
-                                chipElement = document.getElementById(
-                                  `confirm-additional-${tripId}-route-chip`,
-                                );
-                              if (!mapElement || !container) return;
-                              const stateKey = `confirmMapStateAdditional_${additionalTripIndex}`,
-                                animationKey = `confirmMapAnimAdditional_${additionalTripIndex}`;
-                              try {
-                                if (
-                                  container.dataset &&
-                                  "ready" === container.dataset[stateKey]
-                                )
-                                  return;
-                              } catch (_) {}
-                              let fullPath = trip.overview_path || [];
-                              fullPath = fullPath
-                                .map((p) => {
-                                  if (!p) return null;
-                                  const lat = p.lat || p[0];
-                                  const lng = p.lng || p[1];
-                                  return lat && lng ? { lat, lng } : null;
-                                })
-                                .filter(Boolean);
-                              if (fullPath.length < 2) return;
-                              const bounds = new google.maps.LatLngBounds();
-                              fullPath.forEach((point) => bounds.extend(point));
-                              const map = new google.maps.Map(mapElement, {
-                                center: bounds.getCenter(),
-                                zoom: 12,
-                                mapTypeId: "roadmap",
-                                disableDefaultUI: !0,
-                                styles: [
-                                  { featureType: "poi", stylers: [{ visibility: "off" }] },
-                                ],
-                              });
-                              const polyline = new google.maps.Polyline({
-                                path: fullPath,
-                                geodesic: !0,
-                                strokeColor: "#d4af37",
-                                strokeOpacity: 1,
-                                strokeWeight: 4,
-                              });
-                              polyline.setMap(map);
-                              map.fitBounds(bounds);
-                              container.dataset[stateKey] = "ready";
-                              container.dataset[animationKey] = "played";
-                            })(index);
-                          } catch (_) {}
-                        });
-                    }, 100);
-                  };
-                }
-                
-                // No abrir el modal de confirmación todavía
-                return;
-              }
+            // Si hay múltiples trayectos de aeropuerto/tren, usar el modal secuencial
+            if (window.flightTrainTrips && window.flightTrainTrips.length > 1) {
+              showMultipleFlightTrainModal();
+              return;
             }
             
-            // Si no es aeropuerto/estación, abrir el modal directamente
-            (hideElement(formErrorMessage),
-              openDialog(bookingConfirmationOverlay));
+            // Si hay un solo trayecto de aeropuerto/tren, mostrar el modal individual
+            if (window.flightTrainTrips && window.flightTrainTrips.length === 1) {
+              const trip = window.flightTrainTrips[0];
+              const lang = CURRENT_LANG || "es";
+              const modalId = "flight-train-modal";
+              
+              // Eliminar modal si ya existe
+              const existingModal = document.getElementById(modalId);
+              if (existingModal) {
+                existingModal.remove();
+              }
+              
+              const isStation = trip.type === 'station';
+              
+              const copy = {
+                airport: {
+                  es: {
+                    title: "Su llegada, nuestra prioridad",
+                    message: "Su confort es lo más importante. Si nos indica su número de vuelo y hora de llegada, le recibiremos con la puntualidad que merece.",
+                    numberLabel: "Número de vuelo:",
+                    timeLabel: "Hora de llegada:",
+                    placeholder: "Ej.: IB3941",
+                    continue: "Continuar",
+                    skip: "No es necesario"
+                  },
+                  en: {
+                    title: "Your arrival, our priority",
+                    message: "Your comfort is most important. If you provide your flight number and arrival time, we will receive you with the punctuality you deserve.",
+                    numberLabel: "Flight number:",
+                    timeLabel: "Arrival time:",
+                    placeholder: "E.g. IB3941",
+                    continue: "Continue",
+                    skip: "Not needed"
+                  },
+                  de: {
+                    title: "Ihre Ankunft, unsere Priorität",
+                    message: "Ihr Komfort ist am wichtigsten. Wenn Sie uns Ihre Flugnummer und Ankunftszeit mitteilen, empfangen wir Sie mit der Pünktlichkeit, die Sie verdienen.",
+                    numberLabel: "Flugnummer:",
+                    timeLabel: "Ankunftszeit:",
+                    placeholder: "z. B. IB3941",
+                    continue: "Weiter",
+                    skip: "Nicht erforderlich"
+                  },
+                  fr: {
+                    title: "Votre arrivée, notre priorité",
+                    message: "Votre confort est le plus important. Si vous nous indiquez votre numéro de vol et votre heure d'arrivée, nous vous accueillerons avec la ponctualité que vous méritez.",
+                    numberLabel: "Numéro de vol :",
+                    timeLabel: "Heure d'arrivée :",
+                    placeholder: "Ex. : IB3941",
+                    continue: "Continuer",
+                    skip: "Pas nécessaire"
+                  }
+                },
+                station: {
+                  es: {
+                    title: "Su llegada, nuestra prioridad",
+                    message: "Su confort es lo más importante. Si nos indica su número de tren y hora de llegada, le recibiremos con la puntualidad que merece.",
+                    numberLabel: "Número de tren:",
+                    timeLabel: "Hora de llegada:",
+                    placeholder: "Ej.: AVE 02131",
+                    continue: "Continuar",
+                    skip: "No es necesario"
+                  },
+                  en: {
+                    title: "Your arrival, our priority",
+                    message: "Your comfort is most important. If you provide your train number and arrival time, we will receive you with the punctuality you deserve.",
+                    numberLabel: "Train number:",
+                    timeLabel: "Arrival time:",
+                    placeholder: "E.g. AVE 02131",
+                    continue: "Continue",
+                    skip: "Not needed"
+                  },
+                  de: {
+                    title: "Ihre Ankunft, unsere Priorität",
+                    message: "Ihr Komfort ist am wichtigsten. Wenn Sie uns Ihre Zugnummer und Ankunftszeit mitteilen, empfangen wir Sie mit der Pünktlichkeit, die Sie verdienen.",
+                    numberLabel: "Zugnummer:",
+                    timeLabel: "Ankunftszeit:",
+                    placeholder: "z. B. AVE 02131",
+                    continue: "Weiter",
+                    skip: "Nicht erforderlich"
+                  },
+                  fr: {
+                    title: "Votre arrivée, notre priorité",
+                    message: "Votre confort est le plus important. Si vous nous indiquez votre numéro de train et votre heure d'arrivée, nous vous accueillerons avec la ponctualité que vous méritez.",
+                    numberLabel: "Numéro de train :",
+                    timeLabel: "Heure d'arrivée :",
+                    placeholder: "Ex. : AVE 02131",
+                    continue: "Continuer",
+                    skip: "Pas nécessaire"
+                  }
+                }
+              };
+              
+              const pack = (copy[isStation ? "station" : "airport"] && copy[isStation ? "station" : "airport"][lang]) || copy[isStation ? "station" : "airport"].es;
+              
+              const modalHTML = `
+                <div id="${modalId}" class="flight-train-modal" style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/IMG/barrio-de-los-pescadores.jpg'); background-size: cover; background-position: center; z-index: 10000; align-items: center; justify-content: center; overflow-y: auto;">
+                  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26, 42, 69, 0.85);"></div>
+                  <div class="modal-content" style="position: relative; max-width: 600px; width: 90%; background: linear-gradient(135deg, rgba(26, 42, 69, 0.85), rgba(45, 55, 72, 0.85)); padding: 2rem; border-radius: 20px; text-align: center; color: white; box-shadow: 0 20px 60px rgba(0,0,0,0.5); backdrop-filter: blur(10px); margin: 1rem;">
+                    <div style="background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); border-radius: 50%; width: 60px; height: 60px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);">
+                      <span style="font-size: clamp(1.5rem, 5vw, 2rem); color: #1a2a45; line-height: 1;">${isStation ? '🚃' : '✈'}</span>
+                    </div>
+                    <h2 style="color: #d4af37; font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 0.75rem; text-shadow: 0 2px 20px rgba(0,0,0,0.3);">${pack.title}</h2>
+                    <p style="color: rgba(255,255,255,0.8); font-size: clamp(0.9rem, 2.5vw, 1rem); line-height: 1.6; margin-bottom: 1.5rem;">${pack.message}</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                      <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #d4af37; font-weight: 600; text-transform: uppercase; font-size: clamp(0.75rem, 2vw, 0.85rem);">${pack.numberLabel}</label>
+                        <input type="text" id="flight-train-number" placeholder="${pack.placeholder}" style="width: 100%; padding: 0.75rem; background: rgba(255, 255, 255, 0.12); border: 2px solid rgba(212, 175, 55, 0.4); border-radius: 12px; color: white; font-size: clamp(0.9rem, 2.5vw, 1rem);">
+                      </div>
+                      <div>
+                        <label style="display: block; margin-bottom: 0.5rem; color: #d4af37; font-weight: 600; text-transform: uppercase; font-size: clamp(0.75rem, 2vw, 0.85rem);">${pack.timeLabel}</label>
+                        <input type="time" id="flight-train-time" style="width: 100%; padding: 0.75rem; background: rgba(255, 255, 255, 0.12); border: 2px solid rgba(212, 175, 55, 0.4); border-radius: 12px; color: white; font-size: clamp(0.9rem, 2.5vw, 1rem);">
+                      </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                      <button id="flight-train-continue" style="background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); color: #1a2a45; border: none; padding: 1rem; border-radius: 12px; font-size: clamp(0.9rem, 2.5vw, 1rem); font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">${pack.continue}</button>
+                      <button id="flight-train-skip" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 2px solid rgba(255, 255, 255, 0.3); padding: 1rem; border-radius: 12px; font-size: clamp(0.9rem, 2.5vw, 1rem); font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">${pack.skip}</button>
+                    </div>
+                  </div>
+                </div>
+              `;
+              
+              document.body.insertAdjacentHTML('beforeend', modalHTML);
+              
+              const modal = document.getElementById(modalId);
+              const continueBtn = document.getElementById("flight-train-continue");
+              const skipBtn = document.getElementById("flight-train-skip");
+              
+              // Configurar botón continuar
+              if (continueBtn) {
+                continueBtn.onclick = function() {
+                  const flightNumber = document.getElementById("flight-train-number").value;
+                  const flightTime = document.getElementById("flight-train-time").value;
+                  
+                  if (!flightNumber || !flightTime) {
+                    const validationMsgs = getMessagesSection("validation") || {};
+                    alert(validationMsgs.errorFlightTrainRequired || "Por favor, rellene el número de vuelo/tren y la hora de llegada.");
+                    return;
+                  }
+                  
+                  // Guardar datos en la variable global
+                  if (window.flightTrainTrips && window.flightTrainTrips.length === 1) {
+                    window.flightTrainTrips[0].flightNumber = flightNumber;
+                    window.flightTrainTrips[0].arrivalTime = flightTime;
+                  }
+                  
+                  // Guardar datos en el dataset del modal de confirmación
+                  const confirmationModal = document.querySelector("#booking-confirmation-overlay .confirmation-modal");
+                  if (confirmationModal) {
+                    confirmationModal.dataset.pickupKind = isStation ? "station" : "airport";
+                    confirmationModal.dataset.flightNumber = flightNumber;
+                    confirmationModal.dataset.flightTime = flightTime;
+                    confirmationModal.dataset.flightTrainTrips = JSON.stringify(window.flightTrainTrips);
+                  }
+                  
+                  // Cerrar modal y abrir el modal de confirmación
+                  modal.remove();
+                  openDialog(bookingConfirmationOverlay);
+                  
+                  // Llenar el modal después de que esté visible
+                  setTimeout(() => {
+                    if (typeof window.populateConfirmationModal === 'function') {
+                      window.populateConfirmationModal();
+                    }
+                  }, 50);
+                  
+                  // Inicializar mapas después de abrir el modal
+                  setTimeout(() => {
+                    try {
+                      initConfirmationMap(!1);
+                    } catch (_) {}
+                    try {
+                      initConfirmationMap(!0);
+                    } catch (_) {}
+                    try {
+                      Array.isArray(window.additionalTrips) &&
+                        window.additionalTrips.length > 0 &&
+                        window.additionalTrips.forEach((_, index) => {
+                          try {
+                            !(function (additionalTripIndex) {
+                              if (
+                                !Array.isArray(window.additionalTrips) ||
+                                !window.additionalTrips[additionalTripIndex]
+                              )
+                                return;
+                              const trip = window.additionalTrips[additionalTripIndex],
+                                tripId =
+                                  trip.id || `additional-trip-${additionalTripIndex}`,
+                                mapElement = document.getElementById(
+                                  `confirm-additional-${tripId}-route-map`,
+                                ),
+                                container = document.getElementById(
+                                  `confirm-additional-${tripId}-route-container`,
+                                ),
+                                chipElement = document.getElementById(
+                                  `confirm-additional-${tripId}-route-chip`,
+                                );
+                              if (!mapElement || !container) return;
+                              const stateKey = `confirmMapStateAdditional_${additionalTripIndex}`,
+                                animationKey = `confirmMapAnimAdditional_${additionalTripIndex}`;
+                              try {
+                                if (
+                                  container.dataset &&
+                                  "ready" === container.dataset[stateKey]
+                                )
+                                  return;
+                              } catch (_) {}
+                              let fullPath = trip.overview_path || [];
+                              fullPath = fullPath
+                                .map((p) => {
+                                  if (!p) return null;
+                                  const lat = p.lat || p[0];
+                                  const lng = p.lng || p[1];
+                                  return lat && lng ? { lat, lng } : null;
+                                })
+                                .filter(Boolean);
+                              if (fullPath.length < 2) return;
+                              const bounds = new google.maps.LatLngBounds();
+                              fullPath.forEach((point) => bounds.extend(point));
+                              const map = new google.maps.Map(mapElement, {
+                                center: bounds.getCenter(),
+                                zoom: 12,
+                                mapTypeId: "roadmap",
+                                disableDefaultUI: !0,
+                                styles: [
+                                  { featureType: "poi", stylers: [{ visibility: "off" }] },
+                                ],
+                              });
+                              const polyline = new google.maps.Polyline({
+                                path: fullPath,
+                                geodesic: !0,
+                                strokeColor: "#d4af37",
+                                strokeOpacity: 1,
+                                strokeWeight: 4,
+                              });
+                              polyline.setMap(map);
+                              map.fitBounds(bounds);
+                              container.dataset[stateKey] = "ready";
+                              container.dataset[animationKey] = "played";
+                            })(index);
+                          } catch (_) {}
+                        });
+                    } catch (_) {}
+                  }, 100);
+                };
+              }
+              
+              // Configurar botón "No es necesario"
+              if (skipBtn) {
+                skipBtn.onclick = function() {
+                  // Limpiar datos de vuelo/tren
+                  window.flightTrainTrips = [];
+                  
+                  // Cerrar modal y abrir el modal de confirmación directamente
+                  modal.remove();
+                  openDialog(bookingConfirmationOverlay);
+                  
+                  // Llenar el modal después de que esté visible
+                  setTimeout(() => {
+                    if (typeof window.populateConfirmationModal === 'function') {
+                      window.populateConfirmationModal();
+                    }
+                  }, 50);
+                  
+                  // Inicializar mapas después de abrir el modal
+                  setTimeout(() => {
+                    try {
+                      initConfirmationMap(!1);
+                    } catch (_) {}
+                    try {
+                      initConfirmationMap(!0);
+                    } catch (_) {}
+                    try {
+                      Array.isArray(window.additionalTrips) &&
+                        window.additionalTrips.length > 0 &&
+                        window.additionalTrips.forEach((_, index) => {
+                          try {
+                            !(function (additionalTripIndex) {
+                              if (
+                                !Array.isArray(window.additionalTrips) ||
+                                !window.additionalTrips[additionalTripIndex]
+                              )
+                                return;
+                              const trip = window.additionalTrips[additionalTripIndex],
+                                tripId =
+                                  trip.id || `additional-trip-${additionalTripIndex}`,
+                                mapElement = document.getElementById(
+                                  `confirm-additional-${tripId}-route-map`,
+                                ),
+                                container = document.getElementById(
+                                  `confirm-additional-${tripId}-route-container`,
+                                ),
+                                chipElement = document.getElementById(
+                                  `confirm-additional-${tripId}-route-chip`,
+                                );
+                              if (!mapElement || !container) return;
+                              const stateKey = `confirmMapStateAdditional_${additionalTripIndex}`,
+                                animationKey = `confirmMapAnimAdditional_${additionalTripIndex}`;
+                              try {
+                                if (
+                                  container.dataset &&
+                                  "ready" === container.dataset[stateKey]
+                                )
+                                  return;
+                              } catch (_) {}
+                              let fullPath = trip.overview_path || [];
+                              fullPath = fullPath
+                                .map((p) => {
+                                  if (!p) return null;
+                                  const lat = p.lat || p[0];
+                                  const lng = p.lng || p[1];
+                                  return lat && lng ? { lat, lng } : null;
+                                })
+                                .filter(Boolean);
+                              if (fullPath.length < 2) return;
+                              const bounds = new google.maps.LatLngBounds();
+                              fullPath.forEach((point) => bounds.extend(point));
+                              const map = new google.maps.Map(mapElement, {
+                                center: bounds.getCenter(),
+                                zoom: 12,
+                                mapTypeId: "roadmap",
+                                disableDefaultUI: !0,
+                                styles: [
+                                  { featureType: "poi", stylers: [{ visibility: "off" }] },
+                                ],
+                              });
+                              const polyline = new google.maps.Polyline({
+                                path: fullPath,
+                                geodesic: !0,
+                                strokeColor: "#d4af37",
+                                strokeOpacity: 1,
+                                strokeWeight: 4,
+                              });
+                              polyline.setMap(map);
+                              map.fitBounds(bounds);
+                              container.dataset[stateKey] = "ready";
+                              container.dataset[animationKey] = "played";
+                            })(index);
+                          } catch (_) {}
+                        });
+                    } catch (_) {}
+                  }, 100);
+                };
+              }
+              
+              // No abrir el modal de confirmación todavía
+              return;
+            }
+            
+            // Si no hay trayectos de aeropuerto/tren, abrir el modal de confirmación directamente
+            hideElement(formErrorMessage);
+            openDialog(bookingConfirmationOverlay);
+            
+            // Llenar el modal después de que esté visible
+            setTimeout(() => {
+              if (typeof window.populateConfirmationModal === 'function') {
+                window.populateConfirmationModal();
+              }
+            }, 50);
           } catch (e) {
             console.error("Error al configurar banner de vuelo/tren:", e);
             // En caso de error, abrir el modal normalmente
-            (hideElement(formErrorMessage),
-              openDialog(bookingConfirmationOverlay));
+            hideElement(formErrorMessage);
+            openDialog(bookingConfirmationOverlay);
+            
+            // Llenar el modal después de que esté visible
+            setTimeout(() => {
+              if (typeof window.populateConfirmationModal === 'function') {
+                window.populateConfirmationModal();
+              }
+            }, 50);
           }
           
-          // Función para llenar el modal de confirmación
-          function populateConfirmationModal() {
-            try {
-              const getElValue = (id) =>
-                  document.getElementById(id)?.value || "",
-                getRadioValue = (name) =>
-                  document.querySelector(`input[name="${name}"]:checked`)
-                    ?.value || "",
-                confirmNombreEl = document.getElementById("confirm-nombre");
-              confirmNombreEl &&
-                (confirmNombreEl.textContent = getElValue("nombre"));
-
-              applyFlightTrainBanner(resolveBookingPickupKind());
-              const confirmTelefonoEl =
-                document.getElementById("confirm-telefono");
-              confirmTelefonoEl &&
-                (confirmTelefonoEl.textContent = getElValue("telefono"));
-              const confirmEmailEl = document.getElementById("confirm-email");
-              confirmEmailEl &&
-                (confirmEmailEl.textContent = getElValue("email"));
-              const confirmPasajerosEl =
-                document.getElementById("confirm-pasajeros");
-              confirmPasajerosEl &&
-                (confirmPasajerosEl.textContent = getElValue("pasajeros"));
-              const origenIdaEl = document.getElementById("confirm-origen-ida"),
-                destinoIdaEl = document.getElementById("confirm-destino-ida");
-              if (currentCalculation) {
-                const originLabel = buildShortAddressLabel(
-                    currentCalculation.origin || "",
-                  ),
-                  destinationLabel = buildShortAddressLabel(
-                    currentCalculation.destination || "",
-                  );
-                (origenIdaEl && (origenIdaEl.textContent = originLabel || ""),
-                  destinoIdaEl &&
-                    (destinoIdaEl.textContent = destinationLabel || ""));
-              }
-              const idaRouteChipEl = document.getElementById(
-                  "confirm-ida-route-chip",
-                ),
-                idaRouteMapEl = document.getElementById(
-                  "confirm-ida-route-map",
-                ),
-                idaRouteToggleBtn = document.getElementById(
-                  "confirm-ida-route-toggle",
-                ),
-                idaRouteContainerEl = document.getElementById(
-                  "confirm-ida-route-container",
-                ),
-                hasIdaGeometry =
-                  Array.isArray(currentRouteOverviewPath) &&
-                  currentRouteOverviewPath.length > 0 &&
-                  currentRouteStartLocation &&
-                  currentRouteEndLocation;
-              idaRouteChipEl &&
-                currentCalculation &&
-                "number" == typeof currentCalculation.distanceKm &&
-                currentCalculation.durationText &&
-                (idaRouteChipEl.textContent = `${currentCalculation.distanceKm.toFixed(1)} km · ${currentCalculation.durationText}`);
-              idaRouteMapEl &&
-                currentCalculation &&
-                "number" == typeof currentCalculation.distanceKm &&
-                currentCalculation.durationText &&
-                idaRouteMapEl.setAttribute(
-                  "aria-label",
-                  `${currentCalculation.distanceKm.toFixed(1)} km, ${currentCalculation.durationText}`,
-                );
-              idaRouteToggleBtn &&
-              calcMsgs &&
-              calcMsgs.viewRouteButton &&
-              hasIdaGeometry &&
-              idaRouteContainerEl &&
-              idaRouteMapEl
-                ? ((idaRouteToggleBtn.innerHTML = `${calcMsgs.viewRouteButton} <span class="route-toggle-icon">&#9662;</span>`),
-                  (idaRouteToggleBtn.style.display = ""),
-                  idaRouteContainerEl.classList.remove("visible"),
-                  idaRouteContainerEl.setAttribute("aria-hidden", "true"),
-                  createConfirmationRouteToggle({
-                    toggleButton: idaRouteToggleBtn,
-                    container: idaRouteContainerEl,
-                    mapElement: idaRouteMapEl,
-                    chipElement: idaRouteChipEl,
-                    isReturn: !1,
-                  }))
-                : idaRouteToggleBtn &&
-                  idaRouteContainerEl &&
-                  (idaRouteContainerEl.classList.remove("visible"),
-                  idaRouteContainerEl.setAttribute("aria-hidden", "true"));
-              const datetimeIdaEl = document.getElementById(
-                "confirm-datetime-ida",
-              );
-              datetimeIdaEl &&
-                (datetimeIdaEl.textContent = `${fechaBookInput?.value || confirmMsgs.notAvailable}${confirmMsgs.atTimeConnector}${horaBookInput?.value || confirmMsgs.notAvailable}`);
-              const precioIdaSpan =
-                document.getElementById("confirm-precio-ida");
-              precioIdaSpan &&
-                (precioIdaSpan.textContent = formatPrice(
-                  currentCalculation.totalPriceOneWay || 0,
-                ));
-              const returnDateEl = document.getElementById("return-date"),
-                returnTimeEl = document.getElementById("return-time");
-              let formattedReturnDate = confirmMsgs.notAvailable;
-              if (returnDateEl && returnDateEl.value) {
-                const parts = returnDateEl.value.split("-");
-                if (3 === parts.length) {
-                  const [yyyy, mm, dd] = parts;
-                  formattedReturnDate = `${dd}/${mm}/${yyyy}`;
-                } else formattedReturnDate = returnDateEl.value;
-              }
-              const formattedReturnTime =
-                  returnTimeEl && returnTimeEl.value
-                    ? returnTimeEl.value
-                    : confirmMsgs.notAvailable,
-                vueltaSection = document.getElementById(
-                  "confirm-vuelta-section",
-                );
-              if (
-                returnTripYes?.checked &&
-                currentBookingDetails?.returnPrice > 0
-              ) {
-                const origenVueltaEl = document.getElementById(
-                    "confirm-origen-vuelta",
-                  ),
-                  destinoVueltaEl = document.getElementById(
-                    "confirm-destino-vuelta",
-                  ),
-                  origenVueltaManual = getElValue("origen-vuelta-calc"),
-                  destinoVueltaManual = getElValue("destino-vuelta-calc"),
-                  origenVuelta =
-                    currentBookingDetails.returnOrigin ||
-                    origenVueltaManual ||
-                    "",
-                  destinoVuelta =
-                    currentBookingDetails.returnDestination ||
-                    destinoVueltaManual ||
-                    "",
-                  originReturnPlace =
-                    void 0 !== autocompleteSelectedPlaces &&
-                    autocompleteSelectedPlaces.origenVuelta
-                      ? autocompleteSelectedPlaces.origenVuelta
-                      : null,
-                  destinationReturnPlace =
-                    void 0 !== autocompleteSelectedPlaces &&
-                    autocompleteSelectedPlaces.destinoVuelta
-                      ? autocompleteSelectedPlaces.destinoVuelta
-                      : null,
-                  originReturnLabel = buildMapLabelFromPlaceOrAddress(
-                    originReturnPlace,
-                    origenVuelta,
-                  ),
-                  destinationReturnLabel = buildMapLabelFromPlaceOrAddress(
-                    destinationReturnPlace,
-                    destinoVuelta,
-                  );
-                (origenVueltaEl &&
-                  (origenVueltaEl.textContent =
-                    originReturnLabel ||
-                    buildShortAddressLabel(origenVuelta) ||
-                    ""),
-                  destinoVueltaEl &&
-                    (destinoVueltaEl.textContent =
-                      destinationReturnLabel ||
-                      buildShortAddressLabel(destinoVuelta) ||
-                      ""));
-                const datetimeVueltaEl = document.getElementById(
-                  "confirm-datetime-vuelta",
-                );
-                datetimeVueltaEl &&
-                  (datetimeVueltaEl.textContent = `${formattedReturnDate}${confirmMsgs.atTimeConnector}${formattedReturnTime}`);
-                const precioVueltaSpan = document.getElementById(
-                  "confirm-precio-vuelta",
-                );
-                precioVueltaSpan &&
-                  (precioVueltaSpan.textContent = formatPrice(
-                    currentBookingDetails.returnPrice || 0,
-                  ));
-                const vueltaRouteChipEl = document.getElementById(
-                    "confirm-vuelta-route-chip",
-                  ),
-                  vueltaRouteMapEl = document.getElementById(
-                    "confirm-vuelta-route-map",
-                  ),
-                  vueltaRouteToggleBtn = document.getElementById(
-                    "confirm-vuelta-route-toggle",
-                  ),
-                  vueltaRouteContainerEl = document.getElementById(
-                    "confirm-vuelta-route-container",
-                  ),
-                  hasVueltaGeometry =
-                    Array.isArray(currentReturnRouteOverviewPath) &&
-                    currentReturnRouteOverviewPath.length > 0 &&
-                    currentReturnRouteStartLocation &&
-                    currentReturnRouteEndLocation;
-                if (
-                  (vueltaRouteChipEl &&
-                    "number" == typeof currentBookingDetails.returnDistanceKm &&
-                    currentBookingDetails.returnDurationText &&
-                    (vueltaRouteChipEl.textContent = `${currentBookingDetails.returnDistanceKm.toFixed(1)} km · ${currentBookingDetails.returnDurationText}`),
-                  vueltaRouteMapEl &&
-                    "number" == typeof currentBookingDetails.returnDistanceKm &&
-                    currentBookingDetails.returnDurationText &&
-                    vueltaRouteMapEl.setAttribute(
-                      "aria-label",
-                      `${currentBookingDetails.returnDistanceKm.toFixed(1)} km, ${currentBookingDetails.returnDurationText}`,
-                    ),
-                  vueltaRouteToggleBtn &&
-                    calcMsgs &&
-                    vueltaSection &&
-                    hasVueltaGeometry &&
-                    vueltaRouteContainerEl &&
-                    vueltaRouteMapEl)
-                ) {
-                  const label =
-                    calcMsgs.viewReturnRouteButton || calcMsgs.viewRouteButton;
-                  (label &&
-                    (vueltaRouteToggleBtn.innerHTML = `${label} <span class="route-toggle-icon">&#9662;</span>`),
-                    (vueltaRouteToggleBtn.style.display = ""),
-                    vueltaRouteContainerEl.classList.remove("visible"),
-                    vueltaRouteContainerEl.setAttribute("aria-hidden", "true"),
-                    createConfirmationRouteToggle({
-                      toggleButton: vueltaRouteToggleBtn,
-                      container: vueltaRouteContainerEl,
-                      mapElement: vueltaRouteMapEl,
-                      chipElement: vueltaRouteChipEl,
-                      isReturn: !0,
-                    }));
-                } else
-                  vueltaRouteToggleBtn &&
-                    vueltaRouteContainerEl &&
-                    (vueltaRouteContainerEl.classList.remove("visible"),
-                    vueltaRouteContainerEl.setAttribute("aria-hidden", "true"));
-                vueltaSection && (vueltaSection.style.display = "block");
-              }
-              const additionalTripsSection = document.getElementById(
-                "confirm-additional-trips-section",
-              );
-              additionalTripsSection &&
-                ((additionalTripsSection.innerHTML = ""),
-                Array.isArray(window.additionalTrips) && window.additionalTrips.length > 0
-                  ? ((additionalTripsSection.style.display = "block"),
-                    window.additionalTrips.forEach((trip, index) => {
-                      const tripNumber = index + 1,
-                        tripSection = document.createElement("div");
-                      ((tripSection.className = "additional-trip-confirmation"),
-                        (tripSection.style.marginTop = "1.5rem"),
-                        (tripSection.style.paddingTop = "1.5rem"),
-                        (tripSection.style.borderTop = "1px solid #dee2e6"));
-                      const originLabel = buildShortAddressLabel(
-                          trip.origin || "",
-                        ),
-                        destinationLabel = buildShortAddressLabel(
-                          trip.destination || "",
-                        );
-                      let formattedAdditionalDate =
-                        trip.date || confirmMsgs.notAvailable;
-                      if (trip.date && trip.date.includes("-")) {
-                        const parts = trip.date.split("-");
-                        if (3 === parts.length) {
-                          const [yyyy, mm, dd] = parts;
-                          formattedAdditionalDate = `${dd}/${mm}/${yyyy}`;
-                        }
-                      }
-                      const formattedAdditionalTime =
-                          trip.time || confirmMsgs.notAvailable,
-                        tripId = trip.id || `additional-trip-${index}`,
-                        routeChipId = `confirm-additional-${tripId}-route-chip`,
-                        routeMapId = `confirm-additional-${tripId}-route-map`,
-                        routeToggleBtnId = `confirm-additional-${tripId}-route-toggle`,
-                        routeContainerId = `confirm-additional-${tripId}-route-container`;
-                      ((tripSection.innerHTML = `
-            <h3 class="confirmation-section-title">Trayecto adicional ${tripNumber}</h3>
-            <div class="confirmation-field-row"><strong>Origen:</strong> <span id="confirm-additional-${tripId}-origen">${originLabel}</span></div>
-            <div class="confirmation-field-row"><strong>Destino:</strong> <span id="confirm-additional-${tripId}-destino">${destinationLabel}</span></div>
-            <div class="confirmation-field-row"><strong>Fecha y hora:</strong> <span id="confirm-additional-${tripId}-datetime">${formattedAdditionalDate}${confirmMsgs.atTimeConnector}${formattedAdditionalTime}</span></div>
-            <div class="confirmation-field-row"><strong>Precio:</strong> <span id="confirm-additional-${tripId}-precio">${formatPrice(trip.price || 0)}</span></div>
-
-            <div class="confirmation-route-wrapper">
-              <div
-                id="${routeContainerId}"
-                class="route-map-container confirmation-route-map-container visible">
-                <div class="route-map-info">
-                  <div class="route-map-chip">
-                    <span class="route-map-chip-main" id="${routeChipId}"></span>
-                  </div>
-                </div>
-                <div
-                  id="${routeMapId}"
-                  class="route-map"
-                  role="img"
-                  aria-label="Mapa del trayecto adicional ${tripNumber}"></div>
-              </div>
-            </div>
-          `),
-                        additionalTripsSection.appendChild(tripSection));
-                      const routeChipEl = document.getElementById(routeChipId),
-                        routeMapEl = document.getElementById(routeMapId),
-                        routeToggleBtnEl =
-                          document.getElementById(routeToggleBtnId),
-                        routeContainerEl =
-                          document.getElementById(routeContainerId);
-                      (routeChipEl &&
-                        "number" == typeof trip.distance &&
-                        trip.duration &&
-                        (routeChipEl.textContent = `${trip.distance.toFixed(1)} km · ${trip.duration}`),
-                        routeMapEl &&
-                          "number" == typeof trip.distance &&
-                          trip.duration &&
-                          routeMapEl.setAttribute(
-                            "aria-label",
-                            `${trip.distance.toFixed(1)} km, ${trip.duration}`,
-                          ));
-                      const hasGeometry =
-                        Array.isArray(trip.overview_path) &&
-                        trip.overview_path.length > 0 &&
-                        trip.start_location &&
-                        trip.end_location;
-                      routeToggleBtnEl &&
-                      calcMsgs &&
-                      hasGeometry &&
-                      routeContainerEl &&
-                      routeMapEl
-                        ? ((routeToggleBtnEl.innerHTML = `${calcMsgs.viewRouteButton || "Ver ruta"} <span class="route-toggle-icon">&#9662;</span>`),
-                          (routeToggleBtnEl.style.display = ""),
-                          routeContainerEl.classList.remove("visible"),
-                          routeContainerEl.setAttribute("aria-hidden", "true"),
-                          createConfirmationRouteToggle({
-                            toggleButton: routeToggleBtnEl,
-                            container: routeContainerEl,
-                            mapElement: routeMapEl,
-                            chipElement: routeChipEl,
-                            isReturn: !1,
-                            isAdditional: !0,
-                            additionalTripIndex: index,
-                          }))
-                        : routeToggleBtnEl &&
-                          routeContainerEl &&
-                          ((routeToggleBtnEl.style.display = "none"),
-                          routeContainerEl.classList.remove("visible"),
-                          routeContainerEl.setAttribute("aria-hidden", "true"));
-                    }))
-                  : (additionalTripsSection.style.display = "none"));
-              const equipajeEl = document.getElementById("confirm-equipaje");
-              equipajeEl &&
-                (equipajeEl.textContent = `${confirmMsgs.luggageCabinLabel}: ${getElValue("maletas-cabina")}, ${confirmMsgs.luggageLargeLabel}: ${getElValue("maletas-grandes")}`);
-              const mascotaEl = document.getElementById("confirm-mascota");
-              mascotaEl &&
-                (mascotaEl.textContent =
-                  "yes" === getRadioValue("mascota")
-                    ? confirmMsgs.yes
-                    : confirmMsgs.no);
-              let sriTxt = confirmMsgs.no;
-              needsSRIYes?.checked &&
-                ((sriTxt = confirmMsgs.sriYes(
-                  getElValue("baby-seats"),
-                  getElValue("child-seats"),
-                )),
-                parseInt(getElValue("baby-seats"), 10) > 0 &&
-                  (sriTxt += `${confirmMsgs.sriAgeWeightPrefix}${getElValue("baby-age") || confirmMsgs.notAvailable}`));
-              const confirmSriEl = document.getElementById("confirm-sri");
-              confirmSriEl && (confirmSriEl.textContent = sriTxt);
-              const comentariosEl = document.getElementById(
-                "confirm-comentarios",
-              );
-              let comentariosText = getElValue("comentarios") || confirmMsgs.none;
-              
-              // Agregar información de vuelo/tren si existe
-              const flightTrainNumber = getElValue("flight-train-number");
-              const flightTrainTime = getElValue("flight-train-time");
-              const pickupKind = document.getElementById("flight-train-banner")?.dataset.pickupKind || "";
-              
-              if (flightTrainNumber || flightTrainTime) {
-                const parts = [];
-                if (flightTrainNumber) parts.push(`${confirmMsgs.flightNumberLabel}: ${flightTrainNumber}`);
-                if (flightTrainTime) parts.push(`${confirmMsgs.arrivalTimeLabel}: ${flightTrainTime}`);
-                if (parts.length) {
-                  const line = parts.join(" | ");
-                  comentariosText = comentariosText === confirmMsgs.none ? line : `${comentariosText}\n\n${line}`;
-                }
-              }
-              
-              comentariosEl && (comentariosEl.textContent = comentariosText);
-              const confirmTotalEl = document.getElementById("confirm-total");
-              confirmTotalEl &&
-                (confirmTotalEl.textContent = formatPrice(
-                  currentBookingDetails.finalTotalPrice,
-                ));
-            } catch (e) {
-              console.error("populateConfirmationModal failed:", e);
-            }
-          }
-          
-          try {
-            populateConfirmationModal();
-          } catch (e) {
-            console.error("populateConfirmationOverlay failed:", e);
-          }
           try {
             setTimeout(() => {
               try {
@@ -12869,16 +13036,10 @@ function loadGoogleMapsIfNeeded() {
         } catch (_) {}
         if (bookingForm) {
           try {
-            if ("function" == typeof bookingForm.requestSubmit)
-              return void bookingForm.requestSubmit();
-          } catch (_) {}
-          try {
             const ev = new Event("submit", { bubbles: !0, cancelable: !0 });
             bookingForm.dispatchEvent(ev);
           } catch (_) {
-            try {
-              bookingForm.submit();
-            } catch (_) {}
+            console.error("Error dispatching submit event");
           }
         } else
           console.error("Booking form not found when clicking final-book-btn");
@@ -14069,10 +14230,40 @@ function buildTemplateParamsForEmailJS() {
     });
   }
   let comentarios = get("comentarios") || "";
-  const flightTrainNumber = get("flight-train-number");
-  const flightTrainTime = get("flight-train-time");
+  const confirmationModal = document.querySelector("#booking-confirmation-overlay .confirmation-modal");
+  const flightTrainNumber = confirmationModal?.dataset.flightNumber || get("flight-train-number");
+  const flightTrainTime = confirmationModal?.dataset.flightTime || get("flight-train-time");
   const pickupKind =
-    document.getElementById("flight-train-banner")?.dataset.pickupKind || "";
+    confirmationModal?.dataset.pickupKind || "";
+  
+  // Agregar información de múltiples trayectos de vuelo/tren desde la variable global o dataset
+  let flightTrainTrips = [];
+  if (window.flightTrainTrips && window.flightTrainTrips.length > 0) {
+    flightTrainTrips = window.flightTrainTrips;
+  } else if (confirmationModal?.dataset.flightTrainTrips) {
+    try {
+      flightTrainTrips = JSON.parse(confirmationModal.dataset.flightTrainTrips);
+    } catch (e) {
+      flightTrainTrips = [];
+    }
+  }
+  
+  if (flightTrainTrips.length > 0) {
+    const confirmMsgs = getMessagesSection("confirmation") || {};
+    flightTrainTrips.forEach(trip => {
+      if (trip.flightNumber || trip.arrivalTime) {
+        const parts = [];
+        parts.push(`${trip.tripName}:`);
+        if (trip.flightNumber) parts.push(`${confirmMsgs.flightNumberLabel || "Número de vuelo"}: ${trip.flightNumber}`);
+        if (trip.arrivalTime) parts.push(`${confirmMsgs.arrivalTimeLabel || "Hora prevista de llegada"}: ${trip.arrivalTime}`);
+        if (parts.length) {
+          const line = parts.join(" | ");
+          comentarios = comentarios ? `${comentarios}\n\n${line}` : line;
+        }
+      }
+    });
+  }
+  
   if (flightTrainNumber || flightTrainTime) {
     const confirmMsgs = getMessagesSection("confirmation") || {};
     const parts = [];
