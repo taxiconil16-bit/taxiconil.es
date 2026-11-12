@@ -18,9 +18,22 @@
   async function fetchReviews() {
     try {
       const response = await fetch(`/.netlify/functions/google-reviews?lang=${lang}`);
+      if (!response.ok) {
+        // Si no está en Netlify (localhost), ignorar silenciosamente
+        if (response.status === 404) {
+          console.log('Netlify functions not available (expected on localhost)');
+          return null;
+        }
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       const data = await response.json();
       return data;
     } catch (error) {
+      // Ignorar errores en desarrollo/localhost
+      if (error.message.includes('404') || error.message.includes('Failed to fetch')) {
+        console.log('Reviews API not available (expected on localhost)');
+        return null;
+      }
       console.error('Error fetching reviews:', error);
       return null;
     }

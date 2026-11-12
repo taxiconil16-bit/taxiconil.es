@@ -11,12 +11,12 @@
     
     <!-- Performance Optimization -->
     <link rel="preload" as="image" href="https://taxiconil.es/IMG/PORTADA-TAXI-CONIL-1600.webp" fetchpriority="high">
-    <link rel="canonical" href="https://taxiconil.es/taxi-bahia-sur-conil" />
-    <link rel="alternate" hreflang="es-ES" href="https://taxiconil.es/taxi-bahia-sur-conil" />
-    <link rel="alternate" hreflang="en-GB" href="https://taxiconil.es/taxi-bahia-sur-conil-en" />
-    <link rel="alternate" hreflang="de-DE" href="https://taxiconil.es/taxi-bahia-sur-conil-de" />
-    <link rel="alternate" hreflang="fr-FR" href="https://taxiconil.es/taxi-bahia-sur-conil-fr" />
-    <link rel="alternate" hreflang="x-default" href="https://taxiconil.es/taxi-bahia-sur-conil" />
+    <link rel="canonical" href="https://taxiconil.es/es/taxi-bahia-sur-conil" />
+    <link rel="alternate" hreflang="es-ES" href="https://taxiconil.es/es/taxi-bahia-sur-conil" />
+    <link rel="alternate" hreflang="en-GB" href="https://taxiconil.es/en/taxi-bahia-sur-conil" />
+    <link rel="alternate" hreflang="de-DE" href="https://taxiconil.es/de/taxi-bahia-sur-conil" />
+    <link rel="alternate" hreflang="fr-FR" href="https://taxiconil.es/fr/taxi-bahia-sur-conil" />
+    <link rel="alternate" hreflang="x-default" href="https://taxiconil.es/es/taxi-bahia-sur-conil" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -765,7 +765,6 @@
             .desktop-only-guide { display: none !important; }
 
             body.landing-train-station .luxe-grid,
-            body.landing-train-station .pricing-cards,
             body.landing-train-station .commitment-grid {
                 grid-template-columns: 1fr !important;
                 gap: 18px !important;
@@ -939,7 +938,7 @@
             }
 
             body.landing-train-station .pricing-cards {
-                grid-template-columns: 1fr !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
             }
 
             body.landing-train-station a.btn-premium.btn-orange {
@@ -1801,7 +1800,7 @@
         <div class="hero-overlay"></div>
         <div class="container hero-inner">
             <span class="hero-tag">Servicio premium estación de tren</span>
-            <h1><span class="hero-title-top">Taxi</span> <span class="text-gold hero-title-bottom">Conil &harr; Estación de Tren Bahía Sur</span></h1>
+            <h1><span class="hero-title-top">Taxi</span> <span class="text-gold hero-title-bottom">Conil ⇄ Estación de Tren Bahía Sur</span></h1>
             <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 300; max-width: 800px; margin: 0 auto 3rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Traslado privado de alta gama. Puntualidad, discreción y una flota de primer nivel para un servicio líder en la Costa de la Luz.</p>
             <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
                 <a href="/?origen=Conil%20de%20la%20Frontera#calculadora" class="btn-premium btn-orange">Reservar ahora</a>
@@ -1864,6 +1863,34 @@
         <section class="section-padding reveal">
             <div class="container">
                 <div style="background: var(--primary); border-radius: 60px; padding: clamp(40px, 8vw, 100px); border: 1px solid rgba(212, 175, 55, 0.2); position: relative; overflow: hidden; box-shadow: var(--shadow-premium);">
+                    <style>
+                        @media (max-width: 480px) {
+                            .pricing-cards {
+                                gap: 5px !important;
+                            }
+                            .pricing-cards .glass-card {
+                                flex: 1 1 45% !important;
+                                min-width: auto !important;
+                                padding: 20px 10px !important;
+                                border-radius: 20px !important;
+                            }
+                            .pricing-cards .glass-card > div:first-child {
+                                top: 10px !important;
+                                font-size: 0.5rem !important;
+                                letter-spacing: 0.2px !important;
+                            }
+                            .pricing-cards .glass-card > div:nth-child(2) {
+                                font-size: 2.2rem !important;
+                                margin: 8px 0 !important;
+                            }
+                            .pricing-cards .glass-card > div:nth-child(2) span {
+                                font-size: 0.7rem !important;
+                            }
+                            .pricing-cards .glass-card > div:last-child {
+                                font-size: 0.55rem !important;
+                            }
+                        }
+                    </style>
                     <div class="float-anim" style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%); z-index: 1;"></div>
                     
                     <div style="text-align: center; position: relative; z-index: 10;">
@@ -1871,24 +1898,27 @@
                         <h2 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; margin: 1.5rem 0; letter-spacing: -2px; color: white;">Inversión en su <span class="text-gold">Tranquilidad</span></h2>
                         <p style="color: rgba(255,255,255,0.6); font-size: 1.25rem; max-width: 700px; margin: 0 auto 4rem; font-weight: 300;">Precios cerrados calculados desde nuestra base central. Sin suplementos inesperados, con la garantía de un servicio líder.</p>
                         
-                        <div class="pricing-cards" style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 4rem;">
-                            <div class="glass-card" style="flex: 1; min-width: 300px; padding: 60px 40px; border-radius: 40px; position: relative; transition: var(--transition); border-color: var(--accent);">
-                                <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; color: var(--accent); font-size: 0.75rem;">Tarifa diurna</div>
-                                <div style="font-size: 6rem; font-weight: 900; color: white; line-height: 1; margin: 20px 0;">50<span style="font-size: 2rem; vertical-align: super; color: var(--accent);">&euro;</span></div>
-                                <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-weight: 600;">Lunes a viernes (06:00 - 22:00)</div>
+                        <div class="pricing-cards" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 4rem;">
+                            <div class="glass-card" style="flex: 1; min-width: 120px; padding: 25px 15px; border-radius: 25px; position: relative; transition: var(--transition); border-color: var(--accent);">
+                                <div style="position: absolute; top: 12px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; color: var(--accent); font-size: 0.6rem;">Tarifa diurna</div>
+                                <div style="font-size: 3rem; font-weight: 900; color: white; line-height: 1; margin: 12px 0;">50<span style="font-size: 1rem; vertical-align: super; color: var(--accent);">&euro;</span></div>
+                                <div style="color: rgba(255,255,255,0.5); font-size: 0.7rem; font-weight: 600;">Lunes a viernes<br/>06:00 - 22:00</div>
                                 
                             </div>
                             
-                            <div class="glass-card" style="flex: 1; min-width: 300px; padding: 60px 40px; border-radius: 40px; position: relative; transition: var(--transition); border-color: var(--accent);">
-                                <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; color: var(--accent); font-size: 0.75rem;">Nocturna y festivos</div>
-                                <div style="font-size: 6rem; font-weight: 900; color: white; line-height: 1; margin: 20px 0;">57<span style="font-size: 2rem; vertical-align: super; color: var(--accent);">&euro;</span></div>
-                                <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-weight: 600;">22:00 - 06:00, sábados y festivos</div>
+                            <div class="glass-card" style="flex: 1; min-width: 120px; padding: 25px 15px; border-radius: 25px; position: relative; transition: var(--transition); border-color: var(--accent);">
+                                <div style="position: absolute; top: 12px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 800; color: var(--accent); font-size: 0.6rem;">Nocturna y festivos</div>
+                                <div style="font-size: 3rem; font-weight: 900; color: white; line-height: 1; margin: 12px 0;">57<span style="font-size: 1rem; vertical-align: super; color: var(--accent);">&euro;</span></div>
+                                <div style="color: rgba(255,255,255,0.5); font-size: 0.7rem; font-weight: 600;">22:00 - 06:00<br/>Sábados y festivos</div>
                                 
                             </div>
                         </div>
 
                         <a href="/?origen=Conil%20de%20la%20Frontera#calculadora" class="btn-premium btn-orange" style="padding: 1.5rem 4rem;">Calcular precio exacto <i class="fas fa-chevron-right" style="font-size: 0.9rem; margin-left: 10px;"></i></a>
-                        <p style="margin-top: 2.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.4); font-weight: 300; letter-spacing: 1px;">Tarifas calculadas para trayectos directos Conil Centro &rarr; Estación Bahía Sur.</p>
+                        <div style="margin-top: 2.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.4); font-weight: 300; letter-spacing: 1px; line-height: 1.6;">
+                            <p style="margin: 0;">Tarifas calculadas para trayectos directos Conil Centro ⇄ Estación Bahía Sur.</p>
+                            <p style="margin: 0.5rem 0 0;">Precios para vehículos de hasta 4 pasajeros.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2178,7 +2208,7 @@
                             <li style="display: flex; align-items: flex-start; gap: 12px;">
                                 <i class="fas fa-check-circle" style="color: var(--accent); margin-top: 5px;"></i>
                                 <div>
-                                    <a href="/taxi-bahia-sur-conil" style="color: white; text-decoration: none; font-weight: 700; border-bottom: 1px solid rgba(212,175,55,0.3); transition: var(--transition);">Información: Traslado Estación Bahía Sur</a>
+                                    <a href="/articulos/procedimiento-recogida-estacion-tren" style="color: white; text-decoration: none; font-weight: 700; border-bottom: 1px solid rgba(212,175,55,0.3); transition: var(--transition);">Nuestro servicio de recogida en estaciones de tren</a>
                                 </div>
                             </li>
                             <li style="display: flex; align-items: flex-start; gap: 12px;">
@@ -2232,7 +2262,7 @@
                     <a href="/trayectos-frecuentes" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Trayectos frecuentes</a>
                     <a href="/blog" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Blog</a>
                     <a href="/taxi-estacion-tren-cadiz-conil" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Traslado estación de tren Cádiz</a>
-                    <a href="/taxi-bahia-sur-conil" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Traslado estación de tren Bahía Sur</a>
+                    
                     <a href="/taxi-aeropuerto-gibraltar-conil" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Traslado aeropuerto de Gibraltar (GIB)</a>
                     <a href="/taxi-aeropuerto-jerez-conil" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Traslado aeropuerto de Jerez (XRY)</a>
                     <a href="/taxi-aeropuerto-sevilla-conil" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Traslado aeropuerto de Sevilla (SVQ)</a>

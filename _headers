@@ -103,3 +103,68 @@
 
 /IMG/*
   Cache-Control: public, max-age=31536000, immutable
+/fr/articulos/ruta-pueblos-blancos
+  X-Robots-Tag: noindex, follow
+
+/fr/articulos/ruta-pueblos-blancos.html
+  X-Robots-Tag: noindex, follow
+
+/articulos/de-articulos-que-ver-en-conil-new
+  X-Robots-Tag: noindex, follow
+
+/articulos/de-articulos-que-ver-en-conil-new.html
+  X-Robots-Tag: noindex, follow
+
+/articulos/de-articulos-santa-justa-conil-new
+  X-Robots-Tag: noindex, follow
+
+/articulos/de-articulos-santa-justa-conil-new.html
+  X-Robots-Tag: noindex, follow
+
+/articulos/de-articulos-ventajas-precio-cerrado-new
+  X-Robots-Tag: noindex, follow
+
+/articulos/de-articulos-ventajas-precio-cerrado-new.html
+  X-Robots-Tag: noindex, follow
+
+/articulos/en-articulos-que-ver-en-conil-new
+  X-Robots-Tag: noindex, follow
+
+/articulos/en-articulos-que-ver-en-conil-new.html
+  X-Robots-Tag: noindex, follow
+
+/articulos/en-articulos-santa-justa-conil-new
+  X-Robots-Tag: noindex, follow
+
+/articulos/en-articulos-santa-justa-conil-new.html
+  X-Robots-Tag: noindex, follow
+
+/articulos/en-articulos-ventajas-precio-cerrado-new
+  X-Robots-Tag: noindex, follow
+
+/articulos/en-articulos-ventajas-precio-cerrado-new.html
+  X-Robots-Tag: noindex, follow
+
+/articulos/en-articulos-viajar-con-ninos-seguridad-new
+  X-Robots-Tag: noindex, follow
+
+/articulos/en-articulos-viajar-con-ninos-seguridad-new.html
+  X-Robots-Tag: noindex, follow
+
+/articulos/ruta-pueblos-blancos-fr-new2
+  X-Robots-Tag: noindex, follow
+
+/articulos/ruta-pueblos-blancos-fr-new2.html
+  X-Robots-Tag: noindex, follow
+
+/articulos/ruta-pueblos-blancos-fr-new3
+  X-Robots-Tag: noindex, follow
+
+/articulos/ruta-pueblos-blancos-fr-new3.html
+  X-Robots-Tag: noindex, follow
+
+/articulos/ruta-pueblos-blancos-fr-new5
+  X-Robots-Tag: noindex, follow
+
+/articulos/ruta-pueblos-blancos-fr-new5.html
+  X-Robots-Tag: noindex, follow

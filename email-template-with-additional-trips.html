@@ -61,7 +61,7 @@
         <a href="https://wa.me/{{1.Telefono}}" class="btn btn-whatsapp"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/120px-WhatsApp.svg.png" class="icon" style="filter: brightness(0) invert(1);"> WhatsApp</a>
         <a href="mailto:{{1.email}}" class="btn btn-email">✉️ Email</a>
         
-        <a href="https://api.whatsapp.com/send?text=✅ *SERVICIO DE TAXI*%0A%0A👤 *Cliente:* _{{1.Nombre}}_%0A📞 *Teléfono:* {{1.Telefono}}%0A👥 *Pasajeros:* {{1.Pasajeros}}%0A🧳 *Equipaje:* {{1.Maletas_Cabina}}C/{{1.Maletas_Grandes}}G%0A{{if(1.SRI_Detalle; "%0A👶 *Sillas:* " + 1.SRI_Detalle; "")}}{{if(1.mascota; "%0A🐕 *Mascota:* " + 1.mascota; "")}}%0A%0A🚀 *IDA*%0A📅 _{{1.Fecha_Hora_Ida}}_%0A📍 {{1.Trayecto_Ida}}%0A💶 *{{1.Precio_Ida}}*%0A{{if(1.Trayecto_Vuelta; "%0A%0A🔄 *VUELTA*%0A📅 _" + 1.Fecha_Hora_Vuelta + "_%0A📍 " + 1.Trayecto_Vuelta + "%0A💶 *" + 1.Precio_Vuelta + "*"; "")}}{{if(1.additional_trips_whatsapp; "%0A%0A➕ *TRAYECTOS ADICIONALES*%0A" + 1.additional_trips_whatsapp; "")}}{{if(1.Comentarios; "%0A%0A📝 *Nota del cliente:*%0A_" + 1.Comentarios + "_"; "")}}%0A%0A💰 *TOTAL:* _{{if(1.Trayecto_Vuelta; 1.Precio_Total_Reserva; 1.Precio_Ida)}}_" class="btn btn-share btn-full">🚕 Pasar aviso a compañero</a>
+        <a href="https://api.whatsapp.com/send?text=✅ *SERVICIO DE TAXI*%0A%0A👤 *Cliente:* _{{1.Nombre}}_%0A📞 *Teléfono:* {{1.Telefono}}%0A👥 *Pasajeros:* {{1.Pasajeros}}%0A🧳 *Equipaje:* {{1.Maletas_Cabina}}C/{{1.Maletas_Grandes}}G%0A{{if(1.SRI_Detalle; "%0A👶 *Sillas:* " + 1.SRI_Detalle; "")}}{{if(1.mascota; "%0A🐕 *Mascota:* " + 1.mascota; "")}}%0A%0A🚀 *IDA*%0A📅 _{{1.Fecha_Hora_Ida}}_%0A📍 {{1.Trayecto_Ida}}%0A💶 *{{1.Precio_Ida}}*%0A{{if(1.Trayecto_Vuelta; "%0A%0A🔄 *VUELTA*%0A📅 _" + 1.Fecha_Hora_Vuelta + "_%0A📍 " + 1.Trayecto_Vuelta + "%0A💶 *" + 1.Precio_Vuelta + "*"; "")}}{{if(1.additional_trips_whatsapp; "%0A%0A➕ *TRAYECTOS ADICIONALES*%0A" + 1.additional_trips_whatsapp; "")}}{{if(1.Comentarios; "%0A%0A📝 *Nota del cliente:*%0A_" + 1.Comentarios + "_"; "")}}%0A%0A💰 *TOTAL:* _{{if(1.Trayecto_Vuelta; 1.Precio_Total_Reserva; 1.Precio_Ida)}}_" class="btn btn-share btn-full">🚕 Avisar a un compañero</a>
       </div>
 
       <h3>👤 Cliente</h3>
@@ -78,33 +78,33 @@
         <tr><td class="label">Origen/Destino</td><td class="value">{{1.Trayecto_Ida}}</td></tr>
         <tr><td class="label">Distancia</td><td class="value">{{1.Distancia_Ida}}</td></tr>
         <tr><td class="label">Duración</td><td class="value">{{1.Duracion_Ida}}</td></tr>
-        <tr><td class="label" style="color:#1a2a45; font-weight:800;">Precio Ida</td><td class="value highlight-price">{{1.Precio_Ida}}</td></tr>
+        <tr><td class="label" style="color:#1a2a45; font-weight:800;">Precio de ida</td><td class="value highlight-price">{{1.Precio_Ida}}</td></tr>
       </table>
       <a href="{{1.Calendar_Link_Ida}}" class="btn-calendar-full">📅 Añadir Ida al Calendario</a>
 
-      {{if(1.Trayecto_Vuelta; "<h3>🔄 Vuelta</h3><table class='data-table'><tr><td class='label'>Fecha/Hora</td><td class='value highlight-date'>" + 1.Fecha_Hora_Vuelta + "</td></tr><tr><td class='label'>Origen/Destino</td><td class='value'>" + 1.Trayecto_Vuelta + "</td></tr><tr><td class='label'>Distancia</td><td class='value'>" + 1.Distancia_Vuelta + "</td></tr><tr><td class='label'>Duración</td><td class='value'>" + 1.Duracion_Vuelta + "</td></tr><tr><td class='label' style='color:#1a2a45; font-weight:800;'>Precio Vuelta</td><td class='value highlight-price'>" + 1.Precio_Vuelta + "</td></tr></table><a href='" + 1.Calendar_Link_Vuelta + "' class='btn-calendar-full'>📅 Añadir Vuelta al Calendario</a>"; )}}
+      {{if(1.Trayecto_Vuelta; "<h3>🔄 Vuelta</h3><table class='data-table'><tr><td class='label'>Fecha/hora</td><td class='value highlight-date'>" + 1.Fecha_Hora_Vuelta + "</td></tr><tr><td class='label'>Origen/destino</td><td class='value'>" + 1.Trayecto_Vuelta + "</td></tr><tr><td class='label'>Distancia</td><td class='value'>" + 1.Distancia_Vuelta + "</td></tr><tr><td class='label'>Duración</td><td class='value'>" + 1.Duracion_Vuelta + "</td></tr><tr><td class='label' style='color:#1a2a45; font-weight:800;'>Precio de vuelta</td><td class='value highlight-price'>" + 1.Precio_Vuelta + "</td></tr></table><a href='" + 1.Calendar_Link_Vuelta + "' class='btn-calendar-full'>📅 Añadir vuelta al calendario</a>"; )}}
 
       {{if(1.additional_trips; "<h3>➕ Trayectos Adicionales</h3>" + 1.additional_trips; "")}}
 
       <h3>🧳 Extras y Notas</h3>
       <table class="data-table">
-        <tr><td class="label">Equipaje</td><td class="value">{{1.Maletas_Cabina}} Cabina / {{1.Maletas_Grandes}} Grandes</td></tr>
+        <tr><td class="label">Equipaje</td><td class="value">{{1.Maletas_Cabina}} de cabina / {{1.Maletas_Grandes}} grandes</td></tr>
         {{if(1.mascota; "<tr><td class='label'>Mascota</td><td class='value'>" + 1.mascota + "</td></tr>"; )}}
         {{if(1.SRI_Detalle; "<tr><td class='label'>Sillas (SRI)</td><td class='value'>" + 1.SRI_Detalle + "</td></tr>"; )}}
-        {{if(1.Edad_Peso_Bebe; "<tr><td class='label'>Info Bebé</td><td class='value'>" + 1.Edad_Peso_Bebe + "</td></tr>"; )}}
+        {{if(1.Edad_Peso_Bebe; "<tr><td class='label'>Datos del bebé</td><td class='value'>" + 1.Edad_Peso_Bebe + "</td></tr>"; )}}
       </table>
 
       {{if(1.Comentarios; "<div class='notes-box'><strong>⚠️ Nota del cliente:</strong><br>" + 1.Comentarios + "</div>"; )}}
 
       <div class="total-box">
-        <div class="total-title">Total a Cobrar</div>
+        <div class="total-title">Total por cobrar</div>
         <div class="total-price">{{if(1.Trayecto_Vuelta; 1.Precio_Total_Reserva; 1.Precio_Ida)}}</div>
       </div>
     </div>
 
     <div class="footer">
       <p><strong>REGISTRO DE SEGURIDAD</strong></p>
-      <p>📅 Fecha Reserva (AC): {{1.current_date}}</p>
+      <p>📅 Fecha de reserva (AC): {{1.current_date}}</p>
     </div>
   </div>
 </body>

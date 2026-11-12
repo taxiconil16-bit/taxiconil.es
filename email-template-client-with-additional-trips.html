@@ -54,13 +54,13 @@
     <div class="email-content">
       <p>Estimado/a <strong>{{1.Nombre}}</strong>:</p>
       
-      <p>Agradecemos su solicitud de reserva. A continuación, le ofrecemos el resumen de su servicio:</p>
+      <p>Su reserva está confirmada. A continuación, encontrará el resumen de su servicio:</p>
 
       <h3>Información del cliente</h3>
       <div class="info-box">
         <div class="info-row"><span class="label">Nombre:</span> {{1.Nombre}}</div>
         <div class="info-row"><span class="label">Teléfono:</span> {{1.Telefono}}</div>
-        <div class="info-row"><span class="label">Email:</span> {{1.email}}</div>
+        <div class="info-row"><span class="label">Correo electrónico:</span> {{1.email}}</div>
         <div class="info-row"><span class="label">Pasajeros:</span> {{1.Pasajeros}}</div>
       </div>
 
@@ -71,14 +71,14 @@
         <div class="info-row"><span class="label">Distancia:</span> {{1.Distancia_Ida}}</div>
         <div class="info-row"><span class="label">Duración:</span> {{1.Duracion_Ida}}</div>
         <div class="info-row" style="margin-top:5px; border-top:1px dashed #ccc; padding-top:5px;">
-          <span class="label">Precio Ida:</span> {{1.Precio_Ida}}
+          <span class="label">Precio de ida:</span> {{1.Precio_Ida}}
         </div>
         <div class="calendar-wrapper">
             <a href="{{1.Calendar_Link_Ida}}" class="btn-calendar-slim">📅 Añadir a mi agenda</a>
         </div>
       </div>
 
-      {{if(1.Trayecto_Vuelta; "<h3>Trayecto de vuelta</h3><div class='info-box'><div class='info-row'><span class='label'>Trayecto:</span> " + 1.Trayecto_Vuelta + "</div><div class='info-row'><span class='label'>Fecha/Hora:</span> " + 1.Fecha_Hora_Vuelta + "</div><div class='info-row'><span class='label'>Distancia:</span> " + 1.Distancia_Vuelta + "</div><div class='info-row'><span class='label'>Duración:</span> " + 1.Duracion_Vuelta + "</div><div class='info-row' style='margin-top:5px; border-top:1px dashed #ccc; padding-top:5px;'><span class='label'>Precio Vuelta:</span> " + 1.Precio_Vuelta + "</div><div class='calendar-wrapper'><a href='" + 1.Calendar_Link_Vuelta + "' class='btn-calendar-slim'>📅 Añadir a mi agenda</a></div></div>"; )}}
+      {{if(1.Trayecto_Vuelta; "<h3>Trayecto de vuelta</h3><div class='info-box'><div class='info-row'><span class='label'>Trayecto:</span> " + 1.Trayecto_Vuelta + "</div><div class='info-row'><span class='label'>Fecha/hora:</span> " + 1.Fecha_Hora_Vuelta + "</div><div class='info-row'><span class='label'>Distancia:</span> " + 1.Distancia_Vuelta + "</div><div class='info-row'><span class='label'>Duración:</span> " + 1.Duracion_Vuelta + "</div><div class='info-row' style='margin-top:5px; border-top:1px dashed #ccc; padding-top:5px;'><span class='label'>Precio de vuelta:</span> " + 1.Precio_Vuelta + "</div><div class='calendar-wrapper'><a href='" + 1.Calendar_Link_Vuelta + "' class='btn-calendar-slim'>📅 Añadir a mi agenda</a></div></div>"; )}}
 
       {{if(1.additional_trips; "<h3>Trayectos adicionales</h3>" + 1.additional_trips; "")}}
 
@@ -88,9 +88,9 @@
         
         {{if(1.mascota; "<div class='info-row'><span class='label'>Mascota:</span> " + 1.mascota + "</div>"; )}}
         
-        {{if(1.SRI_Detalle; "<div class='info-row'><span class='label'>SRI (Sillas):</span> " + 1.SRI_Detalle + "</div>"; )}}
+        {{if(1.SRI_Detalle; "<div class='info-row'><span class='label'>Sillas infantiles (SRI):</span> " + 1.SRI_Detalle + "</div>"; )}}
         
-        {{if(1.Edad_Peso_Bebe; "<div class='info-row'><span class='label'>Edad/Peso bebé:</span> " + 1.Edad_Peso_Bebe + "</div>"; )}}
+        {{if(1.Edad_Peso_Bebe; "<div class='info-row'><span class='label'>Edad/peso del bebé:</span> " + 1.Edad_Peso_Bebe + "</div>"; )}}
 
         {{if(1.Comentarios; "<div class='info-row' style='margin-top:10px; border-top:1px solid #eee; padding-top:10px;'><span class='label'>Anotaciones:</span><br>" + 1.Comentarios + "</div>"; )}}
       </div>
@@ -111,7 +111,7 @@
 
       <div class="contact-section">
         <p style="margin-bottom: 20px;">
-          Para realizar cambios en su reserva o resolver dudas, pulse sobre su opción preferente:
+          Para realizar cambios en su reserva o resolver dudas, seleccione el canal que prefiera:
         </p>
         
         <a href="https://api.whatsapp.com/send?phone=34670705774" class="btn btn-whatsapp" target="_blank">
@@ -126,7 +126,7 @@
 
         <a href="mailto:taxiconil16@gmail.com" class="btn btn-gmail">
           <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" class="icon-img" width="24" height="24">
-          <span class="btn-text">Correo electronico</span>
+          <span class="btn-text">Correo electrónico</span>
         </a>
       </div>
 

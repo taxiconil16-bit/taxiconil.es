@@ -320,6 +320,15 @@ const server = http.createServer((req, res) => {
       pathname = `${pathname}.html`;
     }
   }
+  
+  // 3. Additional fallback: if still doesn't exist, try the path with .html in subdirectories
+  if (!fs.existsSync(pathname)) {
+    // For taxi pages in language folders, try with .html extension
+    const htmlPath = `${pathname}.html`;
+    if (fs.existsSync(htmlPath)) {
+      pathname = htmlPath;
+    }
+  }
 
   // Fallback for root
   if (decodedPathname === '/' && !fs.existsSync(pathname)) {
@@ -348,6 +357,7 @@ const server = http.createServer((req, res) => {
         const hostHeader = (req.headers && req.headers.host) ? String(req.headers.host) : '';
         const isLocalHost = tcHostHeaderIsLocalDev(hostHeader);
         if (isLocalHost) {
+          // Force UTF-8 decoding
           let html = data.toString('utf8');
           // Replace absolute production URLs with relative ones for local testing
           html = html.replaceAll('https://taxiconil.es/', '/');

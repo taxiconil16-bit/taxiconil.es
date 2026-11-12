@@ -1510,7 +1510,7 @@ input[type=tel]:focus,input[type=tel]:focus-visible {
     padding: 2rem 2.5rem;
     border-top: 1px solid rgba(0,0,0,0.06);
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     gap: 1.5rem;
     align-items: center;
     flex-wrap: wrap;
@@ -2599,6 +2599,12 @@ input[type=tel]:focus,input[type=tel]:focus-visible {
         height:180px !important;
     }
 
+    /* Mapas en el modal de confirmación - altura mayor para mejor visibilidad */
+    .confirmation-modal .route-map,
+    .confirmation-modal [id$="-route-map"] {
+        height: 220px !important;
+    }
+
     .confirmation-modal {
         height: 100dvh !important;
         max-height: 100vh !important;
@@ -2715,9 +2721,13 @@ input[type=tel]:focus,input[type=tel]:focus-visible {
 }
 
 .min-price-note {
-    margin-top: 1.75rem;
-    padding-top: .9rem;
-    border-top: 1px solid rgba(255,255,255,.25)
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,.25);
+    font-size: 0.9rem;
+    color: #ccc;
+    font-style: italic;
+    text-align: center
 }
 
 .min-price-buttons {
@@ -2732,11 +2742,11 @@ input[type=tel]:focus,input[type=tel]:focus-visible {
     padding: 12px 28px
 }
 
-#cancel-min-price-btn,#return-min-cancel-btn {
+#cancel-min-price-btn,#return-min-cancel-btn,#additional-min-cancel-btn {
     order: 1
 }
 
-#continue-min-price-btn,#return-min-accept-btn {
+#continue-min-price-btn,#return-min-accept-btn,#additional-min-accept-btn {
     order: 2;
     animation: heroPulse 2s infinite ease-in-out
 }
@@ -2756,11 +2766,11 @@ input[type=tel]:focus,input[type=tel]:focus-visible {
         gap: .75rem
     }
 
-    #continue-min-price-btn,#return-min-accept-btn {
+    #continue-min-price-btn,#return-min-accept-btn,#additional-min-accept-btn {
         order: 1
     }
 
-    #cancel-min-price-btn,#return-min-cancel-btn {
+    #cancel-min-price-btn,#return-min-cancel-btn,#additional-min-cancel-btn {
         order: 2
     }
 
@@ -2769,6 +2779,19 @@ input[type=tel]:focus,input[type=tel]:focus-visible {
         font-size: .9rem;
         padding: 12px 16px;
         min-height: 44px
+    }
+
+    .flight-train-modal .modal-content > div:last-child {
+        gap: .75rem !important
+    }
+
+    .flight-train-modal .modal-content > div:last-child .btn {
+        min-width: 0;
+        min-height: 44px;
+        padding: 12px 10px;
+        font-size: .85rem;
+        line-height: 1.2;
+        white-space: normal
     }
 
     .calculation-buttons {
@@ -2783,13 +2806,13 @@ input[type=tel]:focus,input[type=tel]:focus-visible {
         min-height: 44px
     }
 
-    #confirm-return-btn,#continue-booking-btn {
+    #confirm-return-btn,#continue-booking-btn,#confirm-additional-trip-btn {
         order: 1;
         font-size: .95rem;
         padding: 12px 18px
     }
 
-    #cancel-calc-btn,#cancel-return-btn {
+    #cancel-calc-btn,#cancel-return-btn,#cancel-additional-trip-btn {
         order: 2
     }
 

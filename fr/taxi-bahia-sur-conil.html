@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="fr-FR">
 <head>
         
@@ -30,12 +30,12 @@
     
     <!-- Performance Optimization -->
     <link rel="preload" as="image" href="/IMG/PORTADA-TAXI-CONIL-1600.webp" fetchpriority="high">
-    <link rel="canonical" href="https://taxiconil.es/taxi-bahia-sur-conil-fr" />
-    <link rel="alternate" hreflang="es-ES" href="https://taxiconil.es/taxi-bahia-sur-conil" />
-    <link rel="alternate" hreflang="en-GB" href="https://taxiconil.es/taxi-bahia-sur-conil-en" />
-    <link rel="alternate" hreflang="de-DE" href="https://taxiconil.es/taxi-bahia-sur-conil-de" />
-    <link rel="alternate" hreflang="fr-FR" href="https://taxiconil.es/taxi-bahia-sur-conil-fr" />
-    <link rel="alternate" hreflang="x-default" href="https://taxiconil.es/taxi-bahia-sur-conil" />
+    <link rel="canonical" href="https://taxiconil.es/fr/taxi-bahia-sur-conil" />
+    <link rel="alternate" hreflang="es-ES" href="https://taxiconil.es/es/taxi-bahia-sur-conil" />
+    <link rel="alternate" hreflang="en-GB" href="https://taxiconil.es/en/taxi-bahia-sur-conil" />
+    <link rel="alternate" hreflang="de-DE" href="https://taxiconil.es/de/taxi-bahia-sur-conil" />
+    <link rel="alternate" hreflang="fr-FR" href="https://taxiconil.es/fr/taxi-bahia-sur-conil" />
+    <link rel="alternate" hreflang="x-default" href="https://taxiconil.es/es/taxi-bahia-sur-conil" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
@@ -101,7 +101,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; background-color: #0f172a; }
+        html { scroll-behavior: smooth; background-color: #0f172a; overflow-x: hidden; }
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-body);
@@ -1217,7 +1217,7 @@
             }
 
             body.landing-train-station .luxe-grid,
-            body.landing-train-station .pricing-cards,
+
             body.landing-train-station .commitment-grid {
                 grid-template-columns: 1fr !important;
                 gap: 18px !important;
@@ -1261,7 +1261,7 @@
             }
 
             body.landing-train-station .pricing-cards {
-                grid-template-columns: 1fr !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
             }
 
             body.landing-train-station a.btn-premium.btn-orange {
@@ -1396,7 +1396,7 @@
             line-height: 1.6;
         }
     </style>
-    <link rel="stylesheet" href="/css/google-reviews.css">
+    <link rel="stylesheet" href="/css/google-reviews.css?v=20261028_1">
 
     <!-- JSON-LD Amélioré avec Expériences Premium -->
     <script type="application/ld+json">
@@ -1589,7 +1589,8 @@
             "@type": "Organization",
             "name": "Taxi Conil 24h"
           },
-          "category": "Service de Transport de Luxe",
+          "category": "Service de Transport de Luxe"
+
           },
         {
           "@type": "WebPage",
@@ -1635,7 +1636,7 @@
               "name": "Que se passe-t-il si mon train arrive en retard ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Ne vous inquiétez pas. Nous utilisons le numéro de train pour surveiller le statut en temps réel. S'il y a un retard, nous ajustons automatiquement l'heure de récupération et vous attendons sans coût supplémentaire."
+                "text": "Ne vous inquiétez pas. Nous utilisons le numéro de train pour surveiller le statut en temps réel. S'il y a un retard, nous ajustons automatiquement l'heure de prise en charge et vous attendons sans coût supplémentaire."
               }
             },
             {
@@ -1767,7 +1768,7 @@
     position: absolute !important;
   }
 </style>
-<link rel="stylesheet" href="/css/google-reviews.css">
+<link rel="stylesheet" href="/css/google-reviews.css?v=20261028_1">
 </head>
 
 <body class="landing-train-station">
@@ -1798,7 +1799,7 @@
         <div class="hero-overlay"></div>
         <div class="container hero-inner">
             <span class="hero-tag">Service gare VIP</span>
-            <h1><span class="hero-title-top">Taxi</span> <span class="text-gold hero-title-bottom">Conil &harr; Gare de Bahía Sur</span></h1>
+            <h1><span class="hero-title-top">Taxi</span> <span class="text-gold hero-title-bottom">Conil <span style="display: inline-block; vertical-align: middle; margin: 0 0.25em; font-size: 0.8em; position: relative; top: -0.2em;">⇄</span> Gare de Bahía Sur</span></h1>
             <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 300; max-width: 800px; margin: 0 auto 3rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Transfert privé haut de gamme : ponctualité, discrétion et véhicule de premier plan pour un service de référence sur la Costa de la Luz.</p>
             <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
                 <a href="/fr/?destino=Gare%20de%20Bah%C3%ADa%20Sur#calculadora" class="btn-premium btn-orange" style="padding: 1.5rem 4rem;">Calculer le prix exact <i class="fas fa-chevron-right" style="font-size: 0.9rem; margin-left: 10px;"></i></a>
@@ -1829,7 +1830,7 @@
                     <span class="hero-tag" style="background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); color: var(--accent); padding: 10px 28px; border-radius: 50px; text-transform: uppercase; letter-spacing: 4px; font-size: 0.85rem; font-weight: 800;">Excellence Garantie</span>
                     <h2 style="font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; letter-spacing: -3px; line-height: 1; margin-top: 2rem;">Engagement pour <br><span class="text-gold">la Perfection</span></h2>
                     <div class="luxury-line"></div>
-                    <p style="color: var(--text-muted); font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 300; margin-top: 1.5rem;">Spécialistes des transferts privés depuis la gare Bahía Sur jusqu'à votre destination à Conil de la Frontera.</p>
+                    <p style="color: var(--text-muted); font-size: clamp(1.1rem, 2.5vw, 1.4rem); font-weight: 300; margin-top: 1.5rem;">Spécialistes des transferts privés entre Conil de la Frontera et la gare de Bahía Sur.</p>
                 </div>
 
                 <div class="luxe-grid reveal">
@@ -1872,18 +1873,21 @@
                             <div class="glass-card" style="flex: 1; min-width: 300px; padding: 60px 40px; border-radius: 40px; position: relative; transition: var(--transition); border-color: var(--accent);">
                                 <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; color: var(--accent); font-size: 0.75rem;">Tarif jour</div>
                                 <div style="font-size: 6rem; font-weight: 900; color: white; line-height: 1; margin: 20px 0;">50<span style="font-size: 2rem; vertical-align: super; color: var(--accent);">&euro;</span></div>
-                                <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-weight: 600;">Lundi au vendredi (06:00 - 22:00)</div>
+                                <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-weight: 600;">Lundi au vendredi<br/>06:00 - 22:00</div>
                             </div>
                             
                             <div class="glass-card" style="flex: 1; min-width: 300px; padding: 60px 40px; border-radius: 40px; position: relative; transition: var(--transition); border-color: var(--accent);">
-                                <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; color: var(--accent); font-size: 0.75rem;">Nuit et jours fériés</div>
+                                <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; color: var(--accent); font-size: 0.75rem;">Nuit et jours f&eacute;ri&eacute;s</div>
                                 <div style="font-size: 6rem; font-weight: 900; color: white; line-height: 1; margin: 20px 0;">57<span style="font-size: 2rem; vertical-align: super; color: var(--accent);">&euro;</span></div>
-                                <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-weight: 600;">22:00 - 06:00, samedis et jours fériés</div>
+                                <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-weight: 600;">22:00 - 06:00<br/>Samedis et jours f&eacute;ri&eacute;s</div>
                             </div>
                         </div>
 
                         <a href="/fr/?destino=Gare%20de%20Bah%C3%ADa%20Sur#calculadora" class="btn-premium btn-orange" style="padding: 1.5rem 4rem;">Calculer le prix exact <i class="fas fa-chevron-right" style="font-size: 0.9rem; margin-left: 10px;"></i></a>
-                        <p style="margin-top: 2.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.4); font-weight: 300; letter-spacing: 1px;">Tarifs calculés pour des trajets directs Conil Centre &rarr; Gare de Bahía Sur.</p>
+                        <div style="margin-top: 2.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.4); font-weight: 300; letter-spacing: 1px; 'ine-height: 1.6;">
+                            <p style="margin: 0;">Tarifs calcul&eacute;s pour les trajets directs : centre de Conil ⇄ gare de Bah&iacute;a Sur.</p>
+                            <p style="margin: 0.5rem 0 0;">Prix pour les v&eacute;hicules jusqu'&agrave; 4 passagers.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2174,7 +2178,7 @@
                             <li style="display: flex; align-items: flex-start; gap: 12px;">
                                 <i class="fas fa-check-circle" style="color: var(--accent); margin-top: 5px;"></i>
                                 <div>
-                                    <a href="/taxi-bahia-sur-conil-fr" style="color: white; text-decoration: none; font-weight: 700; border-bottom: 1px solid rgba(212,175,55,0.3); transition: var(--transition);">Informations détaillées : Transfert Gare Bahía Sur</a>
+                                    <a href="/fr/articulos/comment-nous-vous-recuperons-a-la-gare" style="color: white; text-decoration: none; font-weight: 700; border-bottom: 1px solid rgba(212,175,55,0.3); transition: var(--transition);">Notre service de prise en charge à la gare</a>
                                 </div>
                             </li>
                             <li style="display: flex; align-items: flex-start; gap: 12px;">
@@ -2230,7 +2234,7 @@
                     <h3 style="color: var(--accent); margin-bottom: 2rem; font-size: 1.2rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Pour vous, voyageur</h3>
                     <a href="/trayectos-frecuentes-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Trajets fréquents</a>
                     <a href="/blog-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Blog</a>
-                    <a href="/taxi-bahia-sur-conil-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Transfert gare Bahía Sur</a>
+                    
                     <a href="/taxi-estacion-tren-cadiz-conil-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Transfert gare de Cadix</a>
                     <a href="/taxi-aeropuerto-gibraltar-conil-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Transfert aéroport de Gibraltar (GIB)</a>
                     <a href="/taxi-aeropuerto-jerez-conil-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Transfert aéroport de Jerez (XRY)</a>

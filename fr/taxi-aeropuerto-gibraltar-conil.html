@@ -33,12 +33,12 @@
     
     <!-- Performance Optimization -->
     <link rel="preload" as="image" href="/IMG/PORTADA-TAXI-CONIL-1600.webp" fetchpriority="high">
-    <link rel="canonical" href="https://taxiconil.es/taxi-aeropuerto-gibraltar-conil-fr" />
-    <link rel="alternate" hreflang="es-ES" href="https://taxiconil.es/taxi-aeropuerto-gibraltar-conil" />
-    <link rel="alternate" hreflang="en-GB" href="https://taxiconil.es/taxi-aeropuerto-gibraltar-conil-en" />
-    <link rel="alternate" hreflang="de-DE" href="https://taxiconil.es/taxi-aeropuerto-gibraltar-conil-de" />
-    <link rel="alternate" hreflang="fr-FR" href="https://taxiconil.es/taxi-aeropuerto-gibraltar-conil-fr" />
-    <link rel="alternate" hreflang="x-default" href="https://taxiconil.es/taxi-aeropuerto-gibraltar-conil" />
+    <link rel="canonical" href="https://taxiconil.es/fr/taxi-aeropuerto-gibraltar-conil" />
+    <link rel="alternate" hreflang="es-ES" href="https://taxiconil.es/es/taxi-aeropuerto-gibraltar-conil" />
+    <link rel="alternate" hreflang="en-GB" href="https://taxiconil.es/en/taxi-aeropuerto-gibraltar-conil" />
+    <link rel="alternate" hreflang="de-DE" href="https://taxiconil.es/de/taxi-aeropuerto-gibraltar-conil" />
+    <link rel="alternate" hreflang="fr-FR" href="https://taxiconil.es/fr/taxi-aeropuerto-gibraltar-conil" />
+    <link rel="alternate" hreflang="x-default" href="https://taxiconil.es/es/taxi-aeropuerto-gibraltar-conil" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
 
@@ -1228,7 +1228,7 @@
             }
 
             body.landing-airport .luxe-grid,
-            body.landing-airport .pricing-cards,
+
             body.landing-airport .commitment-grid {
                 grid-template-columns: 1fr !important;
                 gap: 18px !important;
@@ -1274,7 +1274,7 @@
             }
 
             body.landing-airport .pricing-cards {
-                grid-template-columns: 1fr !important;
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
             }
 
             body.landing-airport a.btn-premium.btn-orange {
@@ -1605,7 +1605,6 @@
           "aggregateRating": {
             "@type": "AggregateRating",
             "ratingValue": "4.9",
-            ,
             "bestRating": "5",
             "worstRating": "1"
           }
@@ -1654,7 +1653,7 @@
               "name": "Que se passe-t-il si mon vol arrive en retard ?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Ne vous inquiétez pas. Nous utilisons le numéro de vol pour surveiller le statut en temps réel. S'il y a un retard, nous ajustons automatiquement l'heure de récupération et vous attendons sans coût supplémentaire."
+                "text": "Ne vous inquiétez pas. Nous utilisons le numéro de vol pour surveiller le statut en temps réel. S'il y a un retard, nous ajustons automatiquement l'heure de prise en charge et vous attendons sans coût supplémentaire."
               }
             },
             {
@@ -1818,7 +1817,7 @@
         <div class="hero-overlay"></div>
         <div class="container hero-inner">
             <span class="hero-tag">Service aéroport VIP</span>
-            <h1><span class="hero-title-top">Taxi aéroport</span> <span class="text-gold hero-title-bottom">Gibraltar &rarr; Conil</span></h1>
+            <h1><span class="hero-title-top">Taxi aéroport</span> <span class="text-gold hero-title-bottom">Gibraltar ⇄ Conil</span></h1>
             <p style="font-size: clamp(1.2rem, 3vw, 1.6rem); font-weight: 300; max-width: 800px; margin: 0 auto 3rem; color: rgba(255, 255, 255, 0.8); line-height: 1.6;">Transfert privé haut de gamme : ponctualité, discrétion et véhicule de premier plan pour un service de référence sur la Costa de la Luz.</p>
             <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
                 <a href="/fr/?origen=A%C3%A9roport%20de%20Gibraltar#calculadora" class="btn-premium btn-orange" style="padding: 1.5rem 4rem;">Calculer le prix exact <i class="fas fa-chevron-right" style="font-size: 0.9rem; margin-left: 10px;"></i></a>
@@ -1889,21 +1888,24 @@
                         <p style="color: rgba(255,255,255,0.6); font-size: 1.25rem; max-width: 700px; margin: 0 auto 4rem; font-weight: 300;">Tarifs fixes calculés depuis notre base centrale. Sans suppléments inattendus, avec la garantie d'un service de premier plan.</p>
                         
                         <div class="pricing-cards" style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 4rem;">
-                            <div class="glass-card" style="flex: 1; min-width: 300px; padding: 60px 40px; border-radius: 40px; position: relative; transition: var(--transition); border-color: var(--accent);">
+                            <div class="glass-card" style="flex: 1; min-width: 280px; padding: 60px 40px; border-radius: 40px; position: relative; transition: var(--transition); border-color: var(--accent);">
                                 <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; color: var(--accent); font-size: 0.75rem;">Tarif jour</div>
                                 <div style="font-size: 6rem; font-weight: 900; color: white; line-height: 1; margin: 20px 0;">144<span style="font-size: 2rem; vertical-align: super; color: var(--accent);">&euro;</span></div>
-                                <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-weight: 600;">Lundi au Vendredi (06:00 - 22:00)</div>
+                                <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-weight: 600;">Lundi au vendredi<br/>06:00 - 22:00</div>
                             </div>
                             
-                            <div class="glass-card" style="flex: 1; min-width: 300px; padding: 60px 40px; border-radius: 40px; position: relative; transition: var(--transition); border-color: var(--accent);">
+                            <div class="glass-card" style="flex: 1; min-width: 280px; padding: 60px 40px; border-radius: 40px; position: relative; transition: var(--transition); border-color: var(--accent);">
                                 <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); text-transform: uppercase; letter-spacing: 2px; font-weight: 800; color: var(--accent); font-size: 0.75rem;">Nuit et jours fériés</div>
                                 <div style="font-size: 6rem; font-weight: 900; color: white; line-height: 1; margin: 20px 0;">165<span style="font-size: 2rem; vertical-align: super; color: var(--accent);">&euro;</span></div>
-                                <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-weight: 600;">22:00 - 06:00, samedis et jours fériés</div>
+                                <div style="color: rgba(255,255,255,0.5); font-size: 0.9rem; font-weight: 600;">22:00 - 06:00<br/>Samedis et jours fériés</div>
                             </div>
                         </div>
 
                         <a href="/fr/?origen=A%C3%A9roport%20de%20Gibraltar#calculadora" class="btn-premium btn-orange" style="padding: 1.5rem 4rem;">Calculer le prix exact <i class="fas fa-chevron-right" style="font-size: 0.9rem; margin-left: 10px;"></i></a>
-                        <p style="margin-top: 2.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.4); font-weight: 300; letter-spacing: 1px;">Tarifs calculés pour des trajets directs Aéroport de Gibraltar &rarr; Conil Centre.</p>
+                        <div style="margin-top: 2.5rem; font-size: 0.85rem; color: rgba(255,255,255,0.4); font-weight: 300; letter-spacing: 1px; 'ine-height: 1.6;">
+                            <p style="margin: 0;">Tarifs calculés pour les trajets directs : aéroport de Gibraltar ⇄ centre de Conil.</p>
+                            <p style="margin: 0.5rem 0 0;">Prix pour les véhicules jusqu'à 4 passagers.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1953,7 +1955,7 @@
             <div style="position: absolute; top: 0; right: 0; width: 60%; height: 100%; background: url('/IMG/PORTADA-TAXI-CONIL-1600.webp') center/cover; opacity: 0.07; z-index: 0; filter: grayscale(1);"></div>
             <div class="container" style="position: relative; z-index: 10;">
                 <div style="display: flex; align-items: center; gap: clamp(40px, 8vw, 100px); flex-wrap: wrap;">
-                    <div style="flex: 1.2; min-width: 300px;">
+                    <div style="flex: 1.2; min-width: 280px;">
                         <span style="color: var(--accent); text-transform: uppercase; letter-spacing: 4px; font-weight: 800; font-size: 0.9rem;">Véhicule de Luxe</span>
                         <h2 style="font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; margin: 2rem 0; line-height: 1; letter-spacing: -2px;">Volkswagen Arteon : <br><span class="text-gold">Classe Exécutive</span></h2>
                         <p style="font-size: 1.25rem; color: rgba(255,255,255,0.7); margin-bottom: 3rem; font-weight: 300;">Profitez d'un habitacle conçu pour un confort absolu. Silence de marche, matériaux premium et espace exceptionnel à chaque kilomètre.</p>
@@ -1978,7 +1980,7 @@
                             </div>
                         </div>
                     </div>
-                    <div style="flex: 1; min-width: 300px;">
+                    <div style="flex: 1; min-width: 280px;">
                         <div style="position: relative;" class="reveal stagger-3">
                             <img src="/IMG/PORTADA-TAXI-CONIL-800.webp" srcset="/IMG/PORTADA-TAXI-CONIL-800.webp 800w, /IMG/PORTADA-TAXI-CONIL-1200.webp 1200w, /IMG/PORTADA-TAXI-CONIL-1600.webp 1600w" sizes="(max-width: 600px) 92vw, (max-width: 1100px) 46vw, 520px" width="1200" height="900" loading="lazy" decoding="async" alt="Volkswagen Arteon Premium" style="width: 100%; height: auto; border-radius: 40px; box-shadow: 0 60px 120px rgba(0,0,0,0.6); border: 1px solid rgba(212, 175, 55, 0.2);">
                             <div style="position: absolute; top: -30px; left: -30px; background: var(--gold-gradient); color: var(--primary); padding: 30px; border-radius: 24px; font-weight: 900; box-shadow: 0 30px 60px rgba(0,0,0,0.3); letter-spacing: 1px; transform: rotate(-5deg);">
@@ -2191,7 +2193,7 @@
                             <li style="display: flex; align-items: flex-start; gap: 12px;">
                                 <i class="fas fa-check-circle" style="color: var(--accent); margin-top: 5px;"></i>
                                 <div>
-                                    <a href="/taxi-aeropuerto-gibraltar-conil-fr" style="color: white; text-decoration: none; font-weight: 700; border-bottom: 1px solid rgba(212,175,55,0.3); transition: var(--transition);">Informations détaillées : Transfert Aéroport de Gibraltar</a>
+                                    <a href="/fr/articulos/comment-nous-vous-recuperons-a-l-aeroport" style="color: white; text-decoration: none; font-weight: 700; border-bottom: 1px solid rgba(212,175,55,0.3); transition: var(--transition);">Votre prise en charge à l'aéroport, étape par étape</a>
                                 </div>
                             </li>
                             <li style="display: flex; align-items: flex-start; gap: 12px;">
@@ -2239,7 +2241,7 @@
                         <a href="/terms-fr#legal-faq" class="legal-link" data-target="legal-faq" style="color: var(--accent); text-decoration: none; display: block; margin-bottom: 0.5rem;">Questions fréquemment posées</a>
                         <a href="/fr" class="legal-link" style="color: var(--accent); text-decoration: none; display: block; margin-bottom: 0.5rem;">Accueil</a>
                         <a href="/fr#calculadora" class="legal-link" style="color: var(--accent); text-decoration: none; display: block; margin-bottom: 0.5rem;">Calculateur de tarif</a>
-                        <a href="/taxi-aeropuerto-gibraltar-conil-fr" class="legal-link" style="color: var(--accent); text-decoration: none; display: block; margin-bottom: 0.5rem;">Guide : Aéroport de Gibraltar (GIB)</a>
+                        
                         <a href="/terms-fr#airport-pickups" class="legal-link" data-target="airport-pickups" style="color: var(--accent); text-decoration: none;">Prise en charge à l'aéroport</a>
                     </div>
                 </div>
@@ -2249,7 +2251,7 @@
                     <a href="/blog-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Blog</a>
                     <a href="/taxi-bahia-sur-conil-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Transfert gare Bahía Sur</a>
                     <a href="/taxi-estacion-tren-cadiz-conil-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Transfert gare de Cadix</a>
-                    <a href="/taxi-aeropuerto-gibraltar-conil-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Transfert aéroport de Gibraltar (GIB)</a>
+                    
                     <a href="/taxi-aeropuerto-jerez-conil-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Transfert aéroport de Jerez (XRY)</a>
                     <a href="/taxi-aeropuerto-sevilla-conil-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; margin-bottom: 1rem; transition: var(--transition);">Transfert aéroport de Séville (SVQ)</a>
                     <a href="/taxi-aeropuerto-malaga-conil-fr" style="color: rgba(255,255,255,0.7); text-decoration: none; display: block; transition: var(--transition);">Transfert Málaga (AGP)</a>

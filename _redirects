@@ -71,11 +71,6 @@
 # /de/index.html /de 301!
 # /fr/index.html /fr 301!
 
-# Normalize legacy taxi language paths (safety net)
-/en/taxi-:splat /taxi-:splat-en 301!
-/de/taxi-:splat /taxi-:splat-de 301!
-/fr/taxi-:splat /taxi-:splat-fr 301!
-
 /articulos/aeropuerto-jerez-conil-en.html /en/articulos/aeropuerto-jerez-conil 301!
 /articulos/aeropuerto-jerez-conil-en /en/articulos/aeropuerto-jerez-conil 301!
 /articulos/aeropuerto-malaga-conil-en.html /en/articulos/aeropuerto-malaga-conil 301!

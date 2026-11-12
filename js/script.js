@@ -312,6 +312,14 @@ async function tcSendBookingToMake() {
         return `*Trayecto ${index + 1}*%0A📅 _${formattedDate} ${trip.time || ""}_%0A📍 ${trip.origin || ""} → ${trip.destination || ""}%0A📏 ${distanceKm} km%0A⏱️ ${trip.duration || ""}%0A💶 *€${price}*`;
       }).join("%0A%0A"),
     };
+  
+  // Agregar información del localizador si existe
+  try {
+    const localizadorEl = document.getElementById("confirm-localizador");
+    if (localizadorEl && localizadorEl.textContent && localizadorEl.textContent.trim()) {
+      payload.localizador = localizadorEl.textContent.trim();
+    }
+  } catch (_) {}
   let dedupKey = "";
   try {
     const fp = tcBuildBookingFingerprint(params);
@@ -794,32 +802,51 @@ function showMultipleFlightTrainModal() {
       message: "Hemos detectado que varios de sus trayectos tienen origen en aeropuertos o estaciones de tren. Por favor, indique el número de vuelo/tren y hora de llegada para cada uno:",
       submit: "Continuar",
       skip: "No es necesario",
-      required: "Por favor, complete todos los campos."
+      required: "Por favor, complete todos los campos.",
+      question: "¿Alguna duda sobre su recogida?",
+      questionLinkAirport: "https://taxiconil.es/articulos/como-recogemos-en-el-aeropuerto",
+      questionLinkStation: "https://taxiconil.es/articulos/como-recogemos-en-la-estacion-de-tren"
     },
     en: {
       title: "Flight/Train Information",
       message: "We have detected that several of your trips originate from airports or train stations. Please provide the flight/train number and arrival time for each:",
       submit: "Continue",
       skip: "Not needed",
-      required: "Please fill in all fields."
+      required: "Please fill in all fields.",
+      question: "Any questions about your pickup?",
+      questionLinkAirport: "https://taxiconil.es/en/articulos/how-we-pick-up-at-the-airport",
+      questionLinkStation: "https://taxiconil.es/en/articulos/how-we-pick-up-at-the-train-station"
     },
     de: {
       title: "Flug-/Zuginformationen",
       message: "Wir haben festgestellt, dass mehrere Ihrer Fahrten an Flughäfen oder Bahnhöfen beginnen. Bitte geben Sie die Flug-/Zugnummer und Ankunftszeit für jede Fahrt an:",
       submit: "Weiter",
       skip: "Nicht erforderlich",
-      required: "Bitte füllen Sie alle Felder aus."
+      required: "Bitte füllen Sie alle Felder aus.",
+      question: "Fragen zur Abholung?",
+      questionLinkAirport: "https://taxiconil.es/de/articulos/wir-holen-sie-am-flughafen-ab",
+      questionLinkStation: "https://taxiconil.es/de/articulos/wir-holen-sie-am-bahnhof-ab"
     },
     fr: {
       title: "Informations de vol/train",
       message: "Nous avons détecté que plusieurs de vos trajets commencent à des aéroports ou gares. Veuillez indiquer le numéro de vol/train et l'heure d'arrivée pour chaque trajet:",
       submit: "Continuer",
       skip: "Pas nécessaire",
-      required: "Veuillez remplir tous les champs."
+      required: "Veuillez remplir tous les champs.",
+      question: "Des questions sur votre prise en charge ?",
+      questionLinkAirport: "https://taxiconil.es/fr/articulos/comment-nous-vous-recuperons-a-l-aeroport",
+      questionLinkStation: "https://taxiconil.es/fr/articulos/comment-nous-vous-recuperons-a-la-gare"
     }
   };
   
   const pack = copy[lang] || copy.es;
+  
+  // Determinar si hay aeropuertos o estaciones para el enlace correcto
+  const hasAirport = window.flightTrainTrips.some(t => t.type === 'airport');
+  const hasStation = window.flightTrainTrips.some(t => t.type === 'station');
+  const questionLink = hasAirport && hasStation ? 
+    (lang === 'es' ? 'https://taxiconil.es/articulos/como-recogemos-en-el-aeropuerto' : lang === 'en' ? 'https://taxiconil.es/en/articulos/how-we-pick-up-at-the-airport' : lang === 'de' ? 'https://taxiconil.es/de/articulos/wir-holen-sie-am-flughafen-ab' : 'https://taxiconil.es/fr/articulos/comment-nous-vous-recuperons-a-l-aeroport') :
+    hasAirport ? pack.questionLinkAirport : pack.questionLinkStation;
   
   // Generar lista de trayectos
   const tripsList = window.flightTrainTrips.map((trip, index) => {
@@ -859,16 +886,19 @@ function showMultipleFlightTrainModal() {
   
   const modalHTML = `
     <div id="${modalId}" class="flight-train-modal" style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/IMG/barrio-de-los-pescadores.jpg'); background-size: cover; background-position: center; z-index: 10000; align-items: center; justify-content: center; overflow-y: auto;">
-      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26, 42, 69, 0.85);"></div>
-      <div class="modal-content" style="position: relative; max-width: 600px; width: 90%; background: linear-gradient(135deg, rgba(26, 42, 69, 0.85), rgba(45, 55, 72, 0.85)); padding: 2rem; border-radius: 20px; text-align: center; color: white; box-shadow: 0 20px 60px rgba(0,0,0,0.5); backdrop-filter: blur(10px); margin: 1rem; max-height: 90vh; overflow-y: auto;">
+      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26, 42, 69, 0.70);"></div>
+      <div class="modal-content" style="position: relative; max-width: 600px; width: 90%; background: linear-gradient(135deg, rgba(26, 42, 69, 0.78), rgba(45, 55, 72, 0.78)); padding: 2rem; border-radius: 20px; text-align: center; color: white; box-shadow: 0 20px 60px rgba(0,0,0,0.5); backdrop-filter: blur(10px); margin: 1rem; max-height: 90vh; overflow-y: auto;">
         <h2 style="color: #d4af37; font-family: 'Playfair Display', serif; font-size: clamp(1.4rem, 4vw, 1.8rem); margin-bottom: 0.75rem; text-shadow: 0 2px 20px rgba(0,0,0,0.3);">${pack.title}</h2>
         <p style="color: rgba(255,255,255,0.8); font-size: clamp(0.9rem, 2.5vw, 1rem); line-height: 1.6; margin-bottom: 1.5rem;">${pack.message}</p>
         <div style="max-height: 50vh; overflow-y: auto; margin-bottom: 1.5rem; padding-right: 0.5rem;">
           ${tripsList}
         </div>
+        <p style="margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.8); font-size: clamp(0.85rem, 2.5vw, 0.95rem);">
+          <a href="${questionLink}" target="_blank" rel="noopener noreferrer" style="color: #d4af37; text-decoration: underline; transition: color 0.2s;">${pack.question}</a>
+        </p>
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-          <button id="flight-train-submit" style="background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); color: #1a2a45; border: none; padding: 1rem; border-radius: 12px; font-size: clamp(0.9rem, 2.5vw, 1rem); font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">${pack.submit}</button>
-          <button id="flight-train-skip" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 2px solid rgba(255, 255, 255, 0.3); padding: 1rem; border-radius: 12px; font-size: clamp(0.9rem, 2.5vw, 1rem); font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">${pack.skip}</button>
+          <button id="flight-train-skip" class="btn btn-light">${pack.skip}</button>
+          <button id="flight-train-submit" class="btn btn-primary">${pack.submit}</button>
         </div>
       </div>
     </div>
@@ -923,6 +953,9 @@ function showMultipleFlightTrainModal() {
       confirmationModal.dataset.flightTrainTrips = JSON.stringify(window.flightTrainTrips);
     }
     
+    // Guardar datos del formulario en currentBookingDetails
+    saveFormDataToBookingDetails();
+    
     // Abrir el diálogo primero
     if (bookingConfirmationOverlay) {
       openDialog(bookingConfirmationOverlay);
@@ -951,6 +984,9 @@ function showMultipleFlightTrainModal() {
     
     // Cerrar modal sin guardar datos
     modal.remove();
+    
+    // Guardar datos del formulario en currentBookingDetails
+    saveFormDataToBookingDetails();
     
     // Abrir el diálogo primero
     if (bookingConfirmationOverlay) {
@@ -1344,7 +1380,7 @@ const LOCALES = { es: "es-ES", en: "en-GB", de: "de-DE", fr: "fr-FR" },
       calc: {
         distanceLabel: "Distancia",
         durationLabel: "Duración",
-        totalPriceIntro: "El precio total de este trayecto es de:",
+        totalPriceIntro: "El precio total de este trayecto es:",
         pricesNotBindingNotice:
           "Los precios mostrados no son vinculantes hasta su confirmación.",
         cancelButton: "Cancelar",
@@ -1387,7 +1423,7 @@ const LOCALES = { es: "es-ES", en: "en-GB", de: "de-DE", fr: "fr-FR" },
           '*Hola*, he consultado un trayecto de *{origin}* → *{destination}* a las _{time}_. El precio de la web es de *{price}*. ¿Tendrían disponibilidad para realizarlo hoy?',
         returnDistanceLabel: "Distancia",
         returnDurationLabel: "Duración",
-        returnTotalPriceIntro: "El precio total de este trayecto es de:",
+        returnTotalPriceIntro: "El precio total de este trayecto es:",
         cancelReturnButton: "Cancelar",
         returnAddServiceButton: "Añadir servicio",
         returnCancelButton: "Cancelar",
@@ -1449,7 +1485,7 @@ const LOCALES = { es: "es-ES", en: "en-GB", de: "de-DE", fr: "fr-FR" },
       },
       booking: {
         sending: '<i class="fas fa-spinner fa-spin"></i> Enviando...',
-        bookingSentTitle: "¡Reserva enviada!",
+        bookingSentTitle: "¡Reserva confirmada!",
         formError:
           "Error al enviar el formulario. Por favor, intente nuevamente o contáctenos por teléfono.",
         emailJsError:
@@ -1491,7 +1527,7 @@ const LOCALES = { es: "es-ES", en: "en-GB", de: "de-DE", fr: "fr-FR" },
         pricesNotBindingNotice:
           "Les prix affichés ne sont pas contractuels tant qu'ils ne sont pas confirmés.",
         cancelButton: "Annuler",
-        continueBookingButton: "Confirmer réservation",
+        continueBookingButton: "Confirmer la réservation",
         viewRouteButton: "Voir l'itinéraire",
         hideRouteButton: "Masquer la carte",
         routeOriginLabel: "Origine",
@@ -1593,7 +1629,7 @@ const LOCALES = { es: "es-ES", en: "en-GB", de: "de-DE", fr: "fr-FR" },
       },
       booking: {
         sending: '<i class="fas fa-spinner fa-spin"></i> Envoi...',
-        bookingSentTitle: "Réservation envoyée !",
+        bookingSentTitle: "Réservation confirmée !",
         formError:
           "Erreur lors de l'envoi du formulaire. Veuillez réessayer ou nous contacter par téléphone.",
         emailJsError:
@@ -1623,7 +1659,7 @@ const LOCALES = { es: "es-ES", en: "en-GB", de: "de-DE", fr: "fr-FR" },
           "Please complete the required fields for the return journey or cancel it.",
         googleMapsNotLoadedShort: "Error: The Google Maps API has not loaded.",
         missingCriticalData: (missing) =>
-          "Critical data required for sending are missing: " +
+          "The following required data are missing: " +
           missing.join(", ") +
           ". Please calculate the route first.",
       },
@@ -1651,13 +1687,13 @@ const LOCALES = { es: "es-ES", en: "en-GB", de: "de-DE", fr: "fr-FR" },
         calculating: "Calculating...",
         calculatingPrice: "Calculating fare...",
         minPriceIntro:
-          "In order to provide a distinguished service, the vehicle is reserved exclusively for you one hour before departure, guaranteeing full availability and punctuality.",
+          "To provide a high-quality service, the vehicle is reserved exclusively for you one hour before departure, ensuring availability and punctuality.",
         minPriceLine: (minPrice) =>
           "For this reason, the <strong>minimum fare</strong> for any reservation is <strong>" +
           minPrice +
           "</strong>.",
         minPriceNote:
-          'We particularly recommend this service for clients who need to arrive punctually at an event or special engagement. For other cases, you may contact us whenever you require the service on <a href="tel:+34670705774" style="color: white; font-weight: bold;">+34 670 70 57 74</a>.',
+          'We particularly recommend this service to clients who need to arrive on time for an event or important commitment. Otherwise, you can contact us whenever you need a ride at <a href="tel:+34670705774" style="color: white; font-weight: bold;">+34 670 70 57 74</a>.',
         minPriceContinueButton: (minPrice) => "BOOK (" + minPrice + ")",
         minPriceAcceptButton: (minPrice) =>
           "Accept minimum fare (" + minPrice + ")",
@@ -1734,11 +1770,11 @@ const LOCALES = { es: "es-ES", en: "en-GB", de: "de-DE", fr: "fr-FR" },
       },
       booking: {
         sending: '<i class="fas fa-spinner fa-spin"></i> Sending...',
-        bookingSentTitle: "Booking sent!",
+        bookingSentTitle: "Booking confirmed!",
         formError:
           "Error sending the form. Please try again or contact us by phone.",
         emailJsError:
-          "Error sending the booking. Please try again or contact by phone.",
+          "Error sending the booking. Please try again or contact us by phone.",
         confirmButton: "Confirm my booking!",
       },
       ui: { vehicleVideoTitle: "Our vehicle - Taxi Conil" },
@@ -1874,7 +1910,7 @@ const LOCALES = { es: "es-ES", en: "en-GB", de: "de-DE", fr: "fr-FR" },
       },
       booking: {
         sending: '<i class="fas fa-spinner fa-spin"></i> Wird gesendet...',
-        bookingSentTitle: "Reservierung gesendet!",
+        bookingSentTitle: "Reservierung bestätigt!",
         formError:
           "Fehler beim Senden des Formulars. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch.",
         emailJsError:
@@ -3687,6 +3723,14 @@ let currentBookingDetails = {
     returnRoutePath: null,
     returnRouteStartLocation: null,
     returnRouteEndLocation: null,
+    // Guardar datos del formulario para el modal de confirmación
+    luggageCabin: 0,
+    luggageLarge: 0,
+    pet: "no",
+    babySeats: 0,
+    childSeats: 0,
+    babyAge: "",
+    comments: "",
   },
   googleMapsInitRetryCount = 0,
   googleMapsNotLoadedAlertShown = !1,
@@ -5381,7 +5425,7 @@ function loadGoogleMapsIfNeeded() {
     bookingMsgs = getMessagesSection("booking") || {
       sending: "Enviando…",
       confirmButton: "Confirmar solicitud de reserva",
-      bookingSentTitle: "Solicitud enviada",
+      bookingSentTitle: "Reserva confirmada",
       formError:
         "Ha ocurrido un error al enviar la reserva. Inténtelo de nuevo.",
       emailJsError:
@@ -5550,7 +5594,7 @@ function loadGoogleMapsIfNeeded() {
             (hideElement(additionalTripCalcResultDiv),
             showElement(additionalTripForm));
         }
-        ((additionalTripCalcResultDiv.innerHTML = `\n      <div class="min-price-notice min-price-notice--return">\n        <p>${msgs.minPriceIntro}</p>\n        <p>${msgs.minPriceLine(formattedMinPrice)}</p>\n        <p class="min-price-note" style="font-size: 0.9rem; color: #ccc; font-style: italic; text-align: center; border: none;">${msgs.minPriceNote}</p>\n        <div class="min-price-buttons">\n          <button type="button" id="additional-min-accept-btn" class="btn btn-primary">${msgs.confirmReturnButton}</button>\n          <button type="button" id="additional-min-cancel-btn" class="btn btn-light">${msgs.returnCancelButton}</button>\n        </div>\n      </div>\n    `),
+        ((additionalTripCalcResultDiv.innerHTML = `\n      <div class="min-price-notice min-price-notice--return">\n        <p>${msgs.minPriceIntro}</p>\n        <p>${msgs.minPriceLine(formattedMinPrice)}</p>\n        <p class="min-price-note" style="font-size: 0.9rem; color: #ccc; font-style: italic; text-align: center; border: none;">${msgs.minPriceNote}</p>\n        <div class="min-price-buttons">\n          <button type="button" id="additional-min-cancel-btn" class="btn btn-light">${msgs.returnCancelButton}</button>\n          <button type="button" id="additional-min-accept-btn" class="btn btn-primary">${msgs.confirmReturnButton}</button>\n        </div>\n      </div>\n    `),
           showElement(additionalTripCalcResultDiv),
           additionalTripCalcResultDiv.addEventListener("click", onClick));
       })(price, distance, duration, route);
@@ -5606,25 +5650,23 @@ function loadGoogleMapsIfNeeded() {
           currentAdditionalRouteOverviewPath &&
           currentAdditionalRouteOverviewPath.length
         ) {
+          routeMapElement.innerHTML = "";
+          additionalRouteMapInstance = null;
           const initialCenter =
             currentAdditionalRouteOverviewPath[0] ||
             currentAdditionalRouteStartLocation;
           initialCenter &&
-            (additionalRouteMapInstance
-              ? (additionalRouteMapInstance.setCenter(initialCenter),
-                additionalRouteMapInstance.setZoom(11))
-              : (additionalRouteMapInstance = new google.maps.Map(
-                  routeMapElement,
-                  {
-                    center: initialCenter,
-                    zoom: 11,
-                    disableDefaultUI: !0,
-                    clickableIcons: !1,
-                    keyboardShortcuts: !1,
-                    gestureHandling: "greedy",
-                    mapId: TC_GOOGLE_MAP_ID,
-                  },
-                )));
+            (additionalRouteMapInstance = new google.maps.Map(
+                routeMapElement,
+                {
+                  center: initialCenter,
+                  zoom: 11,
+                  disableDefaultUI: !0,
+                  clickableIcons: !1,
+                  keyboardShortcuts: !1,
+                  gestureHandling: "greedy",
+                },
+              ));
         }
       }
     } catch (_) {}
@@ -5668,36 +5710,39 @@ function loadGoogleMapsIfNeeded() {
             toggleBtn.setAttribute("aria-expanded", "false"),
             (toggleBtn.innerHTML = `${currentMsgs.viewRouteButton} <span class="route-toggle-icon">&#9662;</span>`));
           const mapEl = document.getElementById("additional-route-map");
-          if (
-            (mapEl &&
-              (mapEl.classList.remove("route-map--ready"),
-              mapEl.classList.remove("route-map--labels-ready")),
-            additionalRoutePolyline &&
-              "function" == typeof additionalRoutePolyline.setMap &&
-              additionalRoutePolyline.setMap(null),
-            (additionalRoutePolyline = null),
-            additionalRouteMarkers.forEach((m) => {
-              m && m.setMap && m.setMap(null);
-            }),
-            (additionalRouteMarkers = []),
-            originLabelOverlay &&
-              "function" == typeof originLabelOverlay.setMap)
-          )
+          if (mapEl) {
+            mapEl.classList.remove("route-map--ready");
+            mapEl.classList.remove("route-map--labels-ready");
+            mapEl.innerHTML = "";
+          }
+          if (additionalRoutePolyline && "function" == typeof additionalRoutePolyline.setMap) {
+            additionalRoutePolyline.setMap(null);
+          }
+          additionalRoutePolyline = null;
+          additionalRouteMarkers.forEach((m) => {
+            m && m.setMap && m.setMap(null);
+          });
+          additionalRouteMarkers = [];
+          if (additionalRouteMapInstance) {
+            additionalRouteMapInstance = null;
+          }
+          if (originLabelOverlay && "function" == typeof originLabelOverlay.setMap) {
             try {
               originLabelOverlay.setMap(null);
             } catch (_) {}
-          if (
-            destinationLabelOverlay &&
-            "function" == typeof destinationLabelOverlay.setMap
-          )
+          }
+          if (destinationLabelOverlay && "function" == typeof destinationLabelOverlay.setMap) {
             try {
               destinationLabelOverlay.setMap(null);
             } catch (_) {}
-          ((originLabelOverlay = null), (destinationLabelOverlay = null));
+          }
+          originLabelOverlay = null;
+          destinationLabelOverlay = null;
         } else {
           if (!googleApiLoaded || void 0 === google.maps.Map)
             return void (mapContainer.innerHTML =
               '<p style="padding: 1rem; text-align: center; color: #666;">Google Maps no está disponible</p>');
+          try {
           const routeMapElement = document.getElementById(
             "additional-route-map",
           );
@@ -5735,48 +5780,46 @@ function loadGoogleMapsIfNeeded() {
                   ? getMessagesSection("alerts").googleMapsNotLoadedShort
                   : "No se pudo cargar el mapa.")
             );
+          routeMapElement.innerHTML = "";
+          additionalRouteMapInstance = null;
+          const initialCenter =
+            currentAdditionalRouteOverviewPath &&
+            currentAdditionalRouteOverviewPath.length > 0
+              ? currentAdditionalRouteOverviewPath[0]
+              : currentAdditionalRouteStartLocation;
+          if (!initialCenter)
+            return (
+              (routeMapElement.style.textAlign = "center"),
+              (routeMapElement.style.background = "#f8f9fa"),
+              (routeMapElement.style.border = "1px solid #e0e0e0"),
+              (routeMapElement.style.borderRadius = "8px"),
+              void (routeMapElement.innerHTML =
+                "No se pudo cargar el mapa.")
+            );
+          additionalRouteMapInstance = new google.maps.Map(
+            routeMapElement,
+            {
+              center: initialCenter,
+              zoom: 11,
+              disableDefaultUI: !0,
+              clickableIcons: !1,
+              keyboardShortcuts: !1,
+              gestureHandling: "greedy",
+            },
+          );
           try {
-            if (additionalRouteMapInstance) {
-              const initialCenter =
-                currentAdditionalRouteOverviewPath &&
-                currentAdditionalRouteOverviewPath.length > 0
-                  ? currentAdditionalRouteOverviewPath[0]
-                  : currentAdditionalRouteStartLocation;
-              initialCenter &&
-                (additionalRouteMapInstance.setCenter(initialCenter),
-                additionalRouteMapInstance.setZoom(11));
-            } else {
-              const initialCenter =
-                currentAdditionalRouteOverviewPath &&
-                currentAdditionalRouteOverviewPath.length > 0
-                  ? currentAdditionalRouteOverviewPath[0]
-                  : currentAdditionalRouteStartLocation;
-              if (!initialCenter)
-                return (
-                  (routeMapElement.style.textAlign = "center"),
-                  (routeMapElement.style.background = "#f8f9fa"),
-                  (routeMapElement.style.border = "1px solid #e0e0e0"),
-                  (routeMapElement.style.borderRadius = "8px"),
-                  void (routeMapElement.innerHTML =
-                    "No se pudo cargar el mapa.")
-                );
-              additionalRouteMapInstance = new google.maps.Map(
-                routeMapElement,
-                {
-                  center: initialCenter,
-                  zoom: 11,
-                  disableDefaultUI: !0,
-                  clickableIcons: !1,
-                  keyboardShortcuts: !1,
-                  gestureHandling: "greedy",
-                  mapId: TC_GOOGLE_MAP_ID,
-                },
-              );
-            }
+            routeMapElement.style.opacity = "1";
+          } catch (_) {}
+          setTimeout(() => {
             try {
-              routeMapElement.style.opacity = "1";
+              google.maps &&
+                google.maps.event &&
+                "function" == typeof google.maps.event.trigger &&
+                additionalRouteMapInstance &&
+                google.maps.event.trigger(additionalRouteMapInstance, "resize");
             } catch (_) {}
-            if (
+          }, 100);
+          if (
               (additionalRoutePolyline && additionalRoutePolyline.setMap(null),
               additionalRouteMarkers.forEach((m) => {
                 m && m.setMap && m.setMap(null);
@@ -5988,9 +6031,8 @@ function loadGoogleMapsIfNeeded() {
             labelDistance > 0 &&
               labelDistance < 3 &&
               ((originLabelClass += " route-map-label--short"),
-              (destinationLabelClass += " route-map-label--short"));
-            let isMobile = !0;
-            (isMobile ||
+              (destinationLabelClass += "route-map-label--short"));
+            (
               (startLocation &&
                 originLabelText &&
                 (originLabelOverlay = createRouteLabelOverlay(
@@ -6229,7 +6271,7 @@ function loadGoogleMapsIfNeeded() {
                       flashPolylineOnce(additionalRoutePolyline),
                       bounceMarker(taxiMarker, taxiBaseSize),
                       bounceMarker(destinationMarker, destinationBaseSize),
-                      isMobile &&
+                      isMobileDevice() &&
                         (startLocation &&
                           originLabelText &&
                           !originLabelOverlay &&
@@ -6339,7 +6381,7 @@ function loadGoogleMapsIfNeeded() {
                 currentAdditionalTripData.destination,
               ),
               msgs = getMessagesSection("calc");
-            ((tripDiv.innerHTML = `\n      <div style="display: flex; flex-direction: column; gap: 0.5rem;">\n        <div style="display: flex; justify-content: space-between; align-items: center;">\n          <div style="color: var(--white); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem;">\n            <span style="background: rgba(255, 255, 255, 0.2); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.8rem;">${msgs.tripLabel || "Trayecto"} ${tripNumber}</span>\n          </div>\n          <div style="color: var(--secondary-color); font-weight: 700; font-size: 1.3rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">\n            ${formatPrice(currentAdditionalTripData.price)}\n          </div>\n        </div>\n        <div style="color: var(--white); font-weight: 600; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">\n          <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 45%;">${originCity}</span>\n          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">\n            <line x1="5" y1="12" x2="19" y2="12"></line>\n            <polyline points="12 5 19 12 12 19"></polyline>\n          </svg>\n          <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 45%;">${destinationCity}</span>\n        </div>\n      </div>\n      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; gap: 0.75rem;">\n        <button type="button" id="${toggleBtnId}" class="btn btn-light btn-sm" data-details-id="${detailsId}" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; font-weight: 600; border-radius: 6px; display: flex; align-items: center; gap: 0.4rem; transition: all 0.3s ease;">\n          <svg id="${toggleBtnId}-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s ease;">\n            <polyline points="6 9 12 15 18 9"></polyline>\n          </svg>\n          <span id="${toggleBtnId}-text">${msgs.showDetailsButton || "Mostrar detalles"}</span>\n        </button>\n        <button type="button" class="btn btn-danger btn-sm" data-trip-id="${tripId}" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; font-weight: 600; border-radius: 6px; display: flex; align-items: center; gap: 0.4rem;">\n          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">\n            <polyline points="3 6 5 6 21 6"></polyline>\n            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>\n          </svg>\n          ${msgs.removeButton || "Eliminar"}\n        </button>\n      </div>\n      <div id="${detailsId}" class="additional-trip-details" style="display: none;">\n      </div>\n    `),
+            ((tripDiv.innerHTML = `\n      <div style="display: flex; flex-direction: column; gap: 0.5rem;">\n        <div style="display: flex; justify-content: space-between; align-items: center;">\n          <div style="color: var(--white); font-weight: 700; font-size: 1rem; display: flex; align-items: center; gap: 0.5rem;">\n            <span style="background: rgba(255, 255, 255, 0.2); padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.8rem;">${msgs.tripLabel || "Trayecto"} ${tripNumber}</span>\n          </div>\n          <div style="color: var(--secondary-color); font-weight: 700; font-size: 1.3rem; text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">\n            ${formatPrice(currentAdditionalTripData.price)}\n          </div>\n        </div>\n        <div style="color: var(--white); font-weight: 600; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">\n          <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 45%;">${originCity}</span>\n          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--secondary-color)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;">\n            <line x1="5" y1="12" x2="19" y2="12"></line>\n            <polyline points="12 5 19 12 12 19"></polyline>\n          </svg>\n          <span style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 45%;">${destinationCity}</span>\n        </div>\n      </div>\n      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem; gap: 0.75rem;">\n        <button type="button" class="btn btn-danger btn-sm" data-trip-id="${tripId}" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; font-weight: 600; border-radius: 6px; display: flex; align-items: center; gap: 0.4rem;">\n          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">\n            <polyline points="3 6 5 6 21 6"></polyline>\n            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>\n          </svg>\n          ${msgs.removeButton || "Eliminar"}\n        </button>\n        <button type="button" id="${toggleBtnId}" class="btn btn-light btn-sm" data-details-id="${detailsId}" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; font-weight: 600; border-radius: 6px; display: flex; align-items: center; gap: 0.4rem; transition: all 0.3s ease;">\n          <svg id="${toggleBtnId}-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.3s ease;">\n            <polyline points="6 9 12 15 18 9"></polyline>\n          </svg>\n          <span id="${toggleBtnId}-text">${msgs.showDetailsButton || "Mostrar detalles"}</span>\n        </button>\n      </div>\n      <div id="${detailsId}" class="additional-trip-details" style="display: none;">\n      </div>\n    `),
               additionalTripsList.appendChild(tripDiv));
             const toggleBtn = document.getElementById(toggleBtnId),
               deleteBtn = tripDiv.querySelector("[data-trip-id]");
@@ -7048,7 +7090,8 @@ function loadGoogleMapsIfNeeded() {
             if (
               (mapEl &&
                 (mapEl.classList.remove("route-map--ready"),
-                mapEl.classList.remove("route-map--labels-ready")),
+                mapEl.classList.remove("route-map--labels-ready"),
+                (mapEl.innerHTML = "")),
               polyline &&
                 "function" == typeof polyline.setMap &&
                 polyline.setMap(null),
@@ -7071,7 +7114,10 @@ function loadGoogleMapsIfNeeded() {
               try {
                 destinationLabelOverlay.setMap(null);
               } catch (_) {}
-            ((originLabelOverlay = null), (destinationLabelOverlay = null));
+            ((originLabelOverlay = null),
+              (destinationLabelOverlay = null),
+              (mapInstance = null),
+              (mapInitialized = !1));
           } else {
             (mapContainer.classList.add("visible"),
               mapContainer.setAttribute("aria-hidden", "false"));
@@ -9340,7 +9386,7 @@ function loadGoogleMapsIfNeeded() {
         currentCalculation && currentCalculation.isBelowMinPrice
           ? (function (minPrice, onContinue) {
               const msgs = getMessagesSection("calc");
-              ((calcResultDiv.innerHTML = `\n      <div class="min-price-notice">\n        <p>${msgs.minPriceIntro}</p>\n        <p>${msgs.minPriceLine(formatPrice(minPrice))}</p>\n        <p class="min-price-note" style="font-size: 0.9rem; color: #ccc; font-style: italic; text-align: center; border: none;">${msgs.minPriceNote}</p>\n        <div class="min-price-buttons">\n          <button type="button" id="continue-min-price-btn" class="btn btn-primary">${msgs.minPriceContinueButton(formatPrice(minPrice))}</button>\n          <button type="button" id="cancel-min-price-btn" class="btn btn-light">${msgs.cancelButton}</button>\n        </div>\n      </div>\n    `),
+              ((calcResultDiv.innerHTML = `\n      <div class="min-price-notice">\n        <p>${msgs.minPriceIntro}</p>\n        <p>${msgs.minPriceLine(formatPrice(minPrice))}</p>\n        <p class="min-price-note" style="font-size: 0.9rem; color: #ccc; font-style: italic; text-align: center; border: none;">${msgs.minPriceNote}</p>\n        <div class="min-price-buttons">\n          <button type="button" id="cancel-min-price-btn" class="btn btn-light">${msgs.cancelButton}</button>\n          <button type="button" id="continue-min-price-btn" class="btn btn-primary">${msgs.minPriceContinueButton(formatPrice(minPrice))}</button>\n        </div>\n      </div>\n    `),
                 showElement(calcResultDiv));
               const prevMinClickHandler = calcResultDiv.__minPriceClickHandler;
               if (prevMinClickHandler)
@@ -10271,7 +10317,7 @@ function loadGoogleMapsIfNeeded() {
           ? (function (onAccept) {
               if (!returnCalcResultDiv) return;
               const formattedMinPrice = formatPrice(returnMinPrice);
-              returnCalcResultDiv.innerHTML = `\n      <div class="min-price-notice min-price-notice--return">\n        <p>${calcMsgs.minPriceIntro}</p>\n        <p>${calcMsgs.minPriceLine(formattedMinPrice)}</p>\n        <p class="min-price-note" style="font-size: 0.9rem; color: #ccc; font-style: italic; text-align: center; border: none;">${calcMsgs.minPriceNote}</p>\n        <div class="min-price-buttons">\n          <button type="button" id="return-min-accept-btn" class="btn btn-primary">${calcMsgs.confirmReturnButton}</button>\n          <button type="button" id="return-min-cancel-btn" class="btn btn-light">${calcMsgs.returnCancelButton}</button>\n        </div>\n      </div>\n    `;
+              returnCalcResultDiv.innerHTML = `\n      <div class="min-price-notice min-price-notice--return">\n        <p>${calcMsgs.minPriceIntro}</p>\n        <p>${calcMsgs.minPriceLine(formattedMinPrice)}</p>\n        <p class="min-price-note" style="font-size: 0.9rem; color: #ccc; font-style: italic; text-align: center; border: none;">${calcMsgs.minPriceNote}</p>\n        <div class="min-price-buttons">\n          <button type="button" id="return-min-cancel-btn" class="btn btn-light">${calcMsgs.returnCancelButton}</button>\n          <button type="button" id="return-min-accept-btn" class="btn btn-primary">${calcMsgs.confirmReturnButton}</button>\n        </div>\n      </div>\n    `;
               try {
                 returnCalcResultDiv.__returnMinPriceNoticeActive = !0;
               } catch (_) {}
@@ -10531,13 +10577,19 @@ function loadGoogleMapsIfNeeded() {
       returnDestination: "",
       returnRawPrice: 0,
       returnPickupDateTime: null,
-      // Resetear rutas guardadas
       oneWayRoutePath: null,
       oneWayRouteStartLocation: null,
       oneWayRouteEndLocation: null,
       returnRoutePath: null,
       returnRouteStartLocation: null,
       returnRouteEndLocation: null,
+      luggageCabin: 0,
+      luggageLarge: 0,
+      pet: "no",
+      babySeats: 0,
+      childSeats: 0,
+      babyAge: "",
+      comments: "",
     }),
       hideElement(returnDetailsDiv),
       hideElement(childSeatQuestionsDiv),
@@ -10553,6 +10605,23 @@ function loadGoogleMapsIfNeeded() {
       returnTimeInput && (returnTimeInput.required = !1),
       updateTotalPriceAmount());
   }
+  
+  function saveFormDataToBookingDetails() {
+    if (!currentBookingDetails) return;
+    
+    const getElValue = (id) => document.getElementById(id)?.value || "";
+    const getRadioValue = (name) => 
+      document.querySelector(`input[name="${name}"]:checked`)?.value || "";
+    
+    currentBookingDetails.luggageCabin = parseInt(getElValue("maletas-cabina"), 10) || 0;
+    currentBookingDetails.luggageLarge = parseInt(getElValue("maletas-grandes"), 10) || 0;
+    currentBookingDetails.pet = getRadioValue("mascota") || "no";
+    currentBookingDetails.babySeats = parseInt(getElValue("baby-seats"), 10) || 0;
+    currentBookingDetails.childSeats = parseInt(getElValue("child-seats"), 10) || 0;
+    currentBookingDetails.babyAge = getElValue("baby-age") || "";
+    currentBookingDetails.comments = getElValue("comentarios") || "";
+  }
+  
   function populateBookingForm() {
     if (!currentCalculation.pickupDateTime) return;
     (origenBookInput && (origenBookInput.value = currentCalculation.origin),
@@ -10597,18 +10666,13 @@ function loadGoogleMapsIfNeeded() {
           }
           // Asegurar que se copian las coordenadas para evitar rutas incorrectas
           let originLat = null, originLng = null;
-          console.log("DEBUG autorrellenado origen:", swappedOriginPlace);
           if (swappedOriginPlace.geometry && swappedOriginPlace.geometry.location) {
             const loc = swappedOriginPlace.geometry.location;
             originLat = typeof loc.lat === 'function' ? loc.lat() : loc.lat;
             originLng = typeof loc.lng === 'function' ? loc.lng() : loc.lng;
-            console.log("DEBUG coordenadas desde geometry.location:", originLat, originLng);
           } else if (swappedOriginPlace.lat && swappedOriginPlace.lng) {
             originLat = typeof swappedOriginPlace.lat === 'function' ? swappedOriginPlace.lat() : swappedOriginPlace.lat;
             originLng = typeof swappedOriginPlace.lng === 'function' ? swappedOriginPlace.lng() : swappedOriginPlace.lng;
-            console.log("DEBUG coordenadas desde propiedades directas:", originLat, originLng);
-          } else {
-            console.log("DEBUG: No se encontraron coordenadas");
           }
           
           const swappedOriginPlaceWithCoords = {
@@ -10683,18 +10747,13 @@ function loadGoogleMapsIfNeeded() {
           }
           // Asegurar que se copian las coordenadas para evitar rutas incorrectas
           let destLat = null, destLng = null;
-          console.log("DEBUG autorrellenado destino:", swappedDestinationPlace);
           if (swappedDestinationPlace.geometry && swappedDestinationPlace.geometry.location) {
             const loc = swappedDestinationPlace.geometry.location;
             destLat = typeof loc.lat === 'function' ? loc.lat() : loc.lat;
             destLng = typeof loc.lng === 'function' ? loc.lng() : loc.lng;
-            console.log("DEBUG coordenadas destino desde geometry.location:", destLat, destLng);
           } else if (swappedDestinationPlace.lat && swappedDestinationPlace.lng) {
             destLat = typeof swappedDestinationPlace.lat === 'function' ? swappedDestinationPlace.lat() : swappedDestinationPlace.lat;
             destLng = typeof swappedDestinationPlace.lng === 'function' ? swappedDestinationPlace.lng() : swappedDestinationPlace.lng;
-            console.log("DEBUG coordenadas destino desde propiedades directas:", destLat, destLng);
-          } else {
-            console.log("DEBUG destino: No se encontraron coordenadas");
           }
           
           const swappedDestinationPlaceWithCoords = {
@@ -10854,18 +10913,37 @@ function loadGoogleMapsIfNeeded() {
     const msgEl = document.getElementById(fieldId + "-error");
     msgEl && (msgEl.textContent = message || "");
   }
-  function initConfirmationMap(isReturn = !1) {
-    const mapElement = document.getElementById(
+  function initConfirmationMap(isReturn = !1, isAdditional = !1, additionalTripIndex = null) {
+    let mapElement, container, chipElement;
+    let startLoc, endLoc;
+    
+    if (isAdditional && typeof additionalTripIndex === 'number') {
+      const additionalTrips = window.additionalTrips || [];
+      const trip = additionalTrips[additionalTripIndex];
+      if (!trip) return;
+      
+      // Las coordenadas pueden estar en trip.start_location/end_location o en trip.route.legs[0]
+      startLoc = trip.start_location || (trip.route?.legs?.[0]?.start_location);
+      endLoc = trip.end_location || (trip.route?.legs?.[0]?.end_location);
+      
+      const tripId = trip.id || `additional-trip-${additionalTripIndex}`;
+      mapElement = document.getElementById(`confirm-additional-${tripId}-route-map`);
+      container = document.getElementById(`confirm-additional-${tripId}-route-container`);
+      chipElement = document.getElementById(`confirm-additional-${tripId}-route-chip`);
+    } else {
+      mapElement = document.getElementById(
         isReturn ? "confirm-vuelta-route-map" : "confirm-ida-route-map",
-      ),
+      );
       container = document.getElementById(
         isReturn
           ? "confirm-vuelta-route-container"
           : "confirm-ida-route-container",
-      ),
+      );
       chipElement = document.getElementById(
         isReturn ? "confirm-vuelta-route-chip" : "confirm-ida-route-chip",
       );
+    }
+    
     if (!mapElement || !container) return;
     if (isReturn)
       try {
@@ -10901,52 +10979,123 @@ function loadGoogleMapsIfNeeded() {
       } catch (_) {}
     const stateKey = isReturn
         ? "confirmMapStateReturn"
+        : isAdditional ? `confirmMapStateAdditional_${additionalTripIndex}`
         : "confirmMapStateOneWay",
-      animationKey = isReturn ? "confirmMapAnimReturn" : "confirmMapAnimOneWay";
+      animationKey = isReturn ? "confirmMapAnimReturn" : isAdditional ? `confirmMapAnimAdditional_${additionalTripIndex}` : "confirmMapAnimOneWay";
     try {
       if (container.dataset && "ready" === container.dataset[stateKey]) return;
     } catch (_) {}
-    let fullPath =
-      (isReturn ? currentReturnRouteOverviewPath : currentRouteOverviewPath) ||
-      [];
-    // Si las variables globales están vacías, intentar usar las guardadas en currentBookingDetails
-    if (!fullPath.length && currentBookingDetails) {
-      fullPath = isReturn 
-        ? (currentBookingDetails.returnRoutePath || [])
-        : (currentBookingDetails.oneWayRoutePath || []);
-    }
-    fullPath = fullPath
-      .map((p) => {
-        if (!p) return null;
-        const lat = "function" == typeof p.lat ? p.lat() : p.lat,
-          lng = "function" == typeof p.lng ? p.lng() : p.lng;
-        return new google.maps.LatLng(lat, lng);
-      })
-      .filter((p) => null !== p);
-    const startLocation = isReturn
+    
+    let fullPath, finalStartLocation, finalEndLocation, distanceKm, durationText;
+    
+    if (isAdditional && typeof additionalTripIndex === 'number') {
+      const additionalTrips = window.additionalTrips || [];
+      const trip = additionalTrips[additionalTripIndex];
+      if (!trip) return;
+      
+      fullPath = trip.overview_path || [];
+      fullPath = fullPath
+        .map((p) => {
+          if (!p) return null;
+          const lat = p.lat || p[0];
+          const lng = p.lng || p[1];
+          return lat && lng ? new google.maps.LatLng(lat, lng) : null;
+        })
+        .filter(Boolean);
+      
+      // Convertir start_location y end_location a LatLng si es necesario
+      const toLatLng = (loc) => {
+        if (!loc) return null;
+        if (loc instanceof google.maps.LatLng) return loc;
+        if (loc.lat && loc.lng) {
+          const lat = typeof loc.lat === 'function' ? loc.lat() : loc.lat;
+          const lng = typeof loc.lng === 'function' ? loc.lng() : loc.lng;
+          if (isNaN(lat) || isNaN(lng)) return null;
+          return new google.maps.LatLng(lat, lng);
+        }
+        return null;
+      };
+      
+      finalStartLocation = toLatLng(startLoc);
+      finalEndLocation = toLatLng(endLoc);
+      
+      // Si no hay coordenadas válidas, usar el centro del bounds de la ruta
+      if (!finalStartLocation || !finalEndLocation) {
+        if (fullPath.length > 0) {
+          finalStartLocation = fullPath[0];
+          finalEndLocation = fullPath[fullPath.length - 1];
+        }
+      }
+      
+      distanceKm = trip.distance || 0;
+      durationText = trip.duration || "";
+      
+      chipElement &&
+        distanceKm > 0 &&
+        durationText &&
+        (chipElement.textContent = `${distanceKm.toFixed(1)} km · ${durationText}`);
+    } else {
+      fullPath =
+        (isReturn ? currentReturnRouteOverviewPath : currentRouteOverviewPath) ||
+        [];
+      // Si las variables globales están vacías, intentar usar las guardadas en currentBookingDetails
+      if (!fullPath.length && currentBookingDetails) {
+        fullPath = isReturn 
+          ? (currentBookingDetails.returnRoutePath || [])
+          : (currentBookingDetails.oneWayRoutePath || []);
+      }
+      fullPath = fullPath
+        .map((p) => {
+          if (!p) return null;
+          const lat = "function" == typeof p.lat ? p.lat() : p.lat,
+            lng = "function" == typeof p.lng ? p.lng() : p.lng;
+          return new google.maps.LatLng(lat, lng);
+        })
+        .filter((p) => null !== p);
+      const startLocation = isReturn
         ? currentReturnRouteStartLocation
-        : currentRouteStartLocation,
-      endLocation = isReturn
+        : currentRouteStartLocation;
+      const endLocation = isReturn
         ? currentReturnRouteEndLocation
         : currentRouteEndLocation;
-    // Si las ubicaciones están vacías, intentar usar las guardadas en currentBookingDetails
-    const finalStartLocation = (!startLocation && currentBookingDetails)
-      ? (isReturn ? currentBookingDetails.returnRouteStartLocation : currentBookingDetails.oneWayRouteStartLocation)
-      : startLocation;
-    const finalEndLocation = (!endLocation && currentBookingDetails)
-      ? (isReturn ? currentBookingDetails.returnRouteEndLocation : currentBookingDetails.oneWayRouteEndLocation)
-      : endLocation;
-    if (!fullPath.length || !finalStartLocation || !finalEndLocation) return;
-    const distanceKm = isReturn
+      // Si las variables globales están vacías, intentar usar las guardadas en currentBookingDetails
+      finalStartLocation = startLocation;
+      finalEndLocation = endLocation;
+      if (!finalStartLocation && currentBookingDetails) {
+        finalStartLocation = isReturn 
+          ? currentBookingDetails.returnRouteStartLocation 
+          : currentBookingDetails.oneWayRouteStartLocation;
+      }
+      if (!finalEndLocation && currentBookingDetails) {
+        finalEndLocation = isReturn 
+          ? currentBookingDetails.returnRouteEndLocation 
+          : currentBookingDetails.oneWayRouteEndLocation;
+      }
+      
+      // Si aún no hay coordenadas válidas, usar el primer y último punto de fullPath
+      if (!finalStartLocation && fullPath.length > 0) {
+        finalStartLocation = fullPath[0];
+      }
+      if (!finalEndLocation && fullPath.length > 0) {
+        finalEndLocation = fullPath[fullPath.length - 1];
+      }
+      distanceKm = isReturn
         ? currentBookingDetails?.returnDistanceKm || 0
-        : currentCalculation?.distanceKm || 0,
+        : currentBookingDetails?.oneWayPrice > 0
+          ? currentCalculation?.distanceKm || 0
+          : currentCalculation?.distanceKm || 0;
       durationText = isReturn
         ? currentBookingDetails?.returnDurationText || ""
         : currentCalculation?.durationText || "";
-    chipElement &&
-      distanceKm > 0 &&
-      durationText &&
-      (chipElement.textContent = `${distanceKm.toFixed(1)} km · ${durationText}`);
+      chipElement &&
+        distanceKm > 0 &&
+        durationText &&
+        (chipElement.textContent = `${distanceKm.toFixed(1)} km · ${durationText}`);
+    }
+    
+    if (!fullPath.length || !finalStartLocation || !finalEndLocation) {
+      return;
+    }
     (async () => {
       try {
         await loadGoogleMapsIfNeeded();
@@ -10971,7 +11120,7 @@ function loadGoogleMapsIfNeeded() {
           clickableIcons: !1,
           keyboardShortcuts: !1,
           gestureHandling: "greedy",
-          mapId: "150019df79666595709f2472",
+          mapId: TC_GOOGLE_MAP_ID,
         });
       } catch (e) {
         return (
@@ -10980,19 +11129,36 @@ function loadGoogleMapsIfNeeded() {
         );
       }
       try {
-        ((mapElement.style.height = "350px"), (mapElement.style.opacity = "1"));
+        ((mapElement.style.height = "350px"), 
+         (mapElement.style.opacity = "1"),
+         mapElement.classList.add("route-map--ready"));
       } catch (_) {}
-      new google.maps.Polyline({
-        path: fullPath || [],
+      
+      // Animación de polyline
+      const routePolyline = new google.maps.Polyline({
+        path: [],
         geodesic: !0,
         strokeColor: "#d4af37",
-        strokeOpacity: 0.2,
+        strokeOpacity: 0,
         strokeWeight: 4,
         strokeLinecap: "round",
         strokeLinejoin: "round",
         zIndex: 5,
         map: mapInstance,
       });
+      let animationPathIndex = 0;
+      const animatePath = () => {
+        if (animationPathIndex < fullPath.length) {
+          const path = routePolyline.getPath();
+          path.push(fullPath[animationPathIndex]);
+          animationPathIndex++;
+          requestAnimationFrame(animatePath);
+        } else {
+          routePolyline.setOptions({ strokeOpacity: 0.2 });
+          container.dataset && (container.dataset[animationKey] = "ready");
+        }
+      };
+      animatePath();
       try {
         const hasAdvancedMarker = !(
             !google.maps.marker || !google.maps.marker.AdvancedMarkerElement
@@ -11059,27 +11225,37 @@ function loadGoogleMapsIfNeeded() {
           const overlay = new RouteLabelOverlay(position, text, extraClass);
           return (overlay.setMap(map), overlay);
         }
-        (createEmojiMarker(startLocation, "🚕"),
-          createEmojiMarker(endLocation, "🏁"));
-        const originTitle = buildShortAddressLabel(
-            isReturn
-              ? currentBookingDetails && currentBookingDetails.returnOrigin
-                ? currentBookingDetails.returnOrigin
-                : ""
-              : currentCalculation && currentCalculation.origin
-                ? currentCalculation.origin
-                : "",
-          ),
-          destinationTitle = buildShortAddressLabel(
-            isReturn
-              ? currentBookingDetails && currentBookingDetails.returnDestination
-                ? currentBookingDetails.returnDestination
-                : ""
-              : currentCalculation && currentCalculation.destination
-                ? currentCalculation.destination
-                : "",
-          ),
-          originText =
+        (createEmojiMarker(finalStartLocation, "🚕"),
+          createEmojiMarker(finalEndLocation, "🏁"));
+        
+        let originTitle, destinationTitle;
+        if (isAdditional && typeof additionalTripIndex === 'number') {
+          const additionalTrips = window.additionalTrips || [];
+          const trip = additionalTrips[additionalTripIndex];
+          originTitle = trip ? trip.origin || "" : "";
+          destinationTitle = trip ? trip.destination || "" : "";
+        } else {
+          
+          const rawOrigin = isReturn
+                ? currentBookingDetails && currentBookingDetails.returnOrigin
+                  ? currentBookingDetails.returnOrigin
+                  : getElValue("origen-vuelta-calc") || ""
+                : currentCalculation && currentCalculation.origin
+                  ? currentCalculation.origin
+                  : "";
+          const rawDestination = isReturn
+                ? currentBookingDetails && currentBookingDetails.returnDestination
+                  ? currentBookingDetails.returnDestination
+                  : getElValue("destino-vuelta-calc") || ""
+                : currentCalculation && currentCalculation.destination
+                  ? currentCalculation.destination
+                  : "";
+          
+          originTitle = buildShortAddressLabel(rawOrigin),
+          destinationTitle = buildShortAddressLabel(rawDestination);
+        }
+        
+        const originText =
             originTitle ||
             getMessagesSection("calc").routeOriginLabel ||
             "Origen",
@@ -11087,18 +11263,36 @@ function loadGoogleMapsIfNeeded() {
             destinationTitle ||
             getMessagesSection("calc").routeDestinationLabel ||
             "Destino";
-        (createRouteLabelOverlay(
-          mapInstance,
-          startLocation,
-          originText,
-          "route-map-label--origin",
-        ),
-          createRouteLabelOverlay(
-            mapInstance,
-            endLocation,
-            destinationText,
-            "route-map-label--destination",
-          ));
+        
+        // Dibujar etiquetas después de que el mapa esté completamente inicializado
+        const drawLabels = () => {
+          try {
+            const label1 = createRouteLabelOverlay(
+              mapInstance,
+              finalStartLocation,
+              originText,
+              "route-map-label--origin",
+            );
+            const label2 = createRouteLabelOverlay(
+              mapInstance,
+              finalEndLocation,
+              destinationText,
+              "route-map-label--destination",
+            );
+          } catch (e) {
+            console.error('[DEBUG] Error creating labels:', e);
+          }
+        };
+        
+        // Intentar dibujar etiquetas después de que el mapa esté listo
+        google.maps.event.addListenerOnce(mapInstance, 'idle', () => {
+          drawLabels();
+        });
+        
+        // Fallback con setTimeout
+        setTimeout(() => {
+          drawLabels();
+        }, 500);
       } catch (_) {}
       try {
         mapInstance.fitBounds(bounds, padding);
@@ -11253,14 +11447,331 @@ function loadGoogleMapsIfNeeded() {
       animObserver.observe(container);
     });
   }
+  function initAdditionalConfirmationMap(trip, additionalTripIndex, mapElement, container) {
+    console.log('[DEBUG initAdditionalConfirmationMap] CALLED - trip:', trip);
+    console.log('[DEBUG initAdditionalConfirmationMap] trip.overview_path:', trip.overview_path);
+    console.log('[DEBUG initAdditionalConfirmationMap] trip.start_location:', trip.start_location);
+    console.log('[DEBUG initAdditionalConfirmationMap] trip.end_location:', trip.end_location);
+    console.log('[DEBUG initAdditionalConfirmationMap] trip.origin:', trip.origin);
+    console.log('[DEBUG initAdditionalConfirmationMap] trip.destination:', trip.destination);
+    
+    const stateKey = `confirmMapStateAdditional_${additionalTripIndex}`,
+      animationKey = `confirmMapAnimAdditional_${additionalTripIndex}`;
+    
+    try {
+      if (
+        container.dataset &&
+        "ready" === container.dataset[stateKey]
+      )
+        return;
+    } catch (_) {}
+    
+    let fullPath = trip.overview_path || [];
+    fullPath = fullPath
+      .map((p) => {
+        if (!p) return null;
+        const lat =
+            "function" == typeof p.lat ? p.lat() : p.lat,
+          lng = "function" == typeof p.lng ? p.lng() : p.lng;
+        return new google.maps.LatLng(lat, lng);
+      })
+      .filter((p) => null !== p);
+    
+    const startLocation = trip.start_location,
+      endLocation = trip.end_location;
+    
+    // Convertir a LatLng si es necesario
+    const toLatLng = (loc) => {
+      if (!loc) return null;
+      if (loc instanceof google.maps.LatLng) return loc;
+      if (loc.lat && loc.lng) {
+        const lat = typeof loc.lat === 'function' ? loc.lat() : loc.lat;
+        const lng = typeof loc.lng === 'function' ? loc.lng() : loc.lng;
+        if (isNaN(lat) || isNaN(lng)) return null;
+        return new google.maps.LatLng(lat, lng);
+      }
+      return null;
+    };
+    
+    const finalStartLocation = toLatLng(startLocation);
+    const finalEndLocation = toLatLng(endLocation);
+    
+    // Si no hay coordenadas válidas, usar el primer y último punto de fullPath
+    let mapStartLocation = finalStartLocation;
+    let mapEndLocation = finalEndLocation;
+    if (!mapStartLocation && fullPath.length > 0) {
+      mapStartLocation = fullPath[0];
+    }
+    if (!mapEndLocation && fullPath.length > 0) {
+      mapEndLocation = fullPath[fullPath.length - 1];
+    }
+    
+    if (!fullPath.length || !mapStartLocation || !mapEndLocation) {
+      console.log('[DEBUG initAdditionalConfirmationMap] Early return - fullPath.length:', fullPath.length, 'mapStartLocation:', mapStartLocation, 'mapEndLocation:', mapEndLocation);
+      return;
+    }
+    
+    const distanceKm = trip.distance || 0,
+      durationText = trip.duration || "";
+    
+    (async () => {
+      try {
+        await loadGoogleMapsIfNeeded();
+      } catch (_) {
+        return null;
+      }
+      if (!googleApiLoaded || void 0 === google.maps.Map)
+        return null;
+      const bounds = new google.maps.LatLngBounds();
+      fullPath.forEach((p) => bounds.extend(p));
+      let padding = 40;
+      distanceKm > 0 && distanceKm <= 5
+        ? (padding = 55)
+        : distanceKm > 5 && distanceKm <= 40
+          ? (padding = 30)
+          : distanceKm > 40 && (padding = 15);
+      let mapInstance = null;
+      try {
+        mapInstance = new google.maps.Map(mapElement, {
+          center: mapStartLocation,
+          zoom: 11,
+          disableDefaultUI: !0,
+          clickableIcons: !1,
+          keyboardShortcuts: !1,
+          gestureHandling: "greedy",
+          mapId: TC_GOOGLE_MAP_ID,
+        });
+      } catch (e) {
+        return (
+          console.error(
+            "Additional confirmation map init failed",
+            e,
+          ),
+          null
+        );
+      }
+      try {
+        ((mapElement.style.height = "350px"),
+          (mapElement.style.opacity = "1"));
+      } catch (_) {}
+      
+      // Animación de polyline
+      const routePolyline = new google.maps.Polyline({
+        path: [],
+        geodesic: !0,
+        strokeColor: "#d4af37",
+        strokeOpacity: 0,
+        strokeWeight: 4,
+        strokeLinecap: "round",
+        strokeLinejoin: "round",
+        zIndex: 5,
+        map: mapInstance,
+      });
+      let animationPathIndex = 0;
+      const animatePath = () => {
+        if (animationPathIndex < fullPath.length) {
+          const path = routePolyline.getPath();
+          path.push(fullPath[animationPathIndex]);
+          animationPathIndex++;
+          requestAnimationFrame(animatePath);
+        } else {
+          routePolyline.setOptions({ strokeOpacity: 0.2 });
+          container.dataset && (container.dataset[animationKey] = "ready");
+        }
+      };
+      animatePath();
+      
+      try {
+        const hasAdvancedMarker = !(
+            !google.maps.marker ||
+            !google.maps.marker.AdvancedMarkerElement
+          ),
+          createEmojiMarker = (pos, emoji) => {
+            if (!pos) return null;
+            if (hasAdvancedMarker) {
+              const el = document.createElement("div");
+              return (
+                (el.textContent = emoji),
+                (el.style.fontSize = "30px"),
+                (el.style.lineHeight = "1"),
+                (el.style.transform = "translate3d(0,0,0)"),
+                new google.maps.marker.AdvancedMarkerElement(
+                  {
+                    map: mapInstance,
+                    position: pos,
+                    content: el,
+                  },
+                )
+              );
+            }
+            return new google.maps.Marker({
+              position: pos,
+              map: mapInstance,
+              icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 0,
+              },
+              label: {
+                text: emoji,
+                fontSize: "24px",
+                fontWeight: "bold",
+              },
+            });
+          },
+          originLabelClass =
+            (createEmojiMarker(mapStartLocation, "🚕"),
+            createEmojiMarker(mapEndLocation, "🏁"),
+            "route-map-label--origin"),
+          destLabelClass = "route-map-label--destination";
+        
+        // Usar RouteLabelOverlay como los demás mapas
+        function createRouteLabelOverlay(map, position, text, extraClass) {
+          function RouteLabelOverlay(pos, txt, cls) {
+            ((this.position = pos),
+              (this.text = txt),
+              (this.extraClass = cls || ""),
+              (this.div = null));
+          }
+          ((RouteLabelOverlay.prototype = Object.create(
+            google.maps.OverlayView.prototype,
+          )),
+            (RouteLabelOverlay.prototype.constructor = RouteLabelOverlay),
+            (RouteLabelOverlay.prototype.onAdd = function () {
+              const div = document.createElement("div");
+              ((div.className =
+                "route-map-label" +
+                (this.extraClass ? " " + this.extraClass : "")),
+                (div.textContent = null != this.text ? String(this.text) : ""),
+                (this.div = div));
+              const panes = this.getPanes();
+              panes && panes.floatPane && panes.floatPane.appendChild(div);
+            }),
+            (RouteLabelOverlay.prototype.draw = function () {
+              if (!this.div) return;
+              const projection = this.getProjection();
+              if (!projection) return;
+              const point = projection.fromLatLngToDivPixel(this.position);
+              if (!point) return;
+              ((this.div.style.left = point.x + 18 + "px"),
+                (this.div.style.top = point.y + -14 + "px"));
+            }),
+            (RouteLabelOverlay.prototype.onRemove = function () {
+              (this.div &&
+                this.div.parentNode &&
+                this.div.parentNode.removeChild(this.div),
+                (this.div = null));
+            }));
+          const overlay = new RouteLabelOverlay(position, text, extraClass);
+          return (overlay.setMap(map), overlay);
+        }
+        
+        const originLabelText = trip.origin || "Origen",
+          destLabelText = trip.destination || "Destino";
+        
+        (createRouteLabelOverlay(
+          mapInstance,
+          mapStartLocation,
+          originLabelText,
+          "route-map-label--origin",
+        ),
+          createRouteLabelOverlay(
+            mapInstance,
+            mapEndLocation,
+            destLabelText,
+            "route-map-label--destination",
+          ));
+      } catch (_) {}
+      mapInstance.fitBounds(bounds, padding);
+      try {
+        container.dataset &&
+          (container.dataset[stateKey] = "ready");
+      } catch (_) {}
+      return mapInstance;
+    })().then((ctx) => {
+      if (!ctx) return;
+      const animObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting)
+              if (
+                container.dataset &&
+                "played" === container.dataset[animationKey]
+              )
+                animObserver.disconnect();
+              else
+                try {
+                  const animPolyline =
+                      new google.maps.Polyline({
+                        path: [],
+                        geodesic: !0,
+                        strokeColor: "#d4af37",
+                        strokeOpacity: 1,
+                        strokeWeight: 4,
+                        strokeLinecap: "round",
+                        strokeLinejoin: "round",
+                        zIndex: 5,
+                        map: ctx,
+                      }),
+                    scheduleFrame =
+                      "function" == typeof requestAnimationFrame
+                        ? requestAnimationFrame
+                        : (fn) => setTimeout(fn, 16);
+                  let animIndex = 0;
+                  const animatePoly = () => {
+                    if (animIndex < fullPath.length) {
+                      animPolyline.getPath().push(fullPath[animIndex]);
+                      animIndex++;
+                      scheduleFrame(animatePoly);
+                    } else {
+                      animPolyline.setOptions({ strokeOpacity: 0.2 });
+                      container.dataset &&
+                        (container.dataset[animationKey] = "played");
+                    }
+                  };
+                  animatePoly();
+                } catch (_) {}
+          });
+        },
+        { threshold: 0.3 },
+      );
+      animObserver.observe(container);
+    });
+  }
+  
   function createConfirmationRouteToggle({
     toggleButton: toggleButton,
     container: container,
     mapElement: mapElement,
     chipElement: chipElement,
     isReturn: isReturn,
+    isAdditional: isAdditional,
+    additionalTripIndex: additionalTripIndex,
   }) {
-    initConfirmationMap(isReturn);
+    let mapInitialized = !1;
+    
+    toggleButton.addEventListener("click", async () => {
+      const isExpanded = "true" === toggleButton.getAttribute("aria-expanded");
+      if (
+        (toggleButton.setAttribute("aria-expanded", !isExpanded),
+        container.setAttribute("aria-hidden", isExpanded),
+        isExpanded)
+      ) {
+        (container.classList.remove("visible"),
+          container.setAttribute("aria-hidden", "true"));
+        const currentMsgs = getMessagesSection("calc");
+        toggleButton.innerHTML = `${currentMsgs.viewRouteButton} <span class="route-toggle-icon">&#9662;</span>`;
+      } else {
+        (container.classList.add("visible"),
+          container.setAttribute("aria-hidden", "false"));
+        const currentMsgs = getMessagesSection("calc");
+        toggleButton.innerHTML = `${currentMsgs.hideRouteButton} <span class="route-toggle-icon">&#9652;</span>`;
+        
+        if (!mapInitialized) {
+          initConfirmationMap(isReturn, isAdditional, additionalTripIndex);
+          mapInitialized = !0;
+        }
+      }
+    });
   }
   if (
     (returnTripYes &&
@@ -11930,6 +12441,7 @@ function loadGoogleMapsIfNeeded() {
         );
         additionalTripsSection &&
           ((additionalTripsSection.innerHTML = ""),
+          console.log("populateConfirmationModal - window.additionalTrips:", window.additionalTrips),
           Array.isArray(window.additionalTrips) && window.additionalTrips.length > 0
             ? ((additionalTripsSection.style.display = "block"),
               window.additionalTrips.forEach((trip, index) => {
@@ -11971,7 +12483,7 @@ function loadGoogleMapsIfNeeded() {
       <div class="confirmation-route-wrapper">
         <div
           id="${routeContainerId}"
-          class="route-map-container confirmation-route-map-container visible">
+          class="route-map-container confirmation-route-map-container">
           <div class="route-map-info">
             <div class="route-map-chip">
               <span class="route-map-chip-main" id="${routeChipId}"></span>
@@ -11983,6 +12495,12 @@ function loadGoogleMapsIfNeeded() {
             role="img"
             aria-label="Mapa del trayecto adicional ${tripNumber}"></div>
         </div>
+        <button
+          id="${routeToggleBtnId}"
+          type="button"
+          class="route-toggle-btn"
+          aria-expanded="false"
+          aria-controls="${routeContainerId}"></button>
       </div>
     `),
                   additionalTripsSection.appendChild(tripSection));
@@ -12008,54 +12526,50 @@ function loadGoogleMapsIfNeeded() {
                   trip.overview_path.length > 0 &&
                   trip.start_location &&
                   trip.end_location;
-                routeToggleBtnEl &&
-                window.calcMsgs &&
-                hasGeometry &&
-                routeContainerEl &&
-                routeMapEl
-                  ? ((routeToggleBtnEl.innerHTML = `${window.calcMsgs.viewRouteButton || "Ver ruta"} <span class="route-toggle-icon">&#9662;</span>`),
-                    (routeToggleBtnEl.style.display = ""),
-                    routeContainerEl.classList.remove("visible"),
-                    routeContainerEl.setAttribute("aria-hidden", "true"),
-                    createConfirmationRouteToggle({
-                      toggleButton: routeToggleBtnEl,
-                      container: routeContainerEl,
-                      mapElement: routeMapEl,
-                      chipElement: routeChipEl,
-                      isReturn: !1,
-                      isAdditional: !0,
-                      additionalTripIndex: index,
-                    }))
-                  : routeToggleBtnEl &&
-                    routeContainerEl &&
-                    ((routeToggleBtnEl.style.display = "none"),
-                    routeContainerEl.classList.remove("visible"),
-                    routeContainerEl.setAttribute("aria-hidden", "true"));
+                // Para trayectos adicionales, mostrar el mapa directamente como ida/vuelta
+                if (hasGeometry && routeContainerEl && routeMapEl) {
+                  routeContainerEl.classList.add("visible");
+                  routeContainerEl.setAttribute("aria-hidden", "false");
+                  // Inicializar el mapa del trayecto adicional inmediatamente
+                  setTimeout(() => {
+                    try {
+                      initAdditionalConfirmationMap(trip, index, routeMapEl, routeContainerEl);
+                    } catch (e) {
+                      console.error('Error initializing additional trip map:', e);
+                    }
+                  }, 100);
+                } else if (routeContainerEl) {
+                  routeContainerEl.classList.remove("visible");
+                  routeContainerEl.setAttribute("aria-hidden", "true");
+                }
+                if (routeToggleBtnEl) {
+                  routeToggleBtnEl.style.display = "none";
+                }
               }))
             : (additionalTripsSection.style.display = "none"));
         const equipajeEl = document.getElementById("confirm-equipaje");
         equipajeEl &&
-          (equipajeEl.textContent = `${window.confirmMsgs.luggageCabinLabel}: ${getElValue("maletas-cabina")}, ${window.confirmMsgs.luggageLargeLabel}: ${getElValue("maletas-grandes")}`);
+          (equipajeEl.textContent = `${window.confirmMsgs.luggageCabinLabel}: ${currentBookingDetails.luggageCabin || getElValue("maletas-cabina")}, ${window.confirmMsgs.luggageLargeLabel}: ${currentBookingDetails.luggageLarge || getElValue("maletas-grandes")}`);
         const mascotaEl = document.getElementById("confirm-mascota");
         mascotaEl &&
           (mascotaEl.textContent =
-            "yes" === getRadioValue("mascota")
+            "yes" === (currentBookingDetails.pet || getRadioValue("mascota"))
               ? window.confirmMsgs.yes
               : window.confirmMsgs.no);
         let sriTxt = window.confirmMsgs.no;
         needsSRIYes?.checked &&
           ((sriTxt = window.confirmMsgs.sriYes(
-            getElValue("baby-seats"),
-            getElValue("child-seats"),
+            currentBookingDetails.babySeats || getElValue("baby-seats"),
+            currentBookingDetails.childSeats || getElValue("child-seats"),
           )),
-          parseInt(getElValue("baby-seats"), 10) > 0 &&
-            (sriTxt += `${window.confirmMsgs.sriAgeWeightPrefix}${getElValue("baby-age") || window.confirmMsgs.notAvailable}`));
+          parseInt(currentBookingDetails.babySeats || getElValue("baby-seats"), 10) > 0 &&
+            (sriTxt += `${window.confirmMsgs.sriAgeWeightPrefix}${currentBookingDetails.babyAge || getElValue("baby-age") || window.confirmMsgs.notAvailable}`));
         const confirmSriEl = document.getElementById("confirm-sri");
         confirmSriEl && (confirmSriEl.textContent = sriTxt);
         const comentariosEl = document.getElementById(
           "confirm-comentarios",
         );
-        let comentariosText = getElValue("comentarios") || window.confirmMsgs.none;
+        let comentariosText = currentBookingDetails.comments || getElValue("comentarios") || window.confirmMsgs.none;
         
         // Agregar información de vuelo/tren si existe
         const confirmationModal = document.querySelector("#booking-confirmation-overlay .confirmation-modal");
@@ -12079,7 +12593,10 @@ function loadGoogleMapsIfNeeded() {
         
         console.log('flightTrainTrips final:', flightTrainTrips);
         
+        // Procesar información de vuelos/trenes para el Localizador
+        let localizadorText = "";
         if (flightTrainTrips.length > 0) {
+          const tripLines = [];
           flightTrainTrips.forEach(trip => {
             console.log('Procesando trip:', trip);
             if (trip.flightNumber || trip.arrivalTime) {
@@ -12092,21 +12609,24 @@ function loadGoogleMapsIfNeeded() {
               if (trip.flightNumber) parts.push(`${numberLabel}: ${trip.flightNumber}`);
               if (trip.arrivalTime) parts.push(`${window.confirmMsgs.arrivalTimeLabel}: ${trip.arrivalTime}`);
               if (parts.length) {
-                const line = parts.join(" | ");
-                comentariosText = comentariosText === window.confirmMsgs.none ? line : `${comentariosText}\n\n${line}`;
+                tripLines.push(`• ${parts.join(" | ")}`);
               }
             }
           });
+          if (tripLines.length > 0) {
+            localizadorText = tripLines.join("\n");
+          }
         }
         
-        if (flightTrainNumber || flightTrainTime) {
-          const parts = [];
-          if (flightTrainNumber) parts.push(`${window.confirmMsgs.flightNumberLabel}: ${flightTrainNumber}`);
-          if (flightTrainTime) parts.push(`${window.confirmMsgs.arrivalTimeLabel}: ${flightTrainTime}`);
-          if (parts.length) {
-            const line = parts.join(" | ");
-            comentariosText = comentariosText === window.confirmMsgs.none ? line : `${comentariosText}\n\n${line}`;
-          }
+        // Mostrar/ocultar sección de localizador y asignar texto
+        const localizadorSection = document.getElementById("confirm-localizador-section");
+        const localizadorEl = document.getElementById("confirm-localizador");
+        if (localizadorText) {
+          localizadorSection && (localizadorSection.style.display = "block");
+          localizadorEl && (localizadorEl.textContent = localizadorText);
+        } else {
+          localizadorSection && (localizadorSection.style.display = "none");
+          localizadorEl && (localizadorEl.textContent = "");
         }
         
         comentariosEl && (comentariosEl.textContent = comentariosText);
@@ -12340,7 +12860,9 @@ function loadGoogleMapsIfNeeded() {
                     timeLabel: "Hora de llegada:",
                     placeholder: "Ej.: IB3941",
                     continue: "Continuar",
-                    skip: "No es necesario"
+                    skip: "No es necesario",
+                    question: "¿Alguna duda sobre su recogida?",
+                    questionLink: "https://taxiconil.es/articulos/como-recogemos-en-el-aeropuerto"
                   },
                   en: {
                     title: "Your arrival, our priority",
@@ -12349,7 +12871,9 @@ function loadGoogleMapsIfNeeded() {
                     timeLabel: "Arrival time:",
                     placeholder: "E.g. IB3941",
                     continue: "Continue",
-                    skip: "Not needed"
+                    skip: "Not needed",
+                    question: "Any questions about your pickup?",
+                    questionLink: "https://taxiconil.es/en/articulos/how-we-pick-up-at-the-airport"
                   },
                   de: {
                     title: "Ihre Ankunft, unsere Priorität",
@@ -12358,7 +12882,9 @@ function loadGoogleMapsIfNeeded() {
                     timeLabel: "Ankunftszeit:",
                     placeholder: "z. B. IB3941",
                     continue: "Weiter",
-                    skip: "Nicht erforderlich"
+                    skip: "Nicht erforderlich",
+                    question: "Fragen zur Abholung?",
+                    questionLink: "https://taxiconil.es/de/articulos/wir-holen-sie-am-flughafen-ab"
                   },
                   fr: {
                     title: "Votre arrivée, notre priorité",
@@ -12367,7 +12893,9 @@ function loadGoogleMapsIfNeeded() {
                     timeLabel: "Heure d'arrivée :",
                     placeholder: "Ex. : IB3941",
                     continue: "Continuer",
-                    skip: "Pas nécessaire"
+                    skip: "Pas nécessaire",
+                    question: "Des questions sur votre prise en charge ?",
+                    questionLink: "https://taxiconil.es/fr/articulos/comment-nous-vous-recuperons-a-l-aeroport"
                   }
                 },
                 station: {
@@ -12378,7 +12906,9 @@ function loadGoogleMapsIfNeeded() {
                     timeLabel: "Hora de llegada:",
                     placeholder: "Ej.: AVE 02131",
                     continue: "Continuar",
-                    skip: "No es necesario"
+                    skip: "No es necesario",
+                    question: "¿Alguna duda sobre su recogida?",
+                    questionLink: "https://taxiconil.es/articulos/como-recogemos-en-la-estacion-de-tren"
                   },
                   en: {
                     title: "Your arrival, our priority",
@@ -12387,7 +12917,9 @@ function loadGoogleMapsIfNeeded() {
                     timeLabel: "Arrival time:",
                     placeholder: "E.g. AVE 02131",
                     continue: "Continue",
-                    skip: "Not needed"
+                    skip: "Not needed",
+                    question: "Any questions about your pickup?",
+                    questionLink: "https://taxiconil.es/en/articulos/how-we-pick-up-at-the-train-station"
                   },
                   de: {
                     title: "Ihre Ankunft, unsere Priorität",
@@ -12396,7 +12928,9 @@ function loadGoogleMapsIfNeeded() {
                     timeLabel: "Ankunftszeit:",
                     placeholder: "z. B. AVE 02131",
                     continue: "Weiter",
-                    skip: "Nicht erforderlich"
+                    skip: "Nicht erforderlich",
+                    question: "Fragen zur Abholung?",
+                    questionLink: "https://taxiconil.es/de/articulos/wir-holen-sie-am-bahnhof-ab"
                   },
                   fr: {
                     title: "Votre arrivée, notre priorité",
@@ -12405,7 +12939,9 @@ function loadGoogleMapsIfNeeded() {
                     timeLabel: "Heure d'arrivée :",
                     placeholder: "Ex. : AVE 02131",
                     continue: "Continuer",
-                    skip: "Pas nécessaire"
+                    skip: "Pas nécessaire",
+                    question: "Des questions sur votre prise en charge ?",
+                    questionLink: "https://taxiconil.es/fr/articulos/comment-nous-vous-recuperons-a-la-gare"
                   }
                 }
               };
@@ -12414,8 +12950,8 @@ function loadGoogleMapsIfNeeded() {
               
               const modalHTML = `
                 <div id="${modalId}" class="flight-train-modal" style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: url('/IMG/barrio-de-los-pescadores.jpg'); background-size: cover; background-position: center; z-index: 10000; align-items: center; justify-content: center; overflow-y: auto;">
-                  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26, 42, 69, 0.85);"></div>
-                  <div class="modal-content" style="position: relative; max-width: 600px; width: 90%; background: linear-gradient(135deg, rgba(26, 42, 69, 0.85), rgba(45, 55, 72, 0.85)); padding: 2rem; border-radius: 20px; text-align: center; color: white; box-shadow: 0 20px 60px rgba(0,0,0,0.5); backdrop-filter: blur(10px); margin: 1rem;">
+                  <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(26, 42, 69, 0.70);"></div>
+                  <div class="modal-content" style="position: relative; max-width: 600px; width: 90%; background: linear-gradient(135deg, rgba(26, 42, 69, 0.78), rgba(45, 55, 72, 0.78)); padding: 2rem; border-radius: 20px; text-align: center; color: white; box-shadow: 0 20px 60px rgba(0,0,0,0.5); backdrop-filter: blur(10px); margin: 1rem;">
                     <div style="background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); border-radius: 50%; width: 60px; height: 60px; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 30px rgba(212, 175, 55, 0.4);">
                       <span style="font-size: clamp(1.5rem, 5vw, 2rem); color: #1a2a45; line-height: 1;">${isStation ? '🚃' : '✈'}</span>
                     </div>
@@ -12431,9 +12967,12 @@ function loadGoogleMapsIfNeeded() {
                         <input type="time" id="flight-train-time" style="width: 100%; padding: 0.75rem; background: rgba(255, 255, 255, 0.12); border: 2px solid rgba(212, 175, 55, 0.4); border-radius: 12px; color: white; font-size: clamp(0.9rem, 2.5vw, 1rem);">
                       </div>
                     </div>
+                    <p style="margin-bottom: 1.5rem; color: rgba(255, 255, 255, 0.8); font-size: clamp(0.85rem, 2.5vw, 0.95rem);">
+                      <a href="${pack.questionLink}" target="_blank" rel="noopener noreferrer" style="color: #d4af37; text-decoration: underline; transition: color 0.2s;">${pack.question}</a>
+                    </p>
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
-                      <button id="flight-train-continue" style="background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); color: #1a2a45; border: none; padding: 1rem; border-radius: 12px; font-size: clamp(0.9rem, 2.5vw, 1rem); font-weight: 700; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">${pack.continue}</button>
-                      <button id="flight-train-skip" style="background: transparent; color: rgba(255, 255, 255, 0.7); border: 2px solid rgba(255, 255, 255, 0.3); padding: 1rem; border-radius: 12px; font-size: clamp(0.9rem, 2.5vw, 1rem); font-weight: 600; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s;">${pack.skip}</button>
+                      <button id="flight-train-skip" class="btn btn-light">${pack.skip}</button>
+                      <button id="flight-train-continue" class="btn btn-primary">${pack.continue}</button>
                     </div>
                   </div>
                 </div>
@@ -12463,6 +13002,9 @@ function loadGoogleMapsIfNeeded() {
                     window.flightTrainTrips[0].arrivalTime = flightTime;
                   }
                   
+                  // Guardar datos del formulario en currentBookingDetails
+                  saveFormDataToBookingDetails();
+                  
                   // Guardar datos en el dataset del modal de confirmación
                   const confirmationModal = document.querySelector("#booking-confirmation-overlay .confirmation-modal");
                   if (confirmationModal) {
@@ -12490,75 +13032,6 @@ function loadGoogleMapsIfNeeded() {
                     } catch (_) {}
                     try {
                       initConfirmationMap(!0);
-                    } catch (_) {}
-                    try {
-                      Array.isArray(window.additionalTrips) &&
-                        window.additionalTrips.length > 0 &&
-                        window.additionalTrips.forEach((_, index) => {
-                          try {
-                            !(function (additionalTripIndex) {
-                              if (
-                                !Array.isArray(window.additionalTrips) ||
-                                !window.additionalTrips[additionalTripIndex]
-                              )
-                                return;
-                              const trip = window.additionalTrips[additionalTripIndex],
-                                tripId =
-                                  trip.id || `additional-trip-${additionalTripIndex}`,
-                                mapElement = document.getElementById(
-                                  `confirm-additional-${tripId}-route-map`,
-                                ),
-                                container = document.getElementById(
-                                  `confirm-additional-${tripId}-route-container`,
-                                ),
-                                chipElement = document.getElementById(
-                                  `confirm-additional-${tripId}-route-chip`,
-                                );
-                              if (!mapElement || !container) return;
-                              const stateKey = `confirmMapStateAdditional_${additionalTripIndex}`,
-                                animationKey = `confirmMapAnimAdditional_${additionalTripIndex}`;
-                              try {
-                                if (
-                                  container.dataset &&
-                                  "ready" === container.dataset[stateKey]
-                                )
-                                  return;
-                              } catch (_) {}
-                              let fullPath = trip.overview_path || [];
-                              fullPath = fullPath
-                                .map((p) => {
-                                  if (!p) return null;
-                                  const lat = p.lat || p[0];
-                                  const lng = p.lng || p[1];
-                                  return lat && lng ? { lat, lng } : null;
-                                })
-                                .filter(Boolean);
-                              if (fullPath.length < 2) return;
-                              const bounds = new google.maps.LatLngBounds();
-                              fullPath.forEach((point) => bounds.extend(point));
-                              const map = new google.maps.Map(mapElement, {
-                                center: bounds.getCenter(),
-                                zoom: 12,
-                                mapTypeId: "roadmap",
-                                disableDefaultUI: !0,
-                                styles: [
-                                  { featureType: "poi", stylers: [{ visibility: "off" }] },
-                                ],
-                              });
-                              const polyline = new google.maps.Polyline({
-                                path: fullPath,
-                                geodesic: !0,
-                                strokeColor: "#d4af37",
-                                strokeOpacity: 1,
-                                strokeWeight: 4,
-                              });
-                              polyline.setMap(map);
-                              map.fitBounds(bounds);
-                              container.dataset[stateKey] = "ready";
-                              container.dataset[animationKey] = "played";
-                            })(index);
-                          } catch (_) {}
-                        });
                     } catch (_) {}
                   }, 100);
                 };
@@ -12589,75 +13062,6 @@ function loadGoogleMapsIfNeeded() {
                     try {
                       initConfirmationMap(!0);
                     } catch (_) {}
-                    try {
-                      Array.isArray(window.additionalTrips) &&
-                        window.additionalTrips.length > 0 &&
-                        window.additionalTrips.forEach((_, index) => {
-                          try {
-                            !(function (additionalTripIndex) {
-                              if (
-                                !Array.isArray(window.additionalTrips) ||
-                                !window.additionalTrips[additionalTripIndex]
-                              )
-                                return;
-                              const trip = window.additionalTrips[additionalTripIndex],
-                                tripId =
-                                  trip.id || `additional-trip-${additionalTripIndex}`,
-                                mapElement = document.getElementById(
-                                  `confirm-additional-${tripId}-route-map`,
-                                ),
-                                container = document.getElementById(
-                                  `confirm-additional-${tripId}-route-container`,
-                                ),
-                                chipElement = document.getElementById(
-                                  `confirm-additional-${tripId}-route-chip`,
-                                );
-                              if (!mapElement || !container) return;
-                              const stateKey = `confirmMapStateAdditional_${additionalTripIndex}`,
-                                animationKey = `confirmMapAnimAdditional_${additionalTripIndex}`;
-                              try {
-                                if (
-                                  container.dataset &&
-                                  "ready" === container.dataset[stateKey]
-                                )
-                                  return;
-                              } catch (_) {}
-                              let fullPath = trip.overview_path || [];
-                              fullPath = fullPath
-                                .map((p) => {
-                                  if (!p) return null;
-                                  const lat = p.lat || p[0];
-                                  const lng = p.lng || p[1];
-                                  return lat && lng ? { lat, lng } : null;
-                                })
-                                .filter(Boolean);
-                              if (fullPath.length < 2) return;
-                              const bounds = new google.maps.LatLngBounds();
-                              fullPath.forEach((point) => bounds.extend(point));
-                              const map = new google.maps.Map(mapElement, {
-                                center: bounds.getCenter(),
-                                zoom: 12,
-                                mapTypeId: "roadmap",
-                                disableDefaultUI: !0,
-                                styles: [
-                                  { featureType: "poi", stylers: [{ visibility: "off" }] },
-                                ],
-                              });
-                              const polyline = new google.maps.Polyline({
-                                path: fullPath,
-                                geodesic: !0,
-                                strokeColor: "#d4af37",
-                                strokeOpacity: 1,
-                                strokeWeight: 4,
-                              });
-                              polyline.setMap(map);
-                              map.fitBounds(bounds);
-                              container.dataset[stateKey] = "ready";
-                              container.dataset[animationKey] = "played";
-                            })(index);
-                          } catch (_) {}
-                        });
-                    } catch (_) {}
                   }, 100);
                 };
               }
@@ -12668,6 +13072,10 @@ function loadGoogleMapsIfNeeded() {
             
             // Si no hay trayectos de aeropuerto/tren, abrir el modal de confirmación directamente
             hideElement(formErrorMessage);
+            
+            // Guardar datos del formulario en currentBookingDetails antes de abrir el modal
+            saveFormDataToBookingDetails();
+            
             openDialog(bookingConfirmationOverlay);
             
             // Llenar el modal después de que esté visible
@@ -12680,6 +13088,10 @@ function loadGoogleMapsIfNeeded() {
             console.error("Error al configurar banner de vuelo/tren:", e);
             // En caso de error, abrir el modal normalmente
             hideElement(formErrorMessage);
+            
+            // Guardar datos del formulario en currentBookingDetails antes de abrir el modal
+            saveFormDataToBookingDetails();
+            
             openDialog(bookingConfirmationOverlay);
             
             // Llenar el modal después de que esté visible
@@ -12700,304 +13112,34 @@ function loadGoogleMapsIfNeeded() {
               } catch (_) {}
               Array.isArray(window.additionalTrips) &&
                 window.additionalTrips.length > 0 &&
-                window.additionalTrips.forEach((_, index) => {
+                (console.log('[DEBUG] window.additionalTrips:', window.additionalTrips),
+                window.additionalTrips.forEach((trip, index) => {
                   try {
-                    !(function (additionalTripIndex) {
-                      if (
-                        !Array.isArray(window.additionalTrips) ||
-                        !window.additionalTrips[additionalTripIndex]
-                      )
-                        return;
-                      const trip = window.additionalTrips[additionalTripIndex],
-                        tripId =
-                          trip.id || `additional-trip-${additionalTripIndex}`,
-                        mapElement = document.getElementById(
-                          `confirm-additional-${tripId}-route-map`,
-                        ),
-                        container = document.getElementById(
-                          `confirm-additional-${tripId}-route-container`,
-                        ),
-                        chipElement = document.getElementById(
-                          `confirm-additional-${tripId}-route-chip`,
-                        );
-                      if (!mapElement || !container) return;
-                      const stateKey = `confirmMapStateAdditional_${additionalTripIndex}`,
-                        animationKey = `confirmMapAnimAdditional_${additionalTripIndex}`;
-                      try {
-                        if (
-                          container.dataset &&
-                          "ready" === container.dataset[stateKey]
-                        )
-                          return;
-                      } catch (_) {}
-                      let fullPath = trip.overview_path || [];
-                      fullPath = fullPath
-                        .map((p) => {
-                          if (!p) return null;
-                          const lat =
-                              "function" == typeof p.lat ? p.lat() : p.lat,
-                            lng = "function" == typeof p.lng ? p.lng() : p.lng;
-                          return new google.maps.LatLng(lat, lng);
-                        })
-                        .filter((p) => null !== p);
-                      const startLocation = trip.start_location,
-                        endLocation = trip.end_location;
-                      if (!fullPath.length || !startLocation || !endLocation)
-                        return;
-                      const distanceKm = trip.distance || 0,
-                        durationText = trip.duration || "";
-                      (chipElement &&
-                        distanceKm > 0 &&
-                        durationText &&
-                        (chipElement.textContent = `${distanceKm.toFixed(1)} km · ${durationText}`),
-                        (async () => {
-                          try {
-                            await loadGoogleMapsIfNeeded();
-                          } catch (_) {
-                            return null;
-                          }
-                          if (!googleApiLoaded || void 0 === google.maps.Map)
-                            return null;
-                          const bounds = new google.maps.LatLngBounds();
-                          fullPath.forEach((p) => bounds.extend(p));
-                          let padding = 40;
-                          distanceKm > 0 && distanceKm <= 5
-                            ? (padding = 55)
-                            : distanceKm > 5 && distanceKm <= 40
-                              ? (padding = 30)
-                              : distanceKm > 40 && (padding = 15);
-                          let mapInstance = null;
-                          try {
-                            mapInstance = new google.maps.Map(mapElement, {
-                              center: startLocation,
-                              zoom: 11,
-                              disableDefaultUI: !0,
-                              clickableIcons: !1,
-                              keyboardShortcuts: !1,
-                              gestureHandling: "greedy",
-                              mapId: "150019df79666595709f2472",
-                            });
-                          } catch (e) {
-                            return (
-                              console.error(
-                                "Additional confirmation map init failed",
-                                e,
-                              ),
-                              null
-                            );
-                          }
-                          try {
-                            ((mapElement.style.height = "350px"),
-                              (mapElement.style.opacity = "1"));
-                          } catch (_) {}
-                          new google.maps.Polyline({
-                            path: fullPath || [],
-                            geodesic: !0,
-                            strokeColor: "#d4af37",
-                            strokeOpacity: 0.2,
-                            strokeWeight: 4,
-                            strokeLinecap: "round",
-                            strokeLinejoin: "round",
-                            zIndex: 5,
-                            map: mapInstance,
-                          });
-                          try {
-                            const hasAdvancedMarker = !(
-                                !google.maps.marker ||
-                                !google.maps.marker.AdvancedMarkerElement
-                              ),
-                              createEmojiMarker = (pos, emoji) => {
-                                if (!pos) return null;
-                                if (hasAdvancedMarker) {
-                                  const el = document.createElement("div");
-                                  return (
-                                    (el.textContent = emoji),
-                                    (el.style.fontSize = "30px"),
-                                    (el.style.lineHeight = "1"),
-                                    (el.style.transform = "translate3d(0,0,0)"),
-                                    new google.maps.marker.AdvancedMarkerElement(
-                                      {
-                                        map: mapInstance,
-                                        position: pos,
-                                        content: el,
-                                      },
-                                    )
-                                  );
-                                }
-                                return new google.maps.Marker({
-                                  position: pos,
-                                  map: mapInstance,
-                                  icon: {
-                                    path: google.maps.SymbolPath.CIRCLE,
-                                    scale: 0,
-                                  },
-                                  label: {
-                                    text: emoji,
-                                    fontSize: "24px",
-                                    fontWeight: "bold",
-                                  },
-                                });
-                              },
-                              originLabelClass =
-                                (createEmojiMarker(startLocation, "🚕"),
-                                createEmojiMarker(endLocation, "🏁"),
-                                "route-map-label--origin"),
-                              destLabelClass = "route-map-label--destination";
-                            if (
-                              hasAdvancedMarker &&
-                              google.maps.marker &&
-                              google.maps.marker.AdvancedMarkerElement
-                            ) {
-                              const createLabelMarker = (
-                                  pos,
-                                  text,
-                                  labelClass,
-                                ) => {
-                                  if (!pos) return null;
-                                  const el = document.createElement("div");
-                                  return (
-                                    (el.className = `route-map-label ${labelClass}`),
-                                    (el.textContent = text),
-                                    (el.style.padding = "6px 10px"),
-                                    (el.style.borderRadius = "6px"),
-                                    (el.style.fontSize = "13px"),
-                                    (el.style.fontWeight = "600"),
-                                    (el.style.whiteSpace = "nowrap"),
-                                    (el.style.boxShadow =
-                                      "0 2px 8px rgba(0,0,0,0.2)"),
-                                    new google.maps.marker.AdvancedMarkerElement(
-                                      {
-                                        map: mapInstance,
-                                        position: pos,
-                                        content: el,
-                                        zIndex: 10,
-                                      },
-                                    )
-                                  );
-                                },
-                                originLabelText = trip.origin || "Origen",
-                                destLabelText = trip.destination || "Destino";
-                              (createLabelMarker(
-                                startLocation,
-                                originLabelText,
-                                originLabelClass,
-                              ),
-                                createLabelMarker(
-                                  endLocation,
-                                  destLabelText,
-                                  destLabelClass,
-                                ));
-                            }
-                          } catch (_) {}
-                          mapInstance.fitBounds(bounds, padding);
-                          try {
-                            container.dataset &&
-                              (container.dataset[stateKey] = "ready");
-                          } catch (_) {}
-                          return mapInstance;
-                        })().then((ctx) => {
-                          if (!ctx) return;
-                          const animObserver = new IntersectionObserver(
-                            (entries) => {
-                              entries.forEach((entry) => {
-                                if (entry.isIntersecting)
-                                  if (
-                                    container.dataset &&
-                                    "played" === container.dataset[animationKey]
-                                  )
-                                    animObserver.disconnect();
-                                  else
-                                    try {
-                                      const animPolyline =
-                                          new google.maps.Polyline({
-                                            path: [],
-                                            geodesic: !0,
-                                            strokeColor: "#d4af37",
-                                            strokeOpacity: 1,
-                                            strokeWeight: 5,
-                                            strokeLinecap: "round",
-                                            strokeLinejoin: "round",
-                                            zIndex: 6,
-                                            map: ctx,
-                                          }),
-                                        pathForAnimation = fullPath.slice(),
-                                        totalPoints = pathForAnimation.length,
-                                        step = Math.max(
-                                          1,
-                                          Math.floor(totalPoints / 60),
-                                        );
-                                      let index = 0;
-                                      const frameCountForAnimation = Math.max(
-                                        1,
-                                        Math.ceil(totalPoints / step),
-                                      );
-                                      let targetDurationMs = 0;
-                                      distanceKm > 0 && distanceKm <= 1
-                                        ? (targetDurationMs = 1500)
-                                        : distanceKm > 1 && distanceKm <= 5
-                                          ? (targetDurationMs = 2e3)
-                                          : distanceKm > 5 && distanceKm <= 40
-                                            ? (targetDurationMs = 3200)
-                                            : distanceKm > 40 &&
-                                              (targetDurationMs = 3800);
-                                      const perFrameDelayMs =
-                                          targetDurationMs > 0
-                                            ? Math.min(
-                                                180,
-                                                Math.max(
-                                                  0,
-                                                  Math.round(
-                                                    targetDurationMs /
-                                                      frameCountForAnimation -
-                                                      16,
-                                                  ),
-                                                ),
-                                              )
-                                            : 0,
-                                        scheduleFrame = (callback) =>
-                                          requestAnimationFrame(callback),
-                                        drawNext = () => {
-                                          const nextIndex = Math.min(
-                                            totalPoints,
-                                            index + step,
-                                          );
-                                          for (
-                                            let i = index;
-                                            i < nextIndex;
-                                            i++
-                                          )
-                                            animPolyline
-                                              .getPath()
-                                              .push(pathForAnimation[i]);
-                                          ((index = nextIndex),
-                                            index < totalPoints &&
-                                              (perFrameDelayMs > 0
-                                                ? setTimeout(
-                                                    () =>
-                                                      scheduleFrame(drawNext),
-                                                    perFrameDelayMs,
-                                                  )
-                                                : scheduleFrame(drawNext)));
-                                        };
-                                      (setTimeout(drawNext, 320),
-                                        container.dataset &&
-                                          (container.dataset[animationKey] =
-                                            "played"));
-                                    } catch (_) {}
-                              });
-                            },
-                            {
-                              root: document.querySelector(
-                                ".confirmation-grid",
-                              ),
-                              threshold: [0.25, 0.5, 0.75, 0.9, 0.98, 1],
-                            },
-                          );
-                          animObserver.observe(container);
-                        }));
-                    })(index);
+                    console.log(`[DEBUG] Processing additional trip ${index}:`, trip);
+                    console.log(`[DEBUG] Trip ${index} - overview_path:`, trip.overview_path);
+                    console.log(`[DEBUG] Trip ${index} - start_location:`, trip.start_location);
+                    console.log(`[DEBUG] Trip ${index} - end_location:`, trip.end_location);
+                    console.log(`[DEBUG] Trip ${index} - origin:`, trip.origin);
+                    console.log(`[DEBUG] Trip ${index} - destination:`, trip.destination);
+                    const tripId = trip.id || `additional-trip-${index}`,
+                      mapElement = document.getElementById(
+                        `confirm-additional-${tripId}-route-map`,
+                      ),
+                      container = document.getElementById(
+                        `confirm-additional-${tripId}-route-container`,
+                      ),
+                      chipElement = document.getElementById(
+                        `confirm-additional-${tripId}-route-chip`,
+                      );
+                    console.log(`[DEBUG] Trip ${index} - mapElement:`, mapElement, 'container:', container, 'chipElement:', chipElement);
+                    if (mapElement && container && chipElement) {
+                      console.log(`[DEBUG] Trip ${index} - Calling initAdditionalConfirmationMap`);
+                      initAdditionalConfirmationMap(trip, index, mapElement, container);
+                    } else {
+                      console.log(`[DEBUG] Trip ${index} - Missing DOM elements, skipping map initialization`);
+                    }
                   } catch (_) {}
-                });
+                }));
             }, 120);
           } catch (_) {}
         } catch (e) {
@@ -13746,6 +13888,14 @@ async function tcSendReviewRequestToMake() {
       trip_end_local: tripEnd.toISOString(),
       send_at_local: sendAt.toISOString(),
     };
+  
+  // Agregar información del localizador si existe
+  try {
+    const localizadorEl = document.getElementById("confirm-localizador");
+    if (localizadorEl && localizadorEl.textContent && localizadorEl.textContent.trim()) {
+      payload.localizador = localizadorEl.textContent.trim();
+    }
+  } catch (_) {}
   let dedupKey = "";
   try {
     const fp = tcBuildBookingFingerprint(params);
@@ -13866,6 +14016,15 @@ async function tcSendWhatsAppReminderToMake() {
           send_at_local: sendAt.toISOString(),
           trip_send_at_local: sendAt.toISOString(),
         };
+      
+      // Agregar información del localizador si existe
+      try {
+        const localizadorEl = document.getElementById("confirm-localizador");
+        if (localizadorEl && localizadorEl.textContent && localizadorEl.textContent.trim()) {
+          payload.localizador = localizadorEl.textContent.trim();
+        }
+      } catch (_) {}
+      
       normalizedPhone &&
         ((payload.Telefono_WhatsApp = normalizedPhone),
         (payload.Telefono = normalizedPhone));
@@ -14757,6 +14916,14 @@ function closeDialog(el) {
         (delete el.dataset.prevBodyOverflow,
         delete el.dataset.prevHtmlOverflow,
         delete el.dataset.prevBodyPaddingRight);
+      // Limpiar el HTML de trayectos adicionales al cerrar el modal
+      try {
+        const additionalTripsSection = document.getElementById("confirm-additional-trips-section");
+        if (additionalTripsSection) {
+          additionalTripsSection.innerHTML = "";
+          additionalTripsSection.style.display = "none";
+        }
+      } catch (_) {}
     }
   } catch (_) {}
   isBookingConfirmationOverlay &&

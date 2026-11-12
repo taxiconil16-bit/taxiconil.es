@@ -40,20 +40,20 @@
 <body>
 
   <div style="display:none; max-height:0; overflow:hidden; font-size:1px; color:#f4f6f8;">
-    Bestätigung Ihrer Taxi Conil Buchung. Abholungsdetails, Strecke und Gesamtbetrag.
+    Bestätigung Ihrer Taxi-Conil-Buchung. Abholdetails, Strecke und Gesamtbetrag.
   </div>
 
   <div class="email-wrapper">
 
     <div class="email-header">
-      <img src="https://i.imgur.com/U2KLhsJ.png" alt="Taxi Conil Logo" width="100" />
+      <img src="https://i.imgur.com/U2KLhsJ.png" alt="Logo von Taxi Conil" width="100" />
       <h1>Buchungsbestätigung</h1>
     </div>
 
     <div class="email-content">
       <p>Guten Tag <strong>{{1.Nombre}}</strong>,</p>
       
-      <p>Wir bedanken uns für Ihre Buchungsanfrage. Nachfolgend finden Sie eine Zusammenfassung Ihrer Fahrt:</p>
+      <p>Ihre Reservierung ist bestätigt. Nachfolgend finden Sie eine Zusammenfassung Ihrer Fahrt:</p>
 
       <h3>Kundeninformationen</h3>
       <div class="info-box">
@@ -70,20 +70,20 @@
         <div class="info-row"><span class="label">Entfernung:</span> {{1.Distancia_Ida}}</div>
         <div class="info-row"><span class="label">Dauer:</span> {{1.Duracion_Ida}}</div>
         <div class="info-row" style="margin-top:5px; border-top:1px dashed #ccc; padding-top:5px;">
-          <span class="label">Preis Hinfahrt:</span> {{1.Precio_Ida}}
+          <span class="label">Preis der Hinfahrt:</span> {{1.Precio_Ida}}
         </div>
         <div class="calendar-wrapper">
             <a href="{{1.Calendar_Link_Ida}}" class="btn-calendar-slim">📅 Zu meinem Kalender hinzufügen</a>
         </div>
       </div>
 
-      {{if(1.Trayecto_Vuelta; "<h3>Rückfahrt</h3><div class='info-box'><div class='info-row'><span class='label'>Strecke:</span> " + 1.Trayecto_Vuelta + "</div><div class='info-row'><span class='label'>Datum & Uhrzeit:</span> " + 1.Fecha_Hora_Vuelta + "</div><div class='info-row'><span class='label'>Entfernung:</span> " + 1.Distancia_Vuelta + "</div><div class='info-row'><span class='label'>Dauer:</span> " + 1.Duracion_Vuelta + "</div><div class='info-row' style='margin-top:5px; border-top:1px dashed #ccc; padding-top:5px;'><span class='label'>Preis Rückfahrt:</span> " + 1.Precio_Vuelta + "</div><div class='calendar-wrapper'><a href='" + 1.Calendar_Link_Vuelta + "' class='btn-calendar-slim'>📅 Zu meinem Kalender hinzufügen</a></div></div>"; )}}
+      {{if(1.Trayecto_Vuelta; "<h3>Rückfahrt</h3><div class='info-box'><div class='info-row'><span class='label'>Strecke:</span> " + 1.Trayecto_Vuelta + "</div><div class='info-row'><span class='label'>Datum & Uhrzeit:</span> " + 1.Fecha_Hora_Vuelta + "</div><div class='info-row'><span class='label'>Entfernung:</span> " + 1.Distancia_Vuelta + "</div><div class='info-row'><span class='label'>Dauer:</span> " + 1.Duracion_Vuelta + "</div><div class='info-row' style='margin-top:5px; border-top:1px dashed #ccc; padding-top:5px;'><span class='label'>Preis der Rückfahrt:</span> " + 1.Precio_Vuelta + "</div><div class='calendar-wrapper'><a href='" + 1.Calendar_Link_Vuelta + "' class='btn-calendar-slim'>📅 Zu meinem Kalender hinzufügen</a></div></div>"; )}}
 
       {{if(1.additional_trips; "<h3>Zusätzliche Fahrten</h3>" + 1.additional_trips; "")}}
 
       <h3>Zusätzliche Details</h3>
       <div class="info-box">
-        <div class="info-row"><span class="label">Gepäck:</span> Handgepäck: {{1.Maletas_Cabina}}, Groß: {{1.Maletas_Grandes}}</div>
+        <div class="info-row"><span class="label">Gepäck:</span> Handgepäck: {{1.Maletas_Cabina}}, Großgepäck: {{1.Maletas_Grandes}}</div>
         
         {{if(1.mascota; "<div class='info-row'><span class='label'>Haustier:</span> " + 1.mascota + "</div>"; )}}
         
